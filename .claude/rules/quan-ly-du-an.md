@@ -134,7 +134,8 @@ phải output của lệnh nào.
 | Mỗi lần sửa `CLAUDE.md` | `wc -l` ≤ 120 · `awk 'length > 400'` rỗng · vòng lặp con trỏ §5.1 | gộp hoặc thay luật cũ, không nới trần |
 | Cuối mỗi phiên **có sửa file** | dán bảng thay đổi 5 cột — khuôn [bao-cao-thay-doi.md](bao-cao-thay-doi.md) §1 | thiếu bảng ⇒ phiên **chưa xong**, dù biên nhận đã xanh |
 | Cuối mỗi phiên | ba lệnh dò phiên trôi §5.3 | ghi finding hoặc mở task, đừng sửa lặng lẽ |
-| Mỗi lần mở một lane | quy trình §6 | thiếu vế nào thì lane đó chưa được coi là mở |
+| Mỗi lần mở một lane | quy trình §6 **và lệnh §5.2b** | thiếu vế nào thì lane đó chưa được coi là mở |
+| Mỗi lần viết ô `Nạp` mới | §5.2c — `grep` từng con trỏ cấp `§` trong chính file đích | ra `0` ⇒ con trỏ bịa, sửa ngay, đừng để phiên sau đi tìm |
 
 ---
 
@@ -158,6 +159,23 @@ grep -o '\*\*T-[0-9]*\*\*' task.md | sort | uniq -d                  # mã task 
 for f in $(grep -o 'F-[0-9]*' finding.md | sort -u); do \
   grep -q "$f" task.md || echo "FINDING BỎ RƠI: $f"; done            # finding không task nào đóng
 ```
+
+### 5.2b Lane khai đã mở nhưng mở nửa vời
+
+Dòng lane ở `CLAUDE.md` §1 hết ⚠️ chỉ chứng minh vế 4 của §6. Vế 3 (rule riêng) và vế 5 (dòng task đầu
+tiên) không có lệnh nào đòi, nên lane mở nửa vời **không đỏ ở đâu cả**:
+
+```bash
+for L in ba db be fe devops; do grep -qi "^| \*\*$(echo $L | tr a-z A-Z)\*\*.*⚠️ chưa mở" CLAUDE.md && continue; \
+  test -e ".claude/rules/lane-$L.md" || echo "LANE NỬA VỜI: $L thiếu rule"; \
+  grep -qi "^| \*\*T-[0-9]*\*\* *[^|]*| *$(echo $L | tr a-z A-Z) " task.md || echo "LANE NỬA VỜI: $L không dòng task nào"; done
+```
+
+### 5.2c Con trỏ cấp `§`/mục có giải được không
+
+§5.1 chỉ `test -e` ở **cấp file**: ô `Nạp` trỏ `<file> §3.3 §7 pha 0` vẫn xanh kể cả khi trong file
+không có mục nào tên như vậy. Với mỗi con trỏ cấp mục vừa viết, `grep` nó trong chính file đích trước
+khi commit — ví dụ `grep -c 'Pha 0' project_preparation/prompt-fullstack.md` ra `0` nghĩa là con trỏ bịa.
 
 ### 5.3 Ba lệnh dò phiên đang trôi
 
@@ -201,7 +219,7 @@ chạm sổ* ở file này; thành phần *đổi theo từng việc* ở một 
 | 2 | Bối cảnh và lý do | ô `Hỏng thì mất gì` + `Context › Đã chốt` của dòng task | Lý do viết bằng hậu quả ở quán, đặc tả ở §1.1 file này |
 | 3 | Nhiệm vụ (động từ hành động) | ô `Task` của dòng task | Động từ + tân ngữ + file sẽ sửa |
 | 4 | Tiêu chí thành công | ô `Đầu ra kiểm chứng được` · §3 file này (định nghĩa XONG) | §3 là mức sàn chung, ô task là mức riêng của việc đó |
-| 5 | Dữ liệu đầu vào và vị trí | ô `Context › Nạp` của dòng task · gói nạp ở `CLAUDE.md` §1 | Trỏ **đúng mục**, không trỏ trọn file |
+| 5 | Dữ liệu đầu vào và vị trí | ô `Context › Nạp` của dòng task · gói nạp ở `CLAUDE.md` §1 | §1 là mặc định **mức lane**; ô `Nạp` là mức **việc này** và **thắng khi lệch** ([CLAUDE.md §3](../../CLAUDE.md) bước 3). Trỏ **đúng mục**, và mục đó phải `grep` ra được (§5.2c) |
 | 6 | Phạm vi và ràng buộc + van xả | `CLAUDE.md` §1 (lane sở hữu file nào) + §6 (kích cỡ) · ô `Finding phải đóng` | Van xả: thấy việc khác ⇒ một dòng vào `finding.md`, không sửa kèm |
 | 7 | Định dạng đầu ra | ô `Đầu ra kiểm chứng được` (lệnh + kết quả kỳ vọng) · §1 file này (khuôn 10 cột) | Định dạng của sổ ở đây, định dạng của đầu ra ở dòng task |
 | 8 | Ví dụ (few-shot) | ô `Prompt mở session` — ba dòng đầu `task.md` viết đủ làm mẫu | Dòng sau soi ba dòng đầu mà viết |

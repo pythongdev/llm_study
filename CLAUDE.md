@@ -44,7 +44,9 @@ Nghi một file cũ: so dòng `Cập nhật <ngày>` trong file với `git log -
 
 1. **Định vị.** Chạy `git log --oneline -5` và `git status --short`. Đi tiếp khi biết commit cuối làm gì và cây làm việc sạch hay bẩn.
 2. **Chọn việc.** Chạy lệnh ở mục *Task tiếp theo* đầu [task.md](task.md). Đi tiếp khi có **đúng một** mã `T-xx`.
-3. **Nạp gói.** Mở đúng gói của lane ở §1 cộng ô `Context › Nạp` của dòng task. Đi tiếp khi mọi đường dẫn định mở đều `test -e` ra thật.
+3. **Nạp gói.** Ba phần: gói lane ở §1 · ô `Context › Nạp` của dòng task (**lệch với §1 ⇒ ô `Nạp` thắng**) ·
+   **bảng đầu [finding.md](finding.md)** — finding còn 🔴 MỞ mà chạm file task này sẽ sửa thì đọc mục đó trước khi gõ.
+   Đi tiếp khi mọi đường dẫn `test -e` ra thật **và** mọi con trỏ cấp `§`/mục `grep` ra được trong chính file đích.
 4. **ĐIỂM LÙI.** Cây bẩn ⇒ commit hoặc `git stash` trước khi gõ ký tự đầu tiên. Đi tiếp khi `git status --short` rỗng. Có điểm lùi thì mọi bước sau lùi được bằng `git checkout -- <file>`.
 5. **Làm.** Chỉ chạm file lane sở hữu ở §1. Vượt kích cỡ §6 ⇒ dừng, chẻ, ghi dòng task mới.
 6. **Kiểm chứng.** Chạy biên nhận của lane, **dán output vào câu trả lời**. Đỏ ⇒ quay lại bước 5, không đi tiếp.
