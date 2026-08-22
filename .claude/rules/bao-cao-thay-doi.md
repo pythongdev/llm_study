@@ -36,7 +36,7 @@ Năm cột, đặc tả từng cột — thiếu cột nào thì bảng đó kh�
 | `File` | **file đã tồn tại ⇒ link markdown** — `[tên]` rồi `(đường/dẫn)`, đường dẫn tương đối từ gốc repo · **file phiên này mới tạo ⇒ backtick + `(mới)`**, không link | link tới file chưa có — nó lọt vòng lặp con trỏ §5.1 của [quan-ly-du-an.md](quan-ly-du-an.md) thành `TRỎ HỤT` |
 | `Sửa ở đâu` | xuống tới **mục / dòng / hàm**: `§1.1 bảng đặc tả ô`, `dòng T-05`, `frontmatter paths:`, `func CalcTotal` | dừng ở tên file — đó là cột bên trái, không phải câu trả lời |
 | `Sửa gì` | **một câu**, động từ + tân ngữ, nói *đổi cái gì* chứ không *vì sao* | "cập nhật", "chỉnh sửa", "refactor" — ba chữ này không mang thông tin nào |
-| `Xem diff` | **một lệnh chạy được**, giới hạn `-- <path>` để chỉ hiện file của dòng đó | `git diff` trần — bắt owner tự lọc giữa mọi file |
+| `Xem diff` | **một lệnh chạy được và thực sự IN RA**, giới hạn `-- <path>`. Chưa commit ⇒ `git diff -- <path>`; **đã commit** (kể cả bị phiên khác commit hộ) ⇒ `git show <sha> -- <path>`. Chạy thử trước khi dán: ra rỗng thì lệnh sai, không phải thay đổi mất | `git diff` trần — bắt owner tự lọc giữa mọi file · `git diff -- <path>` cho thay đổi **đã commit**: nó im lặng, và im lặng trông y hệt *không đổi gì* |
 | `#` | một file một dòng, đánh số | gộp "và vài file khác", "cùng một số file liên quan" |
 
 **Ba câu bị cấm trong phần kết phiên**, thấy là viết lại: *"đã cập nhật các file liên quan"* ·
@@ -44,24 +44,42 @@ Năm cột, đặc tả từng cột — thiếu cột nào thì bảng đó kh�
 
 ---
 
-## 2. Ô `Owner kiểm tra` của một dòng task phải có phần `Sửa ở đâu:`
+## 2. Bảng soi của owner — một task một bảng, ba cột
 
-Bảng §1 là báo cáo **sau khi làm**. Ô `Owner kiểm tra` trong [task.md](../../task.md) là lời khai
-**trước khi làm**: dòng task hứa sẽ đụng đúng những chỗ nào. Owner đối chiếu hai cái đó — lệch ra một
-file không có trong lời khai là dấu phiên đã lấn phạm vi, và đó là finding, không phải chuyện nhỏ.
+Bảng §1 là báo cáo **sau khi làm**. Bảng soi trong [task.md](../../task.md) §Owner kiểm tra là lời khai
+**trước khi làm**: task hứa sẽ đụng đúng những chỗ nào. Owner đối chiếu hai cái đó — lệch ra một file
+không có trong lời khai là dấu phiên đã lấn phạm vi, và đó là finding, không phải chuyện nhỏ.
 
-Ô này gồm **bốn** phần, theo đúng thứ tự, ngăn bằng ` · `:
+**Không nhét bảng vào một ô bảng.** Markdown không cho lồng bảng trong ô, nên ô `Owner kiểm tra` ở §Sổ task
+chỉ giữ **dấu ai ký + link**, còn bảng nằm ở mục riêng cuối `task.md`:
 
+```markdown
+| ... | 👤 *(lý do ký)* · [bảng soi ↓](#owner-t-02) | ... |     <- ô trong §Sổ task
+
+### owner-T-02                                                  <- neo: tiêu đề đặt đúng dạng này
+                                                                   thì link #owner-t-02 tự giải
+**Mở lane BA** · ai ký: 👤 *(mở lane đầu tiên, đặt tiền lệ cho T-06→T-09)*
+
+| Thay đổi cái gì | Câu lệnh để thấy thay đổi | Ở đâu |
+|---|---|---|
+| Nhà của lane BA + file yêu cầu pha 0 | `git show --stat HEAD -- design/BA` | `design/BA/04-yeu-cau.md` **(mới)** › cả file |
+| Dòng BA hết ⚠️ | `git show HEAD -- CLAUDE.md` | [CLAUDE.md](../../CLAUDE.md) §1 bảng lane › **đúng một dòng BA** |
+
+**Đạt khi:** `CLAUDE.md` chỉ đổi **đúng một dòng**; mọi thứ khác nằm trong `design/BA/`.
 ```
-👤 · git show --stat HEAD -- <path> — <nhìn gì thì gọi là đạt> · **Sửa ở đâu:** <link tới file> §<mục> › <dòng> · `file-moi.md` (mới)
-```
 
-1. **Dấu ai ký** `👤` / `🤖` — luật chọn dấu ở [quan-ly-du-an.md](quan-ly-du-an.md) §1.2b.
-2. **Một lệnh in ra thay đổi** — `git show`, `git diff --stat`, luôn có `-- <path lane sở hữu>`.
-3. Sau dấu `—`: **nhìn gì thì gọi là đạt**.
-4. **`**Sửa ở đâu:**` + danh sách chỗ sửa**, cùng quy ước link/backtick như cột `File` ở §1.
+Ba cột, **đúng thứ tự này** — nó là thứ tự owner đọc, không phải thứ tự tiện viết:
 
-Phần 4 không bao giờ rỗng. Task chưa biết sẽ chạm chỗ nào ⇒ task đó chưa đủ chín để làm, chẻ nhỏ trước
+| Cột | Viết cái gì | Sai điển hình |
+|---|---|---|
+| `Thay đổi cái gì` | **một câu**, nói *cái gì trong dự án đổi*, không phải *thao tác gì trên file* | "sửa file", "cập nhật rule" — owner đã biết là có sửa, câu hỏi là **đổi cái gì** |
+| `Câu lệnh để thấy thay đổi` | **một lệnh chạy được**, in ra **thay đổi** (`git show`, `git diff`), giới hạn `-- <path>` của **đúng dòng đó** | một lệnh chung cho cả bảng — owner lại phải tự lọc |
+| `Ở đâu` | file (link nếu đã có, backtick + `(mới)` nếu task sẽ tạo) **rồi** `›` **rồi** §/mục/dòng/hàm | dừng ở tên file — đó là nửa câu trả lời |
+
+Dưới bảng, **một dòng `**Đạt khi:**`**: cái owner nhìn để nói *nhận* hay *trả lại*. Đây là chỗ ghi ranh
+giới đếm được — "đúng 4 file", "chỉ 2 hunk", "đúng một dòng" — chứ không phải lời khen chung chung.
+
+Bảng soi không bao giờ rỗng. Task chưa biết sẽ chạm chỗ nào ⇒ chưa đủ chín để làm, chẻ nhỏ trước
 ([CLAUDE.md §6](../../CLAUDE.md)).
 
 ---
@@ -72,11 +90,19 @@ Phần 4 không bao giờ rỗng. Task chưa biết sẽ chạm chỗ nào ⇒ t
 # a. Mọi file git thấy đã đổi đều phải có mặt trong bảng thay đổi vừa dán
 git status --short | awk '{print $NF}'
 
-# b. Mọi dòng task đều có phần "Sửa ở đâu" — in ra mã của dòng nào thiếu
-grep '^| \*\*T-' task.md | grep -v 'Sửa ở đâu' | grep -o '\*\*T-[0-9]*\*\*'
+# b. Mỗi dòng task có một bảng soi, và ngược lại — hai vòng lặp, cả hai phải im
+for t in $(grep -o '^| ~*\*\*T-[0-9]*' task.md | grep -o 'T-[0-9]*'); do \
+  grep -q "^### owner-$t\$" task.md || echo "THIẾU BẢNG SOI: $t"; done
+for o in $(grep -o '^### owner-T-[0-9]*' task.md | grep -o 'T-[0-9]*'); do \
+  grep -q "^| ~*\*\*$o\*\*" task.md || echo "BẢNG SOI MỒ CÔI: $o"; done
 
-# c. Đếm cho khớp: hai số phải bằng nhau (chỉ đếm dòng bảng, không đếm phần văn xuôi)
-grep -c '^. ~*\*\*T-' task.md; grep '^. ~*\*\*T-' task.md | grep -c 'Sửa ở đâu'
+# c. Mỗi bảng soi có dòng "Đạt khi:" — ba số phải bằng nhau
+grep -c '^### owner-T-' task.md; grep -c '^\*\*Đạt khi:\*\*' task.md; grep -c '^| ~*\*\*T-' task.md
+
+# e. Mọi lệnh ở cột "Xem diff" phải IN RA: chạy từng lệnh, cái nào rỗng là lệnh sai
+#    Thường gặp: thay đổi đã vào commit (phiên khác commit hộ) mà cột vẫn ghi `git diff`
+#    -> tra sha rồi đổi sang `git show <sha> -- <path>`:
+git log --oneline -3 -- <path>
 ```
 
 **d.** Mọi link trong `task.md` phải giải được: chạy **vòng lặp con trỏ** ở
