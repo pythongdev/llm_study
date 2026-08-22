@@ -1,5 +1,7 @@
 ---
 paths:
+  - "CLAUDE.md"
+  - ".claude/rules/**"
   - "task.md"
   - "finding.md"
   - "project_preparation/**"
@@ -41,7 +43,7 @@ trái: một ô có `|` bên trong (ví dụ `grep -c '^\| '`) làm lệch mọi
 | `Cần xong trước` | mã task hoặc `—` | "sau khi xong phần backend" | Phụ thuộc dữ liệu quyết định thứ tự, không phải sở thích |
 | `Finding phải đóng` | **chỉ mã** `[F-xx](finding.md#f-xx)` | mô tả lại nội dung finding | Mô tả lại = nhà thứ hai; mã là con trỏ giải được bằng `grep` |
 | `Đầu ra kiểm chứng được` | **một lệnh + kết quả kỳ vọng** | "code chạy được", "xong khi ổn" | "Đã làm" không phải trạng thái, nó là output của một lệnh |
-| `Owner kiểm tra` | `👤` hoặc `🤖` · **một lệnh in ra thay đổi** (`git show`, `git diff --stat`, giới hạn `-- <path lane sở hữu>`) · sau dấu `—` là **nhìn gì thì gọi là đạt** | `👤 · đọc lại file` — không phải lệnh, và "file" không phải "thay đổi" | Biên nhận chứng minh **hiện trạng đúng**; ô này cho owner thấy **cái gì vừa đổi** — hai câu hỏi khác nhau, một diff sạch vẫn có thể kèm ba file không ai xin phép |
+| `Owner kiểm tra` | **bốn** vế theo thứ tự: `👤`/`🤖` · **một lệnh in ra thay đổi** (`git show`, `git diff --stat`, giới hạn `-- <path lane sở hữu>`) · sau dấu `—` là **nhìn gì thì gọi là đạt** · `**Sửa ở đâu:**` + chỗ sửa xuống tới §/mục/dòng — khuôn ở [bao-cao-thay-doi.md](bao-cao-thay-doi.md) §2 | `👤 · đọc lại file` — không phải lệnh, và "file" không phải "thay đổi" · liệt kê tên file mà không nói **chỗ nào trong file** | Biên nhận chứng minh **hiện trạng đúng**; ô này cho owner thấy **cái gì vừa đổi** — hai câu hỏi khác nhau, một diff sạch vẫn có thể kèm ba file không ai xin phép |
 | `Hỏng thì mất gì` | hậu quả **ở quán**, bằng tiếng thường | "lỗi đơn hàng" | Viết bằng thuật ngữ ⇒ mọi task trông quan trọng như nhau ⇒ ưu tiên thành cảm tính |
 | `Prompt mở session` | lane · mã · lệnh mở dòng · `chỉ chạm <path>` · **câu DỪNG** | bỏ câu DỪNG | Không có câu DỪNG thì phiên gánh luôn task kế, diff phình, không ai rà nổi |
 
@@ -53,7 +55,8 @@ tự rà đếm ô từ trái đọc nhầm cột (gốc [F-04](../../finding.md
 `Lane` · `Task` · `Đầu ra kiểm chứng được` · `Hỏng thì mất gì`. Task giấy tờ bỏ được `Bẫy`,
 `Cần xong trước`, `Prompt`; task trên đường găng và task DEVOPS đụng tiền thật phải có **đủ** 10 ô.
 
-`Owner kiểm tra` không bao giờ **rỗng** — bỏ được phần chữ sau dấu `—`, không bỏ được dấu ai ký và lệnh.
+`Owner kiểm tra` không bao giờ **rỗng** — bỏ được phần chữ sau dấu `—`, không bỏ được dấu ai ký, lệnh,
+và `Sửa ở đâu:`. Chưa nói được sẽ chạm chỗ nào ⇒ task chưa đủ chín để làm, chẻ trước ([CLAUDE.md §6](../../CLAUDE.md)).
 
 ### 1.2b Ai ký: `👤` hay `🤖`
 
@@ -129,6 +132,7 @@ phải output của lệnh nào.
 | Mỗi lần sửa `task.md` | năm lệnh tự rà ở §5.2 | lỗi của `task.md`, sửa ngay trong phiên đó |
 | Owner soi lại một task vừa ✅ | lệnh trong ô `Owner kiểm tra` của dòng đó | thay đổi khác cái ô đó khai ⇒ ghi finding, đừng sửa lặng lẽ |
 | Mỗi lần sửa `CLAUDE.md` | `wc -l` ≤ 120 · `awk 'length > 400'` rỗng · vòng lặp con trỏ §5.1 | gộp hoặc thay luật cũ, không nới trần |
+| Cuối mỗi phiên **có sửa file** | dán bảng thay đổi 5 cột — khuôn [bao-cao-thay-doi.md](bao-cao-thay-doi.md) §1 | thiếu bảng ⇒ phiên **chưa xong**, dù biên nhận đã xanh |
 | Cuối mỗi phiên | ba lệnh dò phiên trôi §5.3 | ghi finding hoặc mở task, đừng sửa lặng lẽ |
 | Mỗi lần mở một lane | quy trình §6 | thiếu vế nào thì lane đó chưa được coi là mở |
 
@@ -149,6 +153,7 @@ grep -o '](\([^)#]*\)' <file> | sed 's/](//' | grep -v '^http' | sort -u \
 grep '^| \*\*T-' task.md | awk -F'|' 'length($(NF-4)) < 12 {print $2}'  # thiếu biên nhận ⇒ là ý kiến
 grep '^| \*\*T-' task.md | grep '⚠️+'                                   # chạm 2 lane ⇒ chẻ trước khi làm
 grep '^| \*\*T-' task.md | awk -F'|' '$(NF-3) !~ /👤|🤖/ {print $2}'    # thiếu ô Owner kiểm tra
+grep '^| ~*\*\*T-' task.md | grep -v 'Sửa ở đâu' | grep -o '\*\*T-[0-9]*\*\*'  # thiếu vế Sửa ở đâu
 grep -o '\*\*T-[0-9]*\*\*' task.md | sort | uniq -d                  # mã task trùng
 for f in $(grep -o 'F-[0-9]*' finding.md | sort -u); do \
   grep -q "$f" task.md || echo "FINDING BỎ RƠI: $f"; done            # finding không task nào đóng

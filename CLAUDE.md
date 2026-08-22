@@ -33,6 +33,7 @@ Bốn luật định tuyến:
 | Khuôn dòng task · định nghĩa XONG khi chưa có compiler · nhịp kiểm tra | [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) | rule đó |
 | 6 pha · ràng buộc · bất biến I1–I8 · 3 lát cắt A/B/C | [project_preparation/prompt-fullstack.md](project_preparation/prompt-fullstack.md) | file đó, trừ chỗ [F-02](finding.md#f-02) nêu |
 | Luật viết sổ task (11 TP → 12 trường) | [project_preparation/huong-dan-viet-task-md.md](project_preparation/huong-dan-viet-task-md.md) | file đó |
+| Khuôn bảng thay đổi cuối phiên · vế `Sửa ở đâu` của ô `Owner kiểm tra` | [.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) | rule đó |
 | Đã làm gì, khi nào, ai sửa file nào | `git log` — không có file nào giữ lại | `git log` |
 | Phạm vi & giá món | ⚠️ chưa có nhà — T-05 tạo `project_preparation/00-scope.md` | — |
 | Định nghĩa XONG khi đã có compiler | ⚠️ chưa có nhà — T-04 tạo `quality/05-checklist.md` | — |
@@ -51,7 +52,9 @@ Nghi một file cũ: so dòng `Cập nhật <ngày>` trong file với `git log -
 
 ## §4 Đầu ra session — biên nhận, không phải lời khai
 
-Đánh ✅ cần đủ **ba** thứ, thiếu một thứ thì vẫn là đang làm: **(1)** biên nhận của lane chạy thật + output dán vào · **(2)** commit chứa thay đổi · **(3)** [finding.md](finding.md) đổi trạng thái kèm ngày + cách kiểm chứng, nếu task có đóng finding.
+Đánh ✅ cần đủ **bốn** thứ, thiếu một thứ thì vẫn là đang làm: **(1)** biên nhận của lane chạy thật + output dán vào · **(2)** commit chứa thay đổi · **(3)** [finding.md](finding.md) đổi trạng thái kèm ngày + cách kiểm chứng, nếu task có đóng finding.
+
+**(4)** **Bảng thay đổi**, dán **trước** khi commit, mỗi file đã đụng một dòng: link tới file · **sửa ở đâu** (§/mục/dòng) · sửa gì, một câu · lệnh xem diff riêng file đó. Khuôn + lệnh tự rà: [.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) §1 §3. Thiếu bảng ⇒ phiên **chưa xong**, dù biên nhận đã xanh.
 
 Commit: stage bằng `git add <đường dẫn cụ thể>` — liệt kê từng file, để việc dở của phiên khác không bị nuốt theo. Message theo khuôn `<LANE>/<T-xx>: <file đã sửa>, đóng <F-yy>`. Không dùng `--no-verify`.
 
