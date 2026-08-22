@@ -1,78 +1,84 @@
-Nên thứ tự làm là ba lớp, không được đảo:
+# step.md — lộ trình ba lớp, không phải sổ task
 
-Lớp	Là gì	Trạng thái
-1. Thiết kế	project_preparation/prompt-fullstack.md — 6 pha, 11 ràng buộc, bất biến I1–I8, bảng giá	✅ đã có từ trước
-2. Bộ khung quản lý	luật để mọi phiên sau chạy cùng một cách: lane nào sửa file nào, sự thật nào ở nhà nào, "xong" nghĩa là gì	✅ vừa xong ở session 1
-3. Code ứng dụng	Go, MySQL, Next.js	⬜ chưa bắt đầu, và cố ý chưa bắt đầu
+> Cập nhật **2026-08-22**. File này **không giữ sự thật nào**, nó chỉ giữ **thứ tự ba lớp** và
+> **đường đi tới dòng code đầu tiên**. Mọi câu hỏi khác đã có nhà: *làm gì tiếp* ở `task.md` ·
+> *cái gì đang sai* ở `finding.md` · *đã làm gì, ai sửa file nào* ở `git log` · *luật* ở `CLAUDE.md`.
+> Lệch nhà thật ⇒ **nhà thật thắng**, dòng ở đây là bug phải sửa ngay.
+>
+> Vì vậy file này **cấm** chép mã task, mô tả finding, hay đếm số việc còn lại — mỗi con số chép ra
+> là một chỗ thứ hai phải sửa, và chỗ thứ hai sẽ quên. Chỗ nào cần số, ở đây để **lệnh**, không để số.
+
+---
+
+## §1 Ba lớp, không được đảo
+
+| Lớp | Là gì | Nhà của nó | Trạng thái |
+|---|---|---|---|
+| **1 · Thiết kế** | 6 pha · 11 ràng buộc · bất biến I1–I8 · 3 lát cắt A/B/C | [prompt-fullstack.md](prompt-fullstack.md) | ✅ có từ trước — nhưng còn `F-02` (con trỏ hụt) |
+| **2 · Bộ khung quản lý** | lane nào sửa file nào · sự thật nào ở nhà nào · "XONG" nghĩa là gì · biên nhận nào tính | `CLAUDE.md` · `.claude/rules/**` · `task.md` · `finding.md` | 🔄 **đang ở đây** — dựng xong bản đầu, đang vá bằng chính nó |
+| **3 · Code ứng dụng** | Go · MySQL · Next.js | ⚠️ chưa có nhà — pha 2–4 mới mở | ⬜ chưa bắt đầu, và **cố ý** chưa bắt đầu |
+
 Viết code trước khi có lớp 2 không phải "đi nhanh hơn" — nó là tạo ra thứ chưa ai rà được.
+Bằng chứng lớp 3 chưa mở, chạy được: `ls -d design quality Makefile 2>&1` — cả ba đều `No such file`.
 
-B. Session 1 đã làm gì — từng bước
-Khối 1 (system) giao vai + luật chơi, khối 2 (user) giao việc. Phiên đó chạy 4 bước:
+## §2 Đo hiện trạng bằng lệnh, đừng tin con số trong file này
 
-Bước 1 — Đo hiện trạng trước khi viết một chữ
-Chạy ls -a, git log, đọc 5 tài liệu. Đây là bước quan trọng nhất, vì nó chống lại cái bẫy lớn nhất: reference/CLAUDE_rẻence.md là bản mẫu đã chạy thật nhưng của dự án ở giai đoạn xa hơn — nó nói tới code/be/, Makefile, migrations/, F-01…F-67, 6 lane đang mở. Chép nó = vẽ bản đồ cho lãnh thổ chưa tồn tại, và phiên sau sẽ đi theo bản đồ đó rồi tự tạo ra một cấu trúc khác.
+```bash
+grep -c '^| \(~~\)\?\*\*T-' task.md      # tổng số dòng task
+grep -c '^| ~~\*\*T-' task.md             # số task đã xong (gạch ngang)
+grep -c '🔴 MỞ' finding.md                # số finding còn mở
+grep -n '^| \*\*T-' task.md | grep '🔺' | head -1   # việc phải làm ngay
+git log --oneline -5                      # phiên trước đã đụng gì
+```
 
-Kết quả đo: repo không có code/, design/, quality/, Makefile, database. Và 8 đường dẫn mà prompt-fullstack.md trỏ tới không tồn tại.
+Ở đây **cố ý không chép lại output**. Hai sổ đang được sửa gần như mỗi phiên, nên một con số dán vào
+file này hết đúng trước khi ai đọc tới nó — và một con số sai trông y hệt một con số đúng. Cái duy nhất
+ổn định để nói: lớp 2 chưa đóng, và việc đang chờ luôn là **dòng 🔺 đầu tiên** mà lệnh thứ tư dò ra.
 
-Bước 2 — Tạo 4 file, mỗi file một nhiệm vụ
-File	Dòng	Nạp lúc nào	Trả lời câu gì
-CLAUDE.md	92	mọi request, mọi phiên	luật nào áp cho mọi phiên · lane nào sở hữu file nào · sự thật nào ở nhà nào
-.claude/rules/quan-ly-du-an.md	180	chỉ khi chạm task.md/finding.md/project_preparation/**/design/**	một dòng task viết thế nào · "XONG" nghĩa là gì khi chưa có compiler · lệnh nào dò phiên trôi
-task.md	40	khi đọc	làm gì tiếp, theo thứ tự nào
-finding.md	94	khi đọc	cái gì đang sai ngay bây giờ
-Chỗ tinh tế nhất là vì sao tách hai file đầu: CLAUDE.md tốn token ở mọi request nên phải ≤ 120 dòng; sổ tay 180 dòng kia chỉ nạp khi thật sự cần. Nhưng có một đánh đổi: rule có paths: không được tiêm lại sau /compact, nên luật nào mất giữa phiên là gây hỏng (cấm git add -A, việc thuộc quyền bạn) phải nằm ở CLAUDE.md gốc dù nó "hợp với sổ tay hơn".
+## §3 Lớp 2 đang vá tới đâu
 
-Bước 3 — Đối chiếu 11 thành phần prompt
-Đây là vế bạn yêu cầu: CLAUDE.md + một dòng task cộng lại phải phủ đủ 11 thành phần của một prompt tốt. Cơ chế: thành phần ổn định (vai trò, phạm vi, quy trình) nằm ở CLAUDE.md — phiên tự đọc mỗi lần; thành phần theo từng việc (nạp file nào, bẫy ở đâu, hỏng thì mất gì) nằm trong 9 cột của dòng task. Chép luật chung vào từng dòng task = nhân bản nó lên 11 lần, và bản thứ 11 sẽ khác bản gốc.
+Bộ khung dựng xong ở phiên đầu rồi **tự soi lại nó bằng phiên trí nhớ trắng** — đó là cơ chế, không phải
+sự cố: một phiên chỉ được đọc `CLAUDE.md` + `task.md` + `finding.md` + rule, nhận đúng dòng task mà lệnh
+*Task tiếp theo* dò ra, rồi diễn lại từng bước bằng lệnh. Ba loại lỗ hổng nó phải tìm, nguy hiểm tăng dần:
 
-Bước 4 — Chạy 7 lệnh tự kiểm, dán output thật
-Không phải "tôi đã kiểm tra kỹ" mà là wc -l < CLAUDE.md → 92. 6/7 lệnh đạt.
+1. chỗ phiên mới phải **đoán**
+2. chỗ phiên mới phải **hỏi lại owner** — tức bộ khung chưa gánh được việc của nó
+3. ⚠️ chỗ phiên mới **làm sai được mà không lệnh nào đỏ** — loại này chỉ lộ sau nhiều phiên, lúc đó sửa đã đắt
 
-C. Ba vấn đề nó gặp
-Đây là phần đáng giá nhất của session 1 — nó không giấu ba chỗ sai, kể cả chỗ do chính nó gây ra.
+Ngoại lệ đã chốt: lỗ hổng nào chỉ sửa được bằng cách **đổi kiến trúc file** thì phiên không tự sửa, chỉ
+ghi finding kèm cách sửa đề xuất rồi quay lại việc đang làm.
 
-F-01 — Dự án có hai hệ tên cho cùng một trục chia việc ✅ đã đóng
-reference/task.md chia 5 "Giai đoạn", prompt-fullstack.md §7 chia 6 "Pha". Hai hệ tên ⇒ mỗi phiên hiểu một kiểu, grep không ra chung.
+Danh sách lỗ hổng hiện tại **không ở đây**, nó ở `finding.md`. Xem bằng: `sed -n '/^| # |/,/^$/p' finding.md`.
 
-Chốt: dùng 6 Pha, vì hệ đó mang ranh giới cứng (pha 0–1 không nhắc tên bảng, pha 2 không nhắc endpoint) — cơ chế duy nhất chặn một phiên làm việc của pha sau. Hệ 5 Giai đoạn không có ranh giới đó.
+## §4 Đường đi từ đây tới dòng code đầu tiên
 
-F-02 — prompt-fullstack.md trỏ tới 8 file không tồn tại 🔴 còn mở
-00-scope.md, quality/05-checklist.md, 4 file design/*/01-thiet-ke.md, và ../CLAUDE.md (sai cả cấp thư mục).
+```
+vá nốt lớp 2 ──> mở lane BA ──> mở lane DEVOPS ──> DB ──> BE ──> FE ──> Pha 0 (thiết kế nghiệp vụ thật)
+                                                                             │
+                                                            Go / SQL / React ở Pha 2–4, còn xa
+```
 
-Vì sao đây là lỗi chứ không phải việc chưa làm — đây là phép thử quan trọng nhất trong cả hệ thống: chạy hết mọi dòng trong task.md y như nó viết, dòng này còn không? Còn. Vì kế hoạch có tạo 00-scope.md và quality/05-checklist.md, nhưng 4 con trỏ design/*/01-thiet-ke.md vẫn hụt và ../CLAUDE.md vẫn sai cấp. ⇒ finding, đi sổ lỗi.
+Thứ tự thật nằm ở cột `Cần xong trước` trong `task.md`, không ở sơ đồ này. Sơ đồ chỉ nói **hình dạng**:
+mở lane trước, viết nội dung lane sau — mở lane là dựng cái *chứa*, pha là việc *đổ vào*.
+Một lane coi là mở khi đủ **năm vế** ở `.claude/rules/quan-ly-du-an.md` §6, không phải khi có thư mục.
 
-Hậu quả nếu bỏ qua: phiên nào đó đọc file này, đi tìm design/backend/01-thiet-ke.md, không thấy, rồi tự tạo một cấu trúc khác — im lặng, không lệnh nào đỏ.
+## §5 Việc thuộc quyền owner, agent chuẩn bị sẵn rồi dừng
 
-F-03 — Lỗi trong chính bộ khung nó vừa dựng 🔴 còn mở
-.claude/rules/quan-ly-du-an.md có paths: là task.md, finding.md, project_preparation/**, design/**. Nhưng quy trình mở một lane nằm trong chính rule đó lại yêu cầu sửa CLAUDE.md §1 và tạo .claude/rules/lane-*.md — hai file không nằm trong paths:.
+Bốn thứ agent **không** tự quyết (`CLAUDE.md` §7): tạo remote hoặc `git push` · đổi phạm vi dự án ·
+chốt giá món và thành phần suất bán · mua bất cứ thứ gì tốn tiền thật.
 
-Tức: đúng lúc cần sổ tay nhất thì nó không được nạp. Và cả 5 task mở lane (T-02, T-06, T-07, T-08, T-09) đều chạy trong tình trạng này.
+Cộng thêm: finding nào bảng ghi **"chưa có task — kiến trúc, chờ owner chốt"** đang nằm đó đợi một câu
+trả lời, chứ không đợi một phiên rảnh. Dò bằng: `grep -c 'chưa có task' finding.md`.
 
-Nó không tự sửa, vì paths: là kiến trúc bạn đã chốt — đúng luật van xả: thấy vấn đề khác thì ghi finding kèm cách sửa, rồi quay lại việc đang làm. Nó chỉ vá tạm bằng cách cho 5 task đó trỏ thẳng tới rule §6 — nhưng đó là 5 bản chép của cùng một con trỏ, và chính finding tự thừa nhận điều đó.
+## §6 Ba cái bẫy đã trả giá, đừng trả lần hai
 
-👉 Đây là việc đang chờ bạn quyết (T-11): có cho thêm "CLAUDE.md" + ".claude/rules/**" vào paths: không? Tôi đồng ý là nên — CLAUDE.md là file lane NON-CODE sở hữu và sửa thường xuyên nhất.
-
-D. Session 2 (lượt 2) sẽ làm gì, và vì sao cần
-Session 1 tự chấm bài mình. Đó là bài kiểm tra yếu nhất — nó biết mình định viết gì nên đọc gì cũng thấy đủ nghĩa.
-
-Lượt 2 đổi góc: bắt nó đóng vai một phiên trí nhớ trắng, chỉ được đọc 4 file đó, nhận đúng dòng task mà lệnh "Task tiếp theo" dò ra (hiện là T-02 — mở lane BA), rồi diễn lại từng bước bằng lệnh cụ thể.
-
-Nó phải tìm ra 3 loại lỗ hổng, xếp theo mức nguy hiểm tăng dần:
-
-Chỗ phiên mới phải đoán
-Chỗ phiên mới phải hỏi lại bạn — tức bộ khung chưa gánh được việc của nó
-⚠️ Chỗ phiên mới làm sai được mà không lệnh nào đỏ — loại này chỉ lộ ra sau nhiều phiên, lúc đó sửa đã đắt
-Tôi đã thêm một ngoại lệ vào luot-2.txt: lỗ hổng nào chỉ sửa được bằng cách đổi kiến trúc file thì nó không tự sửa, chỉ ghi finding — đúng như F-03 đã làm.
-
-Vì sao đáng bỏ một phiên cho việc này: sửa bộ khung bây giờ tốn một phiên. Sửa nó sau khi 10 phiên đã xây trên nền sai thì phải sửa cả 10.
-
-E. Sau lượt 2 thì đi đâu
-Sổ hiện có 11 task, T-01 đã ✅. Hai task mang 🔺 (chặn task khác):
-
-T-02 🔺 BA — tạo design/BA/ để pha 0 có nhà
-T-03 🔺 DEVOPS — tạo Makefile, vì T-04/T-06/T-07 đều đợi nó
-Đường đi: lượt 2 (vá bộ khung) → quyết T-11 → T-02 + T-03 → mở dần các lane (T-06 DEVOPS → T-07 DB → T-08 BE → T-09 FE) → lượt 4 vào Pha 0 BA, tức lúc đó mới bắt đầu thiết kế nghiệp vụ thật.
-
-Code Go/SQL/React nằm ở tận Pha 2–4, còn xa.
-
-Một lưu ý nhỏ cho lượt 2: M project_preparation/huong-dan-viet-task-md.md vẫn đang bẩn. Bước ĐIỂM LÙI trong CLAUDE.md §3 sẽ báo cây không sạch. Bạn commit hoặc git stash nó trước cho gọn, hoặc cứ nói với phiên đó rằng file này là việc dở của bạn, đừng đụng vào.
+- **`reference/` là dự án ở giai đoạn xa hơn.** Nó nói tới `code/be/`, `Makefile`, `migrations/`, mã
+  finding tới hai chữ số, 6 lane đang mở — chép nó = vẽ bản đồ cho lãnh thổ chưa tồn tại, rồi phiên sau
+  đi theo bản đồ đó và tự dựng một cấu trúc khác. Lấy **cấu trúc và giọng viết**, không lấy nội dung.
+- **Biên nhận cần compiler đều là lời hứa.** `make check` · `go test` · `npm run build` hiện không chạy.
+  Dùng chúng mà không đánh ⚠️ là làm sổ trông xanh trong khi không lệnh nào chạy. Biên nhận thật của giai
+  đoạn này là lệnh đọc lại: `grep -c`, `sed -n`, `wc -l`, `test -e`, `git log -1 -- <file>`.
+- **Cây bẩn không chắc là của mình.** Repo này đã có hai phiên chạy chồng nhau. Bước ĐIỂM LÙI
+  (`CLAUDE.md` §3) bảo commit hoặc `git stash` khi cây bẩn — làm đúng thế mà file đó là việc dở của phiên
+  khác thì bạn vừa nuốt nó. Trước khi commit: `git status --short` rồi `git add` **từng đường dẫn cụ thể**,
+  không bao giờ `git add -A`.
