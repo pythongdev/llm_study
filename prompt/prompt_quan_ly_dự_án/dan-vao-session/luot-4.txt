@@ -1,0 +1,4 @@
+Lượt 4 — bắt đầu thi công:
+Vào Pha 0 (BA) theo §7 và §8 của project_preparation/prompt-fullstack.md. CHỈ pha 0. Mỗi
+master task sinh ra phải là một dòng đủ 9 cột trong task.md, không phải danh sách file cần
+tạo. Xong thì cập nhật task.md, commit với message ghi rõ pha, rồi dừng — không tự sang pha 1.

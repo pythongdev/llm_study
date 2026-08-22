@@ -1,0 +1,19 @@
+Lượt 2 — kiểm thử ngược bộ khung quản lý.
+
+Bộ khung gồm đúng 4 file: CLAUDE.md · .claude/rules/quan-ly-du-an.md · task.md · finding.md.
+Đọc cả 4 trước khi trả lời một chữ nào.
+
+Giả sử một phiên Claude Code hoàn toàn mới, TRÍ NHỚ TRẮNG, chỉ đọc được 4 file trên, và được
+giao đúng dòng task mà lệnh ở mục "Task tiếp theo" đầu task.md dò ra. Diễn lại từng bước nó
+sẽ làm, BẰNG LỆNH CỤ THỂ — không phải mô tả bằng lời.
+
+Chỗ nào nó phải ĐOÁN, phải HỎI người dùng, hoặc LÀM SAI ĐƯỢC MÀ KHÔNG LỆNH NÀO ĐỎ — đó là lỗ
+hổng của bộ khung, không phải lỗi của nó. Ưu tiên loại thứ ba: sai mà không lệnh nào đỏ là
+loại chỉ lộ ra sau nhiều phiên, lúc đó sửa đã đắt.
+
+Liệt kê tối đa 5 lỗ hổng, mỗi lỗ hổng một dòng kèm file phải sửa, rồi sửa file cho kín.
+NGOẠI LỆ: lỗ hổng nào chỉ sửa được bằng cách ĐỔI KIẾN TRÚC FILE (thêm mục vào `paths:`, tách
+rule mới, đổi trần dòng) thì KHÔNG tự sửa — ghi một dòng vào finding.md kèm đề xuất, vì kiến
+trúc là quyết định của người dùng.
+
+Rồi chạy lại 7 lệnh tự kiểm và dán output thật. Tối đa 25 dòng trong chat.

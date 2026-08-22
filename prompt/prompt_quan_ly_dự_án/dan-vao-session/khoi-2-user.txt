@@ -1,0 +1,236 @@
+<documents>
+  <document index="1">
+    <source>project_preparation/prompt-fullstack.md</source>
+    <note>Bản thiết kế đầy đủ của dự án: 6 pha (§7), luật chẻ master task (§5), ba tầng chất
+    lượng + bảng bất biến I1–I8 (§6), ranh giới cứng giữa các pha, khuôn đầu ra (§8).
+    ĐỌC TOÀN BỘ. Đây là nguồn của mọi luật quy trình bạn sắp viết. CẢNH BÁO: file này trỏ
+    tới rất nhiều đường dẫn (design/, quality/, 00-scope.md, Makefile) mà repo CHƯA CÓ —
+    kiểm bằng `ls` trước khi trỏ lại, đừng chép nguyên con trỏ.</note>
+  </document>
+  <document index="2">
+    <source>project_preparation/huong-dan-viet-task-md.md</source>
+    <note>Luật viết sổ task: khuôn 9 cột, bảng ánh xạ 11 thành phần prompt → 12 trường của
+    task (Phần IV), thứ tự lắp ráp ba tầng (Phần VI), bốn trường không bao giờ được bỏ
+    (Phần VII). ĐỌC TOÀN BỘ. Đây là file quyết định CLAUDE.md phải gánh phần nào của prompt.</note>
+  </document>
+  <document index="3">
+    <source>prompt/huong_dan_prompt/cau-truc-prompt-tot.md</source>
+    <note>11 thành phần của một prompt tốt + lý do tồn tại của từng thành phần. Đọc bảng
+    tổng quan 11 thành phần và các mục 1, 2, 4, 6, 10, 11. Dùng để đối chiếu ở Bước 3.</note>
+  </document>
+  <document index="4">
+    <source>claude-md-huong-dan.md</source>
+    <note>Best practice CLAUDE.md 2026: cái gì NÊN / KHÔNG NÊN nằm trong file (Bước 3), cây
+    quyết định CLAUDE.md hay Skill hay rules hay hook (Bước 7), bảng chi phí context, 12
+    anti-pattern (Bước 12), checklist trước khi commit. ĐÂY LÀ RÀNG BUỘC KỸ THUẬT, không
+    phải gợi ý: file bạn viết sẽ bị chấm bằng checklist cuối file đó.</note>
+  </document>
+  <document index="5">
+    <source>reference/CLAUDE_rẻence.md và reference/task.md</source>
+    <note>MẪU ĐÃ CHẠY THẬT, nhưng của một dự án Ở GIAI ĐOẠN XA HƠN — nó nói tới code/be/,
+    Makefile, migrations, F-01…F-67, 6 lane đang mở. Lấy CẤU TRÚC và GIỌNG VIẾT, TUYỆT ĐỐI
+    KHÔNG chép nội dung: chép = tạo ra tấm bản đồ của một lãnh thổ chưa tồn tại, và phiên
+    sau sẽ đi theo bản đồ đó. Mỗi lần bạn định chép một dòng, chạy `ls` cái đường dẫn trong
+    dòng đó trước.</note>
+  </document>
+</documents>
+
+<kien_truc_da_chot>
+Người dùng ĐÃ CHỐT cách tách file dưới đây. Đây không phải chỗ để bạn thiết kế lại — nhiệm
+vụ của bạn là ĐỔ NỘI DUNG ĐÚNG CHỖ, và nói ra nếu bạn thấy cơ chế nào không chạy được.
+
+| File | Nạp lúc nào | Giữ cái gì | Trần |
+|---|---|---|---|
+| `CLAUDE.md` (gốc repo) | mọi session, mọi request | luật áp cho MỌI session + bảng định tuyến lane + bản đồ "một sự thật một nhà" | ≤ 120 dòng |
+| `.claude/rules/quan-ly-du-an.md` | khi session chạm file khớp `paths:` | sổ tay quản lý: vòng đời một phiên, khuôn 9 cột của một dòng task, hai sổ task/lỗi, định nghĩa XONG của giai đoạn chưa-có-code, bảng ánh xạ 11 TP | ≤ 250 dòng |
+| `task.md` | khi session đọc | sổ task, khuôn 9 cột | — |
+| `finding.md` | khi session đọc | sổ lỗi, có ô Bài học giữ lại | — |
+| `.claude/rules/lane-<ba\|db\|be\|fe\|devops>.md` | **CHƯA TẠO** | luật riêng từng lane | mỗi lane một dòng task trong `task.md` |
+
+Hai luật đi kèm kiến trúc này, phải tôn trọng khi phân bổ nội dung:
+
+1. RULES CÓ `paths:` KHÔNG ĐƯỢC TIÊM LẠI SAU `/compact`; CLAUDE.md gốc thì có. Nên: luật nào
+   mà MẤT ĐI GIỮA PHIÊN SẼ GÂY HỎNG (cấm `git add -A`, việc thuộc quyền owner, luật ghi sổ
+   trước khi đánh xong) PHẢI nằm ở `CLAUDE.md` gốc, dù nó có vẻ hợp với sổ tay hơn.
+2. `@import` KHÔNG tiết kiệm context — file được import vẫn nạp đầy đủ mỗi session. Muốn tách
+   thật thì dùng `.claude/rules/` có `paths:`. Đừng dùng `@import` để giả vờ đã tách.
+
+Cơ chế nào bạn thấy không chạy được ⇒ ghi một dòng vào `finding.md` kèm cách sửa đề xuất,
+rồi vẫn làm theo bảng trên. Đừng tự đổi kiến trúc giữa chừng.
+</kien_truc_da_chot>
+
+<task>
+Dựng bộ khung CLAUDE.md cho giai đoạn chưa-có-code, theo đúng bốn bước dưới đây, đúng thứ tự.
+
+Bước 1 — Đo hiện trạng, rồi trích dẫn. Chạy `ls -a`, `git log --oneline -10`, và đọc các file
+ở <documents>. Đặt trong thẻ <hien_trang> tối đa 6 dòng: thư mục thật đang có, và những đường
+dẫn mà tài liệu nhắc tới nhưng `ls` không thấy. Rồi đặt trong thẻ <trich_dan> tối đa 10 dòng
+TRÍCH NGUYÊN VĂN những câu chi phối CÁCH LÀM VIỆC (định tuyến lane, hai sổ, định nghĩa XONG,
+ba thứ không thoả hiệp, kích cỡ một task, trần của chính CLAUDE.md). Bỏ qua chi tiết nghiệp
+vụ như giá món — pha này không dùng tới.
+
+Bước 2 — Tạo thật 4 file theo <khuon_tung_file>. Nội dung dùng được ngay, không có chỗ trống
+kiểu "TODO điền sau" trừ khi chỗ đó đã đánh ⚠️ và đã có dòng task tạo ra nó.
+
+Bước 3 — Đối chiếu 11 thành phần. Lập bảng: mỗi thành phần trong 11 TP của
+cau-truc-prompt-tot.md nằm ở đâu — `CLAUDE.md`, `.claude/rules/quan-ly-du-an.md`, hay một
+trường của dòng task. THÀNH PHẦN NÀO KHÔNG NẰM Ở ĐÂU CẢ LÀ LỖI PHẢI SỬA NGAY TRONG PHIÊN NÀY,
+không phải ghi chú để lần sau. Bảng này có nhà duy nhất là `.claude/rules/quan-ly-du-an.md`;
+trong chat chỉ in lại dạng rút gọn một dòng một TP.
+
+Bước 4 — Chạy thật các lệnh ở <self_check>, dán output vào mục KIEM_CHUNG. Lệnh nào ra kết
+quả sai thì SỬA FILE RỒI CHẠY LẠI, đừng báo cáo con số sai kèm lời giải thích.
+
+Ba câu bộ khung của bạn phải trả lời được — đây là ba chỗ dự án một-người-cộng-AI hay chết:
+  a. Phiên mới mở, trí nhớ trắng: đọc gì, theo thứ tự nào, gõ lệnh nào, để trong 5 phút biết
+     chính xác dự án đang ở đâu và làm gì tiếp?
+  b. Kết thúc một phiên thì ghi lại những gì, vào file nào, để phiên sau không phải hỏi lại?
+  c. Làm sao PHÁT HIỆN ĐƯỢC BẰNG LỆNH rằng phiên đang trôi (làm việc của pha sau, sửa file
+     ngoài lane, báo xong mà không có biên nhận)?
+</task>
+
+<khuon_tung_file>
+**1. `CLAUDE.md` (gốc repo) — ≤ 120 dòng, mỗi mục ≤ 14 dòng, mỗi dòng ≤ 400 byte.**
+Trần byte tồn tại để `grep` thay được việc đọc cả file. Chỉ chứa LUẬT + CON TRỎ, không chứa
+sự thật nào. Các mục bắt buộc, đặt đúng thứ tự này:
+
+  - Dòng đầu: `Cập nhật <ngày>` + một câu "file này là bản đồ, không phải lãnh thổ; lệch nhà
+    thật thì nhà thật thắng" + một câu vai trò (người dùng giao task, agent tự làm tự kiểm
+    chứng, thấy sai thì nổi lên chứ không im lặng tự xử).
+  - §1 ĐỊNH TUYẾN LANE — bảng: Lane | Prompt nói tới | Lane sở hữu file nào | Nạp gói nào |
+    Biên nhận. Giai đoạn này CHỈ `NON-CODE` và `BA` đang mở; các lane còn lại ghi
+    `⚠️ chưa mở — T-xx sẽ mở` và ĐỂ TRỐNG cột biên nhận thay vì bịa `make check`.
+    Kèm luật: một session một lane · không rõ lane ⇒ NON-CODE · cấm nạp ngoài gói ·
+    đổi lane giữa chừng = dừng, commit, mở task mới.
+  - §2 MỘT SỰ THẬT MỘT NHÀ — bảng: Sự thật | Nhà duy nhất | Ai thắng khi lệch. Mỗi dòng phải
+    trỏ tới file CÓ THẬT (kiểm bằng `test -e`) hoặc mang ⚠️ + mã task.
+  - §3 VÒNG LẶP MỘT PHIÊN — các bước, mỗi bước kèm điều kiện đo được mới đi tiếp. Có bước
+    ĐIỂM LÙI (commit trước khi sửa) đứng trước bước LÀM.
+  - §4 ĐẦU RA SESSION — đánh ✅ cần đủ mấy thứ, ghi sổ ở đâu, luật commit
+    (`git add <đường dẫn cụ thể>`, khuôn message có lane + mã task).
+  - §5 FINDING HAY TASK — phép thử một câu + luật hai sổ không bao giờ trộn.
+  - §6 KÍCH CỠ MỘT TASK — bốn vế + dấu hiệu phải chẻ.
+  - §7 GIAI ĐOẠN HIỆN TẠI — repo chưa có gì, biên nhận nào đang là lời hứa, việc gì thuộc
+    quyền người dùng chứ agent không tự chạy.
+  - §8 TRẦN CỦA CHÍNH FILE NÀY — số dòng tối đa + luật "thêm luật mới ⇒ THAY hoặc GỘP luật
+    cũ, không thêm mục mới", vì file này phình ra là mọi phiên sau đều trả tiền.
+
+Viết theo hướng "hãy làm X", không viết "đừng làm Y" — vùng cấm thì session trôi ra khỏi lúc
+nào không hay, còn hình mẫu tích cực thì nó bám được. Không code block. Không cây thư mục.
+
+**2. `.claude/rules/quan-ly-du-an.md` — ≤ 250 dòng.** Mở đầu bằng frontmatter:
+
+    ---
+    paths:
+      - "task.md"
+      - "finding.md"
+      - "project_preparation/**"
+      - "design/**"
+    ---
+
+Giữ phần DÀI mà CLAUDE.md không chứa nổi: khuôn 9 cột của một dòng task + đặc tả từng ô ·
+hai sổ task/lỗi khác nhau chỗ nào · định nghĩa XONG cho giai đoạn KHÔNG CÓ COMPILER (biên
+nhận là lệnh đọc lại) · nhịp kiểm tra · bảng ánh xạ 11 TP → chỗ giữ (Bước 3) · quy trình mở
+lane mới khi tới lượt. CẤM chép lại §1–§8 của CLAUDE.md — trỏ tới chúng.
+
+**3. `task.md`** — khuôn 9 cột đúng như huong-dan-viet-task-md.md Phần IV:
+`| # | Lane | Task | Context | Cần xong trước | Finding phải đóng | Đầu ra kiểm chứng được | Hỏng thì mất gì | Prompt mở session |`
+Điền các task CÓ THẬT của giai đoạn dựng khung, trong đó bắt buộc có: mở từng lane còn lại
+(mỗi lane một dòng), tạo `Makefile`, và chốt các file mà §2 đang trỏ ⚠️. Mỗi dòng phải có đủ
+bốn trường không bao giờ được bỏ: `Lane` · `Task` · `Đầu ra kiểm chứng được` · `Hỏng thì mất gì`.
+Ba dòng đầu điền đủ ô `Prompt mở session` để làm mẫu few-shot cho các dòng sau — và ba dòng
+đó phải KHÁC DẠNG NHAU, đừng để cả ba cùng là task NON-CODE sửa một file.
+Đầu file có mục "Task tiếp theo — làm ngay" là MỘT LỆNH CHẠY ĐƯỢC dò ra dòng kế, không phải
+câu "tiếp theo làm T-03" (chép tên ra đó = hai chỗ phải sửa, và chỗ thứ hai sẽ quên).
+
+**4. `finding.md`** — bảng tổng hợp + mục `### F-xx` cho từng lỗi. Mỗi mục có ô
+`**Bài học giữ lại:**` nói LUẬT NÀO ĐỔI để nó không tái phát, không kể lại sự cố. Khởi tạo
+bằng đúng những chỗ lệch bạn tìm thấy thật ở Bước 1 — không có thì để bảng rỗng kèm một dòng
+nói rõ khuôn dùng thế nào. TUYỆT ĐỐI KHÔNG bịa finding cho bảng trông đầy.
+
+KHÔNG tạo `state.json` hay bất kỳ file trạng thái nào khác: pha nào, task nào xong, commit
+nào — `task.md` và `git log` đã trả lời. File thứ hai giữ cùng sự thật sẽ lệch, và nó lệch
+im lặng. KHÔNG tạo file chỉ để điều hướng (file chỉ chứa danh sách link) — nội dung của nó
+thuộc về `CLAUDE.md`.
+</khuon_tung_file>
+
+<output_format>
+Trả lời đúng thứ tự này, không thêm mục, không đổi tên mục:
+
+<hien_trang>
+- CÓ THẬT: <thư mục / file>
+- TÀI LIỆU NHẮC NHƯNG KHÔNG CÓ: <đường dẫn> — <file nào nhắc tới>
+</hien_trang>
+
+<trich_dan>
+- "<trích nguyên văn>" — <file>:<mục>
+</trich_dan>
+
+DA_TAO: <mỗi file một dòng: đường dẫn — số dòng — nó trả lời câu hỏi nào của dự án>
+
+BAN_DO_11_TP: <11 dòng, mỗi dòng: TPn <tên> → <file hoặc trường task đang giữ nó>>
+
+KIEM_CHUNG: <mỗi lệnh ở <self_check> một dòng: lệnh — output thật — đạt/không>
+
+LANE_CHUA_MO: <mỗi lane một dòng: lane — mã task sẽ mở nó — cái gì phải có trước>
+
+GIA_DINH: <chỗ tài liệu bỏ ngỏ mà bạn tự chốt, kèm mức rủi ro — bỏ mục này nếu không có>
+
+RUI_RO_LON_NHAT: <đúng 1 dòng + cách chặn>
+
+VIEC_TIEP_THEO: <đúng 1 dòng: lệnh đầu tiên người dùng gõ sau khi đọc xong>
+</output_format>
+
+<examples>
+  <example>
+    <input>Một dòng trong bảng định tuyến lane của CLAUDE.md, cho lane chưa mở</input>
+    <output>SAI: | BE | API, handler, Go | code/be/** | design/backend/04-yeu-cau.md | make check |
+    → Ba đường dẫn không tồn tại và một lệnh không chạy được. Phiên sau đọc dòng này sẽ đi
+    tìm file, không thấy, rồi TỰ TẠO ra một cấu trúc khác — im lặng và không lệnh nào đỏ.
+    ĐÚNG: | BE | API, handler, Go | ⚠️ chưa mở | — | — (T-05 mở lane này sau khi có Makefile) |</output>
+  </example>
+  <example>
+    <input>Một dòng luật trong CLAUDE.md</input>
+    <output>SAI: "Luôn giữ tài liệu đồng bộ với code và viết code chất lượng cao."
+    → Không kiểm chứng được nên không phiên nào biết mình có vi phạm hay không; và nửa sau
+    là kiến thức phổ thông model đã biết, chỉ tốn token mọi request.
+    ĐÚNG: "Mọi file tài liệu có dòng `Cập nhật <ngày>` ở đầu. Sửa nội dung ⇒ đổi ngày TRONG
+    CÙNG COMMIT. Nghi file cũ: so ngày trong file với `git log -1 --format=%ad -- <file>`;
+    lệch ⇒ kiểm bằng code trước khi tin."</output>
+  </example>
+  <example>
+    <input>Ô "Đầu ra kiểm chứng được" của một dòng task giai đoạn chưa có code</input>
+    <output>SAI: `make check` xanh
+    → Repo chưa có Makefile. Đây là lời hứa, và sổ sẽ trông xanh mà không lệnh nào chạy.
+    ĐÚNG: `grep -c '^| ' CLAUDE.md` ra `>= 6` (bảng định tuyến đủ 6 lane) và
+    `wc -l < CLAUDE.md` ra `<= 120`; mọi con trỏ giải được: vòng lặp test -e ở self_check
+    in ra rỗng.</output>
+  </example>
+  <example>
+    <input>Xử lý khi hai file trong repo nói hai điều khác nhau</input>
+    <output>SAI: chọn bên nghe hợp lý hơn rồi viết vào CLAUDE.md, không nhắc gì.
+    → Bản hoà giải im lặng làm cả hai nguồn cùng sai mà không ai biết; và bạn vừa tạo ra
+    nguồn sự thật thứ ba.
+    ĐÚNG: thêm `F-01` vào finding.md: "huong-dan-viet-task-md.md Phần X gọi là *Giai đoạn*,
+    prompt-fullstack §7 gọi là *Pha* ⇒ `grep` không ra chung một hệ tên. Đề xuất: dùng 6 Pha
+    của §7." Rồi trong CLAUDE.md dùng hệ tên đó và trỏ `F-01`, không mô tả lại nội dung F-01.</output>
+  </example>
+</examples>
+
+<self_check>
+Chạy thật, dán output vào KIEM_CHUNG. Sai thì sửa file rồi chạy lại — đừng giải thích con số sai.
+
+  1. wc -l < CLAUDE.md                                    → phải ≤ 120
+  2. awk 'length > 400' CLAUDE.md                         → phải rỗng
+  3. grep -o '](\([^)#]*\)' CLAUDE.md | sed 's/](//' | grep -v '^http' | sort -u | while read f; do [ -e "$f" ] || echo "TRỎ HỤT: $f"; done
+                                                          → phải rỗng, hoặc mỗi dòng in ra đều có ⚠️ + mã task ngay tại chỗ trỏ trong CLAUDE.md
+  4. grep -n 'make \|go test\|npm run' CLAUDE.md task.md   → mỗi hit phải kèm ⚠️ trên cùng dòng
+  5. grep -c '^| ' task.md                                 → ≥ số lane chưa mở + 1
+  6. head -6 .claude/rules/quan-ly-du-an.md                → in ra frontmatter `paths:` đúng cú pháp
+  7. git status --short                                    → chỉ các file bạn vừa tạo, không có file lạ
+
+Ba câu không có lệnh, tự hỏi rồi sửa im lặng:
+  - Dòng nào trong CLAUDE.md là SỰ THẬT chứ không phải luật/con trỏ? → chuyển sang nhà của nó.
+  - Luật nào ở `.claude/rules/` mà mất đi sau /compact thì gây hỏng? → chuyển lên CLAUDE.md gốc.
+  - Hai luật nào đang chống nhau? → giữ một, bỏ một; hai luật chống nhau khiến phiên sau chọn bừa.
+</self_check>

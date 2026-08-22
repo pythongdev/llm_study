@@ -1,0 +1,6 @@
+Lượt 3 — mở lane đầu tiên:
+Tạo .claude/rules/lane-ba.md cho lane BA theo đúng cách CLAUDE.md §1 mô tả, và chỉ lane BA.
+Frontmatter paths: trỏ đúng thư mục lane đó sở hữu. Nội dung chỉ gồm thứ KHÁC với luật chung
+ở CLAUDE.md — trùng thì trỏ, không chép. Biên nhận của lane này là LỆNH ĐỌC LẠI, viết ra
+chính xác lệnh nào. Xong thì đánh dấu dòng task tương ứng trong task.md kèm output lệnh,
+commit với message ghi lane + mã task, rồi DỪNG — không tự mở lane thứ hai.
