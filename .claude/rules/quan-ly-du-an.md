@@ -14,15 +14,19 @@ paths:
 
 ---
 
-## 1. Khuôn một dòng task — 9 cột
+## 1. Khuôn một dòng task — 10 cột
 
 ```
-| # | Lane | Task | Context | Cần xong trước | Finding phải đóng | Đầu ra kiểm chứng được | Hỏng thì mất gì | Prompt mở session |
+| # | Lane | Task | Context | Cần xong trước | Finding phải đóng | Đầu ra kiểm chứng được | Owner kiểm tra | Hỏng thì mất gì | Prompt mở session |
 ```
 
 Khuôn này mở rộng từ 7 cột của `prompt-fullstack.md` §5.3: `Ưu tiên` và `Trạng thái` gộp vào ô `#`,
 `Context` gộp ba mẩu, và cột `Hỏng thì mất gì` được **giữ lại** (quyết định G2 ở
 `huong-dan-viet-task-md.md` Phần X) vì đó là căn cứ duy nhất để xếp ưu tiên.
+Cột `Owner kiểm tra` thêm ngày **2026-08-22** theo yêu cầu của owner: cột `Đầu ra kiểm chứng được` chứng
+minh **hiện trạng đúng**, nó không cho owner thấy **cái gì vừa đổi**. Cột mới đứng ngay sau cột đó nên
+hai lệnh tự rà ở §5.2 đếm ô **từ phải sang** (`$(NF-4)` = biên nhận, `$(NF-3)` = ô mới), không đếm từ
+trái: một ô có `|` bên trong (ví dụ `grep -c '^\| '`) làm lệch mọi chỉ số đếm xuôi.
 
 ### 1.1 Đặc tả từng ô
 
@@ -37,13 +41,32 @@ Khuôn này mở rộng từ 7 cột của `prompt-fullstack.md` §5.3: `Ưu ti�
 | `Cần xong trước` | mã task hoặc `—` | "sau khi xong phần backend" | Phụ thuộc dữ liệu quyết định thứ tự, không phải sở thích |
 | `Finding phải đóng` | **chỉ mã** `[F-xx](finding.md#f-xx)` | mô tả lại nội dung finding | Mô tả lại = nhà thứ hai; mã là con trỏ giải được bằng `grep` |
 | `Đầu ra kiểm chứng được` | **một lệnh + kết quả kỳ vọng** | "code chạy được", "xong khi ổn" | "Đã làm" không phải trạng thái, nó là output của một lệnh |
+| `Owner kiểm tra` | `👤` hoặc `🤖` · **một lệnh in ra thay đổi** (`git show`, `git diff --stat`, giới hạn `-- <path lane sở hữu>`) · sau dấu `—` là **nhìn gì thì gọi là đạt** | `👤 · đọc lại file` — không phải lệnh, và "file" không phải "thay đổi" | Biên nhận chứng minh **hiện trạng đúng**; ô này cho owner thấy **cái gì vừa đổi** — hai câu hỏi khác nhau, một diff sạch vẫn có thể kèm ba file không ai xin phép |
 | `Hỏng thì mất gì` | hậu quả **ở quán**, bằng tiếng thường | "lỗi đơn hàng" | Viết bằng thuật ngữ ⇒ mọi task trông quan trọng như nhau ⇒ ưu tiên thành cảm tính |
 | `Prompt mở session` | lane · mã · lệnh mở dòng · `chỉ chạm <path>` · **câu DỪNG** | bỏ câu DỪNG | Không có câu DỪNG thì phiên gánh luôn task kế, diff phình, không ai rà nổi |
+
+**Dấu `|` bên trong một ô phải viết `\|`.** Không escape thì ô bị cắt làm đôi khi render, và mọi lệnh
+tự rà đếm ô từ trái đọc nhầm cột (gốc [F-04](../../finding.md#f-04)).
 
 ### 1.2 Bốn trường không bao giờ được bỏ
 
 `Lane` · `Task` · `Đầu ra kiểm chứng được` · `Hỏng thì mất gì`. Task giấy tờ bỏ được `Bẫy`,
-`Cần xong trước`, `Prompt`; task trên đường găng và task DEVOPS đụng tiền thật phải có **đủ** 9 ô.
+`Cần xong trước`, `Prompt`; task trên đường găng và task DEVOPS đụng tiền thật phải có **đủ** 10 ô.
+
+`Owner kiểm tra` không bao giờ **rỗng** — bỏ được phần chữ sau dấu `—`, không bỏ được dấu ai ký và lệnh.
+
+### 1.2b Ai ký: `👤` hay `🤖`
+
+`👤` **owner phải nhìn tận mắt trước khi phiên sau đi tiếp**, đúng bốn trường hợp: đụng thứ thuộc quyền
+owner ([CLAUDE.md §7](../../CLAUDE.md): phạm vi, giá món, tiền thật, remote/push) · sửa **luật** ở
+`CLAUDE.md` §2–§8 hoặc rule có `paths:` rộng · dựng thứ mà lane khác lấy làm biên nhận (`Makefile`) ·
+**task đầu tiên của một loại**, vì nó đặt tiền lệ cho mọi task cùng loại sau đó.
+
+`🤖` cho phần còn lại — kể cả việc đổi **đúng một dòng** bảng `CLAUDE.md` §1 theo quy trình §6, vốn là
+việc cơ khí. `🤖` **không** có nghĩa là owner không được xem: lệnh vẫn phải ghi ra, và vẫn phải chạy được.
+
+Đánh `👤` cho mọi dòng là hỏng cơ chế: cột này là **bộ lọc sự chú ý** của owner, mọi dòng `👤` thì nó
+lọc đúng bằng không.
 
 ### 1.3 Kích cỡ
 
@@ -103,7 +126,8 @@ phải output của lệnh nào.
 | Khi nào | Chạy cái gì | Ra kết quả khác kỳ vọng thì |
 |---|---|---|
 | Mỗi task, trước khi đánh ✅ | biên nhận trong ô `Đầu ra kiểm chứng được` | quay lại làm, chưa được đánh ✅ |
-| Mỗi lần sửa `task.md` | bốn lệnh tự rà ở §5.2 | lỗi của `task.md`, sửa ngay trong phiên đó |
+| Mỗi lần sửa `task.md` | năm lệnh tự rà ở §5.2 | lỗi của `task.md`, sửa ngay trong phiên đó |
+| Owner soi lại một task vừa ✅ | lệnh trong ô `Owner kiểm tra` của dòng đó | thay đổi khác cái ô đó khai ⇒ ghi finding, đừng sửa lặng lẽ |
 | Mỗi lần sửa `CLAUDE.md` | `wc -l` ≤ 120 · `awk 'length > 400'` rỗng · vòng lặp con trỏ §5.1 | gộp hoặc thay luật cũ, không nới trần |
 | Cuối mỗi phiên | ba lệnh dò phiên trôi §5.3 | ghi finding hoặc mở task, đừng sửa lặng lẽ |
 | Mỗi lần mở một lane | quy trình §6 | thiếu vế nào thì lane đó chưa được coi là mở |
@@ -122,8 +146,9 @@ grep -o '](\([^)#]*\)' <file> | sed 's/](//' | grep -v '^http' | sort -u \
 ### 5.2 Tự rà `task.md` trước khi commit
 
 ```bash
-grep '^| \*\*T-' task.md | awk -F'|' 'length($8) < 12 {print $2}'   # thiếu biên nhận ⇒ là ý kiến
-grep '^| \*\*T-' task.md | grep '⚠️+'                                # chạm 2 lane ⇒ chẻ trước khi làm
+grep '^| \*\*T-' task.md | awk -F'|' 'length($(NF-4)) < 12 {print $2}'  # thiếu biên nhận ⇒ là ý kiến
+grep '^| \*\*T-' task.md | grep '⚠️+'                                   # chạm 2 lane ⇒ chẻ trước khi làm
+grep '^| \*\*T-' task.md | awk -F'|' '$(NF-3) !~ /👤|🤖/ {print $2}'    # thiếu ô Owner kiểm tra
 grep -o '\*\*T-[0-9]*\*\*' task.md | sort | uniq -d                  # mã task trùng
 for f in $(grep -o 'F-[0-9]*' finding.md | sort -u); do \
   grep -q "$f" task.md || echo "FINDING BỎ RƠI: $f"; done            # finding không task nào đóng
@@ -161,7 +186,7 @@ DB / BE / FE vì ba lane đó lấy `Makefile` làm biên nhận.
 ## 7. Bảng ánh xạ 11 thành phần prompt → chỗ giữ
 
 Nguồn: `prompt/huong_dan_prompt/cau-truc-prompt-tot.md` (11 TP) ·
-`project_preparation/huong-dan-viet-task-md.md` Phần IV (11 TP → 12 trường).
+`project_preparation/huong-dan-viet-task-md.md` Phần IV (11 TP → 13 trường).
 **Nguyên tắc phân bổ:** thành phần *ổn định qua mọi task* ở `CLAUDE.md`; thành phần *dài và chỉ cần khi
 chạm sổ* ở file này; thành phần *đổi theo từng việc* ở một ô của dòng task. Không TP nào được ở cả ba chỗ.
 
@@ -173,8 +198,9 @@ chạm sổ* ở file này; thành phần *đổi theo từng việc* ở một 
 | 4 | Tiêu chí thành công | ô `Đầu ra kiểm chứng được` · §3 file này (định nghĩa XONG) | §3 là mức sàn chung, ô task là mức riêng của việc đó |
 | 5 | Dữ liệu đầu vào và vị trí | ô `Context › Nạp` của dòng task · gói nạp ở `CLAUDE.md` §1 | Trỏ **đúng mục**, không trỏ trọn file |
 | 6 | Phạm vi và ràng buộc + van xả | `CLAUDE.md` §1 (lane sở hữu file nào) + §6 (kích cỡ) · ô `Finding phải đóng` | Van xả: thấy việc khác ⇒ một dòng vào `finding.md`, không sửa kèm |
-| 7 | Định dạng đầu ra | ô `Đầu ra kiểm chứng được` (lệnh + kết quả kỳ vọng) · §1 file này (khuôn 9 cột) | Định dạng của sổ ở đây, định dạng của đầu ra ở dòng task |
+| 7 | Định dạng đầu ra | ô `Đầu ra kiểm chứng được` (lệnh + kết quả kỳ vọng) · §1 file này (khuôn 10 cột) | Định dạng của sổ ở đây, định dạng của đầu ra ở dòng task |
 | 8 | Ví dụ (few-shot) | ô `Prompt mở session` — ba dòng đầu `task.md` viết đủ làm mẫu | Dòng sau soi ba dòng đầu mà viết |
 | 9 | Quy trình (thứ tự) | `CLAUDE.md` §3 (thứ tự **trong** phiên) · ô `Cần xong trước` (thứ tự **giữa** các task) | Hai loại thứ tự khác nhau, hai nhà khác nhau |
 | 10 | Xử lý bất định | ô `Context › Bẫy` · `CLAUDE.md` dòng vai trò ("nổi lên") · §3.1 file này (luật ⚠️) | Không biết ⇒ ghi finding kèm cách sửa, không đoán cho trôi |
-| 11 | Tự kiểm tra | **không thành cột** — thành ba thứ để đánh ✅ ở `CLAUDE.md` §4 | Opus 5 tự verify sẵn; câu "hãy tự kiểm tra lại" chỉ tốn token |
+| 11 | Tự kiểm tra *(máy)* | **không thành cột** — thành ba thứ để đánh ✅ ở `CLAUDE.md` §4 | Opus 5 tự verify sẵn; câu "hãy tự kiểm tra lại" chỉ tốn token |
+| 11 | Kiểm tra *(người)* | ô `Owner kiểm tra` của dòng task | Nửa còn lại của TP11: máy tự verify được **hiện trạng**, nó không thay owner quyết định **thay đổi này có được nhận không** |
