@@ -17,10 +17,11 @@ Mở lời bằng một dòng khai báo để người dùng chặn được nga
 | **FE** | trang, component, Next, giỏ hàng, màn hình trạm, QR bàn | ⚠️ chưa mở | — | — (T-09 mở lane này) |
 | **DEVOPS** | docker, compose, Makefile, CI, deploy, backup, biến môi trường | ⚠️ chưa mở | — | — (T-03 + T-06 mở lane này) |
 
-Bốn luật định tuyến:
+Năm luật định tuyến:
 - **Một session một lane.** Prompt chạm nhiều lane ⇒ chọn lane của *đầu ra kiểm chứng được*, phần còn lại thành dòng task mới trong [task.md](task.md) ngay lúc đó.
 - **Không rõ lane ⇒ NON-CODE**, vì lane đó chỉ đọc và đối chiếu, không sửa code.
 - **Chỉ nạp trong gói.** Cần file thứ tư ⇒ nói ra lý do trước khi mở.
+- **Mở lane X là ngoại lệ chạm-file duy nhất:** được sửa thêm `.claude/rules/lane-x.md` + **đúng một dòng** bảng trên, dù cả hai thuộc NON-CODE. Quá một dòng `CLAUDE.md` ⇒ lấn phạm vi, ghi [finding.md](finding.md).
 - **Đổi lane giữa chừng ⇒ dừng, commit, mở task mới.** Không kéo lane cũ theo.
 
 ## §2 Một sự thật một nhà

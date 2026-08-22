@@ -42,7 +42,7 @@ trái: một ô có `|` bên trong (ví dụ `grep -c '^\| '`) làm lệch mọi
 | `Context › Bẫy` | chỗ đã cắn hoặc chắc chắn sẽ cắn, kèm cách xử | bỏ trống | Đây là ô cấp phép cho phiên **phản bác đề bài** thay vì sửa cho khớp |
 | `Cần xong trước` | mã task hoặc `—` | "sau khi xong phần backend" | Phụ thuộc dữ liệu quyết định thứ tự, không phải sở thích |
 | `Finding phải đóng` | **chỉ mã** `[F-xx](finding.md#f-xx)` | mô tả lại nội dung finding | Mô tả lại = nhà thứ hai; mã là con trỏ giải được bằng `grep` |
-| `Đầu ra kiểm chứng được` | **một lệnh + kết quả kỳ vọng** | "code chạy được", "xong khi ổn" | "Đã làm" không phải trạng thái, nó là output của một lệnh |
+| `Đầu ra kiểm chứng được` | **một lệnh + kết quả kỳ vọng**; kỳ vọng của thứ **còn được sửa tiếp** viết bằng **ngưỡng** (`<= 120`), không bằng hằng số (`ra 92`) | "code chạy được", "xong khi ổn" · hằng số tuyệt đối — task ✅ rồi thì không ai chạy lại, và nó hết đúng trong im lặng | "Đã làm" không phải trạng thái, nó là output của một lệnh |
 | `Owner kiểm tra` | **chỉ hai** thứ: `👤`/`🤖` (+ lý do ký trong ngoặc *nghiêng*) · link `[bảng soi ↓](#owner-t-xx)`. Chi tiết nằm ở **bảng soi ba cột** trong §Owner kiểm tra của `task.md` — *thay đổi cái gì · câu lệnh để thấy thay đổi · ở đâu* — khuôn ở [bao-cao-thay-doi.md](bao-cao-thay-doi.md) §2 | `👤 · đọc lại file` — không phải lệnh, và "file" không phải "thay đổi" · liệt kê tên file mà không nói **chỗ nào trong file** | Biên nhận chứng minh **hiện trạng đúng**; ô này cho owner thấy **cái gì vừa đổi** — hai câu hỏi khác nhau, một diff sạch vẫn có thể kèm ba file không ai xin phép |
 | `Hỏng thì mất gì` | hậu quả **ở quán**, bằng tiếng thường | "lỗi đơn hàng" | Viết bằng thuật ngữ ⇒ mọi task trông quan trọng như nhau ⇒ ưu tiên thành cảm tính |
 | `Prompt mở session` | lane · mã · lệnh mở dòng · `chỉ chạm <path>` · **câu DỪNG** | bỏ câu DỪNG | Không có câu DỪNG thì phiên gánh luôn task kế, diff phình, không ai rà nổi |
@@ -130,7 +130,7 @@ phải output của lệnh nào.
 | Khi nào | Chạy cái gì | Ra kết quả khác kỳ vọng thì |
 |---|---|---|
 | Mỗi task, trước khi đánh ✅ | biên nhận trong ô `Đầu ra kiểm chứng được` | quay lại làm, chưa được đánh ✅ |
-| Mỗi lần sửa `task.md` | năm lệnh tự rà ở §5.2 | lỗi của `task.md`, sửa ngay trong phiên đó |
+| Mỗi lần sửa `task.md` | **cả khối** lệnh tự rà ở §5.2 — đếm số lệnh trong câu này là hằng số, nó tự trôi | lỗi của `task.md`, sửa ngay trong phiên đó |
 | Owner soi lại một task vừa ✅ | từng lệnh ở **bảng soi** `### owner-T-xx` trong `task.md`, rồi đọc dòng `**Đạt khi:**` | thay đổi khác cái bảng đó khai ⇒ ghi finding, đừng sửa lặng lẽ |
 | Mỗi lần sửa `CLAUDE.md` | `wc -l` ≤ 120 · `awk 'length > 400'` rỗng · vòng lặp con trỏ §5.1 | gộp hoặc thay luật cũ, không nới trần |
 | Cuối mỗi phiên **có sửa file** | dán bảng thay đổi 5 cột — khuôn [bao-cao-thay-doi.md](bao-cao-thay-doi.md) §1 | thiếu bảng ⇒ phiên **chưa xong**, dù biên nhận đã xanh |
@@ -163,6 +163,11 @@ for t in $(grep -o '^| ~*\*\*T-[0-9]*' task.md | grep -o 'T-[0-9]*'); do \
 for o in $(grep -o '^### owner-T-[0-9]*' task.md | grep -o 'T-[0-9]*'); do \
   grep -q "^| ~*\*\*$o\*\*" task.md || echo "BẢNG SOI MỒ CÔI: $o"; done    # bảng soi không còn task
 grep -o '\*\*T-[0-9]*\*\*' task.md | sort | uniq -d                  # mã task trùng
+grep -n '^| \*\*T-[0-9]*\*\*[^|]*✅' task.md                        # đánh ✅ mà quên gạch ⇒ lệnh dò trả lại task đã xong
+grep '^| ~~\*\*T-' task.md | awk -F'|' 'NF==12 {t=substr($2,index($2,"T-"),4); \
+  n=split($6,d,/[ ,]+/); for(i=1;i<=n;i++) if (d[i]~/^T-[0-9]+$/) print t, d[i]}' \
+  | while read t dep; do grep -q "^| ~~\*\*$dep\*\*" task.md \
+    || echo "XONG TRƯỚC PHỤ THUỘC: $t đánh xong nhưng $dep chưa"; done   # làm sai thứ tự
 for f in $(grep -oE 'F-[0-9]{2}' finding.md | sort -u); do \
   grep -q "^| \[$f\].*⚠️" finding.md && continue                     # khai rõ chưa có task (chờ owner) ⇒ bỏ qua
   grep -q "$f" task.md || echo "FINDING BỎ RƠI: $f"; done            # finding không task nào đóng
