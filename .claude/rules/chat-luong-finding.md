@@ -52,7 +52,7 @@ Mỗi cổng khai kèm vế **`đỏ khi`** theo guideline §5, và người vi�
 
 ```bash
 # (a) mục ĐANG MỞ thiếu vế bắt buộc — đỏ khi một mục 🔴 thiếu 1 trong 4 vế §1
-for f in $(grep -o '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | grep -o 'F-[0-9]*'); do
+for f in $(grep '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | sed 's/^| \[\(F-[0-9]*\)\].*/\1/'); do
   s=$(sed -n "/^### $f\$/,/^### F-/p" finding.md); m=""
   echo "$s" | grep -q '^\*\*Mệnh đề sai\.\*\*'               || m="$m Mệnh-đề-sai"
   echo "$s" | grep -q '^\*\*Vì sao nó không tự mất đi\.\*\*' || m="$m Vì-sao-không-tự-mất"
@@ -60,12 +60,12 @@ for f in $(grep -o '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | grep -o 'F-[0-9]*')
   echo "$s" | grep -qE '^\*\*(Cách sửa đề xuất\.|Chưa đề xuất được vì:)\*\*' || m="$m Cách-sửa"
   [ -n "$m" ] && echo "THIẾU VẾ: $f$m"; done
 # (b) mục khai ĐÓNG mà không có bài học — đỏ khi đóng một finding không đổi luật nào
-for f in $(grep -o '^| \[F-[0-9]*\].*✅ ĐÓNG' finding.md | grep -o 'F-[0-9]*'); do \
+for f in $(grep '^| \[F-[0-9]*\].*✅ ĐÓNG' finding.md | sed 's/^| \[\(F-[0-9]*\)\].*/\1/'); do \
   sed -n "/^### $f\$/,/^### F-/p" finding.md | grep -q '^\*\*Bài học giữ lại:\*\*' \
   || echo "ĐÓNG KHÔNG BÀI HỌC: $f"; done
 ```
 
-Mục đã đóng không qua cổng (a) — nó chuyển sang khuôn đóng ở §1. Tính duy nhất của mã `F-xx` không ở đây: nó về `quan-ly-du-an.md` §5.2 theo `T-16`.
+Mục đã đóng không qua cổng (a) — nó chuyển sang khuôn đóng ở §1; vì vậy hai cổng lấy mã **đầu dòng** bằng `sed`, chứ `grep -o 'F-[0-9]*'` vét cả mã tham chiếu trong ô và kéo mã đã đóng vào khuôn mở. Tính duy nhất của mã `F-xx` không ở đây: nó về `quan-ly-du-an.md` §5.2 theo `T-16`.
 
 ## 4. Khi nào **không** mở finding
 

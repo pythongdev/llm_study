@@ -34,6 +34,9 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-18](#f-18) | Không cơ chế nào bắt *task đã xong trong git mà dòng sổ còn mở*: T-02 commit đủ đầu ra ở `4851d17` với cả năm vế biên nhận xanh, dòng vẫn `\| **T-02** 🔺` — nên bước 2 của [CLAUDE.md §3](CLAUDE.md) dò đúng vào nó và phiên sau mở ra làm lại việc đã xong | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-30](task.md) |
 | [F-19](#f-19) | Một cơ chế đang hỏng được ghi **ngoài sổ lỗi**: `design/BA/04-yeu-cau.md` §4 mục 2 (*"Đóng T-02 xong thì vế 5 tự đỏ"*) mô tả đủ chuyện đóng T-02 làm lệnh §5.2b in `LANE NỬA VỜI: ba`, nhưng `grep -c 'LANE NỬA VỜI' finding.md` ra `0` và định tuyến §1 không dẫn lane NON-CODE tới `design/BA/**` | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-28](task.md) |
 | [F-20](#f-20) | Bảng `cl-T-02` khai `Đỏ khi: ra hai đường dẫn khác nhau`, nhưng lệnh của nó in ra **8 dòng** ngay cả khi lane hoàn toàn đúng — `[^ )]*` nuốt cả dấu markdown — nên nó **đỏ giả vĩnh viễn**, và khi `paths:` bị đổi sang `design/DB/**` thật thì output chỉ khác đúng một dòng | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-29](task.md) |
+| [F-21](#f-21) | Hai cổng ở [rule §3](.claude/rules/chat-luong-finding.md) lấy mã bằng `grep -o 'F-[0-9]*'` chạy trên **cả dòng bảng**, nên mã `F-xx` **nhắc trong ô** cũng bị duyệt như mã của dòng: dòng `F-06` nhắc `[F-03]` kéo một mã **đã đóng** vào khuôn mở, và cổng (a) duyệt 25 mã cho 18 dòng 🔴 | rà khuôn finding · 2026-08-23 | ✅ ĐÓNG 2026-08-23 | ⚠️ đóng ngay trong phiên rà — không đẻ task |
+| [F-22](#f-22) | Khuôn mục `### F-xx` ở [rule §1](.claude/rules/chat-luong-finding.md) không có vế nào giữ **tiêu chí thành công** lúc **mở**: `**Kiểm chứng.**` chỉ bắt buộc khi **đóng**, nên lệnh chứng minh được chọn **sau** khi đã sửa — 14/18 mục 🔴 hiện không khai nổi một vế `đỏ khi` | rà khuôn finding · 2026-08-23 | 🔴 MỞ | [T-31](task.md) |
+| [F-23](#f-23) | [CLAUDE.md §7](CLAUDE.md) và [rule §3](.claude/rules/quan-ly-du-an.md) vẫn khai *"chưa có `Makefile`"* + xếp `make ...` vào loại ⚠️ **không được tính là biên nhận**, trong khi từ `9699f1c` `make check` chạy được và ra mã thoát `0`; §5.3 chỉ có lệnh bắt ⚠️ **thiếu**, không lệnh nào bắt ⚠️ **thừa** | T-03 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
 
 ---
 
@@ -782,3 +785,152 @@ trên bản đổi sang `design/DB`.
 **Bẫy khi sửa.** Đừng chỉ sửa lệnh của `cl-T-02`. `grep -c 'design/BA\[^ )\]' task.md` ra 1 hôm nay, nhưng
 khuôn `[^ )]*` là thứ 22 bảng `cl-T-xx` còn lại sẽ chép khi tới lượt chúng được đo — chỗ cần sửa cùng lúc
 là một dòng ví dụ trong [quality/00-guideline-chat-luong.md](quality/00-guideline-chat-luong.md).
+
+---
+
+### F-21
+
+**Mệnh đề sai.** Hai cổng ở [.claude/rules/chat-luong-finding.md](.claude/rules/chat-luong-finding.md) §3
+lấy danh sách mã bằng `grep -o 'F-[0-9]*'` chạy trên **cả dòng bảng**, nên mọi mã `F-xx` được **nhắc trong
+ô** `Mệnh đề đang sai` cũng bị duyệt như thể nó là mã của chính dòng đó. Cổng (a) vì vậy duyệt **25 mã**
+cho **18 dòng 🔴**, và trong 25 mã đó có `F-03` — một mã **đã đóng**, bị đem đi đo bằng khuôn **mở**.
+
+**Vì sao nó không tự mất đi.** Chạy hết `task.md` y như nó viết thì dòng này còn: `T-23` vá 5 mục *cho
+cổng (a) xanh* — nó **tin** cổng đang đọc đúng mã; không dòng task nào chạm §3 của rule. Cổng sai theo
+hướng **đỏ giả trên mã đã đóng** còn nguy hơn: mục đóng dùng khuôn đóng, thiếu vế mở là **đúng luật**, nên
+người sửa sẽ nhét vế mở vào một mục đã đóng để dập đỏ — hỏng đúng khuôn mà §1 vừa dựng.
+
+**Lệnh tái hiện.** Hai số phải bằng nhau, chúng lệch `25` với `18`:
+
+```bash
+grep -o '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | grep -o 'F-[0-9]*' | wc -l   # mẫu cũ: 25
+grep '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | sed 's/^| \[\(F-[0-9]*\)\].*/\1/' | wc -l   # đúng: 18
+grep -o '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | grep -o 'F-[0-9]*' | sort -u | grep -x 'F-03'  # mã đã đóng lọt vào
+```
+
+**Cách sửa đề xuất.** Lấy mã **đầu dòng** bằng `sed` thay cho `grep -o` ở cả hai cổng — mã của dòng luôn
+là chuỗi ngay sau `| [`, còn mã tham chiếu thì không bao giờ ở đó:
+`grep '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | sed 's/^| \[\(F-[0-9]*\)\].*/\1/'`. Sửa ngay trong phiên
+rà, không đẻ task: đây là một dòng lệnh trong rule mà lane NON-CODE sở hữu.
+
+**Kiểm chứng.** Sau vá, hai cổng duyệt đúng số mã của bảng — `18` mở và `2` đóng — và không mã đã đóng
+nào lọt vào cổng (a):
+
+```
+$ grep '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | sed 's/^| \[\(F-[0-9]*\)\].*/\1/' | wc -l
+18
+$ grep '^| \[F-[0-9]*\].*✅ ĐÓNG' finding.md | sed 's/^| \[\(F-[0-9]*\)\].*/\1/' | wc -l
+2
+$ <cổng (a) §3>
+THIẾU VẾ: F-06 Lệnh-tái-hiện
+THIẾU VẾ: F-07 Cách-sửa
+THIẾU VẾ: F-08 Cách-sửa
+THIẾU VẾ: F-12 Cách-sửa
+THIẾU VẾ: F-13 Vì-sao-không-tự-mất
+$ <cổng (b) §3>
+(rỗng)
+```
+
+Năm dòng còn lại là **nợ thật** của [T-23](task.md), không phải đỏ giả — trước vá chúng lẫn với mã tham
+chiếu nên không ai phân biệt được hai loại đỏ. **Đã thử làm đỏ:** trên bản sao ở scratchpad, gỡ vế
+`**Cách sửa đề xuất.**` khỏi mục **đã đóng** `F-03` (hợp lệ theo khuôn đóng §1): mẫu cũ in
+`THIẾU VẾ: F-03 Cách-sửa`, mẫu mới im.
+
+**Bài học giữ lại:** lệnh rà đọc một **bảng** phải neo vào **vị trí** của ô, không vào **hình dạng** của
+mã — `grep -o` trên cả dòng luôn vét thêm mọi con trỏ mà ô đó nhắc tới. Luật này đã vào
+[rule §3](.claude/rules/chat-luong-finding.md) ngay dưới khối lệnh, cùng chỗ đã nói *mục đã đóng không qua cổng (a)*.
+Đây là họ hàng của [F-05](#f-05) và [F-09](#f-09) — cùng gốc: lệnh tự rà viết bằng khuôn lỏng thì hỏng
+theo hướng **im lặng** hoặc **đỏ giả**, và cả hai đều dạy phiên sau bỏ qua nó.
+
+---
+
+### F-22
+
+**Mệnh đề sai.** Khuôn một mục ở [.claude/rules/chat-luong-finding.md](.claude/rules/chat-luong-finding.md)
+§1 không có vế nào giữ **tiêu chí thành công** ở thời điểm **mở**: vế duy nhất mang lệnh phán quyết —
+`**Kiểm chứng.**` — được khai `Bắt buộc khi: **đóng**`. Người đóng finding vì vậy **tự chọn lệnh chứng minh
+sau khi đã sửa xong**, và lệnh chọn sau thì gần như luôn xanh. Đo trên sổ hôm nay: **14/18** mục 🔴 không
+có lấy một vế `đỏ khi`.
+
+**Vì sao nó không tự mất đi.** Chạy hết `task.md` y như nó viết thì dòng này còn: `T-20` và `T-21` đưa vế
+`đỏ khi` xuống ô `Đầu ra kiểm chứng được` của **`task.md`** — không dòng nào chạm sổ lỗi; `T-23` vá 5 mục
+theo đúng khuôn **4 vế hiện có**, tức nó củng cố khuôn thiếu chứ không sửa. Bảng ánh xạ TP → nhà ở
+[quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §7 cũng chỉ phủ **dòng task**: TP4 của nó là ô
+`Đầu ra kiểm chứng được`; mục `### F-xx` — thứ phiên sau nạp làm đầu vào y hệt một dòng task — không có
+hàng nào trong bảng đó.
+
+**Lệnh tái hiện.** Hai lệnh, chạy từ gốc repo:
+
+```bash
+# 1. mục 🔴 không khai nổi một vế âm — ra 14 trên 18
+for f in $(grep '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | sed 's/^| \[\(F-[0-9]*\)\].*/\1/'); do \
+  sed -n "/^### $f\$/,/^### F-/p" finding.md | grep -qi 'đỏ khi' || echo "MỞ KHÔNG TIÊU CHÍ ĐÓNG: $f"; done | wc -l
+# 2. vế mang lệnh phán quyết được khai bắt buộc ở phía nào — in ra **đóng**
+sed -n '/^## 1\./,/^## 2\./p' .claude/rules/chat-luong-finding.md | grep 'Kiểm chứng' | grep -o '\*\*đóng\*\*'
+```
+
+**Cách sửa đề xuất.** Thêm **một** vế bắt buộc-khi-**mở** vào khuôn §1, gánh cả TP4 lẫn TP6 của
+[cau-truc-prompt-tot.md](prompt/huong_dan_prompt/cau-truc-prompt-tot.md):
+
+> `**Đóng khi.**` — lệnh sẽ chứng minh mệnh đề **hết đúng**, viết **lúc mở**, kèm vế `đỏ khi …`, và nêu
+> **file được phép chạm** khi sửa. Chưa nghĩ ra lệnh ⇒ `**Chưa đóng được bằng lệnh vì:**` + lý do.
+
+Nó khác `**Kiểm chứng.**` ở chỗ: `Đóng khi` là hợp đồng viết **trước**, `Kiểm chứng` là output thật dán
+**sau**; người đóng phải làm xanh đúng lệnh người mở đã chọn, đổi lệnh giữa chừng là đổi mệnh đề. Chẻ làm
+hai task theo đúng tiền lệ `T-20`/`T-21`: [T-31](task.md) đưa vế vào rule §1 + cổng (c) ở §3,
+[T-32](task.md) áp xuống 18 mục đang mở.
+
+**Bẫy khi sửa.** §3 của rule đang **22/22 dòng** — kịch trần mục ở §5 của chính nó. Thêm cổng (c) là +1
+dòng, nên `T-31` phải **gộp** hai dòng có sẵn trong cùng commit; nới trần §5 cho đủ chỗ là chọn đường dễ,
+và trần đó là thứ duy nhất giữ cho `grep -n` thay được việc đọc cả file.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Chỗ hụt này không lộ ra ở mục đang mở — nó lộ ra **đúng một lần**,
+ở giây phút một finding được đóng, và lúc đó không ai còn đọc lại nó nữa. Sổ lỗi có 20 mã, mỗi mã đóng
+một lần: hỏng ở đây là hỏng ở khâu **không lặp lại được**.
+
+---
+
+### F-23
+
+**Mệnh đề sai.** [CLAUDE.md](CLAUDE.md) §7 khai *"Chưa có `Makefile`"* và *"⚠️ `make check` … hiện không chạy
+được"*; [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §3 khai *"Repo chưa có `Makefile`"* và
+xếp `make ...` vào danh sách **không được tính là biên nhận ở giai đoạn này**. Từ commit `9699f1c` cả ba mệnh đề
+đó đã sai: `Makefile` có thật, `make check` chạy được, ra mã thoát `0`.
+
+**Lệnh tái hiện.**
+
+```bash
+make check >/dev/null 2>&1 && echo "make check: ma thoat 0"
+grep -n 'Chưa có `Makefile`' CLAUDE.md
+grep -n 'Repo chưa có `Makefile`' .claude/rules/quan-ly-du-an.md
+```
+
+Ba dòng cùng in ra một lúc: lệnh thứ nhất nói cổng đã chạy được, hai lệnh sau nói tài liệu vẫn khai nó chưa có.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: `T-04` chỉ chạm `quality/**` + **đúng
+một dòng** `CLAUDE.md` §2 (ô *Định nghĩa XONG khi đã có compiler*); `T-06` chỉ chạm `.claude/rules/lane-devops.md`
++ **đúng một dòng** §1. Không dòng task nào nhận việc sửa §7 hay rule §3, và ô `Nạp` của cả hai không mở hai chỗ
+đó ra. Dòng này **còn** ⇒ finding.
+
+**Vì sao nó nguy hiểm hơn nó trông.** ⚠️ trong repo này có nghĩa *"đừng tin biên nhận này, nó chưa chạy được"*.
+Để nguyên nó trên một lệnh **đã** chạy được thì phiên sau đọc §7 sẽ không gõ `make check`, mà quay lại dán tay
+từng `grep -c` — cổng vừa dựng thành cổng không ai đi qua, và `T-04`…`T-09` mất đúng thứ `T-03` sinh ra để cho
+chúng. Chiều ngược lại đã có người canh: §5.3 lệnh 2 bắt `make ...` viết **thiếu** ⚠️. Chiều ⚠️ **thừa** thì
+không lệnh nào canh — biên nhận trôi theo hướng bi quan không bao giờ đỏ ở đâu cả.
+
+**Cách sửa đề xuất.** Một task NON-CODE, 3 file, một đầu ra: (1) `CLAUDE.md` §7 bỏ `Makefile` khỏi danh sách chưa
+có và đổi ⚠️ `make check` thành biên nhận thật, **giữ** ⚠️ cho `go test` và `npm run build` — hai thứ đó vẫn chưa
+cài; (2) rule §3 đoạn *"Khi `Makefile` đã có (T-03)"* viết lại theo hiện trạng; (3) thêm vào rule §5.3 lệnh
+nghịch đảo của lệnh 2:
+
+```bash
+grep -n '⚠️[^|]*make check' CLAUDE.md .claude/rules/*.md \
+  | while read l; do make check >/dev/null 2>&1 && echo "⚠️ THỪA (lệnh đã ra mã thoát 0): $l"; done
+```
+
+**Đỏ khi:** một file luật còn ⚠️ trên một lệnh vừa ra mã thoát `0`. **Xanh khi:** hoặc lệnh còn hỏng thật, hoặc
+⚠️ đã gỡ. Chạy hôm nay lệnh này **đỏ** — đó là bằng chứng của chính mục này.
+
+**Bẫy khi sửa.** §7 đang là chỗ duy nhất nói *"biên nhận thật của giai đoạn này là lệnh đọc lại"*. Gỡ ⚠️ khỏi
+`make check` mà xoá luôn câu đó là mở đường cho phiên sau khai `go test` là biên nhận trong khi Go chưa cài —
+đúng cái bẫy mà ô `Bẫy` của [T-03](task.md) đã dựng hàng rào. Gỡ **một** dấu ⚠️, không gỡ cả đoạn.
