@@ -1,6 +1,6 @@
 # finding.md — sổ lỗi
 
-> Cập nhật **2026-08-23**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
+> Cập nhật **2026-08-24**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
 > [task.md](task.md). Phép thử một câu và luật không trộn hai sổ ở [CLAUDE.md §5](CLAUDE.md);
 > hai sổ khác nhau chỗ nào ở [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §2.
 
@@ -40,7 +40,9 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-24](#f-24) | [CLAUDE.md §4](CLAUDE.md) khai `git add <đường dẫn cụ thể>` là cách chống nuốt việc dở của phiên khác — nó chỉ chống **lẫn file**, không chống **lẫn hunk**: hai phiên cùng sửa `task.md`/`finding.md` thì bên nào commit trước cũng nuốt trọn phần bên kia đang viết, cây vẫn sạch và `git log` vẫn hợp khuôn (ca thật: `0d2a785` chứa cả phần đóng `T-03` của phiên DEVOPS) | T-03 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-25](#f-25) | Luật *thử làm đỏ một lần* ([guideline §5](quality/00-guideline-chat-luong.md)) không có cổng nào cưỡng chế cho bảng `cl-T-xx`: **28/31** bảng đang `Đã thử làm đỏ: ⬜ chưa`, nên một lệnh soi hỏng nằm im vô hạn — ca phát hiện: `cl-T-04` khai đỏ khi hai file cùng `>= 1` hit `go test`/`npm run`, trong khi rule đã có 2 hit và **một hit nằm trong thân câu lệnh §5.2** nên không xoá được ⇒ trục đó **đỏ vĩnh viễn** | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-26](#f-26) | Ô `**Đạt khi:**` của `owner-T-11` trong [task.md](task.md) khai nhà của luật *không deploy trong giờ bán* là `CLAUDE.md`, nhưng `CLAUDE.md` **không có chữ nào** về luật đó — nhà thật là `prompt-fullstack.md` §6.9, và [guideline §6](quality/00-guideline-chat-luong.md) đang trỏ đúng về đó | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
-| [F-27](#f-27) | `project_preparation/prompt-fullstack.md` khai **hai** bề rộng cho cùng một màn hình khách: §3.7 *"mobile-first 375px"*, §6.5 *"thử ở 360px (khách)"* — [T-04](task.md) sẽ chép **một** trong hai vào `quality/05-checklist.md` và chốt luôn số sai | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task — owner chốt số |
+| [F-27](#f-27) | `project_preparation/prompt-fullstack.md` khai **hai** bề rộng cho cùng một màn hình khách: §3.7 *"mobile-first 375px"*, §6.5 *"thử ở 360px (khách)"* — [T-04](task.md) sẽ chép **một** trong hai vào `quality/05-checklist.md` và chốt luôn số sai | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task — owner đã chốt **375px** 2026-08-24, còn phải sửa §6.5 |
+| [F-28](#f-28) | Lệnh soi trục *Một nhà* của `cl-T-04` **tự bắt `task.md`**: chuỗi mốc `happy path` bắt buộc phải nằm trong chính ô soi, nên lệnh đỏ ở **cả hai** nhánh — có checklist thì ra `3` file (*bản chép thứ ba*), chưa có thì kết quả thiếu `quality/05-checklist.md` (*chưa có nhà*) | T-04 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ owner chỉ định vá ngay trong phiên T-04 — không đẻ task |
+| [F-29](#f-29) | Ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy `awk` 7 khoá trên **cả file** trong khi vế nó muốn đo là *bảy dòng `- [ ]`*: §2 của checklist nhắc lại đúng các chuỗi khoá, nên bản **xoá một vế rồi chèn một dòng bịa** qua được cả hai biên nhận — `grep -c` ra `7`, `awk` ra `7` | T-04 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task — owner giao agent riêng vá ngay sau T-04 |
 
 ---
 
@@ -1100,3 +1102,85 @@ theo [CLAUDE.md §7](CLAUDE.md) vì nó là ràng buộc thiết kế, không ph
 số lớn hơn tự an toàn, chiều ngược lại thì không. Trước khi có quyết định, [T-04](task.md) nên chép
 nguyên văn cả hai kèm dấu `GIẢ ĐỊNH:` thay vì chọn hộ. **Đỏ khi:** lệnh tái hiện ở trên in ra **hai** số
 khác nhau cùng gắn nhãn *(khách)*; chốt xong thì nó chỉ còn in một số.
+
+**Owner đã chốt 2026-08-24: `375px`**, theo §3.7. [T-04](task.md) viết `375px` vào
+[quality/05-checklist.md](quality/05-checklist.md) §1 vế 7 kèm con trỏ về mục này, **không** dùng
+`GIẢ ĐỊNH:` nữa. Finding vẫn 🔴 vì mệnh đề sai chưa hết đúng: §6.5 còn khai `360px`, nên lệnh tái hiện
+vẫn in ra hai số. Đánh đổi owner nhận: `360px` hẹp hơn nên kiểm ở đó thì `375px` tự an toàn, chốt chiều
+ngược lại thì màn hình Android hẹp không có ai kiểm — bù bằng cách thêm `360px` vào tầng pha FE (T-09).
+
+---
+
+### F-28
+
+**Mệnh đề sai.** Lệnh soi trục *Một nhà* của bảng `cl-T-04` trong [task.md](task.md) không xanh được ở
+bất kỳ trạng thái nào của repo. Nó đếm số file `.md` chứa chuỗi mốc `happy path` và khai *đỏ khi* ra
+`>= 3` file **hoặc** kết quả thiếu `quality/05-checklist.md` — nhưng chính ô soi đó phải viết chuỗi mốc
+ra để mô tả phép đo, nên `task.md` luôn là một hit. Chưa có checklist: ra `2` file, thiếu nhà ⇒ đỏ. Có
+checklist: ra `3` file, *bản chép thứ ba* ⇒ đỏ. Cùng họ với [F-11](#f-11) — lệnh tự bắt thân mình.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -rln 'happy path' --include='*.md' --exclude-dir=reference .
+```
+
+Lệnh in ra `task.md` cùng với `project_preparation/prompt-fullstack.md` — hit thứ nhất là dòng
+`503` của chính bảng soi và dòng `506` của vế `Đã thử làm đỏ`, không phải một bản chép nội dung nào.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: T-04 chỉ tạo checklist và sửa
+đúng một dòng `CLAUDE.md` §2, ô `Context` của nó cấm chạm `task.md`. Không dòng task nào nhận việc sửa ô
+soi của một task khác, và `make check` không rà nội dung bảng `cl-`. Dòng **còn** ⇒ finding.
+
+**Cách sửa đề xuất.** Loại **hai sổ** ra khỏi phạm vi quét thay vì nới ngưỡng: thêm `--exclude=task.md
+--exclude=finding.md`, và đổi *đỏ khi* thành **≠ `2`** (đếm chính xác, không phải ngưỡng dưới —
+[guideline §5](quality/00-guideline-chat-luong.md) mục 1). Hai sổ là chỗ **mô tả** phép đo, không phải
+nhà của nội dung §6.5, nên loại chúng không làm mất khả năng bắt bản chép thật.
+
+**Kiểm chứng.**
+
+```bash
+grep -rln 'happy path' --include='*.md' --exclude-dir=reference --exclude=task.md --exclude=finding.md .
+# project_preparation/prompt-fullstack.md
+# quality/05-checklist.md          <- ra đúng 2 file, có nhà mới ⇒ xanh
+```
+
+Đã thử làm đỏ: dựng bản chép thứ ba ở scratchpad ⇒ ra `3` ≠ 2 ⇒ đỏ; xoá bản chép ⇒ xanh lại.
+
+**Bài học giữ lại:** một lệnh soi đếm **chuỗi mốc** phải loại `task.md` và `finding.md` ra khỏi phạm vi
+quét, vì hai sổ buộc phải nhắc lại chuỗi đó để mô tả phép đo. Luật này về
+[guideline §5](quality/00-guideline-chat-luong.md) cùng mục với [F-29](#f-29), chung một câu: **biên nhận
+đếm nội dung của một khối phải lọc đúng khối đó trước, không quét cả cây file.**
+
+---
+
+### F-29
+
+**Mệnh đề sai.** Vế thứ hai trong ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy
+`awk '/tầng 1/…/truy vết/…'` trên **cả** `quality/05-checklist.md`, trong khi thứ nó muốn đo là *bảy vế
+§6.5 có mặt đủ trong bảy dòng `- [ ]`*. §2 của checklist nhắc lại đúng các chuỗi khoá (`sinh lại type`,
+`768`, `down`) ở cột lệnh đo, nên `awk` in `7` kể cả khi một dòng `- [ ]` đã bị thay bằng mục bịa — và vế
+thứ nhất `grep -c` chỉ đếm **số** dòng, không đếm nội dung. Hai vế bù nhau thành một lỗ.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -v '^- \[ \] \*\*Đổi endpoint\*\*' quality/05-checklist.md > /tmp/lo.md
+echo '- [ ] mục bịa, không phải vế nào của §6.5' >> /tmp/lo.md
+grep -c '^- \[ \]' /tmp/lo.md   # 7  <- biên nhận 1 xanh
+awk '/tầng 1/{a=1}/happy/{b=1}/down/{c=1}/sinh lại type/{d=1}/768/{e=1}/tiếng Việt/{f=1}/truy vết/{g=1}END{print a+b+c+d+e+f+g}' /tmp/lo.md   # 7  <- biên nhận 2 xanh
+```
+
+Một bản **thiếu hẳn vế *đổi endpoint*** qua cả hai cổng của T-04.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: T-04 đã ✅, ô biên nhận đứng
+nguyên và là thứ owner dùng để soi lại sau này; không dòng task nào nhận việc sửa ô biên nhận của một
+task đã đóng, và [T-20](task.md)/[T-21](task.md) làm chất lượng ở mức khuôn chung chứ không rà từng ô.
+Dòng **còn** ⇒ finding.
+
+**Cách sửa đề xuất.** Lọc khối trước rồi mới đếm nội dung: đổi vế `awk` của T-04 thành
+`grep '^- \[ \]' quality/05-checklist.md | awk '…'`. Đã thử: bản thủng ra `6` (đỏ), bản thật ra `7`
+(xanh). Thêm luật chung vào [guideline §5](quality/00-guideline-chat-luong.md) — cùng câu với
+[F-28](#f-28): **biên nhận đếm nội dung của một khối phải lọc đúng khối đó trước, không quét cả file.**
+**Đỏ khi:** một biên nhận khai *"đếm N vế trong danh sách"* mà lệnh của nó chạy trên cả file.
+
