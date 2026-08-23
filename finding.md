@@ -37,6 +37,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-21](#f-21) | Hai cổng ở [rule §3](.claude/rules/chat-luong-finding.md) lấy mã bằng `grep -o 'F-[0-9]*'` chạy trên **cả dòng bảng**, nên mã `F-xx` **nhắc trong ô** cũng bị duyệt như mã của dòng: dòng `F-06` nhắc `[F-03]` kéo một mã **đã đóng** vào khuôn mở, và cổng (a) duyệt 25 mã cho 18 dòng 🔴 | rà khuôn finding · 2026-08-23 | ✅ ĐÓNG 2026-08-23 | ⚠️ đóng ngay trong phiên rà — không đẻ task |
 | [F-22](#f-22) | Khuôn mục `### F-xx` ở [rule §1](.claude/rules/chat-luong-finding.md) không có vế nào giữ **tiêu chí thành công** lúc **mở**: `**Kiểm chứng.**` chỉ bắt buộc khi **đóng**, nên lệnh chứng minh được chọn **sau** khi đã sửa — 14/18 mục 🔴 hiện không khai nổi một vế `đỏ khi` | rà khuôn finding · 2026-08-23 | 🔴 MỞ | [T-31](task.md) |
 | [F-23](#f-23) | [CLAUDE.md §7](CLAUDE.md) và [rule §3](.claude/rules/quan-ly-du-an.md) vẫn khai *"chưa có `Makefile`"* + xếp `make ...` vào loại ⚠️ **không được tính là biên nhận**, trong khi từ `9699f1c` `make check` chạy được và ra mã thoát `0`; §5.3 chỉ có lệnh bắt ⚠️ **thiếu**, không lệnh nào bắt ⚠️ **thừa** | T-03 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-24](#f-24) | [CLAUDE.md §4](CLAUDE.md) khai `git add <đường dẫn cụ thể>` là cách chống nuốt việc dở của phiên khác — nó chỉ chống **lẫn file**, không chống **lẫn hunk**: hai phiên cùng sửa `task.md`/`finding.md` thì bên nào commit trước cũng nuốt trọn phần bên kia đang viết, cây vẫn sạch và `git log` vẫn hợp khuôn (ca thật: `0d2a785` chứa cả phần đóng `T-03` của phiên DEVOPS) | T-03 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
 
 ---
 
@@ -934,3 +935,51 @@ grep -n '⚠️[^|]*make check' CLAUDE.md .claude/rules/*.md \
 **Bẫy khi sửa.** §7 đang là chỗ duy nhất nói *"biên nhận thật của giai đoạn này là lệnh đọc lại"*. Gỡ ⚠️ khỏi
 `make check` mà xoá luôn câu đó là mở đường cho phiên sau khai `go test` là biên nhận trong khi Go chưa cài —
 đúng cái bẫy mà ô `Bẫy` của [T-03](task.md) đã dựng hàng rào. Gỡ **một** dấu ⚠️, không gỡ cả đoạn.
+
+---
+
+### F-24
+
+**Mệnh đề sai.** [CLAUDE.md §4](CLAUDE.md) khai cách chống nuốt việc của phiên khác là: *"stage bằng
+`git add <đường dẫn cụ thể>` — liệt kê từng file, để việc dở của phiên khác không bị nuốt theo."* Cách đó
+**chỉ chặn được file khác**, không chặn được **cùng một file**. Hai phiên song song trong repo này đều
+sửa `task.md` và `finding.md` — tức đúng cái mà `git add` lấy nguyên vẹn cả file — nên `git add task.md`
+của phiên A nuốt trọn phần `task.md` phiên B đang viết dở, dù A đã liệt kê từng đường dẫn đúng như luật.
+
+**Lệnh tái hiện.** Hôm nay, phiên DEVOPS đóng `T-03` (sửa `task.md`, mở `F-23` trong `finding.md`), phiên
+NON-CODE chạy song song commit `0d2a785` với message *"đóng F-21, mở F-22 + T-31 T-32"*:
+
+```bash
+git show --stat 0d2a785            # 3 file, trong đó task.md + finding.md
+git show 0d2a785 -- task.md | grep -c 'T-03'   # ra > 0: việc của phiên DEVOPS nằm trong commit của phiên khác
+git log --oneline -1 -- Makefile   # 9699f1c: nửa còn lại của cùng một task, ở commit khác, khai lane khác
+```
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: không dòng nào đổi cách stage.
+[F-07](#f-07) nằm ở bước 4 (ĐIỂM LÙI, *trước* khi gõ) và ba hướng sửa của nó đều là kiến trúc chờ owner;
+dòng này nằm ở §4 (*lúc commit*) và mệnh đề của nó là **một câu luật đang khai sai mức bảo vệ nó cho**.
+Sửa xong F-07 theo hướng 1 hay 2 thì câu ở §4 vẫn sai. Dòng này **còn** ⇒ finding.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Nuốt việc không để lại dấu đỏ nào: cây sạch, `make check` xanh,
+`git log` hợp khuôn. Cái mất là **truy vết** — [CLAUDE.md §2](CLAUDE.md) trao cho `git log` vai nhà duy
+nhất của *"ai sửa file nào"*, mà `0d2a785` giờ khai sai cả lane lẫn mã task cho một nửa nội dung của nó.
+Đó chính là [F-17](#f-17) sinh thêm một ca mới, lần này do luật §4 chỉ đường sai chứ không do người viết ẩu.
+
+**Cách sửa đề xuất.** Đổi câu ở §4 thành hai vế, và ghi kỹ thuật vào
+[.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md): (1) *file không ai khác chạm* ⇒
+`git add <đường dẫn>` như cũ; (2) *file đang bẩn vì phiên khác* ⇒ **không** `git add` cả file, mà dựng
+bản vá chỉ chứa hunk của mình rồi nạp thẳng vào index:
+
+```bash
+git show HEAD:task.md > /tmp/base            # bản gốc
+cp /tmp/base /tmp/mine && <áp đúng sửa đổi của phiên này lên /tmp/mine>
+git diff --no-index /tmp/base /tmp/mine | sed 's|/tmp/base|a/task.md|; s|/tmp/mine|b/task.md|' > /tmp/p
+git apply --cached /tmp/p && git commit -m '...'   # index = HEAD + phần của tôi; cây vẫn giữ cả hai phiên
+```
+
+**Đỏ khi:** `git show --stat <commit>` liệt kê một file mà bảng thay đổi của phiên đó không có dòng nào.
+Đây là lệnh (e) mà [F-16](#f-16) đang nói là chưa chạy được — sửa F-16 thì phép đo này có sẵn người canh.
+
+**Bẫy khi sửa.** Đừng sửa bằng cách cấm hai phiên chạy cùng lúc — đó là hướng của [F-07](#f-07) và là quyền
+owner. Mục này chỉ đòi câu ở §4 khai **đúng** mức bảo vệ mà `git add <đường dẫn>` thật sự cho: nó chống
+lẫn file, không chống lẫn hunk.
