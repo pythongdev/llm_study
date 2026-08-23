@@ -81,13 +81,13 @@ File này là **tầng chung**. Hai tầng dưới kế thừa nguyên §3 §4 �
 - **Tầng pha** — `quality/0n-pha-<n>-<tên>.md`: (a) mệnh đề riêng của pha · (b) lệnh đo riêng ·
   (c) **ranh giới pha** — nhắc tới cái gì là đã lấn pha sau
   ([prompt-fullstack §7](../project_preparation/prompt-fullstack.md)).
-- **Tầng step** — ô `Đầu ra kiểm chứng được` của một dòng [task.md](../task.md): mỗi vế viết
-  `<lệnh>` + `đỏ khi <…>` theo §5; số vế ≥ số trục §4 mà task đó chạm.
+- **Tầng step** — hai ô của một dòng [task.md](../task.md): `Đầu ra kiểm chứng được` = `<lệnh>` + `đỏ khi
+  <…>` (§5), số vế ≥ số trục §4 task chạm · ô `Chất lượng` + bảng `### cl-T-xx` = tầng sàn §3 + trục §4 +
+  lệnh soi chạm ≥ 2 file + dòng `**Đã thử làm đỏ:**`, chỗ duy nhất ghi lại việc §5 đòi.
 
-Nhà chất lượng của từng pha — **cả sáu đều ⚠️ chưa có**, mỗi cái mở được sau khi lane của pha đó mở
-([CLAUDE.md §1](../CLAUDE.md)): **0 · BA** sau [T-02](../task.md) · **1 · System design** ⚠️ chưa có task
-mở lane · **2 · DB** sau [T-07](../task.md) · **3 · BE** sau [T-08](../task.md) · **4 · FE** sau
-[T-09](../task.md) · **5 · Deploy** sau [T-03](../task.md) + [T-06](../task.md).
+Nhà chất lượng từng pha — **cả sáu ⚠️ chưa có**, mỗi cái mở sau khi lane của pha mở ([CLAUDE.md §1](../CLAUDE.md)):
+**0 · BA** sau [T-02](../task.md) · **1 · System design** ⚠️ chưa có task mở lane · **2 · DB** sau [T-07](../task.md) ·
+**3 · BE** sau [T-08](../task.md) · **4 · FE** sau [T-09](../task.md) · **5 · Deploy** sau [T-03](../task.md) + [T-06](../task.md).
 
 Khi `Makefile` đã có, định nghĩa XONG mức compiler về `quality/05-checklist.md` ([T-04](../task.md));
 file đó **tiếp nối** thang §3 ở T1/T2, không thay nó.
