@@ -10,7 +10,7 @@ Mở lời bằng một dòng khai báo để người dùng chặn được nga
 
 | Lane | Prompt nói tới | Lane sở hữu file nào | Nạp gói nào | Biên nhận |
 |---|---|---|---|---|
-| **NON-CODE** | chốt tài liệu, lập kế hoạch, rà soát, hỏi hiện trạng | `task.md`, `finding.md`, `CLAUDE.md`, `project_preparation/**`, `.claude/rules/**` | [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) + đúng file sẽ sửa | lệnh đọc lại: `grep -c`, `wc -l`, `test -e` |
+| **NON-CODE** | chốt tài liệu, lập kế hoạch, rà soát, hỏi hiện trạng | `task.md`, `finding.md`, `CLAUDE.md`, `project_preparation/**`, `.claude/rules/**`, `quality/**` | [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) + đúng file sẽ sửa | lệnh đọc lại: `grep -c`, `wc -l`, `test -e` |
 | **BA** | quy trình quán, luồng nghiệp vụ, vai & quyền, quy tắc nghiệp vụ | `design/BA/**` | [.claude/rules/lane-ba.md](.claude/rules/lane-ba.md) + [prompt-fullstack.md](project_preparation/prompt-fullstack.md) §3 §7 dòng `**0 · BA**` | 4 lệnh ở [design/BA/04-yeu-cau.md](design/BA/04-yeu-cau.md) §2 |
 | **DB** | bảng, cột, index, migration, seed, `.sql` | ⚠️ chưa mở | — | — (T-07 mở lane này) |
 | **BE** | API, endpoint, handler, service, Go, transaction, tính giá | ⚠️ chưa mở | — | — (T-08 mở lane này) |
@@ -36,6 +36,7 @@ Năm luật định tuyến:
 | Luật viết sổ task (11 TP → 12 trường) | [project_preparation/huong-dan-viet-task-md.md](project_preparation/huong-dan-viet-task-md.md) | file đó |
 | Khuôn bảng thay đổi cuối phiên · vế `Sửa ở đâu` của ô `Owner kiểm tra` | [.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) | rule đó |
 | Đã làm gì, khi nào, ai sửa file nào | `git log` — không có file nào giữ lại | `git log` |
+| Chất lượng: "TỐT" nghĩa là gì · thang biên nhận T0–T3 · luật biên nhận âm | [quality/00-guideline-chat-luong.md](quality/00-guideline-chat-luong.md) | file đó |
 | Phạm vi & giá món | ⚠️ chưa có nhà — T-05 tạo `project_preparation/00-scope.md` | — |
 | Định nghĩa XONG khi đã có compiler | ⚠️ chưa có nhà — T-04 tạo `quality/05-checklist.md` | — |
 

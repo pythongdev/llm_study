@@ -6,6 +6,7 @@ paths:
   - "finding.md"
   - "project_preparation/**"
   - "design/**"
+  - "quality/**"
 ---
 
 # Sổ tay quản lý dự án — nạp khi chạm sổ task, sổ lỗi, hoặc tài liệu thiết kế
