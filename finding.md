@@ -38,6 +38,9 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-22](#f-22) | Khuôn mục `### F-xx` ở [rule §1](.claude/rules/chat-luong-finding.md) không có vế nào giữ **tiêu chí thành công** lúc **mở**: `**Kiểm chứng.**` chỉ bắt buộc khi **đóng**, nên lệnh chứng minh được chọn **sau** khi đã sửa — 14/18 mục 🔴 hiện không khai nổi một vế `đỏ khi` | rà khuôn finding · 2026-08-23 | 🔴 MỞ | [T-31](task.md) |
 | [F-23](#f-23) | [CLAUDE.md §7](CLAUDE.md) và [rule §3](.claude/rules/quan-ly-du-an.md) vẫn khai *"chưa có `Makefile`"* + xếp `make ...` vào loại ⚠️ **không được tính là biên nhận**, trong khi từ `9699f1c` `make check` chạy được và ra mã thoát `0`; §5.3 chỉ có lệnh bắt ⚠️ **thiếu**, không lệnh nào bắt ⚠️ **thừa** | T-03 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-24](#f-24) | [CLAUDE.md §4](CLAUDE.md) khai `git add <đường dẫn cụ thể>` là cách chống nuốt việc dở của phiên khác — nó chỉ chống **lẫn file**, không chống **lẫn hunk**: hai phiên cùng sửa `task.md`/`finding.md` thì bên nào commit trước cũng nuốt trọn phần bên kia đang viết, cây vẫn sạch và `git log` vẫn hợp khuôn (ca thật: `0d2a785` chứa cả phần đóng `T-03` của phiên DEVOPS) | T-03 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-25](#f-25) | Luật *thử làm đỏ một lần* ([guideline §5](quality/00-guideline-chat-luong.md)) không có cổng nào cưỡng chế cho bảng `cl-T-xx`: **28/31** bảng đang `Đã thử làm đỏ: ⬜ chưa`, nên một lệnh soi hỏng nằm im vô hạn — ca phát hiện: `cl-T-04` khai đỏ khi hai file cùng `>= 1` hit `go test`/`npm run`, trong khi rule đã có 2 hit và **một hit nằm trong thân câu lệnh §5.2** nên không xoá được ⇒ trục đó **đỏ vĩnh viễn** | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-26](#f-26) | Ô `**Đạt khi:**` của `owner-T-11` trong [task.md](task.md) khai nhà của luật *không deploy trong giờ bán* là `CLAUDE.md`, nhưng `CLAUDE.md` **không có chữ nào** về luật đó — nhà thật là `prompt-fullstack.md` §6.9, và [guideline §6](quality/00-guideline-chat-luong.md) đang trỏ đúng về đó | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-27](#f-27) | `project_preparation/prompt-fullstack.md` khai **hai** bề rộng cho cùng một màn hình khách: §3.7 *"mobile-first 375px"*, §6.5 *"thử ở 360px (khách)"* — [T-04](task.md) sẽ chép **một** trong hai vào `quality/05-checklist.md` và chốt luôn số sai | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task — owner chốt số |
 
 ---
 
@@ -983,3 +986,117 @@ git apply --cached /tmp/p && git commit -m '...'   # index = HEAD + phần của
 **Bẫy khi sửa.** Đừng sửa bằng cách cấm hai phiên chạy cùng lúc — đó là hướng của [F-07](#f-07) và là quyền
 owner. Mục này chỉ đòi câu ở §4 khai **đúng** mức bảo vệ mà `git add <đường dẫn>` thật sự cho: nó chống
 lẫn file, không chống lẫn hunk.
+
+---
+
+### F-25
+
+**Mệnh đề sai.** [Guideline §5](quality/00-guideline-chat-luong.md) bắt *"người viết phải thử làm nó đỏ
+đúng một lần trước khi commit"*, và mỗi bảng `### cl-T-xx` có sẵn dòng `**Đã thử làm đỏ:**` để ghi lại.
+Nhưng **không lệnh nào trong repo đọc dòng đó**: khối tự rà §5.2 của
+[quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) đếm cột, dò mã, dò lane — không nhánh nào chạm bảng
+`cl-*`. Kết quả: 28/31 bảng đang `⬜ chưa`, và một lệnh soi viết sai nằm im cho tới khi có người đọc nó
+bằng mắt.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -c 'Đã thử làm đỏ:\*\* ⬜' task.md   # ra 28
+grep -c 'Đã thử làm đỏ:\*\* ✅' task.md   # ra 3
+grep -c '^### cl-T-' task.md              # ra 31 — 28/31 chưa ai chạy thử
+```
+
+Ca cụ thể, phát hiện lúc rà ô của [T-04](task.md): trục *Một nhà* của `cl-T-04` khai
+`grep -c 'go test\|npm run'` trên hai file, **đỏ khi cả hai cùng `>= 1`**. Nhưng
+`grep -n 'go test\|npm run' .claude/rules/quan-ly-du-an.md` ra **2 dòng**, trong đó dòng 211 nằm **trong
+thân câu lệnh** của §5.2 (`grep -rn 'make \|go test\|npm run' …`) nên không xoá được. Vế "cả hai cùng
+`>= 1`" vì thế đỏ bất kể checklist viết thế nào — cùng họ với [F-20](#f-20) (đỏ giả) và [F-13](#f-13)
+(xanh giả). Bảng `cl-T-04` đã được vá trong chính commit mở mục này; 28 bảng còn lại thì chưa ai biết.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-20](task.md) và
+[T-21](task.md) thêm vế `đỏ khi` vào ô `Đầu ra kiểm chứng được` — **ô khác**, không phải cột `Lệnh soi`
+của bảng `cl-*`. [T-29](task.md) vá đúng **một** bảng (`cl-T-02`). [T-31](task.md) thêm cổng **(c)** cho
+khuôn `finding.md`, không chạm `task.md`. Không dòng nào dựng cổng đọc `**Đã thử làm đỏ:**`, nên chạy hết
+kế hoạch xong con số vẫn là 28 — dòng này **còn** ⇒ finding.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Bảng `cl-*` là tầng đo **chất lượng**, tức tầng duy nhất đứng trên
+ô biên nhận. Ô biên nhận hỏng thì [F-13](#f-13) đã có người canh; bảng `cl-*` hỏng thì **không tầng nào ở
+trên nữa** — nó chính là người canh cuối. Một `cl-*` đỏ vĩnh viễn bị bỏ qua sau hai lần đúng như
+[guideline §5 mục 3](quality/00-guideline-chat-luong.md) mô tả, và từ lần thứ ba cột `Chất lượng` chỉ còn
+là một cột ký hiệu.
+
+**Cách sửa đề xuất.** Thêm một nhánh vào khối §5.2 của
+[quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) — mỗi dòng task **đã `✅`** mà bảng `cl-` của nó còn
+`⬜` thì in ra một dòng cảnh báo:
+
+```bash
+for x in $(grep '^| ~~\*\*T-[0-9]*\*\*~~ ✅' task.md | sed 's/^| ~~\*\*\(T-[0-9]*\)\*\*~~.*/\1/'); do
+  sed -n "/^### cl-$x\$/,/^### cl-T-/p" task.md | grep -q 'Đã thử làm đỏ:\*\* ✅' \
+  || echo "CHƯA THỬ ĐỎ: $x"; done
+```
+
+Gắn vào [T-21](task.md) (nó đã đi qua mọi dòng biên nhận) hoặc mở một dòng task riêng. **Đỏ khi:** đổi tạm
+một bảng `cl-` của task đã `✅` về `⬜` ⇒ lệnh phải in `CHƯA THỬ ĐỎ: T-xx`; đổi lại thì output rỗng.
+
+**Bẫy khi sửa.** Đừng bắt **mọi** bảng `cl-*` phải `✅` — 28 bảng kia thuộc task **chưa làm**, chưa có gì
+để thử làm đỏ. Cổng chỉ được soi bảng của dòng đã `✅`, nếu không nó đỏ ngay từ lần chạy đầu và chết theo
+đúng kiểu [F-11](#f-11).
+
+---
+
+### F-26
+
+**Mệnh đề sai.** Ô `**Đạt khi:**` của bảng `owner-T-11` trong [task.md](task.md) viết: *"…luật không
+deploy trong giờ bán **không** bị đem vào rule — luật đó mất giữa phiên là gây hỏng thật, nên **nhà của
+nó là `CLAUDE.md`**"*. `CLAUDE.md` không chứa câu nào về luật đó. Nhà thật là
+`project_preparation/prompt-fullstack.md` §6.9, và [guideline §6](quality/00-guideline-chat-luong.md)
+đang trỏ đúng về đó với chú thích *"trỏ, không chép"*.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -c 'deploy trong giờ bán' CLAUDE.md                                   # ra 0 — không có nhà nào ở đây
+grep -rn 'không deploy trong giờ bán' --include='*.md' --exclude-dir=reference .
+# ra: prompt-fullstack.md §6.9 (nguồn) · quality/00-guideline-chat-luong.md §6 (trỏ) · task.md (khai sai)
+```
+
+**Vì sao nó không tự mất đi.** T-11 đã xong ([F-03](#f-03) ✅ ĐÓNG). Chạy hết [task.md](task.md): không
+dòng nào mở lại ô `Đạt khi` của `owner-T-11`, và không lệnh nào trong §5.2 đối chiếu một câu khai *"nhà
+của X là Y"* với việc Y có thật chứa X hay không. Dòng này **còn** ⇒ finding. Nó cùng họ với
+[F-17](#f-17) (khai sai file đã sửa) nhưng khác nguyên nhân: F-17 là commit message lệch `--stat`, mục
+này là **một câu khai nhà** lệch nội dung nhà đó.
+
+**Cách sửa đề xuất.** Sửa ô `Đạt khi` của `owner-T-11` cho trỏ đúng nhà thật:
+*"…nhà của nó là [prompt-fullstack.md](project_preparation/prompt-fullstack.md) §6.9, `CLAUDE.md` chỉ
+được trỏ"*. Nếu owner **muốn** `CLAUDE.md` thật sự thành nhà của ba luật không thoả hiệp thì đó là
+*thay hoặc gộp một luật cũ* theo [CLAUDE.md §8](CLAUDE.md) — quyền owner, không phải việc sửa kèm.
+**Đỏ khi:** `grep -c 'deploy trong giờ bán' CLAUDE.md` ra `0` **trong khi** `task.md` còn câu
+*"nhà của nó là `CLAUDE.md`"* — hai lệnh này phải cùng xanh hoặc cùng đỏ, không được lệch nhau.
+
+---
+
+### F-27
+
+**Mệnh đề sai.** `project_preparation/prompt-fullstack.md` khai **hai** bề rộng cho cùng một màn hình
+khách: §3.7 viết *"Khách — mobile-first **375px**"*, §6.5 viết *"có UI thì thử ở **360px** (khách) và
+768px (tablet)"*. Một trong hai là số sẽ được kiểm, số kia là số sẽ được thiết kế.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -n '375px\|360px' project_preparation/prompt-fullstack.md
+# 183: - **Khách** — mobile-first 375px; …
+# 295: … có UI thì thử ở 360px (khách) và 768px (tablet) …
+```
+
+**Vì sao nó không tự mất đi.** [T-10](task.md) chỉ sửa **con trỏ hụt** ([F-02](#f-02)), không đụng con
+số. [T-04](task.md) chép vế 5 của §6.5 vào `quality/05-checklist.md` — chép xong thì `360px` thành luật
+kiểm tra chính thức, trong khi FE đọc §3.7 dựng ở `375px`. Không lệnh nào so hai số này. Dòng **còn** ⇒
+finding, và nó **xấu đi** sau T-04 chứ không mất.
+
+**Cách sửa đề xuất.** Owner chốt **một** số rồi sửa vế còn lại cho khớp — đây là thứ thuộc quyền owner
+theo [CLAUDE.md §7](CLAUDE.md) vì nó là ràng buộc thiết kế, không phải lỗi chính tả. Dữ kiện để chốt:
+`360px` là bề rộng CSS nhỏ nhất còn phổ biến trên Android, `375px` là iPhone; kiểm ở số **nhỏ hơn** thì
+số lớn hơn tự an toàn, chiều ngược lại thì không. Trước khi có quyết định, [T-04](task.md) nên chép
+nguyên văn cả hai kèm dấu `GIẢ ĐỊNH:` thay vì chọn hộ. **Đỏ khi:** lệnh tái hiện ở trên in ra **hai** số
+khác nhau cùng gắn nhãn *(khách)*; chốt xong thì nó chỉ còn in một số.
