@@ -38,7 +38,7 @@ Năm luật định tuyến:
 | Đã làm gì, khi nào, ai sửa file nào | `git log` — không có file nào giữ lại | `git log` |
 | Chất lượng: "TỐT" nghĩa là gì · thang biên nhận T0–T3 · luật biên nhận âm | [quality/00-guideline-chat-luong.md](quality/00-guideline-chat-luong.md) | file đó |
 | Phạm vi & giá món | ⚠️ chưa có nhà — T-05 tạo `project_preparation/00-scope.md` | — |
-| Định nghĩa XONG khi đã có compiler | ⚠️ chưa có nhà — T-04 tạo `quality/05-checklist.md` | — |
+| Định nghĩa XONG khi đã có compiler | [quality/05-checklist.md](quality/05-checklist.md) — 7 vế §6.5, tách hai hạng | file đó |
 
 Nghi một file cũ: so dòng `Cập nhật <ngày>` trong file với `git log -1 --format=%ad -- <file>`; lệch ⇒ kiểm bằng nhà thật trước khi tin. Sửa nội dung ⇒ đổi ngày **trong cùng commit**.
 
