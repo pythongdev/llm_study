@@ -29,7 +29,7 @@ Năm luật định tuyến:
 | Sự thật | Nhà duy nhất | Ai thắng khi lệch |
 |---|---|---|
 | Làm gì tiếp, theo thứ tự nào | [task.md](task.md) | `task.md` |
-| Cái gì đang sai + bài học giữ lại | [finding.md](finding.md) | `finding.md` |
+| Cái gì đang sai + bài học giữ lại | [finding.md](finding.md) · khuôn một mục `### F-xx` + 2 cổng: [.claude/rules/chat-luong-finding.md](.claude/rules/chat-luong-finding.md) | nội dung: `finding.md` · khuôn: rule đó |
 | Luật áp cho mọi session | file này, §1–§8 | file này |
 | Khuôn dòng task · định nghĩa XONG khi chưa có compiler · nhịp kiểm tra | [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) | rule đó |
 | 6 pha · ràng buộc · bất biến I1–I8 · 3 lát cắt A/B/C | [project_preparation/prompt-fullstack.md](project_preparation/prompt-fullstack.md) | file đó, trừ chỗ [F-02](finding.md#f-02) nêu |
