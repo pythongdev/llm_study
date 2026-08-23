@@ -567,7 +567,10 @@ lượng. Hẹp **tập file** chịu T3, không hạ **thang**.
 `HEAD` di chuyển sau mỗi commit. Với task **đã xong**, lệnh không còn chiếu thay đổi của task đó nữa:
 `owner-T-02` in ra **rỗng** cả ba lệnh (T-02 nằm ở `4851d17`, cách `HEAD` năm commit), còn `owner-T-14`
 và `owner-T-22` in ra **diff của T-24** vì `HEAD` tình cờ cũng đụng `task.md` và `quan-ly-du-an.md`.
-`owner-T-24` xanh chỉ vì `HEAD` **đang là** commit của T-24 — commit kế tiếp làm nó hỏng.
+Chuyện này **đã xảy ra thật trong lúc mục này đang được viết**: lúc 10:4x ngày 2026-08-23 `HEAD` còn là
+commit của T-24 nên `owner-T-24` xanh; hai commit sau (`862f2c1`, rồi `8dd11b3` tên `dfg`) cả **11** lệnh
+ghim `HEAD` của `owner-T-14` `owner-T-22` `owner-T-24` đồng loạt in ra `0` dòng. Bảng soi của ba task đã
+✅ ĐÓNG hỏng cùng lúc, không lệnh nào kêu.
 
 **Vì sao nó không tự mất đi.** Luật đã đúng sẵn: [bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md)
 §2 viết *"**đã commit** (kể cả bị phiên khác commit hộ) ⇒ `git show <sha> -- <path>`"*. Nhưng **ví dụ
@@ -580,7 +583,8 @@ luật. Không dòng nào trong [task.md](task.md) rà lại cột này; T-14 �
 awk '/^## Chất lượng đầu ra/{exit} /^### owner-T-/{f=1} f' task.md | grep -c 'HEAD'   # 50 lệnh ghim HEAD
 git show --stat HEAD -- design/BA | wc -l                       # ra 0 — bảng owner-T-02 in rỗng
 git show --stat 4851d17 -- design/BA | tail -2                  # sha thật: 1 file changed, 81 insertions
-git show HEAD -- task.md | wc -l                                # 387 — cái owner-T-14 và owner-T-22 đang chiếu
+awk '$0=="### owner-T-24"{f=1;next} /^### /{f=0} f' task.md | grep -o '`git [^`]*`' | tr -d '`' \
+  | while read -r c; do echo "[$(eval "$c" 2>/dev/null | wc -l) dòng] $c"; done   # ba dòng đầu ra 0
 ```
 
 **Vì sao nó nguy hiểm hơn nó trông.** Rỗng trông y hệt *"không lấn phạm vi"* — đúng cái bẫy mà rule §2
