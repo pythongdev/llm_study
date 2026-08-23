@@ -1,6 +1,6 @@
 # finding.md — sổ lỗi
 
-> Cập nhật **2026-08-22**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
+> Cập nhật **2026-08-23**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
 > [task.md](task.md). Phép thử một câu và luật không trộn hai sổ ở [CLAUDE.md §5](CLAUDE.md);
 > hai sổ khác nhau chỗ nào ở [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §2.
 
@@ -27,6 +27,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-11](#f-11) | Vòng lặp con trỏ §5.1 **tự bắt chính mình**: chạy trên `.claude/rules/quan-ly-du-an.md` luôn in một dòng `TRỎ HỤT` rác lấy từ chính đoạn code của lệnh ⇒ vế 3 của định nghĩa XONG (§3) không bao giờ xanh được trên file luật | rà bộ khung · 2026-08-22 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-12](#f-12) | Cả bộ khung đặt cưỡng chế lên `paths:` của `.claude/rules/**` — nhưng **không lệnh nào trong repo chứng minh được một rule có thật sự được nạp**; `test -e` chỉ chứng minh file tồn tại, không chứng minh nó tới được phiên | rà bộ khung · 2026-08-22 | 🔴 MỞ | ⚠️ chưa có task — **kiến trúc, chờ owner chốt** |
 | [F-13](#f-13) | Không biên nhận nào trong repo đo **chất lượng**: cả 16 dòng `task.md` dừng ở *tồn tại + hình dạng*, không dòng nào khai **đỏ khi** — nên ngưỡng dưới kiểu `grep -c '^- '` ra `>= 3` xanh **vĩnh viễn**, kể cả với ba dòng rác | owner nêu · 2026-08-23 | 🔴 MỞ | [T-20](task.md) + [T-21](task.md) |
+| [F-14](#f-14) | Luật sàn ở [guideline §3](quality/00-guideline-chat-luong.md) khai **T3 bắt buộc** cho *file mà phiên khác sẽ nạp* — trong repo chỉ-có-tài-liệu này **mọi** `.md` đều là file phiên khác nạp, nên sàn T3 rơi vào 21/23 dòng task và cột `Chất lượng` lọc được đúng bằng không, cùng kiểu hỏng với *đánh 👤 cho mọi dòng* mà rule §1.2b đã cấm | T-24 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task — sửa luật chất lượng là việc owner chốt |
 
 ---
 
@@ -510,3 +511,44 @@ hỏng nhất. Nó tệ hơn việc không có biên nhận, vì không-có thì
 Còn hai việc: đưa vế `đỏ khi` vào đặc tả ô ở rule §1.1 ([T-20](task.md)), rồi áp xuống mọi dòng đang có
 ([T-21](task.md)). Đóng được F-13 khi hai số của lệnh tái hiện bằng nhau — và khi mỗi vế âm đã **được
 thử làm đỏ đúng một lần**, không chỉ được viết ra.
+
+
+---
+
+### F-14
+
+**Mệnh đề sai.** [Guideline §3](quality/00-guideline-chat-luong.md) đặt luật sàn: *"**T3 bắt buộc** cho
+file mà phiên khác sẽ nạp: `CLAUDE.md`, mọi `.claude/rules/**`, mọi `quality/**`, và mọi file đứng trong
+ô `Nạp` của một dòng `task.md`"*. Repo giai đoạn này **không có file nào khác** — nó chỉ gồm tài liệu, và
+mọi tài liệu đều bị một phiên nào đó nạp. Nên vị ngữ *"file mà phiên khác sẽ nạp"* không loại được file
+nào, và một luật không loại được gì thì không phải bộ lọc: 21/23 dòng task nhận sàn T3, hai dòng còn lại
+(`T-03` Makefile, `T-15` settings.json) thoát chỉ vì chúng được **chạy** chứ không được **đọc**.
+
+**Vì sao nó không tự mất đi.** Không dòng nào trong [task.md](task.md) hẹp lại luật sàn: `T-19` viết tầng
+pha, `T-20` `T-21` đưa vế `đỏ khi` xuống ô biên nhận, `T-04` viết checklist mức compiler — cả bốn đều
+**thêm** cơ chế lên trên luật sàn, không cái nào chạm chính nó. Chạy hết kế hoạch y như nó viết thì sàn
+T3 vẫn rơi vào gần như mọi dòng.
+
+**Lệnh tái hiện.**
+
+```bash
+grep '^| ~*\*\*T-' task.md | grep -o 'T[0-3] · \[soi' | sort | uniq -c   # ra 21 dòng T3, 2 dòng T2
+grep -c 'T3 bắt buộc' quality/00-guideline-chat-luong.md                # ra 1 — luật sàn còn nguyên
+ls *.md .claude/rules/*.md quality/*.md | wc -l                        # mẫu số: mọi file đều là tài liệu
+```
+
+**Vì sao nó nguy hiểm hơn nó trông.** Sàn T3 đòi **diễn tập**: mở một phiên mới, chỉ nạp gói, làm thử
+bước kế tiếp. Đòi thứ đó cho mọi task nghĩa là mỗi task tốn hai phiên. Cái giá đó không được trả — nó
+được **bỏ qua**, và bỏ qua một luật là cách nhanh nhất dạy phiên sau rằng luật ở đây tuỳ nghi. Đúng cơ
+chế mà rule §1.2b đã mô tả cho dấu `👤`: mọi dòng cùng một giá trị thì cột đó lọc đúng bằng không.
+
+**Cách sửa đề xuất.** Hẹp vị ngữ của luật sàn §3 thành thứ **loại được file**: T3 bắt buộc cho file
+đứng trong **gói nạp của một lane** ở [CLAUDE.md §1](CLAUDE.md) (`CLAUDE.md`, `.claude/rules/lane-*.md`,
+`quality/**`) và cho file đứng trong ô `Nạp` của một dòng task **chưa làm**; file chỉ được tra cứu
+(`task.md`, `finding.md`, tài liệu thiết kế đã chốt) sàn **T2**. Sửa ở `quality/00-guideline-chat-luong.md`
+§3 đoạn `**Luật sàn.**`, một đoạn, không đụng bảng bốn tầng. Đây là **sửa luật chất lượng** nên rule
+§1.2b xếp vào việc owner ký: mở task khi owner chốt hướng hẹp này.
+
+**Bẫy khi sửa.** Đừng hạ sàn chung xuống T2 cho gọn — T2 không đo được *phiên mới có làm tiếp được
+không*, và đó đúng là câu hỏi mà [guideline §2](quality/00-guideline-chat-luong.md) định nghĩa là chất
+lượng. Hẹp **tập file** chịu T3, không hạ **thang**.
