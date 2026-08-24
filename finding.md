@@ -43,7 +43,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-27](#f-27) | `project_preparation/prompt-fullstack.md` khai **hai** bề rộng cho cùng một màn hình khách: §3.7 *"mobile-first 375px"*, §6.5 *"thử ở 360px (khách)"* — [T-04](task.md) sẽ chép **một** trong hai vào `quality/05-checklist.md` và chốt luôn số sai | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task — owner đã chốt **375px** 2026-08-24, còn phải sửa §6.5 |
 | [F-28](#f-28) | Lệnh soi trục *Một nhà* của `cl-T-04` **tự bắt `task.md`**: chuỗi mốc `happy path` bắt buộc phải nằm trong chính ô soi, nên lệnh đỏ ở **cả hai** nhánh — có checklist thì ra `3` file (*bản chép thứ ba*), chưa có thì kết quả thiếu `quality/05-checklist.md` (*chưa có nhà*) | T-04 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ owner chỉ định vá ngay trong phiên T-04 — không đẻ task |
 | [F-29](#f-29) | Ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy `awk` 7 khoá trên **cả file** trong khi vế nó muốn đo là *bảy dòng `- [ ]`*: §2 của checklist nhắc lại đúng các chuỗi khoá, nên bản **xoá một vế rồi chèn một dòng bịa** qua được cả hai biên nhận — `grep -c` ra `7`, `awk` ra `7` | T-04 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task — owner giao agent riêng vá ngay sau T-04 |
-| [F-30](#f-30) | Biên nhận thứ nhất của [T-26](task.md) — `grep -c '<path>' .claude/rules/bao-cao-thay-doi.md` ra `0` — quét **cả file** trong khi phạm vi T-26 chỉ là §3: `<path>` ở §1 cột `Xem diff` và §2 cột `Câu lệnh để thấy thay đổi` là placeholder văn xuôi **hợp lệ, phải giữ**, nên ô này ra `2` kể cả khi (e) đã vá đúng — đỏ vĩnh viễn, và cách duy nhất làm nó xanh là lấn phạm vi | T-26 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-30](#f-30) | Biên nhận thứ nhất của [T-26](task.md) — `grep -c '<path>' .claude/rules/bao-cao-thay-doi.md` ra `0` — quét **cả file** trong khi phạm vi T-26 chỉ là §3: `<path>` ở §1 cột `Xem diff` và §2 cột `Câu lệnh để thấy thay đổi` là placeholder văn xuôi **hợp lệ, phải giữ**, nên ô này ra `2` kể cả khi (e) đã vá đúng — đỏ vĩnh viễn, và cách duy nhất làm nó xanh là lấn phạm vi | T-26 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ đóng ngay trong phiên vá — không đẻ task |
 
 ---
 
@@ -1242,3 +1242,23 @@ làm chất lượng ở mức khuôn chung. Dòng **còn** ⇒ finding.
 thì §1 hàng `Xem diff` mất luôn ví dụ phân biệt `git diff` với `git show <sha>` — tức là làm hỏng thứ
 [F-15](#f-15) đang cần, để chữa một lệnh đo sai.
 
+
+**Kiểm chứng.** Vế thứ nhất của T-26 nay lọc khối §3 trước rồi mới đếm; `<path>` ở §1 §2 giữ nguyên.
+
+```bash
+sed -n '/^## 3\./,/^## 4\./p' .claude/rules/bao-cao-thay-doi.md | grep -c '<path>'  # 0  <- vế 1 xanh
+grep -c '<path>' .claude/rules/bao-cao-thay-doi.md                                  # 2  <- §1 §2 còn nguyên, ĐÚNG
+grep -c "Ba lệnh: \`grep -c '<path>'" task.md                                       # 0  <- ô hết quét cả file
+```
+
+Đã thử làm đỏ: chép rule sang scratchpad, chèn lại `git log --oneline -3 -- <path>` vào thân **(e)** đúng
+như [F-16](#f-16) mô tả ⇒ vế 1 ra `1` ⇒ đỏ; repo không bị chạm
+(`git status --short -- .claude/rules/bao-cao-thay-doi.md` rỗng). Cả ba vế của T-26 xanh sau khi vá:
+`0` · `0` · `2`.
+
+**Bài học giữ lại:** ô `Đầu ra kiểm chứng được` **không được đo rộng hơn phạm vi mà ô `Prompt mở session`
+của cùng dòng cho phép chạm** — quét rộng hơn thì nó đỏ vì việc của người khác, và cách duy nhất làm nó
+xanh là lấn phạm vi. Luật này về [guideline §5](quality/00-guideline-chat-luong.md), cùng câu với
+[F-28](#f-28)/[F-29](#f-29); nó **chưa được viết vào đó** và mã đang sở hữu việc cài là [F-29](#f-29)
+(còn 🔴) — không đẻ mã mới cho cùng một nguyên nhân, theo
+[rule §4](.claude/rules/chat-luong-finding.md).
