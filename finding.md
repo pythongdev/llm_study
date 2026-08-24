@@ -44,6 +44,8 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-28](#f-28) | Lệnh soi trục *Một nhà* của `cl-T-04` **tự bắt `task.md`**: chuỗi mốc `happy path` bắt buộc phải nằm trong chính ô soi, nên lệnh đỏ ở **cả hai** nhánh — có checklist thì ra `3` file (*bản chép thứ ba*), chưa có thì kết quả thiếu `quality/05-checklist.md` (*chưa có nhà*) | T-04 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ owner chỉ định vá ngay trong phiên T-04 — không đẻ task |
 | [F-29](#f-29) | Ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy `awk` 7 khoá trên **cả file** trong khi vế nó muốn đo là *bảy dòng `- [ ]`*: §2 của checklist nhắc lại đúng các chuỗi khoá, nên bản **xoá một vế rồi chèn một dòng bịa** qua được cả hai biên nhận — `grep -c` ra `7`, `awk` ra `7` | T-04 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task — owner giao agent riêng vá ngay sau T-04 |
 | [F-30](#f-30) | Biên nhận thứ nhất của [T-26](task.md) — `grep -c '<path>' .claude/rules/bao-cao-thay-doi.md` ra `0` — quét **cả file** trong khi phạm vi T-26 chỉ là §3: `<path>` ở §1 cột `Xem diff` và §2 cột `Câu lệnh để thấy thay đổi` là placeholder văn xuôi **hợp lệ, phải giữ**, nên ô này ra `2` kể cả khi (e) đã vá đúng — đỏ vĩnh viễn, và cách duy nhất làm nó xanh là lấn phạm vi | T-26 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ đóng ngay trong phiên vá — không đẻ task |
+| [F-31](#f-31) | Hai bản **dẫn xuất** từ `project_preparation/00-scope.md` không có cơ chế nào canh: `prompt-fullstack.md` §9.3 giữ 10 số giá tự khai *"hợp đồng với chủ quán"* mà chỉ khai nguồn bằng câu chữ, và `design/BA/04-yeu-cau.md` dòng 22 còn đánh ⚠️ cho `00-scope.md` §4.4 trong khi nhà đã có | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-32](#f-32) | `.claude/rules/bao-cao-thay-doi.md` §3 khai *"cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc"* nhưng khối lệnh của §3 chỉ có **bốn** nhãn — `# d.` **chưa từng tồn tại** ở bất kỳ phiên bản nào của file; bộ bắt buộc đang đòi một lệnh ma, và phiên đóng T-26 đã khai *"(d) rỗng"* cho nó | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 
 ---
 
@@ -1262,3 +1264,87 @@ xanh là lấn phạm vi. Luật này về [guideline §5](quality/00-guideline-
 [F-28](#f-28)/[F-29](#f-29); nó **chưa được viết vào đó** và mã đang sở hữu việc cài là [F-29](#f-29)
 (còn 🔴) — không đẻ mã mới cho cùng một nguyên nhân, theo
 [rule §4](.claude/rules/chat-luong-finding.md).
+
+---
+
+### F-31
+
+**Mệnh đề sai.** Từ T-05, `project_preparation/00-scope.md` là nhà duy nhất của giá — nhưng **hai bản dẫn
+xuất của nó không có cơ chế nào canh**. (a) `project_preparation/prompt-fullstack.md` §9.3 giữ 10 số giá
+và tự khai là *"hợp đồng với chủ quán"*; T-05 đã thêm một câu nói chúng dẫn xuất từ [00-scope](project_preparation/00-scope.md)
+§4.2 §4.3, nhưng **câu chữ không phải cơ chế**: §4.2 đổi một giá mà §9.3 đứng im thì không lệnh nào đỏ.
+(b) `design/BA/04-yeu-cau.md` dòng 22 còn khai `nhà thật ⚠️ project_preparation/00-scope.md §4.4 (T-05
+tạo)` — ⚠️ ở đó **nay sai**, nhà đã có từ T-05.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: T-05 tạo nhà (xong);
+[T-10](task.md) chỉ nhận 8 con trỏ hụt **trong `prompt-fullstack.md`**, ô Task chốt đúng file đó nên
+`design/BA/**` nằm ngoài; [T-25](task.md) viết `design/BA/01-kenh-ban.md`, không rà `04-yeu-cau.md`.
+Không dòng task nào nhận việc đối chiếu §9.3 với §4.2, cũng không dòng nào nhận dòng 22. Dòng còn ⇒ finding.
+
+**Lệnh tái hiện.**
+
+```bash
+# (a) 10 ca giá ở §9.3 — dẫn xuất, không có lệnh nào canh
+sed -n '/^\*\*9\.3 /,/^\*\*9\.4 /p' project_preparation/prompt-fullstack.md \
+  | grep -oE '→ [0-9]+\.[0-9]{3}' | wc -l                      # ra 10
+# (b) ⚠️ mồ côi ở lane BA — nhà đã có mà vẫn đánh chưa-có
+grep -n '00-scope' design/BA/04-yeu-cau.md | grep -c '⚠️'       # ra 1
+```
+
+**Cách sửa đề xuất.** Vế (a) đã có lệnh cưỡng chế chạy được, đưa nó vào đích `check` của `Makefile`:
+
+```bash
+comm -23 \
+ <(sed -n '/^\*\*9\.3 /,/^\*\*9\.4 /p' project_preparation/prompt-fullstack.md | grep -oE '[0-9]+\.[0-9]{3}' | sort -u) \
+ <(sed -n '/^### 4\.2 /,/^### 4\.3 /p' project_preparation/00-scope.md | grep -oE '[0-9]+\.[0-9]{3}' | sort -u)
+```
+
+Hôm nay in ra **rỗng** (đã chạy). **Đỏ khi** §9.3 có một số giá mà §4.2 không có — tức bảng ca test đã
+lệch khỏi nhà thật. Vế (b): gỡ ⚠️ ở `design/BA/04-yeu-cau.md` dòng 22 — việc của lane BA, gắn vào
+[T-25](task.md) hoặc một dòng task riêng cho lane đó; lane NON-CODE **không** sở hữu `design/BA/**`
+([CLAUDE.md §1](CLAUDE.md)).
+
+**Bẫy khi sửa.** Đừng xoá 10 số ở §9.3 cho hết trùng lặp: §9.3 là **bảng ca test** của hàm tính giá, nó
+phải hardcode kết quả mong đợi — bảng ca test lấy số từ chính nhà nó đang kiểm thì không kiểm gì cả.
+Cái cần thêm là **lệnh đối chiếu**, không phải xoá một bên.
+
+---
+
+### F-32
+
+**Mệnh đề sai.** [.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) §3 khai **"Cả năm
+lệnh (a) (b) (c) (d) (e) đều bắt buộc chạy trước khi commit"**, nhưng khối lệnh ngay dưới câu đó chỉ có
+**bốn** nhãn: `# a.` `# b.` `# c.` `# e.` — **không có `# d.`**. Lệnh (d) chưa từng tồn tại ở bất kỳ phiên
+bản nào của file. Cái tên (d) lan ra từ ba chỗ: ô Task của [T-14](task.md) khai đưa *"(b) (c) (d)"* vào bộ
+bắt buộc · [F-16](#f-16) khai *"Bốn lệnh còn lại (a) (b) (c) (d)"* · câu "cả năm lệnh" mà T-26 vừa thêm.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Một bộ cổng đòi lệnh không tồn tại thì phiên nào cũng phải **khai
+đã chạy thứ không chạy được**. Đã xảy ra: phiên đóng T-26 báo *"(d) rỗng"* — rỗng là kết quả trông y hệt
+xanh, nên không ai thấy. Cổng nào cũng có thể trượt kiểu này một lần rồi thành tiền lệ.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-14](task.md) đã ✅, [T-26](task.md)
+đã ✅, [T-27](task.md) chỉ sửa cột `Câu lệnh để thấy thay đổi` **trong `task.md`** chứ không rà nhãn lệnh
+trong rule. Không dòng task nào nhận việc đối chiếu danh sách nhãn ở §3 với khối lệnh ngay dưới nó.
+Dòng còn ⇒ finding.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -o '^# [a-e]\.' .claude/rules/bao-cao-thay-doi.md          # in a. b. c. e. — (d) khuyết
+grep -c '^# [a-e]\.' .claude/rules/bao-cao-thay-doi.md          # ra 4, không phải 5
+grep -c '(b) (c) (d)' task.md                                    # ra 1 — nguồn lây đầu tiên
+for c in $(git log --format=%h -- .claude/rules/bao-cao-thay-doi.md); do \
+  echo "$c $(git show $c:.claude/rules/bao-cao-thay-doi.md | grep -c '^# d\.')"; done   # mọi phiên bản ra 0
+```
+
+**Cách sửa đề xuất.** Owner chọn một trong hai, đừng để phiên tự chọn:
+1. **Viết thật lệnh (d)** — nếu (d) từng có ý định soi một thứ mà (a)(b)(c)(e) không soi. Không phiên bản
+   nào lưu nội dung nó, nên phải chốt lại từ đầu ý định là gì.
+2. **Bỏ (d)** — đổi câu §3 thành *"cả bốn lệnh (a) (b) (c) (e)"*, sửa luôn ô Task của T-14 và câu của
+   [F-16](#f-16) để hết nhắc (d).
+
+Cưỡng chế bằng một dòng trong đích `check` của `Makefile`. **Đỏ khi** số nhãn `^# [a-e]\.` trong file khác
+số nhãn mà câu *"đều bắt buộc"* của §3 liệt ra.
+
+**Bẫy khi sửa.** Đừng chọn hướng 2 chỉ vì nó nhanh. Nếu (d) từng là cổng soi một thứ riêng, bỏ nhãn đi là
+**xoá một cổng rồi khai là đã dọn** — đúng hạng lỗi mà [F-16](#f-16) sinh ra để tố, chỉ đổi chiều.

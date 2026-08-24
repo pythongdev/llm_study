@@ -345,6 +345,9 @@ SAI : "Không được mở 2 phiên trên cùng một bàn."            ← l�
 
 **9.3 Mười một ca giá bắt buộc (dùng nguyên, đây là hợp đồng với chủ quán)**
 
+Mười một số dưới đây **dẫn xuất** từ [00-scope.md](00-scope.md) §4.2 §4.3, không phải nhà thứ hai của
+giá: §4.2 đổi ⇒ mười một ca này phải tính lại.
+
 ```
 Bánh cuốn   · Chay          · —      → 3.000      Trứng vàng  · Thịt          · Nhiều  → 10.000
 Bánh cuốn   · Thịt          · Thường → 4.000      Giò         · —             · —      → 9.000
