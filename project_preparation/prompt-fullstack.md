@@ -1,6 +1,6 @@
 # Prompt bàn giao — lập kế hoạch full-stack "Bánh cuốn Bà Thanh Cao Bằng"
 
-> Cập nhật **2026-08-19** · Lane sở hữu: **NON-CODE** · Khuôn: [quality/prompt_guiline.md](../quality/prompt_guiline.md) (5 vế).
+> Cập nhật **2026-08-24** · Lane sở hữu: **NON-CODE** · Khuôn: [quality/prompt_guiline.md](../quality/prompt_guiline.md) (5 vế).
 >
 > **Đầu ra của prompt này là KẾ HOẠCH, không phải code.** Bảo một AI "làm luôn cả dự án" là cách chắc
 > chắn nhất để nhận về 40 file không ai rà. Prompt này bắt nó trả lời trước hai câu khó nhất —
@@ -60,37 +60,12 @@ Code chỉ xuất hiện dưới dạng **chữ ký hàm, DDL, hoặc endpoint**
 Bốn kênh bán: `delivery` (khách, web) · `pickup` (khách, web, có giờ hẹn) · `qr_table` (khách quét QR tại bàn) ·
 `staff_pos` (nhân viên đặt hộ). Hai kênh sau **đều gắn với một số bàn** và **gộp vào một phiên bàn, tính tiền một lần**.
 
-### 3.2 Menu và công thức giá — nguồn duy nhất của tiền
+### 3.2 Menu và giá — nhà thật ở `00-scope.md`
 
-`giá món = base_price (giá CHAY) + phụ thu nhân + phụ thu lượng nhân`
-
-| Nhóm tuỳ chọn | Lựa chọn | Món lẻ | Combo |
-|---|---|---|---|
-| **Nhân** (bắt buộc chọn 1) | Chay / Thịt / Thịt + mộc nhĩ | 0 / +1.000 / +1.000 | 0 / +4.000 / +4.000 |
-| **Lượng nhân** (chỉ hiện khi nhân ≠ Chay) | Thường / Nhiều nhân | 0 / +1.000 | 0 / +4.000 |
-
-Combo phụ thu **×4** vì có 4 phần nhận nhân. Loại nhân (thịt hay thịt + mộc nhĩ) **không đổi giá**.
-
-| Danh mục | Món | Chay | Thịt thường | Thịt nhiều |
-|---|---|---|---|---|
-| Bánh cuốn | Bánh cuốn | 3.000 | 4.000 | 5.000 |
-| Bánh cuốn | Trứng chín / tái / vàng | 8.000 | 9.000 | 10.000 |
-| Ăn kèm | Giò | — | **9.000** | — |
-| Combo | Đầy đủ trứng chín / tái / vàng | 26.000 | **30.000** | 34.000 |
-
-**Một "suất" gồm những gì** — đây là thứ bếp làm, khác với thứ khách trả tiền. Nhà thật của bảng này là
-[00-scope §4.4](00-scope.md); ba câu từng treo ở đây **owner đã chốt ngày 2026-08-19**:
-
-| Suất bán | Bếp làm ra | Phần **nhận** tuỳ chọn nhân |
-|---|---|---|
-| Suất **bánh cuốn** | 1 cái bánh cuốn | cái bánh đó |
-| Suất **trứng** (chín / tái / vàng) | **1 quả trứng + 4 cái bánh cuốn** | 4 cái bánh **và** quả trứng |
-| Suất **giò** | **1 chiếc giò + 4 cái bánh cuốn** | 4 cái bánh (giò **không** nhận nhân) |
-| **Combo "Đầy đủ"** | **3 cái bánh cuốn + 1 quả trứng + 1 chiếc giò** | 3 cái bánh **và** quả trứng |
-
-Một dòng đơn chọn **một** loại nhân + **một** lượng nhân, áp cho mọi phần nhận nhân của suất đó;
-mặc định là **nhân thịt, lượng thường**. Phụ thu vẫn theo bảng trên (món lẻ ×1, combo ×4) — **không**
-nhân theo số phần bếp làm.
+Công thức giá, bảng giá, nhóm tuỳ chọn và **thành phần một suất bán** đã chuyển về nhà duy nhất của chúng:
+[00-scope.md](00-scope.md) §4 — công thức **§4.1** · bảng giá **§4.2** · phụ thu **§4.3** · thành phần suất bán
+**§4.4** (owner chốt 2026-08-19). Phạm vi bán và bốn kênh ở [00-scope.md](00-scope.md) §2.
+Lệch với file này ⇒ **`00-scope.md` thắng** ([CLAUDE.md §2](../CLAUDE.md)).
 
 ### 3.3 Luồng ăn tại bàn (chiếm phần lớn doanh thu — vẽ được luồng này rồi mới thiết kế)
 
@@ -320,7 +295,7 @@ BE luôn tính lại giá từ DB (vi phạm = khách đặt món 0đ) · backup
 |---|---|---|
 | **0 · BA** | Quán làm gì, ai thao tác, tiền đi đường nào | 4 kênh bán · 2 sơ đồ luồng (tại bàn, ship) · danh sách quy tắc nghiệp vụ · **trả lời 3 câu chưa rõ ở §3.2** hoặc ghi thành giả định có mức rủi ro |
 | **1 · System design** | Cái gì bảo vệ cái gì | **Bảng bất biến 3 cột (§6.2)** · ràng buộc kiến trúc ẩn + dấu hiệu phải xem lại · chọn nguồn thời gian · 5 rủi ro lớn nhất kèm cách chặn |
-| **2 · DB** | Dữ liệu sống ở đâu | Sơ đồ quan hệ · thứ tự migration · dữ liệu mồi (menu thật §3.2) · quy tắc dữ liệu · **query đối chiếu cho từng bất biến** |
+| **2 · DB** | Dữ liệu sống ở đâu | Sơ đồ quan hệ · thứ tự migration · dữ liệu mồi (menu thật [00-scope §4.2](00-scope.md)) · quy tắc dữ liệu · **query đối chiếu cho từng bất biến** |
 | **3 · BE** | Ai được làm gì, giá tính ở đâu | Endpoint + quyền theo vai · hợp đồng API (nguồn duy nhất cho FE) · **hàm tính giá duy nhất** + bảng ca test · luồng đặt món từng bước · realtime + dự phòng |
 | **4 · FE** | Người dùng thấy gì | Cây route · nguyên tắc UI **theo từng loại người dùng** · nguồn dữ liệu mỗi màn · type sinh từ hợp đồng API, không gõ tay |
 | **5 · Deploy & vận hành** | Chạy thật thì sao | compose production · HTTPS · **backup đã restore thử** · checklist trước deploy · quy trình sự cố + sổ giấy · việc hằng ngày/hằng tháng |

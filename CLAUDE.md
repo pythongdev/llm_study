@@ -1,6 +1,6 @@
 # CLAUDE.md — luật + con trỏ
 
-> Cập nhật **2026-08-22**. **File này là bản đồ, không phải lãnh thổ.** Nó không giữ sự thật nào của dự án: mỗi dòng hoặc là **luật làm việc**, hoặc là **con trỏ** tới nhà thật. Lệch nhà thật ⇒ **nhà thật thắng**, dòng ở đây là bug phải sửa ngay. Trần của chính file này ở §8.
+> Cập nhật **2026-08-24**. **File này là bản đồ, không phải lãnh thổ.** Nó không giữ sự thật nào của dự án: mỗi dòng hoặc là **luật làm việc**, hoặc là **con trỏ** tới nhà thật. Lệch nhà thật ⇒ **nhà thật thắng**, dòng ở đây là bug phải sửa ngay. Trần của chính file này ở §8.
 >
 > **Vai trò.** Người dùng giao task + yêu cầu; agent tự chọn cách làm, tự viết, **tự kiểm chứng bằng lệnh**, không hỏi lại thứ đọc được trong repo. Đổi lại: thấy hệ thống sai thì **nổi lên** — ghi một dòng vào [finding.md](finding.md) kèm cách sửa đề xuất, rồi quay lại việc đang làm. Im lặng tự xử = vi phạm.
 
@@ -37,7 +37,7 @@ Năm luật định tuyến:
 | Khuôn bảng thay đổi cuối phiên · vế `Sửa ở đâu` của ô `Owner kiểm tra` | [.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) | rule đó |
 | Đã làm gì, khi nào, ai sửa file nào | `git log` — không có file nào giữ lại | `git log` |
 | Chất lượng: "TỐT" nghĩa là gì · thang biên nhận T0–T3 · luật biên nhận âm | [quality/00-guideline-chat-luong.md](quality/00-guideline-chat-luong.md) | file đó |
-| Phạm vi & giá món | ⚠️ chưa có nhà — T-05 tạo `project_preparation/00-scope.md` | — |
+| Phạm vi bán · giá món · thành phần suất bán | [project_preparation/00-scope.md](project_preparation/00-scope.md) — §2 kênh · §4 giá · §4.4 suất bán | file đó |
 | Định nghĩa XONG khi đã có compiler | [quality/05-checklist.md](quality/05-checklist.md) — 7 vế §6.5, tách hai hạng | file đó |
 
 Nghi một file cũ: so dòng `Cập nhật <ngày>` trong file với `git log -1 --format=%ad -- <file>`; lệch ⇒ kiểm bằng nhà thật trước khi tin. Sửa nội dung ⇒ đổi ngày **trong cùng commit**.
