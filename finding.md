@@ -53,6 +53,8 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-37](#f-37) | Lời hứa ở checklist §2 — *"vế nào còn ⚠️ thì lane sinh ra nó gỡ ⚠️ ngay trong task mở lane"* — **không nằm trong sổ của ai**: 7/8 dòng bảng §2 đang ⚠️, mà `0` dòng task của T-07 T-08 T-09 nhắc tới `quality/05-checklist.md` | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-38](#f-38) | Vòng lặp con trỏ [rule §5.1](.claude/rules/quan-ly-du-an.md) **mù với neo `#f-xx`**: lớp `[^)#]*` cắt bỏ mọi thứ sau `#`, nên `](../finding.md#f-67)` chỉ bị kiểm là *file có tồn tại không* → xanh — và đang có một neo hụt sống ở `prompt-fullstack.md` dòng 13 (`grep -c '^### F-67' finding.md` ra `0`) | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-39](#f-39) | Luật báo cáo chỉ đòi con trỏ xuống tới **mục** — ô `Sửa ở đâu` ở [.claude/rules/bao-cao-thay-doi.md §1](.claude/rules/bao-cao-thay-doi.md) đặc tả `§1.1 bảng đặc tả ô`, `dòng T-05` — mà **không** đòi **đường dẫn** đi kèm, nên `§6` trần lọt hợp lệ vào mọi báo cáo; repo đang có **5** file `.md` cùng có một mục `§6`, owner đọc `§6` không biết là §6 của file nào | owner nêu · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên owner nêu — không đẻ task |
+| [F-40](#f-40) | Hệ đánh số tên file `quality/` va nhau: [guideline §7](quality/00-guideline-chat-luong.md) đặt tầng pha ở `quality/0n-pha-<n>-<tên>.md` cho **6 pha** ⇒ pha 4 đòi `05-`, pha 5 đòi `06-`; nhưng `05-` đã là `05-checklist.md` (T-04 đã xong) và `06-` đã bị [T-33](task.md) đặt trước cho `06-rang-buoc-kien-truc.md` — hai chỗ va, cả hai đều đã ghim vào sổ | T-34 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-41](#f-41) | `NHA` trong [Makefile](Makefile) là **danh sách gõ tay 10 file**, không cơ chế nào bắt một nhà mới bị bỏ ngoài: `quality/05-checklist.md` ra đời ở T-04 và **chưa từng** vào `NHA`, nên bốn đích của `make check` không hề soi nó — cổng xanh trong khi hai nhà đứng ngoài cổng | T-34 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 
 ---
 
@@ -1650,3 +1652,75 @@ wc -l < CLAUDE.md; awk 'length>400' CLAUDE.md                           # 101, r
 [CLAUDE.md §4](CLAUDE.md) *Trích dẫn đủ nhà* — đường dẫn **và** mục, mọi lần nhắc, không rút gọn từ lần
 hai. Phép thử áp cho mọi luật khác cùng loại: đọc đúng chuỗi ký tự đó, tách khỏi ngữ cảnh câu, có ra đúng
 một chỗ trong repo không? Ra nhiều hơn một ⇒ đó là gợi ý, không phải con trỏ.
+
+---
+
+### F-40
+
+**Mệnh đề sai.** [guideline §7](quality/00-guideline-chat-luong.md) đặt khuôn tên tầng pha là
+`quality/0n-pha-<n>-<tên>.md`. Với **sáu** pha bắt đầu từ `01-` ([prompt-fullstack §7](project_preparation/prompt-fullstack.md)),
+pha 4 rơi vào `05-` và pha 5 rơi vào `06-`. Cả hai số **đã có chủ khác**: `quality/05-checklist.md` tồn tại
+từ T-04, và `06-rang-buoc-kien-truc.md` đã được ô `Task` của [T-33](task.md) đặt trước. Khuôn tên hiện hành
+**không cấp phát được** cho hai pha cuối, và không lệnh nào trong repo kêu.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-19](task.md) tạo
+`01-pha-0-ba.md`, [T-33](task.md) tạo `06-rang-buoc-kien-truc.md`, rồi [T-07](task.md) [T-08](task.md)
+[T-09](task.md) mở lane và tầng pha 2/3/4 sẽ lần lượt đòi `03- 04- 05-`. Không dòng task nào nhận việc
+**chốt hệ tên**; mỗi dòng chỉ tạo đúng file của nó rồi dừng. Va chạm chỉ lộ ra ở task thứ năm kể từ bây
+giờ, lúc đó phiên đang làm sẽ tự chọn một số còn trống và hệ tên mất luôn ý nghĩa. Dòng **còn** ⇒ finding.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -c '0n-pha-<n>-<tên>' quality/00-guideline-chat-luong.md   # 2 — khuôn tên tầng pha, hai chỗ
+ls quality/                                                     # 05-checklist.md đã chiếm 05-
+grep -c '06-rang-buoc-kien-truc' task.md                        # >= 1 — 06- đã bị T-33 đặt trước
+# ⇒ khuôn `0n-pha-<n>` còn cấp được 01 02 03 04, thiếu chỗ cho pha 4 và pha 5
+```
+
+**Cách sửa đề xuất.** Bỏ số khỏi tên **tầng pha**: `quality/pha-<n>-<tên>.md`. Con số đứng trước ở đó không
+mang thông tin nào ngoài thứ tự, mà thứ tự đã nằm sẵn trong `<n>` — bỏ nó thì hai họ tên file không còn tranh
+chỗ, và nhìn tên là biết ngay file thuộc tầng nào. Sửa đúng hai chỗ: khuôn ở
+[guideline §7](quality/00-guideline-chat-luong.md) và ô `Task` của [T-19](task.md) (chưa làm, nên chưa có
+file nào phải đổi tên). Tầng chung giữ số `00`–`0x` như hiện tại. Gắn vào một dòng task mới cho lane NON-CODE.
+
+**Bẫy khi sửa.** `quality/01-chat-luong-noi-dung.md` do [T-34](task.md) tạo đang đứng ở `01-`, cùng số với
+`01-pha-0-ba.md` mà [T-19](task.md) sẽ tạo. Hai file **không** đè nhau (khác tên đầy đủ), nên đây chưa phải
+lỗi — nhưng sửa hệ tên mà chỉ đổi tầng pha rồi để `01-` mang hai nghĩa thì mới là chọn đường dễ: chuỗi
+`-pha-` phải là thứ **duy nhất** phân biệt hai tầng, không phải con số.
+
+---
+
+### F-41
+
+**Mệnh đề sai.** [Makefile](Makefile) dòng 13–19 khai `NHA` bằng cách **gõ tay** ba danh sách (`SO`, `LUAT`,
+`HDAN`). `QUET := $(NHA)`, và cả bốn đích `check-nha` `check-tran` `check-contro` `check-so` chỉ chạy trên
+tập đó. Một nhà mới không được ai thêm tay vào `NHA` thì **không đích nào soi nó**, và `make check` vẫn in
+`XANH`. Đây không phải rủi ro tương lai: `quality/05-checklist.md` sinh ra ở [T-04](task.md) — đã đánh ✅ —
+và tới hôm nay vẫn đứng ngoài `NHA`.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-06](task.md) mở lane DEVOPS
+bằng một rule có `paths:`, không dòng nào nói tới `NHA`. [T-19](task.md) [T-33](task.md) và mọi task tầng
+pha sau này đều **tạo thêm** file trong `quality/`, không dòng nào có vế *"thêm vào `NHA`"* trong ô biên
+nhận. Cơ chế đăng ký là một thói quen, không phải một cổng — và thói quen đã trượt một lần rồi. Dòng
+**còn** ⇒ finding.
+
+**Lệnh tái hiện.**
+
+```bash
+ls quality/*.md                                       # 3 file: 00-guideline, 01-chat-luong-noi-dung, 05-checklist
+grep -o 'quality/[a-z0-9-]*\.md' Makefile | sort -u   # ra ĐÚNG 1: quality/00-guideline-chat-luong.md
+make check                                            # vẫn không nhắc gì về hai file còn lại
+# ⇒ 2/3 nhà trong quality/ đứng ngoài mọi đích, cổng vẫn xanh
+```
+
+**Cách sửa đề xuất.** Thay danh sách gõ tay bằng một **đích đối chiếu**: liệt kê file thật bằng `ls`/`git
+ls-files` trên các thư mục nhà (`quality/` `.claude/rules/` `design/**`), so với `NHA`, in ra chênh lệch và
+**đỏ** khi có file thật không nằm trong `NHA`. Giữ `NHA` gõ tay làm bản khai — không tự nạp mọi file, vì
+`reference/` và `prompt/` cố ý đứng ngoài — nhưng biến chỗ lệch thành **đỏ** thay vì im lặng. Đây là việc
+của lane **DEVOPS** (`Makefile`), lane chưa mở: gắn vào một dòng task mở sau [T-06](task.md).
+
+**Vì sao nó nguy hiểm hơn nó trông.** `make check` là biên nhận **duy nhất** hiện chạy được của cả repo
+([CLAUDE.md §7](CLAUDE.md)), nên nó cũng là chỗ mọi phiên tin nhất. Một cổng bỏ sót file không kêu to hơn
+một cổng đỏ — nó im, và cái im đó đọc y hệt *"đã kiểm, không có vấn đề"*. Càng nhiều nhà mới sinh ra, tỷ lệ
+file thật sự được soi càng giảm, trong khi dòng `make check: XANH` không đổi một chữ.

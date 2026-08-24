@@ -36,7 +36,7 @@ Năm luật định tuyến:
 | Luật viết sổ task (11 TP → 12 trường) | [project_preparation/huong-dan-viet-task-md.md](project_preparation/huong-dan-viet-task-md.md) | file đó |
 | Khuôn bảng thay đổi cuối phiên · vế `Sửa ở đâu` của ô `Owner kiểm tra` | [.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) | rule đó |
 | Đã làm gì, khi nào, ai sửa file nào | `git log` — không có file nào giữ lại | `git log` |
-| Chất lượng: "TỐT" nghĩa là gì · thang biên nhận T0–T3 · luật biên nhận âm | [quality/00-guideline-chat-luong.md](quality/00-guideline-chat-luong.md) | file đó |
+| Chất lượng đầu ra: *"TỐT"* (dùng lại được) · *"ĐÚNG để xây"* (nội dung) · T0–T3 · biên nhận âm | [quality/00-guideline-chat-luong.md](quality/00-guideline-chat-luong.md) · nội dung: [quality/01-chat-luong-noi-dung.md](quality/01-chat-luong-noi-dung.md) | mỗi file cho câu hỏi của nó |
 | Phạm vi bán · giá món · thành phần suất bán | [project_preparation/00-scope.md](project_preparation/00-scope.md) — §2 kênh · §4 giá · §4.4 suất bán | file đó |
 | Định nghĩa XONG khi đã có compiler | [quality/05-checklist.md](quality/05-checklist.md) — 7 vế §6.5, tách hai hạng | file đó |
 

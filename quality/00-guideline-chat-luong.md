@@ -1,8 +1,10 @@
 # quality/00 — guideline chất lượng: "TỐT" nghĩa là gì và đo bằng lệnh nào
 
-> Cập nhật **2026-08-23** · Lane sở hữu: **NON-CODE** · Trần của chính file: §8.
+> Cập nhật **2026-08-25** · Lane sở hữu: **NON-CODE** · Trần của chính file: §8.
 > Nhà duy nhất của câu hỏi **"đầu ra có TỐT không"**. Câu hỏi **"task XONG chưa"** ở nhà khác —
 > [rule §3](../.claude/rules/quan-ly-du-an.md); §1 nói vì sao hai câu hỏi không được trộn.
+> Câu hỏi thứ ba — **nội dung có ĐÚNG ĐỂ XÂY không** (đúng việc được giao · đúng pha · đúng cỡ quán) — ở
+> [quality/01-chat-luong-noi-dung.md](01-chat-luong-noi-dung.md): sáu trục N1–N6, kế thừa §3 §4 §5 dưới đây.
 > File này **trỏ, không chép**: chép là đẻ nhà thứ hai, và bản chép sẽ lệch trong im lặng
 > ([CLAUDE.md §2](../CLAUDE.md)).
 
