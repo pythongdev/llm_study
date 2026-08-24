@@ -47,7 +47,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-31](#f-31) | Hai bản **dẫn xuất** từ `project_preparation/00-scope.md` không có cơ chế nào canh: `prompt-fullstack.md` §9.3 giữ 10 số giá tự khai *"hợp đồng với chủ quán"* mà chỉ khai nguồn bằng câu chữ, và `design/BA/04-yeu-cau.md` dòng 22 còn đánh ⚠️ cho `00-scope.md` §4.4 trong khi nhà đã có | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-32](#f-32) | `.claude/rules/bao-cao-thay-doi.md` §3 khai *"cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc"* nhưng khối lệnh của §3 chỉ có **bốn** nhãn — `# d.` **chưa từng tồn tại** ở bất kỳ phiên bản nào của file; bộ bắt buộc đang đòi một lệnh ma, và phiên đóng T-26 đã khai *"(d) rỗng"* cho nó | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-33](#f-33) | `quality/05-checklist.md` tự khai là **nhà duy nhất** của câu hỏi *"task này XONG chưa"* cho task có code, nhưng cả bảy vế §1 chỉ đo **vệ sinh của đầu ra** — không vế nào hỏi đầu ra **có phải thứ ô `Task` yêu cầu không**; dòng 57 còn đẩy việc đó sang câu hỏi TỐT | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
-| [F-34](#f-34) | Biên nhận `grep -c '^- \[ \]'` **= đúng 7, không hơn không kém** bị ghim ở **ba** chỗ (checklist §5 · ô `Đầu ra kiểm chứng được` của T-04 · bảng `cl-T-04`), nên checklist **không có cửa** nhận vế XONG mới — kể cả vế học từ một sự cố thật mà §6.7 luật 2 đòi | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-34](#f-34) | Biên nhận `grep -c '^- \[ \]'` **= đúng 7, không hơn không kém** bị ghim ở **bốn** chỗ (checklist §5 · ô `Đầu ra kiểm chứng được` của T-04 · bảng `cl-T-04` · ô biên nhận của [T-33](task.md) còn mở), nên checklist **không có cửa** nhận vế XONG mới — kể cả vế học từ một sự cố thật mà §6.7 luật 2 đòi | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-35](#f-35) | Bảy ô `- [ ]` ở §1 **không phải bảy phép xác nhận**: 5/7 dòng gộp nhiều thứ vào một dấu tick (vế 1 gộp `build · lint · unit test · typecheck`), tổng ra **14–16 tuỳ cách đếm** — và `grep -c` đang đo **số dòng**, không đo số thứ đã xác nhận | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-36](#f-36) | §6.9 *(ba thứ không bao giờ thoả hiệp)* chỉ được **trỏ** ở 3 chỗ, **không** cổng nào buộc xác nhận nó trước commit: §3 checklist (*cái gì không tính là XONG*) nhắc `0` lần, và `0` ô `Đạt khi` nào của bảng ba cổng [guideline §6](quality/00-guideline-chat-luong.md) nhắc tới nó | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-37](#f-37) | Lời hứa ở checklist §2 — *"vế nào còn ⚠️ thì lane sinh ra nó gỡ ⚠️ ngay trong task mở lane"* — **không nằm trong sổ của ai**: 7/8 dòng bảng §2 đang ⚠️, mà `0` dòng task của T-07 T-08 T-09 nhắc tới `quality/05-checklist.md` | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
@@ -1384,7 +1384,7 @@ grep -n "yêu cầu\|ô \`Task\`\|đúng thứ được giao\|acceptance" qualit
 ```
 
 **Cách sửa đề xuất.** Thêm **một dòng cổng** ở đầu §1 — **không** phải ô `- [ ]` thứ tám: số 7 đang bị
-ghim ở ba chỗ ([F-34](#f-34)), thêm một ô làm cả ba biên nhận đỏ cùng lúc. Câu đại ý: *"Trước khi tick
+ghim ở bốn chỗ ([F-34](#f-34)), thêm một ô làm cả bốn biên nhận đỏ cùng lúc. Câu đại ý: *"Trước khi tick
 bảy vế: ô `Đầu ra kiểm chứng được` của dòng task đã **chạy thật** và đã được **thử làm đỏ một lần**
 ([guideline §5](quality/00-guideline-chat-luong.md)); bảy vế dưới đo vệ sinh của đầu ra, không đo việc
 được giao."* Là **con trỏ** tới ô của dòng task, không chép nội dung ⇒ không đẻ nhà thứ hai. Gắn vào một
@@ -1400,25 +1400,29 @@ tồn tại ở bất kỳ dòng nào.
 
 ### F-34
 
-**Mệnh đề sai.** Biên nhận *"`grep -c '^- \[ \]'` ra **đúng 7**, không hơn không kém"* bị ghim ở **ba**
+**Mệnh đề sai.** Biên nhận *"`grep -c '^- \[ \]'` ra **đúng 7**, không hơn không kém"* bị ghim ở **bốn**
 chỗ cùng lúc: `quality/05-checklist.md` §5 dòng 74 · ô `Đầu ra kiểm chứng được` của dòng
-[T-04](task.md) · bảng soi `### cl-T-04` (dòng `Đã thử làm đỏ` chốt `5 ≠ 7`, `8 ≠ 7`, *"bản thật ra 7"*).
+[T-04](task.md) (đã ✅) · bảng soi `### cl-T-04` (dòng `Đã thử làm đỏ` chốt `5 ≠ 7`, `8 ≠ 7`, *"bản thật
+ra 7"*) · và ô biên nhận của [T-33](task.md) — một dòng **còn mở**, khai thẳng *"**đỏ khi** ra `8`"*.
 Nguồn duy nhất của con số 7 là [prompt-fullstack.md](project_preparation/prompt-fullstack.md) §6.5 — mà
 chính file đó dòng 8 tự khai *"File này là **bản xuất khẩu**, không phải nhà của sự thật nào"* và dòng 13
 *"Là bản chép nên nó **sẽ trôi**"*. Kết quả: checklist **không có cửa** nào để nhận một vế XONG thứ tám —
 kể cả vế học từ **một sự cố thật ở quán**, đúng thứ §6.7 luật 2 bắt buộc (*"mỗi sự cố ở quán phải sinh ra
-một test"*) — vì thêm một dòng làm **ba** biên nhận đỏ cùng lúc.
+một test"*) — vì thêm một dòng làm **bốn** biên nhận đỏ cùng lúc.
 
 **Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md): T-04 đã ✅ ĐÓNG, dòng bị gạch ngang, không
-dòng nào mở lại ô biên nhận của nó; `cl-T-04` là bảng soi của một task đã xong nên cũng đứng im. Không
-dòng task nào nói tới việc *"vế XONG mới sinh ra ở đâu"*. Dòng **còn** ⇒ finding.
+dòng nào mở lại ô biên nhận của nó; `cl-T-04` là bảng soi của một task đã xong nên cũng đứng im; và
+[T-33](task.md) — dòng mới nhất chạm checklist — **đóng cửa chặt thêm** thay vì mở: nó dùng `= 7` làm
+biên nhận *giữ nguyên hiện trạng*. Không dòng task nào nói tới việc *"vế XONG mới sinh ra ở đâu"*. Chạy
+hết kế hoạch thì số 7 được ghim ở nhiều chỗ hơn, không ít hơn. Dòng **còn** ⇒ finding.
 
 **Lệnh tái hiện.**
 
 ```bash
 grep -rn -F "grep -c '^- \[ \]' quality/05-checklist.md" quality/05-checklist.md task.md | cut -c1-64
 # quality/05-checklist.md:74:grep -c '^- \[ \]' quality/05-checklist.md   <- chỗ 1
-# task.md:46:| ~~**T-04**~~ ✅ | NON-CODE | Tạo `quality/05-checklist  <- chỗ 2
+# task.md:46:| ~~**T-04**~~ ✅ | NON-CODE | Tạo `quality/05-checkli     <- chỗ 2 (T-04, đã đóng)
+# task.md:74:| **T-33** | NON-CODE | Tạo `quality/06-rang-buoc-kie     <- chỗ 4 (T-33, CÒN MỞ)
 sed -n '/^### cl-T-04/,/^### /p' task.md | grep -o '≠ 7' | wc -l          # ra 2  <- chỗ 3
 grep -c 'không hơn không kém' quality/05-checklist.md                     # ra 1  <- cửa bị đóng bằng câu chữ
 ```
