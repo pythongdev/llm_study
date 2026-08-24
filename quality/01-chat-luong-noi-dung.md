@@ -48,25 +48,23 @@ sai**, và pha 2 thừa kế một thiết kế chưa ai duyệt.
 [00-scope.md](../project_preparation/00-scope.md), **một ràng buộc** §4 hoặc **một bất biến** §6.2 của
 [prompt-fullstack](../project_preparation/prompt-fullstack.md). Truy không ra ⇒ nó phục vụ một quán không
 tồn tại. Corpus của máy toàn hệ lớn nên **mặc định của nó là hệ lớn**, và mỗi thứ nó thêm tự nó hợp lý — nên duyệt-bằng-đọc luôn gật.
-· *Probe:* `grep -rniE 'multi-tenant|microservice|kafka|redis|cache|i18n|đa ngôn ngữ|event sourc|CQRS|replica|autoscal|OAuth|SSO|RBAC' <đầu ra>`
-· *Đỏ khi:* một dòng in ra **không** kèm dòng `Vì:` trỏ nguồn giải được. §6.8 đã chốt **không hàng đợi · không cache · 1 instance · 1 VPS**: nghịch bốn dòng đó là **phá ràng buộc kiến trúc**, không phải "cải tiến".
+· *Probe 1:* `grep -niE 'multi-tenant|microservice|kafka|redis|cache|i18n|đa ngôn ngữ|event sourc|CQRS|replica|autoscal|OAuth|SSO|RBAC' <đầu ra> | grep -v 'Vì:'` — rỗng.
+· *Probe 2 (chạm nhà thật):* mọi vế `Vì:` phải trỏ về mục **có thật**: `grep -oE 'Vì: *[^·|]*' <đầu ra> | grep -oE '§[0-9.]+|I[1-8]' | sort -u | while read -r r; do x=$(printf '%s' "${r#§}" | sed 's/\./\\./g'); grep -qE "^(#+ §?|\*\*)$x([ .]|$)|^\| $x \|" <nhà thật> || echo "LÝ DO TRỎ HỤT: $r"; done` — rỗng.
+· *Đỏ khi:* Probe 1 in ra ≥ 1 dòng (cơ chế không ai giải trình), hoặc Probe 2 in ra ≥ 1 `LÝ DO TRỎ HỤT` (giải trình bằng một mục không tồn tại). §6.8 đã chốt **không hàng đợi · không cache · 1 instance · 1 VPS**: nghịch bốn dòng đó là **phá ràng buộc kiến trúc**, không phải "cải tiến".
 
 ## §4 N4–N6 · đúng nguồn · đối chiếu ngoài · có quyết định
 
 **N4 · Không có số mồ côi.** Mọi **số, ngưỡng, tên trạng thái, tên vai** hoặc khớp nhà thật ([guideline §4](00-guideline-chat-luong.md) trục *Đúng*), hoặc mang nhãn `GIẢ ĐỊNH:` + mức rủi ro + ai chốt được — **không có ô thứ ba**.
 Chế độ hỏng đắt nhất: máy không để trống chỗ nó không biết, nó điền một giá trị hợp lý — `20 giây`, `3 lần thử lại`, `15%`, `pending/confirmed/done` — trông y hệt giá trị đã chốt. Ba phiên sau, số đó **là** nhà thật vì không ai còn nhớ nó từ đâu ra.
-· *Probe:* bốc số ra rồi **đối chiếu sang nhà thật của loại số đó** (giá → [00-scope.md](../project_preparation/00-scope.md) §4 · bề rộng màn hình → [prompt-fullstack](../project_preparation/prompt-fullstack.md) §3.7):
-```bash
-grep -oE '[0-9]+([.,][0-9]{3})+|[0-9]+ ?(giây|phút|giờ|ngày|%|px|lần|món|bàn)' <đầu ra> | sort -u \
-  | while read -r n; do grep -qF "$n" <nhà thật> || echo "SỐ MỒ CÔI: $n"; done
-```
+· *Probe (chạm nhà thật):* `grep -oE '[0-9]+([.,][0-9]{3})+|[0-9]+ ?(giây|phút|giờ|ngày|%|px|lần|món|bàn)' <đầu ra> | sort -u | while read -r n; do grep -qF "$n" <nhà thật> || echo "SỐ MỒ CÔI: $n"; done` — giá → [00-scope.md](../project_preparation/00-scope.md) §4 · bề rộng màn hình → [prompt-fullstack](../project_preparation/prompt-fullstack.md) §3.7.
 · *Đỏ khi:* in ra ≥ 1 dòng `SỐ MỒ CÔI` mà số đó **không** nằm cùng đoạn với `GIẢ ĐỊNH:`. Nhãn tại chỗ là **cờ**, không phải nhà; nhà của giả định đã gom là [00-scope.md §6](../project_preparation/00-scope.md).
 
 **N5 · Đối chiếu ngoài — nêu tên, hoặc khai chưa tra.** Mỗi **quyết định thiết kế** có một dòng ba vế:
 `Ngoài: <tên gọi được của chuẩn/thực hành/hệ đã dùng> · Ta: <ta làm gì> · Vì: <lý do gắn với cỡ quán>`. Một dòng bắt **cả hai chiều sai**: *tự nghĩ lại* thứ thế giới đã giải (thiếu vế `Ngoài:`) và *bê nguyên* một chuẩn dự án không cần (vế `Vì:` trống hoặc chung chung).
 **Cấm viện dẫn vô danh** — *"chuẩn ngành", "best practice", "người ta thường"* mà không kèm tên gọi được là **bịa có thẩm quyền**, dạng bịa khó cãi nhất vì nó mượn uy tín của một nguồn không tồn tại. Không tra được ⇒ `Ngoài: ⚠️ chưa tra` + mở finding.
-· *Probe:* `grep -nEi 'best practice|chuẩn ngành|thông lệ|người ta thường|industry standard' <đầu ra> | grep -v 'Ngoài:'`
-· *Đỏ khi:* lệnh trên in ra ≥ 1 dòng, hoặc số dòng `Ngoài:` ít hơn số quyết định thiết kế trong file.
+· *Probe 1:* `grep -nEi 'best practice|chuẩn ngành|thông lệ|người ta thường|industry standard' <đầu ra> | grep -v 'Ngoài:'` — rỗng.
+· *Probe 2 (chạm nhà thật):* mỗi `⚠️ chưa tra` phải kèm một mã finding **có thật** — `grep -c '⚠️ chưa tra' <đầu ra>` phải `<=` số mã giải được của `grep -oE 'F-[0-9]{2}' <đầu ra> | sort -u | while read -r f; do grep -q "^### $f\$" finding.md && echo x; done | wc -l`.
+· *Đỏ khi:* Probe 1 in ra ≥ 1 dòng (viện dẫn vô danh), hoặc Probe 2 ra `chưa tra > mã giải được` (khai chưa tra mà không mở finding), hoặc số dòng `Ngoài:` ít hơn số quyết định thiết kế trong file.
 
 **N6 · Có quyết định — nước đôi là việc chưa làm.** Chỗ cần một quyết định thì đầu ra **chốt một** phương
 án, phương án bị loại nêu kèm **lý do loại**; để ngỏ chỉ hợp lệ khi kèm **mã task hoặc mã finding** nhận việc chốt.
