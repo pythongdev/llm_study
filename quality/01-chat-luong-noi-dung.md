@@ -23,7 +23,6 @@
 Văn trôi chảy, đủ mục, đúng khuôn, con trỏ giải được là thứ **rẻ nhất** mà máy sinh ra — nên `test -e`,
 đếm mục, đếm gạch đầu dòng, vòng lặp con trỏ đang đo đúng cái máy **giỏi nhất** và mù với cái nó **dở nhất**.
 Người làm sai việc thường sai cả cách làm nên bị bắt ở tầng 1; máy làm rất sạch đúng thứ nó hiểu nhầm.
-
 **Luật gốc:** *không chấm nội dung bằng cách đọc lại* — đọc lại chỉ để phiên vừa viết xác nhận **ý định
 của chính nó**. Chấm bằng **ánh xạ ngược về ô `Task`** và **lệnh in ra số dòng**; mỗi trục dưới đây có ít
 nhất một trong hai. `<đầu ra>` là placeholder văn xuôi, thay bằng đường dẫn thật — và **chạy trên đầu ra
@@ -54,18 +53,18 @@ tồn tại. Corpus của máy toàn hệ lớn nên **mặc định của nó l
 
 ## §4 N4–N6 · đúng nguồn · đối chiếu ngoài · có quyết định
 
-**N4 · Không có số mồ côi.** Mọi **số, ngưỡng, tên trạng thái, tên vai** hoặc khớp nhà thật
-([guideline §4](00-guideline-chat-luong.md) trục *Đúng*), hoặc mang nhãn `GIẢ ĐỊNH:` + mức rủi ro + ai chốt được — **không có ô thứ ba**.
+**N4 · Không có số mồ côi.** Mọi **số, ngưỡng, tên trạng thái, tên vai** hoặc khớp nhà thật ([guideline §4](00-guideline-chat-luong.md) trục *Đúng*), hoặc mang nhãn `GIẢ ĐỊNH:` + mức rủi ro + ai chốt được — **không có ô thứ ba**.
 Chế độ hỏng đắt nhất: máy không để trống chỗ nó không biết, nó điền một giá trị hợp lý — `20 giây`, `3 lần thử lại`, `15%`, `pending/confirmed/done` — trông y hệt giá trị đã chốt. Ba phiên sau, số đó **là** nhà thật vì không ai còn nhớ nó từ đâu ra.
-· *Probe:* `grep -noE '[0-9]+ *(giây|phút|giờ|ngày|đ|%|px|lần|món|bàn)' <đầu ra> | sort -u` — mỗi số phải `grep` ra được ở nhà thật, hoặc nằm cùng đoạn với `GIẢ ĐỊNH:`.
-· *Đỏ khi:* ≥ 1 số không ở cả hai chỗ. Nhãn tại chỗ là **cờ**, không phải nhà; nhà của giả định đã gom là [00-scope.md §6](../project_preparation/00-scope.md).
+· *Probe:* bốc số ra rồi **đối chiếu sang nhà thật của loại số đó** (giá → [00-scope.md](../project_preparation/00-scope.md) §4 · bề rộng màn hình → [prompt-fullstack](../project_preparation/prompt-fullstack.md) §3.7):
+```bash
+grep -oE '[0-9]+([.,][0-9]{3})+|[0-9]+ ?(giây|phút|giờ|ngày|%|px|lần|món|bàn)' <đầu ra> | sort -u \
+  | while read -r n; do grep -qF "$n" <nhà thật> || echo "SỐ MỒ CÔI: $n"; done
+```
+· *Đỏ khi:* in ra ≥ 1 dòng `SỐ MỒ CÔI` mà số đó **không** nằm cùng đoạn với `GIẢ ĐỊNH:`. Nhãn tại chỗ là **cờ**, không phải nhà; nhà của giả định đã gom là [00-scope.md §6](../project_preparation/00-scope.md).
 
 **N5 · Đối chiếu ngoài — nêu tên, hoặc khai chưa tra.** Mỗi **quyết định thiết kế** có một dòng ba vế:
-`Ngoài: <tên gọi được của chuẩn/thực hành/hệ đã dùng> · Ta: <ta làm gì> · Vì: <lý do gắn với cỡ quán>`.
-Một dòng bắt **cả hai chiều sai**: *tự nghĩ lại* thứ thế giới đã giải (thiếu vế `Ngoài:`) và *bê nguyên*
-một chuẩn dự án không cần (vế `Vì:` trống hoặc chung chung). **Cấm viện dẫn vô danh** — *"chuẩn ngành",
-"best practice", "người ta thường"* mà không kèm tên gọi được là **bịa có thẩm quyền**, dạng bịa khó cãi
-nhất vì nó mượn uy tín của một nguồn không tồn tại. Không tra được ⇒ `Ngoài: ⚠️ chưa tra` + mở finding.
+`Ngoài: <tên gọi được của chuẩn/thực hành/hệ đã dùng> · Ta: <ta làm gì> · Vì: <lý do gắn với cỡ quán>`. Một dòng bắt **cả hai chiều sai**: *tự nghĩ lại* thứ thế giới đã giải (thiếu vế `Ngoài:`) và *bê nguyên* một chuẩn dự án không cần (vế `Vì:` trống hoặc chung chung).
+**Cấm viện dẫn vô danh** — *"chuẩn ngành", "best practice", "người ta thường"* mà không kèm tên gọi được là **bịa có thẩm quyền**, dạng bịa khó cãi nhất vì nó mượn uy tín của một nguồn không tồn tại. Không tra được ⇒ `Ngoài: ⚠️ chưa tra` + mở finding.
 · *Probe:* `grep -nEi 'best practice|chuẩn ngành|thông lệ|người ta thường|industry standard' <đầu ra> | grep -v 'Ngoài:'`
 · *Đỏ khi:* lệnh trên in ra ≥ 1 dòng, hoặc số dòng `Ngoài:` ít hơn số quyết định thiết kế trong file.
 
