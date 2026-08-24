@@ -29,7 +29,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-13](#f-13) | Không biên nhận nào trong repo đo **chất lượng**: cả 16 dòng `task.md` dừng ở *tồn tại + hình dạng*, không dòng nào khai **đỏ khi** — nên ngưỡng dưới kiểu `grep -c '^- '` ra `>= 3` xanh **vĩnh viễn**, kể cả với ba dòng rác | owner nêu · 2026-08-23 | 🔴 MỞ | [T-20](task.md) + [T-21](task.md) |
 | [F-14](#f-14) | Luật sàn ở [guideline §3](quality/00-guideline-chat-luong.md) khai **T3 bắt buộc** cho *file mà phiên khác sẽ nạp* — trong repo chỉ-có-tài-liệu này **mọi** `.md` đều là file phiên khác nạp, nên sàn T3 rơi vào 21/23 dòng task và cột `Chất lượng` lọc được đúng bằng không, cùng kiểu hỏng với *đánh 👤 cho mọi dòng* mà rule §1.2b đã cấm | T-24 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task — sửa luật chất lượng là việc owner chốt |
 | [F-15](#f-15) | 50/61 lệnh ở cột `Câu lệnh để thấy thay đổi` của §Owner kiểm tra ghi `HEAD`; `HEAD` di chuyển sau mỗi commit nên với task **đã xong** lệnh in ra rỗng (`owner-T-02`, cả 3 lệnh) hoặc in ra **diff của task khác** (`owner-T-14` `owner-T-22` đang chiếu diff của T-24) | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-27](task.md) |
-| [F-16](#f-16) | Lệnh **(e)** ở [bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) §3 — lệnh **duy nhất** bắt được [F-15](#f-15) — không chạy được: thân nó là hai dòng chú thích cộng `git log --oneline -3 -- <path>` với `<path>` là chỗ trống, và T-14 chỉ đưa (b) (c) (d) vào bộ bắt buộc | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-26](task.md) |
+| [F-16](#f-16) | Lệnh **(e)** ở [bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) §3 — lệnh **duy nhất** bắt được [F-15](#f-15) — không chạy được: thân nó là hai dòng chú thích cộng `git log --oneline -3 -- <path>` với `<path>` là chỗ trống, và T-14 chỉ đưa (b) (c) (d) vào bộ bắt buộc | T-02 rà pipeline · 2026-08-23 | ✅ ĐÓNG 2026-08-24 | T-26 |
 | [F-17](#f-17) | [CLAUDE.md §2](CLAUDE.md) trao cho `git log` vai nhà duy nhất của *"ai sửa file nào"*, nhưng không lệnh nào đối chiếu message với `--stat`: `c386219` khai sửa `.claude/rules/quan-ly-du-an.md` trong khi commit đó chỉ đụng `finding.md` và `task.md` | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-15](task.md) |
 | [F-18](#f-18) | Không cơ chế nào bắt *task đã xong trong git mà dòng sổ còn mở*: T-02 commit đủ đầu ra ở `4851d17` với cả năm vế biên nhận xanh, dòng vẫn `\| **T-02** 🔺` — nên bước 2 của [CLAUDE.md §3](CLAUDE.md) dò đúng vào nó và phiên sau mở ra làm lại việc đã xong | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-30](task.md) |
 | [F-19](#f-19) | Một cơ chế đang hỏng được ghi **ngoài sổ lỗi**: `design/BA/04-yeu-cau.md` §4 mục 2 (*"Đóng T-02 xong thì vế 5 tự đỏ"*) mô tả đủ chuyện đóng T-02 làm lệnh §5.2b in `LANE NỬA VỜI: ba`, nhưng `grep -c 'LANE NỬA VỜI' finding.md` ra `0` và định tuyến §1 không dẫn lane NON-CODE tới `design/BA/**` | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-28](task.md) |
@@ -43,6 +43,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-27](#f-27) | `project_preparation/prompt-fullstack.md` khai **hai** bề rộng cho cùng một màn hình khách: §3.7 *"mobile-first 375px"*, §6.5 *"thử ở 360px (khách)"* — [T-04](task.md) sẽ chép **một** trong hai vào `quality/05-checklist.md` và chốt luôn số sai | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task — owner đã chốt **375px** 2026-08-24, còn phải sửa §6.5 |
 | [F-28](#f-28) | Lệnh soi trục *Một nhà* của `cl-T-04` **tự bắt `task.md`**: chuỗi mốc `happy path` bắt buộc phải nằm trong chính ô soi, nên lệnh đỏ ở **cả hai** nhánh — có checklist thì ra `3` file (*bản chép thứ ba*), chưa có thì kết quả thiếu `quality/05-checklist.md` (*chưa có nhà*) | T-04 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ owner chỉ định vá ngay trong phiên T-04 — không đẻ task |
 | [F-29](#f-29) | Ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy `awk` 7 khoá trên **cả file** trong khi vế nó muốn đo là *bảy dòng `- [ ]`*: §2 của checklist nhắc lại đúng các chuỗi khoá, nên bản **xoá một vế rồi chèn một dòng bịa** qua được cả hai biên nhận — `grep -c` ra `7`, `awk` ra `7` | T-04 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task — owner giao agent riêng vá ngay sau T-04 |
+| [F-30](#f-30) | Biên nhận thứ nhất của [T-26](task.md) — `grep -c '<path>' .claude/rules/bao-cao-thay-doi.md` ra `0` — quét **cả file** trong khi phạm vi T-26 chỉ là §3: `<path>` ở §1 cột `Xem diff` và §2 cột `Câu lệnh để thấy thay đổi` là placeholder văn xuôi **hợp lệ, phải giữ**, nên ô này ra `2` kể cả khi (e) đã vá đúng — đỏ vĩnh viễn, và cách duy nhất làm nó xanh là lấn phạm vi | T-26 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 
 ---
 
@@ -645,6 +646,27 @@ awk '/^### owner-T-[0-9]*$/{t=$2} /^\| .*\| `git (show|diff)[^`]*` \|/{ \
 gì để chiếu. Đưa nó vào bộ bắt buộc mà không lọc theo trạng thái dòng task là biến nó thành 20 dòng nhiễu
 mỗi phiên, và nhiễu thì bị bỏ qua y như rỗng. Lọc bằng `^| ~*\*\*T-` + dấu gạch, chỉ soi task đã xong.
 
+**Kiểm chứng.** T-26 · 2026-08-24. Thân (e) nay là vòng lặp đọc `task.md`, lọc theo dòng đã gạch, và §3
+khai cả năm lệnh là bắt buộc:
+
+```bash
+sed -n '/^## 3\./,/^## 4\./p' .claude/rules/bao-cao-thay-doi.md | grep -c '<path>'   # ra 0 — hết chỗ trống
+sed -n '/^## 3\./,/^## 4\./p' .claude/rules/bao-cao-thay-doi.md | grep -c 'bắt buộc' # ra 2 — (e) đã vào bộ bắt buộc
+sed -n '/^# e\. /,/^```$/p' .claude/rules/bao-cao-thay-doi.md | grep -v '^```$' | bash \
+  | grep -cE 'T-(0[3-9]|1[0356]|25)'                                                  # ra 0 — không nhiễu task chưa làm
+```
+
+Khối (e) chạy thật in **8 dòng**, tất cả là `owner-T-11` `owner-T-14` `owner-T-22` `owner-T-24` — đúng
+bốn task đã gạch còn ghim `HEAD`, tức [F-15](#f-15), thứ mà (e) sinh ra để bắt. **Đã thử làm đỏ:** bỏ một
+dấu `~` trong bộ lọc (`~~` → `~*`) trên bản sao ở scratchpad ⇒ 8 dòng thành **49**, và lệnh soi ra **20**
+thay vì `0` — đúng cái bẫy *nhiễu bị bỏ qua y như rỗng* mà mục này cảnh báo.
+
+**Bài học giữ lại:** luật đổi ở [bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) §3 đoạn cuối —
+**cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc, không có bộ rút gọn.** Gốc của F-16 không phải lệnh viết
+dở, mà là ô biên nhận của T-14 chỉ đòi **ba** lệnh: một lệnh có tên trong rule nhưng không có tên trong
+biên nhận của task nào thì **chưa từng phải chạy một lần nào**, nên nó hỏng mà không ai biết. Từ nay
+thêm một lệnh vào rule ⇒ cùng commit đó phải nói lệnh ấy bắt buộc hay không.
+
 ---
 
 ### F-17
@@ -1183,4 +1205,40 @@ Dòng **còn** ⇒ finding.
 (xanh). Thêm luật chung vào [guideline §5](quality/00-guideline-chat-luong.md) — cùng câu với
 [F-28](#f-28): **biên nhận đếm nội dung của một khối phải lọc đúng khối đó trước, không quét cả file.**
 **Đỏ khi:** một biên nhận khai *"đếm N vế trong danh sách"* mà lệnh của nó chạy trên cả file.
+
+---
+
+### F-30
+
+**Mệnh đề sai.** Vế thứ nhất trong ô `Đầu ra kiểm chứng được` của [T-26](task.md) —
+`grep -c '<path>' .claude/rules/bao-cao-thay-doi.md` ra `0`, *đỏ khi chỗ trống còn nguyên* — chạy trên
+**cả file**, trong khi T-26 chỉ được chạm **§3** (ô `Prompt mở session` và bảng `owner-T-26` đều chốt
+vậy). `<path>` còn hai chỗ nữa ngoài §3: §1 hàng `Xem diff` và §2 hàng `Câu lệnh để thấy thay đổi`, ở đó
+nó là **placeholder văn xuôi hợp lệ** đang dạy người đọc viết `git show <sha> -- <path>`. Nên ô này ra
+`2` ngay cả khi (e) đã vá đúng hoàn toàn, và cách duy nhất làm nó xanh là **lấn phạm vi sang §1 §2**.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -c '<path>' .claude/rules/bao-cao-thay-doi.md                                    # ra 2 — "đỏ"
+sed -n '/^## 3\./,/^## 4\./p' .claude/rules/bao-cao-thay-doi.md | grep -c '<path>'   # ra 0 — §3 đã sạch
+grep -n '<path>' .claude/rules/bao-cao-thay-doi.md | cut -c1-60                       # hai dòng, cả hai ở §1 §2
+```
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: T-26 đóng xong thì ô biên nhận
+của nó đứng nguyên và là thứ owner dùng để soi lại. Không dòng task nào nhận việc sửa ô biên nhận của
+task đã đóng — [T-27](task.md) chỉ đụng cột `Câu lệnh để thấy thay đổi`, [T-20](task.md)/[T-21](task.md)
+làm chất lượng ở mức khuôn chung. Dòng **còn** ⇒ finding.
+
+**Cách sửa đề xuất.** Giới hạn khối trước khi đếm, đúng bài học mà [F-29](#f-29) đã rút:
+`sed -n '/^## 3\./,/^## 4\./p' <file> | grep -c '<path>'` ra `0`. Sửa ô biên nhận của T-26 trong
+`task.md`. Nếu owner muốn cưỡng chế ở tầng luật thay vì từng ô, gắn vào
+[guideline §5](quality/00-guideline-chat-luong.md) cùng câu của [F-28](#f-28)/[F-29](#f-29):
+**biên nhận của một task chỉ được đo đúng phạm vi task ấy được phép chạm — quét rộng hơn phạm vi thì nó
+đỏ vì việc của người khác.** **Đỏ khi:** một ô biên nhận `grep`/`awk` cả file trong khi ô
+`Prompt mở session` của cùng dòng chốt `chỉ chạm <file> §x`.
+
+**Bẫy khi sửa.** Đừng xoá `<path>` ở §1 §2 cho lệnh xanh: hai chỗ đó là đặc tả **cách viết cột**, xoá đi
+thì §1 hàng `Xem diff` mất luôn ví dụ phân biệt `git diff` với `git show <sha>` — tức là làm hỏng thứ
+[F-15](#f-15) đang cần, để chữa một lệnh đo sai.
 

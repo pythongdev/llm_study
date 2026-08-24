@@ -6,7 +6,7 @@ paths:
 
 # Báo cáo thay đổi — nạp ở **mọi** phiên chạm bất kỳ file nào
 
-> Cập nhật **2026-08-22**. Luật này trả lời đúng một câu hỏi của owner: *phiên vừa rồi đổi **file nào**,
+> Cập nhật **2026-08-24**. Luật này trả lời đúng một câu hỏi của owner: *phiên vừa rồi đổi **file nào**,
 > và trong file đó đổi **chỗ nào**?* [CLAUDE.md §4](../../CLAUDE.md) chỉ đòi biên nhận + commit — cả hai
 > chứng minh **kết quả đúng**, không cái nào bày ra **đường đi**. File này giữ phần còn thiếu đó.
 >
@@ -99,10 +99,15 @@ for o in $(grep -o '^### owner-T-[0-9]*' task.md | grep -o 'T-[0-9]*'); do \
 # c. Mỗi bảng soi có dòng "Đạt khi:" — ba số phải bằng nhau
 grep -c '^### owner-T-' task.md; grep -c '^\*\*Đạt khi:\*\*' task.md; grep -c '^| ~*\*\*T-' task.md
 
-# e. Mọi lệnh ở cột "Xem diff" phải IN RA: chạy từng lệnh, cái nào rỗng là lệnh sai
-#    Thường gặp: thay đổi đã vào commit (phiên khác commit hộ) mà cột vẫn ghi `git diff`
-#    -> tra sha rồi đổi sang `git show <sha> -- <path>`:
-git log --oneline -3 -- <path>
+# e. Mọi lệnh ở cột "Câu lệnh để thấy thay đổi" phải IN RA — chỉ soi task ĐÃ GẠCH ở sổ task:
+#    task chưa làm in rỗng là ĐÚNG (chưa commit thì không có gì để chiếu), không lọc thì thành nhiễu.
+#    Ra "LỆNH RỖNG" -> tra sha bằng `git log --oneline -3 -- <đường/dẫn>` rồi ghim `git show <sha> -- ...`
+d=$(grep -o '^| ~~\*\*T-[0-9]*' task.md | grep -o 'T-[0-9]*' | tr '\n' ' ')
+awk -v d=" $d" '/^### owner-T-[0-9]*$/{t=$2; ok=index(d," " substr(t,7) " ")} \
+  ok && /^\| .*\| `git (show|diff)[^`]*` \|/{ \
+    match($0,/`git [^`]*`/); c=substr($0,RSTART+1,RLENGTH-2); \
+    cmd=c " 2>/dev/null | head -1"; cmd | getline out; close(cmd); \
+    if (out=="") print "LỆNH RỖNG: " t " -> " c; out="" }' task.md
 ```
 
 **d.** Mọi link trong `task.md` phải giải được: chạy **vòng lặp con trỏ** ở
@@ -112,6 +117,10 @@ backtick + `(mới)`, đừng tạo file rỗng cho con trỏ giải được.
 
 Lệnh (a) chạy **trước** khi commit và đối chiếu bằng mắt với bảng: git là nhà thật của *file nào đã đổi*,
 bảng chỉ là bản khai. Lệch ⇒ sửa bảng, không sửa git.
+
+**Cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc** chạy trước khi commit — không có bộ rút gọn ba lệnh. (e)
+là lệnh **duy nhất** soi cột `Câu lệnh để thấy thay đổi` của §2; để nó ngoài bộ bắt buộc một lần thôi là
+bảng soi của task đã đóng hỏng **im lặng**, không ai biết ([F-16](../../finding.md#f-16)).
 
 ---
 
