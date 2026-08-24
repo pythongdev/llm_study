@@ -1,6 +1,6 @@
 # finding.md — sổ lỗi
 
-> Cập nhật **2026-08-24**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
+> Cập nhật **2026-08-25**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
 > [task.md](task.md). Phép thử một câu và luật không trộn hai sổ ở [CLAUDE.md §5](CLAUDE.md);
 > hai sổ khác nhau chỗ nào ở [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §2.
 
@@ -52,6 +52,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-36](#f-36) | §6.9 *(ba thứ không bao giờ thoả hiệp)* chỉ được **trỏ** ở 3 chỗ, **không** cổng nào buộc xác nhận nó trước commit: §3 checklist (*cái gì không tính là XONG*) nhắc `0` lần, và `0` ô `Đạt khi` nào của bảng ba cổng [guideline §6](quality/00-guideline-chat-luong.md) nhắc tới nó | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-37](#f-37) | Lời hứa ở checklist §2 — *"vế nào còn ⚠️ thì lane sinh ra nó gỡ ⚠️ ngay trong task mở lane"* — **không nằm trong sổ của ai**: 7/8 dòng bảng §2 đang ⚠️, mà `0` dòng task của T-07 T-08 T-09 nhắc tới `quality/05-checklist.md` | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-38](#f-38) | Vòng lặp con trỏ [rule §5.1](.claude/rules/quan-ly-du-an.md) **mù với neo `#f-xx`**: lớp `[^)#]*` cắt bỏ mọi thứ sau `#`, nên `](../finding.md#f-67)` chỉ bị kiểm là *file có tồn tại không* → xanh — và đang có một neo hụt sống ở `prompt-fullstack.md` dòng 13 (`grep -c '^### F-67' finding.md` ra `0`) | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-39](#f-39) | Luật báo cáo chỉ đòi con trỏ xuống tới **mục** — ô `Sửa ở đâu` ở [.claude/rules/bao-cao-thay-doi.md §1](.claude/rules/bao-cao-thay-doi.md) đặc tả `§1.1 bảng đặc tả ô`, `dòng T-05` — mà **không** đòi **đường dẫn** đi kèm, nên `§6` trần lọt hợp lệ vào mọi báo cáo; repo đang có **5** file `.md` cùng có một mục `§6`, owner đọc `§6` không biết là §6 của file nào | owner nêu · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên owner nêu — không đẻ task |
 
 ---
 
@@ -1601,3 +1602,51 @@ task mới cho lane NON-CODE. Ca `#f-67` sống ở `prompt-fullstack.md` thì g
 **không được** làm sống lại đám đó thành `TRỎ HỤT` rỗng; neo cùng file phải kiểm bằng chính file đang
 quét, không phải bằng `test -e`. Và đừng sửa §5.1 khi chưa đọc [F-11](#f-11): vòng lặp này còn **tự bắt
 chính mình** khi chạy trên file luật, thêm một vế mà không tính tới F-11 là cộng thêm một dòng rác nữa.
+---
+
+### F-39
+
+**Mệnh đề sai.** Đặc tả cách viết con trỏ trong báo cáo dừng lại ở **mục**, không đòi **đường dẫn**: ô
+`Sửa ở đâu` ở [.claude/rules/bao-cao-thay-doi.md §1](.claude/rules/bao-cao-thay-doi.md) chỉ cấm *"dừng ở
+tên file"* mà không cấm chiều ngược lại — dừng ở tên mục. Nên `§6` trần, `guideline §3`, `rule §5.1` là
+cách viết **hợp luật** trong khi chúng không trỏ vào đâu cả: owner phải tự đoán file rồi tự đi tìm.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết thì dòng này còn: không dòng task
+nào sở hữu *cách viết con trỏ trong câu trả lời*. Nó còn tệ hơn theo thời gian — mỗi lane mới mở thêm một
+file có `§1 §2 §3`, nên cùng một chuỗi `§6` càng ngày càng trỏ được vào nhiều chỗ hơn. Đây cũng là loại
+lỗi **không có compiler nào bắt**: văn bản báo cáo sống trong hội thoại, không nằm trong file để `grep`.
+
+**Lệnh tái hiện.**
+
+```bash
+# Có bao nhiêu file đang cùng sở hữu một mục "§6"? -> 5. Vậy "§6" trần trỏ vào 1 trong 5.
+grep -rln '^#\+ *§6' --include='*.md' . | sed 's|^\./||'
+# CLAUDE.md · quality/00-guideline-chat-luong.md · project_preparation/00-scope.md
+# project_preparation/prompt-fullstack.md · project_preparation/step.md
+
+# Và cách viết trần đó đã có sẵn trong sổ, không phải giả định:
+grep -c 'guideline §' finding.md      # 17
+```
+
+**Cách sửa đề xuất.** Thêm một luật ngắn vào [CLAUDE.md §4](CLAUDE.md) *(Đầu ra session)* — nhà của
+*"một phiên phải trả ra cái gì"*: mọi con trỏ vào repo viết `[đường/dẫn/file.md §6]` rồi `(đường/dẫn/file.md)`,
+đủ **cả** đường dẫn **và** mục, ở **mọi** lần nhắc. `bao-cao-thay-doi.md` §1 chỉ **trỏ** tới luật đó và
+thêm nó vào danh sách câu bị cấm — không chép lại, tránh đẻ nhà thứ hai đúng kiểu [F-04](#f-04).
+
+**Bẫy khi sửa.** Đừng biến luật này thành lệnh `grep` quét cả repo: repo đang có **980** chuỗi `§<số>` trong
+9 file, quét thô sẽ đỏ vĩnh viễn và thành nhiễu bị tắt đi. Luật này áp cho **văn bản phiên sinh ra từ nay**,
+không hồi tố các file đã có — chỗ owner đau là báo cáo đọc một lần, không phải tài liệu đọc có ngữ cảnh.
+
+**Kiểm chứng.**
+
+```bash
+grep -c 'Trích dẫn đủ nhà' CLAUDE.md                                    # 1
+grep -c 'Bốn câu bị cấm' .claude/rules/bao-cao-thay-doi.md              # 1
+grep -c 'Ba câu bị cấm'  .claude/rules/bao-cao-thay-doi.md              # 0  <- khuôn cũ hết đúng
+wc -l < CLAUDE.md; awk 'length>400' CLAUDE.md                           # 101, rỗng — còn trong trần §8
+```
+
+**Bài học giữ lại:** một con trỏ chỉ được tính là con trỏ khi nó **giải được một mình**. Luật đổi:
+[CLAUDE.md §4](CLAUDE.md) *Trích dẫn đủ nhà* — đường dẫn **và** mục, mọi lần nhắc, không rút gọn từ lần
+hai. Phép thử áp cho mọi luật khác cùng loại: đọc đúng chuỗi ký tự đó, tách khỏi ngữ cảnh câu, có ra đúng
+một chỗ trong repo không? Ra nhiều hơn một ⇒ đó là gợi ý, không phải con trỏ.

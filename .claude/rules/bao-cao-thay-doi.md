@@ -6,7 +6,7 @@ paths:
 
 # Báo cáo thay đổi — nạp ở **mọi** phiên chạm bất kỳ file nào
 
-> Cập nhật **2026-08-24**. Luật này trả lời đúng một câu hỏi của owner: *phiên vừa rồi đổi **file nào**,
+> Cập nhật **2026-08-25**. Luật này trả lời đúng một câu hỏi của owner: *phiên vừa rồi đổi **file nào**,
 > và trong file đó đổi **chỗ nào**?* [CLAUDE.md §4](../../CLAUDE.md) chỉ đòi biên nhận + commit — cả hai
 > chứng minh **kết quả đúng**, không cái nào bày ra **đường đi**. File này giữ phần còn thiếu đó.
 >
@@ -39,8 +39,12 @@ Năm cột, đặc tả từng cột — thiếu cột nào thì bảng đó kh�
 | `Xem diff` | **một lệnh chạy được và thực sự IN RA**, giới hạn `-- <path>`. Chưa commit ⇒ `git diff -- <path>`; **đã commit** (kể cả bị phiên khác commit hộ) ⇒ `git show <sha> -- <path>`. Chạy thử trước khi dán: ra rỗng thì lệnh sai, không phải thay đổi mất | `git diff` trần — bắt owner tự lọc giữa mọi file · `git diff -- <path>` cho thay đổi **đã commit**: nó im lặng, và im lặng trông y hệt *không đổi gì* |
 | `#` | một file một dòng, đánh số | gộp "và vài file khác", "cùng một số file liên quan" |
 
-**Ba câu bị cấm trong phần kết phiên**, thấy là viết lại: *"đã cập nhật các file liên quan"* ·
-*"chi tiết xem `git diff`"* · tên file viết trần không link và không chỉ ra chỗ sửa.
+**Bốn câu bị cấm trong phần kết phiên**, thấy là viết lại: *"đã cập nhật các file liên quan"* ·
+*"chi tiết xem `git diff`"* · tên file viết trần không link và không chỉ ra chỗ sửa · **`§6` trần, không
+kèm đường dẫn** — có **5** file `.md` đang cùng có một mục `§6`, nên `§6` một mình không trỏ vào đâu cả.
+Khuôn viết đủ (`[đường/dẫn/file.md §6]` rồi `(đường/dẫn/file.md)`) là luật *Trích dẫn đủ nhà* ở
+[CLAUDE.md §4](../../CLAUDE.md); file này **trỏ, không chép**. Luật đó áp cho **mọi** câu của phiên, còn
+§1 và §2 dưới đây chỉ là chỗ nó bị vi phạm nhiều nhất.
 
 ---
 

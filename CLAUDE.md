@@ -1,6 +1,6 @@
 # CLAUDE.md — luật + con trỏ
 
-> Cập nhật **2026-08-24**. **File này là bản đồ, không phải lãnh thổ.** Nó không giữ sự thật nào của dự án: mỗi dòng hoặc là **luật làm việc**, hoặc là **con trỏ** tới nhà thật. Lệch nhà thật ⇒ **nhà thật thắng**, dòng ở đây là bug phải sửa ngay. Trần của chính file này ở §8.
+> Cập nhật **2026-08-25**. **File này là bản đồ, không phải lãnh thổ.** Nó không giữ sự thật nào của dự án: mỗi dòng hoặc là **luật làm việc**, hoặc là **con trỏ** tới nhà thật. Lệch nhà thật ⇒ **nhà thật thắng**, dòng ở đây là bug phải sửa ngay. Trần của chính file này ở §8.
 >
 > **Vai trò.** Người dùng giao task + yêu cầu; agent tự chọn cách làm, tự viết, **tự kiểm chứng bằng lệnh**, không hỏi lại thứ đọc được trong repo. Đổi lại: thấy hệ thống sai thì **nổi lên** — ghi một dòng vào [finding.md](finding.md) kèm cách sửa đề xuất, rồi quay lại việc đang làm. Im lặng tự xử = vi phạm.
 
@@ -58,7 +58,9 @@ Nghi một file cũ: so dòng `Cập nhật <ngày>` trong file với `git log -
 
 Đánh ✅ cần đủ **bốn** thứ, thiếu một thứ thì vẫn là đang làm: **(1)** biên nhận của lane chạy thật + output dán vào · **(2)** commit chứa thay đổi · **(3)** [finding.md](finding.md) đổi trạng thái kèm ngày + cách kiểm chứng, nếu task có đóng finding.
 
-**(4)** **Bảng thay đổi**, dán **trước** khi commit, mỗi file đã đụng một dòng: link tới file · **sửa ở đâu** (§/mục/dòng) · sửa gì, một câu · lệnh xem diff riêng file đó. Khuôn + lệnh tự rà: [.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) §1 §3. Thiếu bảng ⇒ phiên **chưa xong**, dù biên nhận đã xanh.
+**(4)** **Bảng thay đổi**, dán **trước** khi commit, mỗi file đã đụng một dòng: link tới file · **sửa ở đâu** (§/mục/dòng) · sửa gì, một câu · lệnh xem diff riêng file đó. Khuôn + 5 lệnh tự rà: [.claude/rules/bao-cao-thay-doi.md §1 §3](.claude/rules/bao-cao-thay-doi.md). Thiếu bảng ⇒ phiên **chưa xong**, dù biên nhận đã xanh.
+
+**Trích dẫn đủ nhà** — mọi câu, mọi ô bảng, mọi dòng sổ: con trỏ vào repo viết `[đường/dẫn/file.md §6]` rồi `(đường/dẫn/file.md)`, đủ **cả** đường dẫn **và** mục, **mọi** lần nhắc, không rút gọn từ lần hai. Cấm `§6` trần, cấm `guideline §3`, cấm tên file trần — owner bấm thẳng, không đi tìm.
 
 Commit: stage bằng `git add <đường dẫn cụ thể>` — liệt kê từng file, để việc dở của phiên khác không bị nuốt theo. Message theo khuôn `<LANE>/<T-xx>: <file đã sửa>, đóng <F-yy>`. Không dùng `--no-verify`.
 
