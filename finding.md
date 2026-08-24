@@ -46,6 +46,12 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-30](#f-30) | Biên nhận thứ nhất của [T-26](task.md) — `grep -c '<path>' .claude/rules/bao-cao-thay-doi.md` ra `0` — quét **cả file** trong khi phạm vi T-26 chỉ là §3: `<path>` ở §1 cột `Xem diff` và §2 cột `Câu lệnh để thấy thay đổi` là placeholder văn xuôi **hợp lệ, phải giữ**, nên ô này ra `2` kể cả khi (e) đã vá đúng — đỏ vĩnh viễn, và cách duy nhất làm nó xanh là lấn phạm vi | T-26 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ đóng ngay trong phiên vá — không đẻ task |
 | [F-31](#f-31) | Hai bản **dẫn xuất** từ `project_preparation/00-scope.md` không có cơ chế nào canh: `prompt-fullstack.md` §9.3 giữ 10 số giá tự khai *"hợp đồng với chủ quán"* mà chỉ khai nguồn bằng câu chữ, và `design/BA/04-yeu-cau.md` dòng 22 còn đánh ⚠️ cho `00-scope.md` §4.4 trong khi nhà đã có | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-32](#f-32) | `.claude/rules/bao-cao-thay-doi.md` §3 khai *"cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc"* nhưng khối lệnh của §3 chỉ có **bốn** nhãn — `# d.` **chưa từng tồn tại** ở bất kỳ phiên bản nào của file; bộ bắt buộc đang đòi một lệnh ma, và phiên đóng T-26 đã khai *"(d) rỗng"* cho nó | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-33](#f-33) | `quality/05-checklist.md` tự khai là **nhà duy nhất** của câu hỏi *"task này XONG chưa"* cho task có code, nhưng cả bảy vế §1 chỉ đo **vệ sinh của đầu ra** — không vế nào hỏi đầu ra **có phải thứ ô `Task` yêu cầu không**; dòng 57 còn đẩy việc đó sang câu hỏi TỐT | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-34](#f-34) | Biên nhận `grep -c '^- \[ \]'` **= đúng 7, không hơn không kém** bị ghim ở **ba** chỗ (checklist §5 · ô `Đầu ra kiểm chứng được` của T-04 · bảng `cl-T-04`), nên checklist **không có cửa** nhận vế XONG mới — kể cả vế học từ một sự cố thật mà §6.7 luật 2 đòi | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-35](#f-35) | Bảy ô `- [ ]` ở §1 **không phải bảy phép xác nhận**: 5/7 dòng gộp nhiều thứ vào một dấu tick (vế 1 gộp `build · lint · unit test · typecheck`), tổng ra **14–16 tuỳ cách đếm** — và `grep -c` đang đo **số dòng**, không đo số thứ đã xác nhận | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-36](#f-36) | §6.9 *(ba thứ không bao giờ thoả hiệp)* chỉ được **trỏ** ở 3 chỗ, **không** cổng nào buộc xác nhận nó trước commit: §3 checklist (*cái gì không tính là XONG*) nhắc `0` lần, và `0` ô `Đạt khi` nào của bảng ba cổng [guideline §6](quality/00-guideline-chat-luong.md) nhắc tới nó | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-37](#f-37) | Lời hứa ở checklist §2 — *"vế nào còn ⚠️ thì lane sinh ra nó gỡ ⚠️ ngay trong task mở lane"* — **không nằm trong sổ của ai**: 7/8 dòng bảng §2 đang ⚠️, mà `0` dòng task của T-07 T-08 T-09 nhắc tới `quality/05-checklist.md` | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-38](#f-38) | Vòng lặp con trỏ [rule §5.1](.claude/rules/quan-ly-du-an.md) **mù với neo `#f-xx`**: lớp `[^)#]*` cắt bỏ mọi thứ sau `#`, nên `](../finding.md#f-67)` chỉ bị kiểm là *file có tồn tại không* → xanh — và đang có một neo hụt sống ở `prompt-fullstack.md` dòng 13 (`grep -c '^### F-67' finding.md` ra `0`) | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 
 ---
 
@@ -1348,3 +1354,246 @@ số nhãn mà câu *"đều bắt buộc"* của §3 liệt ra.
 
 **Bẫy khi sửa.** Đừng chọn hướng 2 chỉ vì nó nhanh. Nếu (d) từng là cổng soi một thứ riêng, bỏ nhãn đi là
 **xoá một cổng rồi khai là đã dọn** — đúng hạng lỗi mà [F-16](#f-16) sinh ra để tố, chỉ đổi chiều.
+
+---
+
+### F-33
+
+**Mệnh đề sai.** `quality/05-checklist.md` dòng 4 tự khai: *"Nhà duy nhất của câu hỏi **task này XONG
+chưa** cho task **có code**"*. Nhưng cả bảy vế §1 chỉ đo **vệ sinh của đầu ra** — tầng 1 xanh · có test
+happy + test lỗi · lỗi tiếng Việt · có mã truy vết · có `down` và đã chạy thử · sinh lại type · 375/768.
+**Không vế nào hỏi đầu ra có phải thứ ô `Task` của dòng task yêu cầu hay không.** Dòng 57 còn tự tay đẩy
+việc đó ra khỏi phạm vi: *"Bảy vế ở §1 trả lời **XONG**, không trả lời **TỐT**"* — nhưng *"đúng thứ được
+giao"* không phải câu hỏi TỐT, nó là vế **đầu tiên** của XONG. Kết quả: một task xây **đúng cách** một
+thứ **sai** tick đủ 7/7 và được khai XONG hợp lệ.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-04](task.md) đã ✅ và không
+dòng nào mở lại §1. Ba lane còn lại ([T-07](task.md) [T-08](task.md) [T-09](task.md)) chỉ mở lane; vế
+riêng của từng pha đi **tầng pha** `quality/0n-pha-*.md`, mà [guideline §7](quality/00-guideline-chat-luong.md)
+buộc tầng pha *"chỉ được **thêm**"* vế **riêng của pha** — *đúng-việc-được-giao* là vế **chung**, không
+tầng pha nào là nhà của nó. Không dòng task nào nhận việc này. Dòng **còn** ⇒ finding.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -n "yêu cầu\|ô \`Task\`\|đúng thứ được giao\|acceptance" quality/05-checklist.md
+# ra ĐÚNG MỘT dòng:
+#   25:- [ ] Log có **mã truy vết** đi theo một yêu cầu từ đầu tới cuối, đủ để debug **tại quán**…
+# "yêu cầu" ở đó là một request chạy qua hệ thống, không phải yêu cầu của dòng task
+# ⇒ 0/7 vế đo "đầu ra có đúng thứ được giao không"
+```
+
+**Cách sửa đề xuất.** Thêm **một dòng cổng** ở đầu §1 — **không** phải ô `- [ ]` thứ tám: số 7 đang bị
+ghim ở ba chỗ ([F-34](#f-34)), thêm một ô làm cả ba biên nhận đỏ cùng lúc. Câu đại ý: *"Trước khi tick
+bảy vế: ô `Đầu ra kiểm chứng được` của dòng task đã **chạy thật** và đã được **thử làm đỏ một lần**
+([guideline §5](quality/00-guideline-chat-luong.md)); bảy vế dưới đo vệ sinh của đầu ra, không đo việc
+được giao."* Là **con trỏ** tới ô của dòng task, không chép nội dung ⇒ không đẻ nhà thứ hai. Gắn vào một
+dòng task mới cho lane NON-CODE.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Đây là chế độ hỏng **đặc trưng của agent**, không phải của người:
+người làm sai việc thường làm sai cả cách làm nên bị bắt ở tầng 1, còn agent làm rất sạch đúng thứ nó
+hiểu nhầm — bảy vế vệ sinh đều xanh, và cái sai duy nhất là **cái nó đã xây**. Mọi Definition of Done
+tham khảo ngoài repo đều đặt *"all acceptance criteria are met"* ở **dòng đầu tiên**; ở đây vế đó không
+tồn tại ở bất kỳ dòng nào.
+
+---
+
+### F-34
+
+**Mệnh đề sai.** Biên nhận *"`grep -c '^- \[ \]'` ra **đúng 7**, không hơn không kém"* bị ghim ở **ba**
+chỗ cùng lúc: `quality/05-checklist.md` §5 dòng 74 · ô `Đầu ra kiểm chứng được` của dòng
+[T-04](task.md) · bảng soi `### cl-T-04` (dòng `Đã thử làm đỏ` chốt `5 ≠ 7`, `8 ≠ 7`, *"bản thật ra 7"*).
+Nguồn duy nhất của con số 7 là [prompt-fullstack.md](project_preparation/prompt-fullstack.md) §6.5 — mà
+chính file đó dòng 8 tự khai *"File này là **bản xuất khẩu**, không phải nhà của sự thật nào"* và dòng 13
+*"Là bản chép nên nó **sẽ trôi**"*. Kết quả: checklist **không có cửa** nào để nhận một vế XONG thứ tám —
+kể cả vế học từ **một sự cố thật ở quán**, đúng thứ §6.7 luật 2 bắt buộc (*"mỗi sự cố ở quán phải sinh ra
+một test"*) — vì thêm một dòng làm **ba** biên nhận đỏ cùng lúc.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md): T-04 đã ✅ ĐÓNG, dòng bị gạch ngang, không
+dòng nào mở lại ô biên nhận của nó; `cl-T-04` là bảng soi của một task đã xong nên cũng đứng im. Không
+dòng task nào nói tới việc *"vế XONG mới sinh ra ở đâu"*. Dòng **còn** ⇒ finding.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -rn -F "grep -c '^- \[ \]' quality/05-checklist.md" quality/05-checklist.md task.md | cut -c1-64
+# quality/05-checklist.md:74:grep -c '^- \[ \]' quality/05-checklist.md   <- chỗ 1
+# task.md:46:| ~~**T-04**~~ ✅ | NON-CODE | Tạo `quality/05-checklist  <- chỗ 2
+sed -n '/^### cl-T-04/,/^### /p' task.md | grep -o '≠ 7' | wc -l          # ra 2  <- chỗ 3
+grep -c 'không hơn không kém' quality/05-checklist.md                     # ra 1  <- cửa bị đóng bằng câu chữ
+```
+
+**Cách sửa đề xuất.** Khai **cửa** ở `quality/05-checklist.md` §4 (*ranh giới — file này không sở hữu cái
+gì*): vế XONG mới sinh ở **tầng pha** `quality/0n-pha-*.md` ([guideline §7](quality/00-guideline-chat-luong.md)),
+**không** sinh ở tầng chung; tầng chung chỉ đổi khi §6.5 đổi. Rồi đổi biên nhận từ **đếm dòng** sang
+**neo nội dung** (bảy chuỗi khoá phải nằm đúng trong bảy dòng `- [ ]`). Vế thứ hai **phải chờ vá
+[F-29](#f-29) trước** — lệnh `awk` bảy khoá hiện quét cả file nên không đỏ được, sửa biên nhận trước khi
+vá F-29 là chồng một lỗ lên một lỗ.
+
+**Bẫy khi sửa.** Đừng gỡ số 7 bằng cách đổi biên nhận thành ngưỡng dưới `>= 7`: đó đúng chỗ hỏng số 1 mà
+[guideline §5](quality/00-guideline-chat-luong.md) đã cấm — ngưỡng dưới đặt trên thứ dễ đẻ thì xanh
+**vĩnh viễn**, và bảy vế XONG là thứ dễ đẻ nhất trong repo này.
+
+---
+
+### F-35
+
+**Mệnh đề sai.** Bảy ô `- [ ]` ở §1 của `quality/05-checklist.md` **không phải bảy phép xác nhận**:
+**5/7** dòng gộp nhiều thứ vào **một** dấu tick — vế 1 gộp `build · lint · unit test · typecheck` *và*
+*"output dán vào câu trả lời"*; vế 2 gộp happy path **và** case lỗi; vế 5 gộp *viết `down`* **và** *đã
+chạy thử `down` thật*; vế 6 gộp *cập nhật hợp đồng* **và** *FE sinh lại type*; vế 7 gộp 375px **và**
+768px. Đếm ra **14** nếu đếm theo nội dung, **16** nếu đếm bằng dấu ngăn — và **không cách đếm nào là
+sai**, đó chính là bằng chứng: hôm nay không ai nói được checklist đòi bao nhiêu phép xác nhận. Một dấu
+tick không chứng minh được 14 thứ; dòng gộp bị tick theo thành viên **dễ nhất** của nó. `grep -c '^- \[ \]'`
+= 7 đang đo **số dòng**, không đo số thứ đã xác nhận.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md): T-04 ✅ đã chốt đúng bảy dòng này và không
+dòng nào mở lại; T-07/T-08/T-09 mở lane rồi mở **tầng pha**, mà tầng pha chỉ được *thêm* vế mới, không
+được viết lại bảy vế chung ([guideline §7](quality/00-guideline-chat-luong.md), và chính checklist §4
+nhắc lại ranh giới đó). Không dòng nào nhận việc tách vế gộp. Dòng **còn** ⇒ finding.
+
+**Lệnh tái hiện.**
+
+```bash
+# (1) đếm dòng gộp — dòng có dấu ngăn `·` hoặc liên từ "và"
+grep -n '^- \[ \]' quality/05-checklist.md | grep -cE ' và |\*và\*|·'          # ra 5  (trên tổng 7)
+# (2) đếm vế con bằng dấu ngăn
+grep '^- \[ \]' quality/05-checklist.md \
+  | awk '{n=1;m=$0; while(match(m,/ · | và |\*và\*/)){n++;m=substr(m,RSTART+RLENGTH)} s+=n; print n} END{print "TỔNG: " s}'
+# ra: 5 · 2 · 1 · 1 · 3 · 2 · 2 · TỔNG: 16
+# (3) biên nhận đang xanh trên chính bộ dòng đó
+grep -c '^- \[ \]' quality/05-checklist.md                                     # ra 7
+```
+
+Bảy dấu tick, mười sáu vế con máy đếm được (mười bốn nếu bỏ *"output dán vào"* và gộp lại
+*"`down` đã chạy thử"*). Chênh lệch 14–16 là **cùng một triệu chứng**, không phải sai số.
+
+**Cách sửa đề xuất.** Đánh **số vế con** trong §1 để đếm được (`1a 1b 1c 1d`, `2a 2b`, …), hoặc tách vế 1
+thành bốn dòng riêng. Hai hướng đều buộc **chỉnh biên nhận theo** — và chỉnh biên nhận vướng
+[F-34](#f-34). **Thứ tự phụ thuộc bắt buộc:** mở cửa nhận vế mới ([F-34](#f-34)) → vá lệnh `awk` bảy khoá
+([F-29](#f-29)) → mới tách vế gộp ở mã này. Làm ngược thứ tự thì bước nào cũng làm đỏ biên nhận của bước
+chưa tới.
+
+---
+
+### F-36
+
+**Mệnh đề sai.** **Không cơ chế nào buộc xác nhận §6.9** (*ba thứ không bao giờ thoả hiệp: BE luôn tính
+lại giá từ DB · backup trước mọi migration và backup phải restore được · không deploy trong giờ bán*)
+trước khi commit. Nó xuất hiện đúng ba chỗ, cả ba đều là **con trỏ**: `quality/05-checklist.md` dòng 9–10
+(phần dẫn, *"trỏ, không chép"*) · cùng file dòng 62 (§4 — *file này **không** sở hữu cái gì*) ·
+`quality/00-guideline-chat-luong.md` dòng 75 (văn xuôi **dưới** bảng ba cổng). Nó **không** là một vế ở
+§1, **không** nằm trong danh sách §3 *"cái gì không tính là XONG"*, và **không** ô `Đạt khi` nào của bảng
+ba cổng nhắc tới nó.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md): T-04 ✅ đã cố tình **không** chép §6.9 vào
+checklist (ô `Bẫy` của dòng T-04 ra lệnh đúng như vậy — và ra lệnh đó **đúng**, chép là đẻ nhà thứ hai);
+[T-06](task.md) mở lane DEVOPS có nạp §6.9 nhưng ô Task của nó là tạo `.claude/rules/lane-devops.md`,
+không phải cài cổng cho ba luật. Không dòng nào nhận việc *biến con trỏ thành cổng*. Dòng **còn** ⇒ finding.
+Khác [F-26](#f-26): F-26 là **một con trỏ khai sai nhà**; mã này là **không có cổng nào** để con trỏ trỏ vào.
+
+**Lệnh tái hiện.**
+
+```bash
+sed -n '/^## §3/,/^## §4/p' quality/05-checklist.md | grep -c '6\.9'
+# ra 0 — danh sách "cái gì KHÔNG tính là XONG" không nhắc §6.9 lần nào
+sed -n '/^## §6/,/^## §7/p' quality/00-guideline-chat-luong.md | grep '^|' | grep -c '6\.9'
+# ra 0 — không ô `Đạt khi` nào của BA CỔNG nhắc tới nó
+grep -n '6\.9' quality/00-guideline-chat-luong.md
+# ra 75:[prompt-fullstack.md](...) §6.9 — trỏ, không chép.   <- nằm NGOÀI bảng (bảng kết thúc ở dòng 72)
+```
+
+**Cách sửa đề xuất.** Thêm **một vế** vào §3 của `quality/05-checklist.md`: *"task chạm **giá** /
+**migration** / **deploy** mà không xác nhận [§6.9](project_preparation/prompt-fullstack.md) ⇒ **không**
+tính XONG"*. §3 là văn xuôi liệt kê, **không** phải bộ ô `- [ ]`, nên thêm vào đó **không** đụng biên
+nhận `= 7` ([F-34](#f-34)). Là **con trỏ** tới nhà thật, không chép ba luật ⇒ không vi phạm luật một nhà
+([CLAUDE.md §2](CLAUDE.md)). Gắn vào một dòng task mới cho lane NON-CODE.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Với quán ăn đây là vế **đắt nhất** trong cả bộ: vi phạm không ra
+một test đỏ, nó ra *khách đặt món 0đ* hoặc *mất toàn bộ đơn hàng*. Và §6.9 tự khai phạm vi là *"kể cả khi
+gấp"* — tức đúng lúc nó có giá là đúng lúc nó bị lướt qua, vì lúc đó không cổng nào chặn.
+
+---
+
+### F-37
+
+**Mệnh đề sai.** `quality/05-checklist.md` dòng 46–48 hứa: *"vế nào còn ⚠️ thì **lane sinh ra nó gỡ ⚠️
+ngay trong task mở lane**"*. Lời hứa đó **không nằm trong sổ của ai**: **7/8** dòng bảng §2 đang ⚠️, mà
+**không** dòng task nào của [T-07](task.md) (lane DB), [T-08](task.md) (lane BE), [T-09](task.md) (lane
+FE) nhắc tới `quality/05-checklist.md` — không ở ô `Nạp`, không ở ô `Bẫy`, không ở ô `Đầu ra kiểm chứng
+được`. Lời hứa không có người mang ⇒ đến khi lane mở, bảng §2 khai *"chưa chạy được"* về những lệnh **đã
+chạy được**, và khai sai trong im lặng.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: T-07 T-08 T-09 mở đủ ba lane,
+`go.mod`/`package.json` ra đời, `go test`/`npm run build` chạy được — và **đúng lúc đó** bảy dòng ⚠️ của
+§2 trở thành sai, vì không ô nào của ba dòng task đó buộc quay lại gỡ. Kế hoạch chạy xong thì lỗi **mới
+nở ra**, không phải mất đi. Dòng **còn** ⇒ finding. Cùng họ [F-23](#f-23) (⚠️ **thừa** không lệnh nào
+bắt) nhưng khác nguyên nhân: F-23 là ⚠️ đã sai **hôm nay** ở hai file luật, mã này là **lời hứa gỡ ⚠️
+không có chủ** ở một file thứ ba.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -c '^| \*\*T-0[789]\*\*' task.md                        # ra 3 — ba dòng task đều có thật
+grep '^| \*\*T-0[789]\*\*' task.md | grep -c '05-checklist'   # ra 0 — không dòng nào nhắc tới checklist
+grep -c '⚠️' quality/05-checklist.md                          # ra 10
+sed -n '/^## §2/,/^## §3/p' quality/05-checklist.md | grep -c '^| .*⚠️'   # ra 7  (trên 8 dòng bảng)
+grep -n 'lane sinh ra nó gỡ' quality/05-checklist.md          # ra 47 — lời hứa nằm đây, không nằm trong task.md
+```
+
+**Cách sửa đề xuất.** Thêm vế gỡ ⚠️ vào ô `Bẫy` **hoặc** ô `Đầu ra kiểm chứng được` của T-07 / T-08 /
+T-09 — đại ý *"gỡ ⚠️ ở dòng tương ứng của [checklist §2](quality/05-checklist.md) trong cùng commit;
+đỏ khi lane đã mở mà `grep -c '⚠️'` của §2 không giảm"*. **Ba dòng, ba lane khác nhau** ⇒ vượt kích cỡ
+một task ([CLAUDE.md §6](CLAUDE.md): 1 lane · ≤ 3 file), nên phải **đẻ task riêng** cho việc sửa sổ, đừng
+sửa kèm trong phiên đóng finding — và cũng đừng gộp ba lane vào một dòng.
+
+---
+
+### F-38
+
+**Mệnh đề sai.** Vòng lặp con trỏ ở [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md)
+§5.1 dùng `grep -o '](\([^)#]*\)'` — lớp `[^)#]*` **cắt bỏ mọi thứ sau `#`**, nên một con trỏ dạng
+`](../finding.md#f-67)` chỉ được kiểm là `test -e ../finding.md` → file có thật → **xanh**, dù neo
+`#f-67` không tồn tại. Đây là **một lớp** con trỏ mà **chưa phép rà nào trong repo bắt được**, và lớp đó
+đang có một ca sống: `project_preparation/prompt-fullstack.md` dòng 13 trỏ `[F-67](../finding.md#f-67)`
+trong khi sổ này **không có mã nào ở dải 60**
+(`grep -c '^### F-6[0-9]' finding.md` ra `0`) — `F-67` là dấu vết đánh số của bản `reference/`.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md): [T-10](task.md) nhận đúng **8 đường dẫn** mà
+[F-02](#f-02) liệt kê, `#f-67` không nằm trong tám cái đó (nó là **neo**, không phải đường dẫn — chính
+`../finding.md` thì có thật). Sửa xong T-10, chạy lại §5.1: neo hụt vẫn xanh, vì lệnh về nguyên tắc không
+nhìn thấy phần sau `#`. Dòng **còn** ⇒ finding. **Không trùng [F-02](#f-02):** F-02 là *file A trỏ 8
+đường dẫn không tồn tại* — và §5.1 **bắt được** cả 8; mã này là *lệnh §5.1 mù với một lớp con trỏ*, chủ
+ngữ là file luật khác, và bài học của F-02 (*mọi con trỏ phải giải được hoặc mang ⚠️*) đã vào
+[CLAUDE.md §2](CLAUDE.md) rồi mà vẫn không bắt được ca này — đó đúng là bằng chứng khác nguyên nhân.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -n '#f-67' project_preparation/prompt-fullstack.md
+# 13:> định nghĩa XONG [quality/05](../quality/05-checklist.md). … rủi ro ghi ở [F-67](../finding.md#f-67).
+grep -c '^### F-67' finding.md                                  # ra 0 — neo không có đích
+grep -c '^### F-6[0-9]' finding.md                               # ra 0 — sổ này không có mã nào ở dải 60
+
+# vòng lặp §5.1 nguyên văn, chạy trong project_preparation/ (đúng cấp của con trỏ tương đối):
+cd project_preparation && grep -o '](\([^)#]*\)' prompt-fullstack.md | sed 's/](//' \
+  | grep -v '^http' | grep -v '^$' | sort -u | while read f; do [ -e "$f" ] || echo "TRỎ HỤT: $f"; done
+# TRỎ HỤT: ../design/backend/01-thiet-ke.md
+# TRỎ HỤT: ../design/data_base/01-thiet-ke.md
+# TRỎ HỤT: ../design/frontend/01-thiet-ke.md
+# TRỎ HỤT: ../design/system_design/01-thiet-ke.md
+# TRỎ HỤT: ../quality/prompt_guiline.md
+# <- KHÔNG dòng nào cho #f-67; `grep -o` chỉ moi ra được `](../finding.md`
+sed -n '13p' prompt-fullstack.md | grep -o '](\([^)#]*\)'        # ](../quality/05-checklist.md  ·  ](../finding.md
+```
+
+**Cách sửa đề xuất.** Bổ sung **một vế** vào §5.1: tách phần sau `#` ra kiểm riêng — với mỗi con trỏ có
+neo, `grep -c '^### <mã>' <file đích>` phải ra `1` (mã lấy từ neo, viết hoa lại: `#f-67` → `F-67`). Vế này
+**thêm** vào vòng lặp cũ, không thay nó, vì vòng lặp cũ vẫn phải kiểm phần đường dẫn. Gắn vào một dòng
+task mới cho lane NON-CODE. Ca `#f-67` sống ở `prompt-fullstack.md` thì gộp vào [T-10](task.md) — dòng đó
+đã sở hữu đúng file này rồi, đừng đẻ dòng thứ hai chạm cùng một file.
+
+**Bẫy khi sửa.** §5.1 hiện có `grep -v '^$'` để bỏ **neo trong cùng file** (`](#owner-t-02)`) — vế mới
+**không được** làm sống lại đám đó thành `TRỎ HỤT` rỗng; neo cùng file phải kiểm bằng chính file đang
+quét, không phải bằng `test -e`. Và đừng sửa §5.1 khi chưa đọc [F-11](#f-11): vòng lặp này còn **tự bắt
+chính mình** khi chạy trên file luật, thêm một vế mà không tính tới F-11 là cộng thêm một dòng rác nữa.

@@ -26,7 +26,7 @@ Mọi phiên có sửa dù một ký tự đều kết bằng bảng này. Khôn
 | # | File | Sửa ở đâu | Sửa gì | Xem diff |
 |---|---|---|---|---|
 | 1 | [task.md](task.md) | §Sổ task › dòng `T-05` | thoát dấu `\|` trong ô biên nhận | `git diff -- task.md` |
-| 2 | `quality/05-checklist.md` **(mới)** | cả file | 9 mục `- [ ]` của định nghĩa XONG | `git show --stat HEAD -- quality/` |
+| 2 | `quality/05-checklist.md` **(mới)** | cả file | 7 mục `- [ ]` của định nghĩa XONG | `git show --stat HEAD -- quality/` |
 ```
 
 Năm cột, đặc tả từng cột — thiếu cột nào thì bảng đó không tính:
