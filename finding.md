@@ -59,6 +59,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-43](#f-43) | `paths:` của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) liệt kê **7** mẫu và **không mẫu nào khớp thư mục code**; [rule mục 6](.claude/rules/quan-ly-du-an.md) — 5 vế mở một lane — chỉ đòi `paths:` cho `.claude/rules/lane-<tên>.md`, không vế nào đòi nới `paths:` của rule quản lý dự án ⇒ từ lúc [T-07](task.md)/[T-08](task.md)/[T-09](task.md) mở lane DB/BE/FE, phiên viết code không nạp rule này, và hàng nhịp vừa thêm ở [F-42](#f-42) tắt đúng lúc đầu ra là code | owner hỏi hiện trạng · 2026-08-25 | 🔴 MỞ | [T-36](task.md) |
 | [F-44](#f-44) | **Định nghĩa XONG thiếu một vế.** [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 3 vế 4 khai *"**Ba** thứ của `CLAUDE.md` §4 đủ"* rồi liệt kê 3 — biên nhận · commit · `finding.md` — nhưng [CLAUDE.md §4](CLAUDE.md) khai *"cần đủ **bốn** thứ"*, thứ (4) là **bảng thay đổi**; phiên theo đúng rule mục 3 đánh ✅ hợp lệ mà không dán bảng, đúng thứ CLAUDE.md §4 gọi là *phiên chưa xong* | T-36 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-45](#f-45) | [prompt-fullstack.md §6.6](project_preparation/prompt-fullstack.md) khai bốn nhịp kiểm tra bắt buộc, nhịp thứ hai là *"mỗi ngày sau khi đóng quán → **tầng 2**"* — nhưng chuỗi `tầng 2` xuất hiện **đúng một lần** trong toàn repo, chính dòng khai nó, và **không file nào** nói tầng 2 gồm lệnh gì; [rule mục 4](.claude/rules/quan-ly-du-an.md) — nhà mà [checklist §4](quality/05-checklist.md) và [guideline §6](quality/00-guideline-chat-luong.md) trao quyền giữ nhịp — có **10** hàng và **0** hàng nào là nhịp của §6.6 | giải thích checklist §1 vế 1 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-46](#f-46) | Cổng **(e)** ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) đỏ **15 dòng** và đã đỏ từ lâu: 15 ô `Câu lệnh để thấy thay đổi` của 7 task đã gạch ghim `git show HEAD -- <file>` (toàn sổ có **63** ô như vậy), mà `HEAD` **trôi theo mỗi commit** — chúng nay chiếu vào commit chẳng liên quan. Cổng đỏ thường trực là cổng phiên sau học cách bỏ qua | ngoài-sổ · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 
 ---
 
@@ -1937,3 +1938,57 @@ giờ khai *gồm lệnh gì*; nội dung tầng 2 **chưa từng tồn tại �
 không phải việc cơ khí. Và đừng gộp mã này vào [F-42](#f-42): F-42 là nhịp **có** nội dung (sáu probe N1–N6)
 mà thiếu hàng nhịp — sửa xong là hết; F-45 là nhịp **không có** nội dung, đóng nó cần owner chốt một thứ
 chưa ai viết. Một mã một nguyên nhân ([rule §2](.claude/rules/chat-luong-finding.md) phép thử thứ tư).
+
+---
+
+### F-46
+
+**Mệnh đề sai.** [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) dựng cổng **(e)**
+để bắt ô `Câu lệnh để thấy thay đổi` nào **in ra rỗng**, tức không chiếu được diff nào. Hôm nay cổng đó
+**đỏ 15 dòng**, thuộc 7 task đã gạch: `owner-T-05` (×2) `owner-T-11` `owner-T-14` (×3) `owner-T-22` (×2)
+`owner-T-24` (×2) `owner-T-26` (×2) `owner-T-34` (×3). Gốc chung: ô ghim `git show HEAD -- <file>`, mà
+`HEAD` **không phải một con trỏ cố định** — nó trôi theo mỗi commit, nên lệnh viết lúc task xong thì đúng,
+một commit sau đã chiếu vào chỗ khác. `owner-T-11` ghim sha thật `c386219` nhưng sha đó cũng không còn.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Cổng (e) chính là cổng owner dùng để **tự kiểm chứng** thay vì tin
+lời agent — ô nào rỗng thì owner mất đúng khả năng đó. Tệ hơn: một cổng đỏ **thường trực** dạy phiên sau
+rằng đỏ là bình thường, nên lần cổng này bắt được lỗi thật sẽ không ai nhìn. Đây đúng chế độ hỏng mà
+[F-32](#f-32) mô tả ở cổng (d) — cùng một rule, cùng một cách trượt.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-27](task.md) đã sửa cột
+`Câu lệnh để thấy thay đổi` nhưng chỉ trong `task.md` phần sổ task, không rà bảng `owner-T-xx`;
+[T-14](task.md) [T-26](task.md) dựng chính cổng (e) rồi ✅. Không dòng task nào nhận việc thay `HEAD`
+bằng sha cố định trong 15 ô đó, và ô mới viết hôm nay vẫn được phép ghim `HEAD` vì rule không cấm.
+Dòng còn ⇒ finding.
+
+**Lệnh tái hiện.** Chạy nguyên khối `# e.` ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md),
+hoặc đếm thẳng nguồn:
+
+```bash
+# (i) số ô ĐANG đỏ — chỉ task đã gạch mới bị cổng (e) soi
+d=$(grep -o '^| ~~\*\*T-[0-9]*' task.md | grep -o 'T-[0-9]*' | tr '\n' ' ')
+awk -v d=" $d" '/^### owner-T-[0-9]*$/{t=$2; ok=index(d," " substr(t,7) " ")} \
+  ok && /^\| .*\| `git (show|diff)[^`]*` \|/{ \
+    match($0,/`git [^`]*`/); c=substr($0,RSTART+1,RLENGTH-2); \
+    cmd=c " 2>/dev/null | head -1"; cmd | getline out; close(cmd); \
+    if (out=="") print t; out="" }' task.md | wc -l          # ra 15
+# (ii) tổng ô đã ghim con trỏ trôi — 15 cái đã đỏ, phần còn lại đỏ dần khi task được gạch
+grep -c 'git show HEAD --' task.md                            # ra 63
+```
+
+Con số (ii) lớn hơn (i) **bốn lần** mới là phần đáng lo: rule không cấm `HEAD`, nên 48 ô nữa đang xếp
+hàng chờ đỏ, mỗi lần một task được gạch. Vá 15 ô mà không vá rule thì finding này quay lại sau vài phiên.
+
+**Cách sửa đề xuất.** Hai nước, nước sau mới là nước chặn tái phát:
+(1) thay từng `HEAD` bằng **sha thật** của commit đã đóng task đó — tra bằng
+`git log --oneline -3 -- <đường/dẫn>`; task nào không còn tra ra sha thì ô đó ghi `—` chứ đừng để lệnh rỗng.
+(2) cấm `HEAD` ngay trong rule: thêm vào [.claude/rules/bao-cao-thay-doi.md §1](.claude/rules/bao-cao-thay-doi.md)
+một câu *ô này ghim sha cố định, không dùng `HEAD`*, kèm cổng `grep -c 'git show HEAD --' task.md` ra `0`.
+
+**Đóng khi.** Hai vế cùng lúc: khối `# e.` ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md)
+chạy **im** — **đỏ khi** in ra dòng `LỆNH RỖNG` nào (hôm nay in `15`) · **và** `grep -c 'git show HEAD --' task.md`
+ra **`0`** — **đỏ khi** `>= 1` (hôm nay ra `63`). Vế thứ hai là vế chặn tái phát: vế thứ nhất xanh được
+bằng cách chỉ vá 15 ô đã gạch, và 48 ô còn lại sẽ đỏ lại lần lượt.
+
+**Bẫy khi sửa.** Đừng gỡ cổng (e) cho hết đỏ: nó đỏ vì nó **đúng** — 15 ô kia thật sự không chiếu được gì.
+Gỡ cổng là đổi một cổng đỏ ồn ào lấy một lỗ hổng im lặng.

@@ -345,17 +345,26 @@ SAI : "Không được mở 2 phiên trên cùng một bàn."            ← l�
 
 **9.3 Mười một ca giá bắt buộc (dùng nguyên, đây là hợp đồng với chủ quán)**
 
-Mười một số dưới đây **dẫn xuất** từ [00-scope.md](00-scope.md) §4.2 §4.3, không phải nhà thứ hai của
-giá: §4.2 đổi ⇒ mười một ca này phải tính lại.
+Đây là danh sách **tổ hợp đầu vào** phải phủ, **không** phải nhà của giá. Giá kỳ vọng của mười ca đầu tra
+thẳng ở [00-scope.md](00-scope.md) §4.2 (bảng giá) và §4.3 (phụ thu) — mỗi số từng đứng ở đây chỉ là bản
+chép của một ô trong bảng đó, nay gỡ đi để §4.2 đổi giá thì không còn bản chép nào đứng im ([F-31](../finding.md#f-31)).
 
 ```
-Bánh cuốn   · Chay          · —      → 3.000      Trứng vàng  · Thịt          · Nhiều  → 10.000
-Bánh cuốn   · Thịt          · Thường → 4.000      Giò         · —             · —      → 9.000
-Bánh cuốn   · Thịt          · Nhiều  → 5.000      Đầy đủ chín · Thịt          · Thường → 30.000
-Bánh cuốn   · Thịt+mộc nhĩ  · Nhiều  → 5.000      Đầy đủ tái  · Thịt+mộc nhĩ  · Nhiều  → 34.000
-Trứng chín  · Chay          · —      → 8.000      Bánh cuốn   · Chay          · Nhiều  → LỖI
-Trứng tái   · Thịt+mộc nhĩ  · Thường → 9.000
+ 1. Bánh cuốn   · Chay          · —
+ 2. Bánh cuốn   · Thịt          · Thường
+ 3. Bánh cuốn   · Thịt          · Nhiều
+ 4. Bánh cuốn   · Thịt+mộc nhĩ  · Nhiều      ⟵ phải bằng ca 3: §4.3 chốt loại nhân không đổi giá
+ 5. Trứng chín  · Chay          · —
+ 6. Trứng tái   · Thịt+mộc nhĩ  · Thường
+ 7. Trứng vàng  · Thịt          · Nhiều
+ 8. Giò         · —             · —          ⟵ giò không nhận nhân (§4.4)
+ 9. Đầy đủ chín · Thịt          · Thường     ⟵ combo: phụ thu ×4 (§4.3)
+10. Đầy đủ tái  · Thịt+mộc nhĩ  · Nhiều
+11. Bánh cuốn   · Chay          · Nhiều      → LỖI
 ```
+
+Ca 11 là ca **duy nhất** ghi kết quả tại chỗ. §4.2 không tra ra nó được, vì nó không phải một giá — nó là
+luật hành vi ở §4.3: *lượng nhân chỉ hiện khi nhân ≠ Chay*, nên tổ hợp Chay + Nhiều không hợp lệ.
 
 **9.4 Việc xuống bếp phải "nổ" ra thành phần** — khách gọi **2 suất "Đầy đủ trứng tái", thịt + mộc nhĩ, nhiều nhân**:
 
