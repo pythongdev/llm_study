@@ -10,7 +10,7 @@ Mở lời bằng một dòng khai báo để người dùng chặn được nga
 
 | Lane | Prompt nói tới | Lane sở hữu file nào | Nạp gói nào | Biên nhận |
 |---|---|---|---|---|
-| **NON-CODE** | chốt tài liệu, lập kế hoạch, rà soát, hỏi hiện trạng | `task.md`, `finding.md`, `CLAUDE.md`, `project_preparation/**`, `.claude/rules/**`, `quality/**` | [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) + đúng file sẽ sửa | lệnh đọc lại: `grep -c`, `wc -l`, `test -e` |
+| **NON-CODE** | chốt tài liệu, lập kế hoạch, rà soát, hỏi hiện trạng | `task.md`, `finding.md`, `CLAUDE.md`, `project_preparation/**`, `.claude/rules/**`, `.claude/settings.json`, `quality/**` | [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) + đúng file sẽ sửa | lệnh đọc lại: `grep -c`, `wc -l`, `test -e` |
 | **BA** | quy trình quán, luồng nghiệp vụ, vai & quyền, quy tắc nghiệp vụ | `design/BA/**` | [.claude/rules/lane-ba.md](.claude/rules/lane-ba.md) + [prompt-fullstack.md](project_preparation/prompt-fullstack.md) §3 §7 dòng `**0 · BA**` | 4 lệnh ở [design/BA/04-yeu-cau.md](design/BA/04-yeu-cau.md) §2 |
 | **DB** | bảng, cột, index, migration, seed, `.sql` | ⚠️ chưa mở | — | — (T-07 mở lane này) |
 | **BE** | API, endpoint, handler, service, Go, transaction, tính giá | ⚠️ chưa mở | — | — (T-08 mở lane này) |
@@ -90,18 +90,30 @@ Vế thứ tư cứng nhất: task không vừa một phiên sẽ bị tóm tắ
 
 ## §7 Giai đoạn hiện tại — chưa có một dòng code ứng dụng nào
 
-Repo hiện chỉ có tài liệu thiết kế và hướng dẫn. Chưa có `Makefile`, chưa có thư mục code, chưa có database, chưa có `design/`.
+Repo có tài liệu thiết kế, [design/BA/](design/BA) và [Makefile](Makefile): `make check` — 5 đích — **chạy thật, là biên nhận thật**. Chưa có thư mục code, chưa có database.
 
-Vì vậy **mọi biên nhận cần compiler đều là lời hứa** — ⚠️ `make check`, ⚠️ `go test`, ⚠️ `npm run build` hiện không chạy được; dùng chúng mà không đánh ⚠️ là làm sổ trông xanh trong khi không lệnh nào chạy.
+Vì vậy **biên nhận cần compiler vẫn là lời hứa** — ⚠️ `go test`, ⚠️ `npm run build` hiện không chạy được; dùng chúng mà không đánh ⚠️ là làm sổ trông xanh trong khi không lệnh nào chạy. Chiều ngược lại cũng là khai sai: đánh ⚠️ cho `make check` là bỏ không dùng cổng đã dựng xong.
 
-Biên nhận thật của giai đoạn này là **lệnh đọc lại**: `grep -c`, `sed -n`, `wc -l`, `test -e`, `git log -1 -- <file>`.
+Biên nhận thật của giai đoạn này: `make check` · `grep -c` · `sed -n` · `wc -l` · `test -e` · `git log -1 -- <file>`.
 
 Việc thuộc quyền người dùng, agent chuẩn bị sẵn rồi dừng lại chờ: tạo remote hoặc `git push` · đổi phạm vi dự án · chốt giá món và thành phần suất bán · mua VPS, tên miền, hay bất cứ thứ gì tốn tiền thật.
 
-## §8 Trần của chính file này
+## §8 Trần của chính file này — và luật cấm lách
 
-Trần: **120 dòng**, mỗi mục ≤ 14 dòng, mỗi dòng ≤ 400 byte. Byte có trần để `grep -n` thay được việc đọc cả file. Kiểm: `wc -l < CLAUDE.md` và `awk 'length > 400' CLAUDE.md` (phải rỗng).
+Trần: **120 dòng** toàn file · **mỗi mục ≤ 20 dòng** · mỗi dòng ≤ 400 byte. Byte có trần để `grep -n` thay được việc đọc cả file. Ba lệnh kiểm, cả ba phải xanh:
+
+```bash
+wc -l < CLAUDE.md                             # ra <= 120 — đỏ khi lớn hơn
+awk 'length > 400' CLAUDE.md                  # phải rỗng — đỏ khi in ra dòng nào
+awk '/^## §/{if(n)print n": "c; n=$2; c=0} {c++} END{print n": "c}' CLAUDE.md | awk '$2>20'   # phải rỗng
+```
+
+**§1 đang kịch trần 20, §2 đang 18.** Thêm một hàng vào hai bảng đó ⇒ **gộp một hàng cũ trong cùng commit**. Nới trần cho vừa là đường dễ, và nó làm đỏ biên nhận [T-33](task.md) — dòng đó ghim `§2` phải in ra đúng `18`.
+
+**§1–§8 tuân 100%, không có vùng nào là gợi ý.** Không tuân nổi một luật thì cách hợp lệ duy nhất là **đổi chính luật đó bằng một commit**: dừng, ghi [finding.md](finding.md), hỏi owner. Đi vòng trong im lặng là lách, và một lần lách nằm lại trong `git log` thành tiền lệ cho mọi phiên sau.
+
+Sáu nước lách bị cấm đích danh: chọn cách đếm có lợi khi luật chưa ghim lệnh · đánh ✅ lúc biên nhận đỏ hoặc chưa chạy · tự cấp ngoại lệ chạm-file ngoài §1 luật 4 · `git commit --no-verify` · sửa kèm file ngoài phạm vi task · viết lại biên nhận cho vừa kết quả đã có.
 
 Thêm luật mới ⇒ **thay hoặc gộp một luật cũ**, không mở mục mới. File này nạp lại ở **mọi request của mọi phiên**, nên mỗi dòng thừa ở đây là khoản thuế mọi phiên sau đều trả.
 
-Luật chỉ đúng cho một loại file thì nhà của nó là `.claude/rules/` có `paths:`, không phải ở đây. Luật cần **chắc chắn** xảy ra thì nhà của nó là hook trong `.claude/settings.json` — câu chữ ở đây là lời đề nghị, hook mới là cưỡng chế.
+Luật chỉ đúng cho một loại file thì nhà của nó là `.claude/rules/` có `paths:`. Luật cần **chắc chắn** xảy ra thì nhà của nó là hook trong `.claude/settings.json` ([T-35](task.md)) hoặc một đích trong [Makefile](Makefile) ([T-38](task.md)) — câu chữ ở đây là lời đề nghị, hook và `make check` mới là cưỡng chế.

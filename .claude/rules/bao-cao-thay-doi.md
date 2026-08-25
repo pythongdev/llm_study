@@ -90,6 +90,11 @@ Bảng soi không bao giờ rỗng. Task chưa biết sẽ chạm chỗ nào ⇒
 
 ## 3. Lệnh tự rà — chạy từ gốc repo
 
+**Năm cổng, đọc theo thứ tự chữ cái (a) → (e).** Bốn cổng là lệnh chạy được, nằm trong khối ```bash với
+nhãn `# x.`; riêng **(d)** là **con trỏ** tới vòng lặp §5.1 của [quan-ly-du-an.md](quan-ly-du-an.md) nên
+nhãn của nó là `**d.**` **ngoài** khối — trỏ, không chép. Lệnh đếm nhãn phải bắt **cả hai** ký pháp, nếu
+không nó báo thiếu một cổng đang chạy tốt ([F-32](../../finding.md#f-32)).
+
 ```bash
 # a. Mọi file git thấy đã đổi đều phải có mặt trong bảng thay đổi vừa dán
 git status --short | awk '{print $NF}'
@@ -102,7 +107,14 @@ for o in $(grep -o '^### owner-T-[0-9]*' task.md | grep -o 'T-[0-9]*'); do \
 
 # c. Mỗi bảng soi có dòng "Đạt khi:" — ba số phải bằng nhau
 grep -c '^### owner-T-' task.md; grep -c '^\*\*Đạt khi:\*\*' task.md; grep -c '^| ~*\*\*T-' task.md
+```
 
+**d.** Mọi link trong `task.md` phải giải được: chạy **vòng lặp con trỏ** ở
+[quan-ly-du-an.md](quan-ly-du-an.md) §5.1 trên `task.md` — file này **không chép lại** lệnh đó.
+Ra `TRỎ HỤT` nghĩa là có chỗ sửa được viết thành link trong khi file chưa tồn tại: đổi thành
+backtick + `(mới)`, đừng tạo file rỗng cho con trỏ giải được. Ra **rỗng** là **xanh**, không phải "chưa chạy".
+
+```bash
 # e. Mọi lệnh ở cột "Câu lệnh để thấy thay đổi" phải IN RA — chỉ soi task ĐÃ GẠCH ở sổ task:
 #    task chưa làm in rỗng là ĐÚNG (chưa commit thì không có gì để chiếu), không lọc thì thành nhiễu.
 #    Ra "LỆNH RỖNG" -> tra sha bằng `git log --oneline -3 -- <đường/dẫn>` rồi ghim `git show <sha> -- ...`
@@ -114,17 +126,22 @@ awk -v d=" $d" '/^### owner-T-[0-9]*$/{t=$2; ok=index(d," " substr(t,7) " ")} \
     if (out=="") print "LỆNH RỖNG: " t " -> " c; out="" }' task.md
 ```
 
-**d.** Mọi link trong `task.md` phải giải được: chạy **vòng lặp con trỏ** ở
-[quan-ly-du-an.md](quan-ly-du-an.md) §5.1 trên `task.md` — file này **không chép lại** lệnh đó.
-Ra `TRỎ HỤT` nghĩa là có chỗ sửa được viết thành link trong khi file chưa tồn tại: đổi thành
-backtick + `(mới)`, đừng tạo file rỗng cho con trỏ giải được.
-
 Lệnh (a) chạy **trước** khi commit và đối chiếu bằng mắt với bảng: git là nhà thật của *file nào đã đổi*,
 bảng chỉ là bản khai. Lệch ⇒ sửa bảng, không sửa git.
 
 **Cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc** chạy trước khi commit — không có bộ rút gọn ba lệnh. (e)
 là lệnh **duy nhất** soi cột `Câu lệnh để thấy thay đổi` của §2; để nó ngoài bộ bắt buộc một lần thôi là
 bảng soi của task đã đóng hỏng **im lặng**, không ai biết ([F-16](../../finding.md#f-16)).
+
+**Cổng của chính §3** — số nhãn **có thân thật** phải bằng số nhãn câu *"Cả năm lệnh"* liệt ra, và bằng `5`.
+**Đỏ khi** hai số lệch nhau hoặc khác `5`: bộ bắt buộc đang đòi một cổng không có thân, hoặc bỏ ngoài một
+cổng đang chạy. Chính vế này là thứ F-32 thiếu nên nó khai nhầm (d) là cổng ma.
+
+```bash
+grep -cE '^(# |\*\*)[a-z]\.' .claude/rules/bao-cao-thay-doi.md    # nhãn có thân thật -> 5
+grep '^\*\*Cả năm lệnh' .claude/rules/bao-cao-thay-doi.md \
+  | grep -o '([a-z])' | sort -u | wc -l                          # nhãn câu khai liệt -> 5
+```
 
 ---
 

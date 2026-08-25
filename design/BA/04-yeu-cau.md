@@ -19,7 +19,7 @@ nhà** và **một điều kiện đạt đo được**.
 | Đ1 | 4 kênh bán, mỗi kênh nói rõ: ai bấm · có gắn số bàn không · tiền thu ở khâu nào | ⚠️ `design/BA/01-kenh-ban.md` — chưa có | bảng ra **đúng 4** dòng kênh, mỗi dòng đủ ba ô trên, không ô nào bỏ trống |
 | Đ2 | 2 sơ đồ luồng: ăn tại bàn, và ship | ⚠️ `design/BA/02-luong.md` — chưa có | **2** khối sơ đồ, mỗi khối đi đủ ba mốc *mở → xác nhận → đóng*, và khối ship nêu rõ nó khác khối tại bàn ở mấy điểm |
 | Đ3 | Danh sách quy tắc nghiệp vụ, mỗi quy tắc **một** dòng mang mã `QT-xx` | ⚠️ `design/BA/03-quy-tac.md` — chưa có | `>= 12` dòng `QT-`, không mã trùng, mỗi dòng qua **cả bốn** phép thử ở `lane-ba.md` §3 |
-| Đ4 | 3 câu từng treo ở §3.2 | **đã chốt rồi** — `prompt-fullstack.md` §3.2, owner chốt 2026-08-19; nhà thật ⚠️ `project_preparation/00-scope.md` §4.4 (T-05 tạo) | pha 0 **trỏ** tới chỗ đã chốt và dừng lại — xem cảnh báo dưới bảng |
+| Đ4 | 3 câu từng treo ở §3.2 | **đã chốt rồi** — `prompt-fullstack.md` §3.2, owner chốt 2026-08-19; nhà thật `project_preparation/00-scope.md` §4.4 (T-05 tạo) | pha 0 **trỏ** tới chỗ đã chốt và dừng lại — xem cảnh báo dưới bảng |
 
 **Đ4 là một cái bẫy, đọc trước khi làm.** §7 viết *"trả lời 3 câu chưa rõ ở §3.2"*, nhưng §3.2 hôm nay
 ghi rõ ba câu đó **owner đã chốt ngày 2026-08-19**. Phiên nào đọc §7 rồi đi tìm "ba câu chưa rõ" sẽ
