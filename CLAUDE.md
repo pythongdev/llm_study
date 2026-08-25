@@ -65,6 +65,8 @@ Nghi một file cũ: so dòng `Cập nhật <ngày>` trong file với `git log -
 Commit: stage bằng `git add <đường dẫn cụ thể>` — liệt kê từng file, để việc dở của phiên khác không bị nuốt theo. Message theo khuôn `<LANE>/<T-xx>: <file đã sửa>, đóng <F-yy>`. Không dùng `--no-verify`.
 
 Kết phiên, dán ba dòng: mã task đã đụng · lệnh biên nhận + output · dòng task hoặc finding vừa mở ra. Ba dòng này là thứ phiên sau đọc thay cho hội thoại hôm nay.
+Phiên còn finding 🔴 MỞ mà nó mở ra hay chạm tới ⇒ dán thêm **một dòng xử trí cho mỗi mã**, chọn **(a)** hoặc **(b)**, không được để trống: **(a)** đóng ngay trong phiên này — kèm biên nhận đóng + một lần thử làm đỏ, hai cổng ở [.claude/rules/chat-luong-finding.md](.claude/rules/chat-luong-finding.md).
+**(b)** **prompt agent viết đủ ngay trong câu trả lời**, dán là chạy được: mã `F-xx` · lane + file được phép sửa · lệnh đóng kèm ngưỡng **đỏ khi** · đòi agent chạy biên nhận, qua hai cổng trên, rồi mới đổi trạng thái. Thiếu dòng này ⇒ phiên **chưa xong**: finding không có người nhận là finding trôi.
 
 ## §5 Finding hay task
 
