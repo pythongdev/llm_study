@@ -15,7 +15,7 @@ Mở lời bằng một dòng khai báo để người dùng chặn được nga
 | **DB** | bảng, cột, index, migration, seed, `.sql` | ⚠️ chưa mở | — | — (T-07 mở lane này) |
 | **BE** | API, endpoint, handler, service, Go, transaction, tính giá | ⚠️ chưa mở | — | — (T-08 mở lane này) |
 | **FE** | trang, component, Next, giỏ hàng, màn hình trạm, QR bàn | ⚠️ chưa mở | — | — (T-09 mở lane này) |
-| **DEVOPS** | docker, compose, Makefile, CI, deploy, backup, biến môi trường | ⚠️ chưa mở | — | — (T-03 + T-06 mở lane này) |
+| **DEVOPS** | docker, compose, Makefile, CI, deploy, backup, biến môi trường | `Makefile`, `deploy/**`, `.env*` | [.claude/rules/lane-devops.md](.claude/rules/lane-devops.md) + [prompt-fullstack.md](project_preparation/prompt-fullstack.md) §6.9 | `make check` ra mã thoát `0` · 4 lệnh §2 §3 của rule lane |
 
 Năm luật định tuyến:
 - **Một session một lane.** Prompt chạm nhiều lane ⇒ chọn lane của *đầu ra kiểm chứng được*, phần còn lại thành dòng task mới trong [task.md](task.md) ngay lúc đó.
