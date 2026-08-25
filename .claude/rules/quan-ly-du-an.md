@@ -11,7 +11,7 @@ paths:
 
 # Sổ tay quản lý dự án — nạp khi chạm sổ task, sổ lỗi, hoặc tài liệu thiết kế
 
-> Cập nhật **2026-08-23**. File này giữ phần **dài** mà [CLAUDE.md](../../CLAUDE.md) không chứa nổi.
+> Cập nhật **2026-08-25**. File này giữ phần **dài** mà [CLAUDE.md](../../CLAUDE.md) không chứa nổi.
 > Luật áp cho **mọi** session nằm ở `CLAUDE.md` §1–§8 — file này **trỏ** tới chúng, không chép lại.
 > Chép lại là đẻ nhà thứ hai, và bản chép sẽ lệch trong im lặng.
 
@@ -136,6 +136,7 @@ phải output của lệnh nào.
 
 | Khi nào | Chạy cái gì | Ra kết quả khác kỳ vọng thì |
 |---|---|---|
+| Mỗi phiên **sinh nội dung mới** — sau khi gõ, **trước** biên nhận | sáu probe N1–N6 ở [quality/01-chat-luong-noi-dung.md](../../quality/01-chat-luong-noi-dung.md) §3 §4, rồi dán **phiếu sáu dòng** theo §5 bước 3 của file đó | một trục KHÔNG ĐẠT ⇒ đầu ra bị **trả lại** (§6 file đó), không có nợ; sửa không xong trong phiên ⇒ nhãn tại chỗ **và** một dòng [finding.md](../../finding.md) |
 | Mỗi task, trước khi đánh ✅ | biên nhận trong ô `Đầu ra kiểm chứng được` | quay lại làm, chưa được đánh ✅ |
 | Mỗi lần sửa `task.md` | **cả khối** lệnh tự rà ở §5.2 — đếm số lệnh trong câu này là hằng số, nó tự trôi | lỗi của `task.md`, sửa ngay trong phiên đó |
 | Owner soi lại một task vừa ✅ | từng lệnh ở **bảng soi** `### owner-T-xx` trong `task.md`, rồi đọc dòng `**Đạt khi:**` | thay đổi khác cái bảng đó khai ⇒ ghi finding, đừng sửa lặng lẽ |
