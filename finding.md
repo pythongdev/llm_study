@@ -44,7 +44,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-28](#f-28) | Lệnh soi trục *Một nhà* của `cl-T-04` **tự bắt `task.md`**: chuỗi mốc `happy path` bắt buộc phải nằm trong chính ô soi, nên lệnh đỏ ở **cả hai** nhánh — có checklist thì ra `3` file (*bản chép thứ ba*), chưa có thì kết quả thiếu `quality/05-checklist.md` (*chưa có nhà*) | T-04 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ owner chỉ định vá ngay trong phiên T-04 — không đẻ task |
 | [F-29](#f-29) | Ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy `awk` 7 khoá trên **cả file** trong khi vế nó muốn đo là *bảy dòng `- [ ]`*: §2 của checklist nhắc lại đúng các chuỗi khoá, nên bản **xoá một vế rồi chèn một dòng bịa** qua được cả hai biên nhận — `grep -c` ra `7`, `awk` ra `7` | T-04 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task — owner giao agent riêng vá ngay sau T-04 |
 | [F-30](#f-30) | Biên nhận thứ nhất của [T-26](task.md) — `grep -c '<path>' .claude/rules/bao-cao-thay-doi.md` ra `0` — quét **cả file** trong khi phạm vi T-26 chỉ là §3: `<path>` ở §1 cột `Xem diff` và §2 cột `Câu lệnh để thấy thay đổi` là placeholder văn xuôi **hợp lệ, phải giữ**, nên ô này ra `2` kể cả khi (e) đã vá đúng — đỏ vĩnh viễn, và cách duy nhất làm nó xanh là lấn phạm vi | T-26 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ đóng ngay trong phiên vá — không đẻ task |
-| [F-31](#f-31) | Hai bản **dẫn xuất** từ `project_preparation/00-scope.md` không có cơ chế nào canh: `prompt-fullstack.md` §9.3 giữ 10 số giá tự khai *"hợp đồng với chủ quán"* mà chỉ khai nguồn bằng câu chữ, và `design/BA/04-yeu-cau.md` dòng 22 còn đánh ⚠️ cho `00-scope.md` §4.4 trong khi nhà đã có | T-05 · 2026-08-24 | 🟡 MỞ **vế (b)** — vế (a) đã xử 2026-08-25 | [T-37](task.md) |
+| [F-31](#f-31) | Hai bản **dẫn xuất** từ `project_preparation/00-scope.md` không có cơ chế nào canh: `prompt-fullstack.md` §9.3 giữ 10 số giá tự khai *"hợp đồng với chủ quán"* mà chỉ khai nguồn bằng câu chữ, và `design/BA/04-yeu-cau.md` dòng 22 còn đánh ⚠️ cho `00-scope.md` §4.4 trong khi nhà đã có | T-05 · 2026-08-24 | ✅ ĐÓNG 2026-08-25 | [T-37](task.md) |
 | [F-32](#f-32) | `.claude/rules/bao-cao-thay-doi.md` §3 khai *"cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc"* nhưng khối lệnh của §3 chỉ có **bốn** nhãn — `# d.` **chưa từng tồn tại** ở bất kỳ phiên bản nào của file; bộ bắt buộc đang đòi một lệnh ma, và phiên đóng T-26 đã khai *"(d) rỗng"* cho nó | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-33](#f-33) | `quality/05-checklist.md` tự khai là **nhà duy nhất** của câu hỏi *"task này XONG chưa"* cho task có code, nhưng cả bảy vế §1 chỉ đo **vệ sinh của đầu ra** — không vế nào hỏi đầu ra **có phải thứ ô `Task` yêu cầu không**; dòng 57 còn đẩy việc đó sang câu hỏi TỐT | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-34](#f-34) | Biên nhận `grep -c '^- \[ \]'` **= đúng 7, không hơn không kém** bị ghim ở **bốn** chỗ (checklist §5 · ô `Đầu ra kiểm chứng được` của T-04 · bảng `cl-T-04` · ô biên nhận của [T-33](task.md) còn mở), nên checklist **không có cửa** nhận vế XONG mới — kể cả vế học từ một sự cố thật mà §6.7 luật 2 đòi | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
@@ -302,6 +302,26 @@ commit đè lên việc đó, và **không lệnh nào trong bộ khung đỏ**:
 mà theo [CLAUDE.md §7](CLAUDE.md) đó là quyền của owner. Chốt xong mới mở dòng task.
 
 **Ca sống 2026-08-25.** Lần đầu bắt được tại chỗ, và nó tệ hơn mệnh đề trên mô tả. Một phiên NON-CODE mở [F-42](#f-42)/[F-43](#f-43)/[T-36](task.md) thấy cây **sạch** ở bước 4 ([CLAUDE.md §3](CLAUDE.md)); trong lúc nó gõ, phiên thứ hai **commit đè** đúng phần việc chưa commit của nó (`5df6c66`, `eb8a0c9`) rồi mở tiếp `F-44` của riêng mình — **cùng mã** với `F-44` phiên đầu vừa viết. Hai phiên tự phát hiện và một bên đổi sang `F-45`, nên lần này không mất gì; nhưng cơ chế cứu được là **may**, không phải luật: không lệnh nào trong repo bắt được trùng mã **trước khi ghi**, và `git status` sạch ở bước 4 **không** còn nghĩa là an toàn khi có phiên khác chạy. Thêm vế cho `Cách sửa đề xuất`: cấp mã `F-xx`/`T-xx` phải là thao tác **đọc-rồi-ghi trong một commit**, hoặc `CLAUDE.md` §3 bước 4 phải thêm điều kiện *không có phiên khác đang mở* — điều kiện hiện chưa đo được, đó mới là gốc.
+
+**Ca sống thứ hai 2026-08-25 — lần này mất thật, phát hiện muộn.** Phiên **BA/[T-37](task.md)** thấy cây
+sạch ở bước 4, sửa đúng một dòng của [design/BA/04-yeu-cau.md](design/BA/04-yeu-cau.md), chạy biên nhận
+xanh — rồi `git status --short` ra **rỗng** và `git diff` ra **rỗng**: một phiên song song đã commit hộ
+`c6155eb` *"NON-CODE/ngoài-sổ: điểm lùi — commit phần dở còn trong cây trước khi mở F-46"*, nuốt trọn hunk
+của lane BA. Đây đúng là hướng 2 của mệnh đề trên chạy ngược: phiên kia **tuân thủ** bước 4 (cây bẩn ⇒
+commit lấy điểm lùi) và chính vì tuân thủ mà nuốt việc phiên khác. Hậu quả nằm ở [CLAUDE.md §2](CLAUDE.md):
+`git log` là nhà duy nhất của *ai sửa file nào*, mà `c6155eb` khai lane **NON-CODE** cho một hunk thuộc
+`design/BA/**` — thư mục lane NON-CODE **không sở hữu** ([CLAUDE.md §1](CLAUDE.md)) — và không nhắc `T-37`
+lẫn [F-31](#f-31). Cùng một commit vì vậy sinh thêm ca cho [F-17](#f-17) (message khai sai `--stat`) và
+[F-24](#f-24) (nuốt lẫn hunk); không đẻ mã mới, gốc vẫn là dòng này.
+
+```bash
+git show --stat c6155eb | grep 'design/BA'   # ra 1 dòng — đỏ khi rỗng: ca sống này đã bị viết lại lịch sử
+git log -1 --format=%s c6155eb | grep -c 'T-37\|F-31'   # ra 0 — commit không khai mã task đã nuốt
+```
+
+**Thêm vế cho `Cách sửa đề xuất`:** hướng 2 phải đảo chiều điều kiện — cây bẩn ở bước 4 mà **file bẩn nằm
+ngoài lane của phiên này** ⇒ **không** commit, không stash, dừng hỏi owner. Đây là điều kiện **đo được
+ngay hôm nay**, khác ba hướng trên: `git status --porcelain` giao với `paths:` của rule lane đang nạp.
 
 ---
 
@@ -1350,6 +1370,30 @@ B | grep -c 'LỖI'                 # ra 1  — đỏ khi 0: dọn tay làm mấ
 
 **Đã thử làm đỏ:** ✅ 2026-08-25, trên bản sao — chép lại `→ 4.000` vào ca 2 thì vế 1 ra `1`; xoá ca 7 thì
 vế 2 ra `10`; xoá dòng `→ LỖI` thì vế 3 ra `0`. Cả ba đỏ đúng như khai, bản thật vẫn `11` ca.
+
+**Kiểm chứng.** Vế (b) hết đúng 2026-08-25 bởi [T-37](task.md), lane BA — ô `Đ4` ở
+[design/BA/04-yeu-cau.md §1](design/BA/04-yeu-cau.md) dòng 22 nay đọc `nhà thật \`project_preparation/00-scope.md\` §4.4 (T-05 tạo)`,
+không còn ⚠️. Ba vế, chạy từ gốc repo:
+
+```bash
+grep -n '00-scope' design/BA/04-yeu-cau.md | grep -c '⚠️'   # ra 0  — đỏ khi >= 1: ⚠️ mồ côi còn đó
+grep -c '00-scope' design/BA/04-yeu-cau.md                  # ra 1  — đỏ khi 0: xoá luôn con trỏ thay vì gỡ mỗi dấu
+grep -c '^| Đ[0-9]' design/BA/04-yeu-cau.md                 # ra 4  — đỏ khi 3: sửa ô Đ4 làm vỡ hàng bảng
+grep -rn '⚠️' design/BA/ | grep -c '00-scope'               # ra 0  — đỏ khi >= 1: còn ⚠️ cùng loại ở file khác trong lane
+```
+
+**Đã thử làm đỏ (vế b):** ✅ 2026-08-25, trên bản sao ở scratchpad — trả ⚠️ về dòng 22 thì vế 1 ra `1`; thay
+cả cụm `\`project_preparation/00-scope.md\` §4.4 (T-05 tạo)` bằng chữ *nhà thật đã có* thì vế 2 ra `0`; đổi
+`| Đ4 ` thành `| D4 ` thì vế 3 ra `3`. Cả ba đỏ đúng như khai, bản thật vẫn `0 · 1 · 4`.
+
+**Bài học giữ lại:** ⚠️ là **mệnh đề có hạn dùng** — nó khai *"nhà này chưa có"*, nên **phiên tạo ra nhà**
+phải gỡ mọi ⚠️ trỏ vào nhà đó, không để phiên sau nhặt. Luật đổi ở
+[.claude/rules/quan-ly-du-an.md §5.3](.claude/rules/quan-ly-du-an.md): §5.3 hôm nay chỉ có lệnh bắt ⚠️
+**thiếu** (con trỏ hụt mà không đánh dấu), **chưa** có lệnh bắt ⚠️ **thừa** (nhà đã có mà còn đánh dấu) —
+vế thiếu đó là mệnh đề của [F-23](#f-23), mã đang 🔴 và đã sở hữu việc sửa, nên không đẻ mã mới. Lệnh cần
+thêm vào §5.3: với mỗi đường dẫn đứng sau một ⚠️, chạy `test -e` — **đỏ khi** file **có thật**, vì lúc đó
+dấu ⚠️ đang nói dối theo hướng làm phiên sau tự dựng lại thứ đã có ([CLAUDE.md §2](CLAUDE.md) — một sự
+thật một nhà).
 
 ---
 
