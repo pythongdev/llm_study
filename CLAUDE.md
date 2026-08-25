@@ -74,7 +74,11 @@ Phép thử một câu: **chạy hết kế hoạch trong [task.md](task.md) y n
 
 Hai sổ không bao giờ trộn: sổ task đo *xong / chưa*, sổ lỗi đo *đúng / sai*. Trộn thì mất cả hai cơ chế — finding nằm trong sổ task bị đánh ✅ khi hết giờ, task nằm trong sổ lỗi không bao giờ đóng được.
 
-Một finding đẻ ra nhiều task được; task không bao giờ nằm trong sổ lỗi. Trong `task.md` chỉ ghi **mã** `F-xx` và trỏ link — mô tả lại nội dung finding là đẻ nhà thứ hai. Đóng một finding phải để lại một dòng **Bài học giữ lại**: luật nào đổi để nó không tái phát.
+Một finding đẻ ra nhiều task được; task không bao giờ nằm trong sổ lỗi. Trong [task.md](task.md) chỉ ghi **mã** `F-xx` và trỏ link — mô tả lại nội dung finding là đẻ nhà thứ hai. Đóng một finding phải để lại một dòng **Bài học giữ lại**: luật nào đổi để nó không tái phát.
+
+**Giao ngay trong phiên.** Sinh ra dòng `T-xx` hay mã `F-xx` thì **cùng phiên đó** giao đi: ghi vào sổ · **commit dòng đó trước** (điểm lùi, [CLAUDE.md §3](CLAUDE.md) bước 4) · spawn agent bằng **đúng** ô `Prompt mở session` của dòng. Viết không nổi ô đó ⇒ chưa đủ chín, chẻ trước ([CLAUDE.md §6](CLAUDE.md)), đừng spawn.
+
+**Agent con không chạm hai sổ.** Phiên cha giữ [task.md](task.md) và [finding.md](finding.md): agent chỉ ghi file lane nó sở hữu, trả về biên nhận + bảng thay đổi, **phiên cha** mới đổi dấu ✅. Hai bên cùng ghi một sổ là dựng lại [F-24](finding.md#f-24) — nuốt hunk trong im lặng, cây vẫn sạch.
 
 ## §6 Kích cỡ một task
 

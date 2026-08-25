@@ -60,6 +60,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-44](#f-44) | **Định nghĩa XONG thiếu một vế.** [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 3 vế 4 khai *"**Ba** thứ của `CLAUDE.md` §4 đủ"* rồi liệt kê 3 — biên nhận · commit · `finding.md` — nhưng [CLAUDE.md §4](CLAUDE.md) khai *"cần đủ **bốn** thứ"*, thứ (4) là **bảng thay đổi**; phiên theo đúng rule mục 3 đánh ✅ hợp lệ mà không dán bảng, đúng thứ CLAUDE.md §4 gọi là *phiên chưa xong* | T-36 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-45](#f-45) | [prompt-fullstack.md §6.6](project_preparation/prompt-fullstack.md) khai bốn nhịp kiểm tra bắt buộc, nhịp thứ hai là *"mỗi ngày sau khi đóng quán → **tầng 2**"* — nhưng chuỗi `tầng 2` xuất hiện **đúng một lần** trong toàn repo, chính dòng khai nó, và **không file nào** nói tầng 2 gồm lệnh gì; [rule mục 4](.claude/rules/quan-ly-du-an.md) — nhà mà [checklist §4](quality/05-checklist.md) và [guideline §6](quality/00-guideline-chat-luong.md) trao quyền giữ nhịp — có **10** hàng và **0** hàng nào là nhịp của §6.6 | giải thích checklist §1 vế 1 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-46](#f-46) | Cổng **(e)** ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) đỏ **15 dòng** và đã đỏ từ lâu: 15 ô `Câu lệnh để thấy thay đổi` của 7 task đã gạch ghim `git show HEAD -- <file>` (toàn sổ có **63** ô như vậy), mà `HEAD` **trôi theo mỗi commit** — chúng nay chiếu vào commit chẳng liên quan. Cổng đỏ thường trực là cổng phiên sau học cách bỏ qua | ngoài-sổ · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-47](#f-47) | Sổ lỗi có **đường vào** mà không có **đường ra**: dòng vai trò ở [CLAUDE.md](CLAUDE.md) bắt *ghi một dòng vào finding.md rồi quay lại việc đang làm*, nhưng không luật nào bắt **giao dòng đó đi** — nên tồn đọng chỉ tăng: **37/46** finding còn 🔴 MỞ, **25** trong số đó khai `⚠️ chưa có task` | owner nêu · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên owner nêu — không đẻ task |
 
 ---
 
@@ -1992,3 +1993,48 @@ bằng cách chỉ vá 15 ô đã gạch, và 48 ô còn lại sẽ đỏ lại 
 
 **Bẫy khi sửa.** Đừng gỡ cổng (e) cho hết đỏ: nó đỏ vì nó **đúng** — 15 ô kia thật sự không chiếu được gì.
 Gỡ cổng là đổi một cổng đỏ ồn ào lấy một lỗ hổng im lặng.
+---
+
+### F-47
+
+**Mệnh đề sai.** Van xả của repo chỉ có nửa đầu. Dòng vai trò ở [CLAUDE.md](CLAUDE.md) và luật *"không sửa
+kèm"* ở [.claude/rules/quan-ly-du-an.md §7](.claude/rules/quan-ly-du-an.md) TP6 bắt phiên **ghi** một mã
+`F-xx` rồi quay lại việc đang làm — đúng, vì nó bảo vệ task đang chạy. Nhưng **không luật nào** bắt mã vừa
+ghi phải được **giao đi**. Kết quả: sổ lỗi có tốc độ vào mà không có tốc độ ra, và không lệnh nào đỏ khi
+tồn đọng phình.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết thì dòng này còn, và còn **nặng
+hơn**: 24 dòng task chưa xong có chạy hết cũng không chạm tới 25 finding đang khai `⚠️ chưa có task` —
+không dòng nào trong chúng nhận các mã đó. Mỗi phiên van xả lại thêm mã mới, không phiên nào bị buộc rút
+bớt, nên tỉ lệ 🔴/tổng đi một chiều.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -c '^| \[F-[0-9]*\].*🔴 MỞ' finding.md            # 37   <- còn mở
+grep -c '^| \[F-[0-9]*\].*⚠️ chưa có task' finding.md   # 25   <- không ai nhận
+grep -c '^| \*\*T-' task.md                             # 24   <- task chưa xong, không dòng nào nhận 25 mã trên
+```
+
+**Cách sửa đề xuất.** Thêm nửa sau của van xả vào [CLAUDE.md §5](CLAUDE.md) — nhà của *finding hay task*:
+**Giao ngay trong phiên** (ghi vào sổ → commit dòng đó → spawn agent bằng đúng ô `Prompt mở session`) và
+**Agent con không chạm hai sổ** (agent chỉ ghi file lane nó sở hữu; phiên cha đổi dấu ✅).
+
+**Bẫy khi sửa.** Đừng biến *"giao ngay"* thành *"sửa kèm"* — đó là thứ van xả sinh ra để chặn, và nó vẫn
+đúng: bên làm là **agent con**, phiên cha không đổi lane ([CLAUDE.md §1](CLAUDE.md)). Và đừng cho agent con
+ghi [finding.md](finding.md)/[task.md](task.md) khi phiên cha còn mở: hai bên cùng ghi một sổ là
+[F-24](#f-24) — nuốt hunk trong im lặng, cây vẫn sạch, `git log` vẫn hợp khuôn.
+
+**Kiểm chứng.**
+
+```bash
+grep -c 'Giao ngay trong phiên' CLAUDE.md              # 1
+grep -c 'Agent con không chạm hai sổ' CLAUDE.md        # 1
+wc -l < CLAUDE.md; awk 'length>400' CLAUDE.md          # 107 (trần 120), rỗng
+awk '/^## §5/,/^## §6/' CLAUDE.md | sed '$d' | wc -l   # 12 (trần mỗi mục 14)
+```
+
+**Bài học giữ lại:** một cơ chế khai **đường vào** thì phải khai **đường ra** trong cùng luật, nếu không
+nó là hàng đợi không người phục vụ. Luật đổi: [CLAUDE.md §5](CLAUDE.md) — hai đoạn *Giao ngay trong phiên*
+và *Agent con không chạm hai sổ*. Phép thử áp cho mọi luật kiểu *"ghi lại rồi đi tiếp"*: ai là người nhận,
+và luật nào buộc bàn giao? Không trả lời được ⇒ luật đó đang đẻ tồn đọng chứ không đang bảo vệ ai.
