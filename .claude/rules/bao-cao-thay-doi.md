@@ -26,7 +26,7 @@ Mọi phiên có sửa dù một ký tự đều kết bằng bảng này. Khôn
 | # | File | Sửa ở đâu | Sửa gì | Xem diff |
 |---|---|---|---|---|
 | 1 | [task.md](task.md) | §Sổ task › dòng `T-05` | thoát dấu `\|` trong ô biên nhận | `git diff -- task.md` |
-| 2 | `quality/05-checklist.md` **(mới)** | cả file | 7 mục `- [ ]` của định nghĩa XONG | `git show --stat HEAD -- quality/` |
+| 2 | `quality/05-checklist.md` **(mới)** | cả file | 7 mục `- [ ]` của định nghĩa XONG | `git show --stat 97b25e0 -- quality/` |
 ```
 
 Năm cột, đặc tả từng cột — thiếu cột nào thì bảng đó không tính:
@@ -38,6 +38,18 @@ Năm cột, đặc tả từng cột — thiếu cột nào thì bảng đó kh�
 | `Sửa gì` | **một câu**, động từ + tân ngữ, nói *đổi cái gì* chứ không *vì sao* | "cập nhật", "chỉnh sửa", "refactor" — ba chữ này không mang thông tin nào |
 | `Xem diff` | **một lệnh chạy được và thực sự IN RA**, giới hạn `-- <path>`. Chưa commit ⇒ `git diff -- <path>`; **đã commit** (kể cả bị phiên khác commit hộ) ⇒ `git show <sha> -- <path>`. Chạy thử trước khi dán: ra rỗng thì lệnh sai, không phải thay đổi mất | `git diff` trần — bắt owner tự lọc giữa mọi file · `git diff -- <path>` cho thay đổi **đã commit**: nó im lặng, và im lặng trông y hệt *không đổi gì* |
 | `#` | một file một dòng, đánh số | gộp "và vài file khác", "cùng một số file liên quan" |
+
+**Ô `Xem diff` ghim sha, cấm ghim `HEAD`.** `HEAD` không phải con trỏ cố định — nó trôi theo mỗi commit:
+lệnh đúng lúc dán, một commit sau đã chiếu sang thay đổi của task khác, hai commit sau thì in **rỗng**, mà
+rỗng trông y hệt *không đổi gì* ([F-46](../../finding.md#f-46)). Tra sha bằng `git log --oneline -3 -- <đường/dẫn>`
+rồi ghim sha đó. Luật này áp cho **cả** cột `Xem diff` ở §1 **và** cột `Câu lệnh để thấy thay đổi` của bảng
+soi §2: task **chưa làm** chưa có sha để tra, nên ô đó ghi `—` chứ không để một lệnh rỗng đứng sẵn; phiên
+**đóng** task thay `—` bằng sha vừa commit, **trong chính commit đó**. Ví dụ hai bảng trên đã ghim sha thật,
+chép được ngay. Cổng:
+
+```bash
+grep -c 'git show HEAD --' task.md    # ra 0 — đỏ khi >= 1: còn ô ghim con trỏ trôi
+```
 
 **Bốn câu bị cấm trong phần kết phiên**, thấy là viết lại: *"đã cập nhật các file liên quan"* ·
 *"chi tiết xem `git diff`"* · tên file viết trần không link và không chỉ ra chỗ sửa · **`§6` trần, không
@@ -66,8 +78,8 @@ chỉ giữ **dấu ai ký + link**, còn bảng nằm ở mục riêng cuối `
 
 | Thay đổi cái gì | Câu lệnh để thấy thay đổi | Ở đâu |
 |---|---|---|
-| Nhà của lane BA + file yêu cầu pha 0 | `git show --stat HEAD -- design/BA` | `design/BA/04-yeu-cau.md` **(mới)** › cả file |
-| Dòng BA hết ⚠️ | `git show HEAD -- CLAUDE.md` | [CLAUDE.md](../../CLAUDE.md) §1 bảng lane › **đúng một dòng BA** |
+| Nhà của lane BA + file yêu cầu pha 0 | `git show --stat 4851d17 -- design/BA` | `design/BA/04-yeu-cau.md` **(mới)** › cả file |
+| Dòng BA hết ⚠️ | `git show 4851d17 -- CLAUDE.md` | [CLAUDE.md](../../CLAUDE.md) §1 bảng lane › **đúng một dòng BA** |
 
 **Đạt khi:** `CLAUDE.md` chỉ đổi **đúng một dòng**; mọi thứ khác nằm trong `design/BA/`.
 ```
