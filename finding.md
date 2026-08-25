@@ -45,7 +45,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-29](#f-29) | Ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy `awk` 7 khoá trên **cả file** trong khi vế nó muốn đo là *bảy dòng `- [ ]`*: §2 của checklist nhắc lại đúng các chuỗi khoá, nên bản **xoá một vế rồi chèn một dòng bịa** qua được cả hai biên nhận — `grep -c` ra `7`, `awk` ra `7` | T-04 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task — owner giao agent riêng vá ngay sau T-04 |
 | [F-30](#f-30) | Biên nhận thứ nhất của [T-26](task.md) — `grep -c '<path>' .claude/rules/bao-cao-thay-doi.md` ra `0` — quét **cả file** trong khi phạm vi T-26 chỉ là §3: `<path>` ở §1 cột `Xem diff` và §2 cột `Câu lệnh để thấy thay đổi` là placeholder văn xuôi **hợp lệ, phải giữ**, nên ô này ra `2` kể cả khi (e) đã vá đúng — đỏ vĩnh viễn, và cách duy nhất làm nó xanh là lấn phạm vi | T-26 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ đóng ngay trong phiên vá — không đẻ task |
 | [F-31](#f-31) | Hai bản **dẫn xuất** từ `project_preparation/00-scope.md` không có cơ chế nào canh: `prompt-fullstack.md` §9.3 giữ 10 số giá tự khai *"hợp đồng với chủ quán"* mà chỉ khai nguồn bằng câu chữ, và `design/BA/04-yeu-cau.md` dòng 22 còn đánh ⚠️ cho `00-scope.md` §4.4 trong khi nhà đã có | T-05 · 2026-08-24 | ✅ ĐÓNG 2026-08-25 | [T-37](task.md) |
-| [F-32](#f-32) | `.claude/rules/bao-cao-thay-doi.md` §3 khai *"cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc"* nhưng khối lệnh của §3 chỉ có **bốn** nhãn — `# d.` **chưa từng tồn tại** ở bất kỳ phiên bản nào của file; bộ bắt buộc đang đòi một lệnh ma, và phiên đóng T-26 đã khai *"(d) rỗng"* cho nó | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-32](#f-32) | `.claude/rules/bao-cao-thay-doi.md` §3 khai *"cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc"* nhưng dán nhãn năm cổng bằng **hai ký pháp** và **sai thứ tự** — (a) (b) (c) (e) là `# x.` trong khối bash, (d) là `**d.**` ngoài khối và đứng sau (e) — nên không lệnh nào đếm nổi đủ năm, mọi phép đếm hiển nhiên ra `4`. **Bản mở của mã này tự trượt vào đó**: nó kết luận (d) là *"lệnh ma chưa từng tồn tại"* và đề nghị **bỏ** một cổng đang chạy tốt từ `b520e7c` | T-05 · 2026-08-24 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên vá — không đẻ task |
 | [F-33](#f-33) | `quality/05-checklist.md` tự khai là **nhà duy nhất** của câu hỏi *"task này XONG chưa"* cho task có code, nhưng cả bảy vế §1 chỉ đo **vệ sinh của đầu ra** — không vế nào hỏi đầu ra **có phải thứ ô `Task` yêu cầu không**; dòng 57 còn đẩy việc đó sang câu hỏi TỐT | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-34](#f-34) | Biên nhận `grep -c '^- \[ \]'` **= đúng 7, không hơn không kém** bị ghim ở **bốn** chỗ (checklist §5 · ô `Đầu ra kiểm chứng được` của T-04 · bảng `cl-T-04` · ô biên nhận của [T-33](task.md) còn mở), nên checklist **không có cửa** nhận vế XONG mới — kể cả vế học từ một sự cố thật mà §6.7 luật 2 đòi | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-35](#f-35) | Bảy ô `- [ ]` ở §1 **không phải bảy phép xác nhận**: 5/7 dòng gộp nhiều thứ vào một dấu tick (vế 1 gộp `build · lint · unit test · typecheck`), tổng ra **14–16 tuỳ cách đếm** — và `grep -c` đang đo **số dòng**, không đo số thứ đã xác nhận | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
@@ -1052,6 +1052,24 @@ git apply --cached /tmp/p && git commit -m '...'   # index = HEAD + phần của
 owner. Mục này chỉ đòi câu ở §4 khai **đúng** mức bảo vệ mà `git add <đường dẫn>` thật sự cho: nó chống
 lẫn file, không chống lẫn hunk.
 
+**Ca sống thứ ba — 2026-08-25, bắt tại trận.** Phiên NON-CODE làm [F-32](#f-32) sửa xong
+[.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) lúc ~13:50 và **chưa** commit.
+Lúc **13:51:03** một phiên khác commit `c6155eb` với message *"điểm lùi — commit phần dở còn trong cây
+trước khi mở F-46"*: nó thấy cây bẩn, tưởng là phần dở của chính nó ([F-07](#f-07)), và nuốt trọn bản vá
+§3 vào một commit **không nhắc F-32 một chữ nào**. Ca này đắt hơn hai ca trước ở một điểm mới: kẻ nuốt
+đang **thi hành đúng** [CLAUDE.md §3](CLAUDE.md) bước 4 — *cây bẩn ⇒ commit trước khi gõ*. Luật ĐIỂM LÙI
+và luật chống-nuốt đang **chỉ ngược chiều nhau**, và bước 4 thắng vì nó chạy trước.
+
+```bash
+git show --stat c6155eb                 # 3 file, có .claude/rules/bao-cao-thay-doi.md
+git show c6155eb -- .claude/rules/bao-cao-thay-doi.md | grep -c 'Cổng của chính §3'   # ra 1
+git log -1 --format=%s c6155eb | grep -c 'F-32'                                       # ra 0 — đỏ: nuốt im lặng
+```
+
+**Đỏ khi** vế 2 ra `>= 1` mà vế 3 ra `0`: nội dung của một mã nằm trong commit không khai mã đó.
+Ca này cũng chứng minh vế *"cây vẫn sạch nên không ai thấy"* của mệnh đề trên là **thật**: phiên bị nuốt
+chỉ phát hiện vì tình cờ chạy `git diff --stat` và thấy file mình vừa sửa **không** có trong danh sách.
+
 ---
 
 ### F-25
@@ -1399,42 +1417,67 @@ thật một nhà).
 
 ### F-32
 
-**Mệnh đề sai.** [.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) §3 khai **"Cả năm
-lệnh (a) (b) (c) (d) (e) đều bắt buộc chạy trước khi commit"**, nhưng khối lệnh ngay dưới câu đó chỉ có
-**bốn** nhãn: `# a.` `# b.` `# c.` `# e.` — **không có `# d.`**. Lệnh (d) chưa từng tồn tại ở bất kỳ phiên
-bản nào của file. Cái tên (d) lan ra từ ba chỗ: ô Task của [T-14](task.md) khai đưa *"(b) (c) (d)"* vào bộ
-bắt buộc · [F-16](#f-16) khai *"Bốn lệnh còn lại (a) (b) (c) (d)"* · câu "cả năm lệnh" mà T-26 vừa thêm.
+**Mệnh đề sai.** [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) khai **"Cả năm
+lệnh (a) (b) (c) (d) (e) đều bắt buộc"** nhưng §3 dán nhãn năm cổng bằng **hai ký pháp khác nhau và sai
+thứ tự chữ cái**: (a) (b) (c) (e) là `# x.` **trong** khối ```bash, còn (d) là `**d.**` **ngoài** khối và
+đứng **sau** (e). Vì vậy **không lệnh nào trong repo đếm được đủ năm cổng** — mọi phép đếm hiển nhiên
+(`grep '^# [a-e]\.'`) ra `4`, và §3 không có vế `đỏ khi` nào canh con số đó.
 
-**Vì sao nó nguy hiểm hơn nó trông.** Một bộ cổng đòi lệnh không tồn tại thì phiên nào cũng phải **khai
-đã chạy thứ không chạy được**. Đã xảy ra: phiên đóng T-26 báo *"(d) rỗng"* — rỗng là kết quả trông y hệt
-xanh, nên không ai thấy. Cổng nào cũng có thể trượt kiểu này một lần rồi thành tiền lệ.
+**Vì sao nó nguy hiểm hơn nó trông.** Chế độ hỏng của nó không phải "thiếu một cổng" mà là **báo động
+giả**: chính mã F-32 này, khi mở ngày 2026-08-24, đã kết luận từ phép đếm ra `4` rằng *"`# d.` chưa từng
+tồn tại ở bất kỳ phiên bản nào"* và *"bộ bắt buộc đang đòi một lệnh ma"* — **cả hai đều sai**. Cổng (d) có
+thật, chạy được, và tồn tại **từ commit khai sinh file** (`b520e7c`, T-14, 2026-08-22) ở **mọi** phiên bản.
+F-32 còn đề nghị owner cân nhắc *"hướng 2 — bỏ (d)"*, tức **xoá một cổng đang chạy tốt** vì một lệnh đếm
+mù. Đó đúng cái bẫy mà chính F-32 tự viết ở vế `**Bẫy khi sửa.**` — nó suýt tự rơi vào.
 
-**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-14](task.md) đã ✅, [T-26](task.md)
-đã ✅, [T-27](task.md) chỉ sửa cột `Câu lệnh để thấy thay đổi` **trong `task.md`** chứ không rà nhãn lệnh
-trong rule. Không dòng task nào nhận việc đối chiếu danh sách nhãn ở §3 với khối lệnh ngay dưới nó.
-Dòng còn ⇒ finding.
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-14](task.md) đã ✅ (dựng §3),
+[T-26](task.md) đã ✅ (vá thân (e)), [T-27](task.md) chỉ sửa cột `Câu lệnh để thấy thay đổi` **trong**
+`task.md`. Không dòng task nào nhận việc đối chiếu **danh sách nhãn** ở câu *"đều bắt buộc"* với **nhãn có
+thân thật** trong §3. Dòng còn ⇒ finding.
 
-**Lệnh tái hiện.**
+**Lệnh tái hiện** *(chạy trên bản trước khi vá — `git show 2881f4b:.claude/rules/bao-cao-thay-doi.md`)*:
 
 ```bash
-grep -o '^# [a-e]\.' .claude/rules/bao-cao-thay-doi.md          # in a. b. c. e. — (d) khuyết
-grep -c '^# [a-e]\.' .claude/rules/bao-cao-thay-doi.md          # ra 4, không phải 5
-grep -c '(b) (c) (d)' task.md                                    # ra 1 — nguồn lây đầu tiên
-for c in $(git log --format=%h -- .claude/rules/bao-cao-thay-doi.md); do \
-  echo "$c $(git show $c:.claude/rules/bao-cao-thay-doi.md | grep -c '^# d\.')"; done   # mọi phiên bản ra 0
+R=.claude/rules/bao-cao-thay-doi.md
+grep -c '^# [a-e]\.' $R      # ra 4 — phép đếm hiển nhiên, mù với nhãn prose ngoài khối
+grep -c '^\*\*d\.\*\*' $R    # ra 1 — cổng (d) CÓ THẬT, chỉ khác ký pháp
+grep -n '^# [a-e]\.\|^\*\*[a-e]\.\*\*' $R   # thứ tự đọc được: a b c e ... rồi mới tới d
 ```
 
-**Cách sửa đề xuất.** Owner chọn một trong hai, đừng để phiên tự chọn:
-1. **Viết thật lệnh (d)** — nếu (d) từng có ý định soi một thứ mà (a)(b)(c)(e) không soi. Không phiên bản
-   nào lưu nội dung nó, nên phải chốt lại từ đầu ý định là gì.
-2. **Bỏ (d)** — đổi câu §3 thành *"cả bốn lệnh (a) (b) (c) (e)"*, sửa luôn ô Task của T-14 và câu của
-   [F-16](#f-16) để hết nhắc (d).
+**Kiểm chứng** *(2026-08-25)*. §3 nay xếp lại đúng thứ tự **a b c → d → e**, khai thẳng vì sao (d) mang ký
+pháp khác (nó **trỏ** tới vòng lặp [§5.1](.claude/rules/quan-ly-du-an.md), không chép lệnh), và mọc thêm
+**cổng của chính §3** với vế `đỏ khi` — đúng thứ mệnh đề trên nói là không có:
 
-Cưỡng chế bằng một dòng trong đích `check` của `Makefile`. **Đỏ khi** số nhãn `^# [a-e]\.` trong file khác
-số nhãn mà câu *"đều bắt buộc"* của §3 liệt ra.
+```bash
+$ grep -cE '^(# |\*\*)[a-z]\.' .claude/rules/bao-cao-thay-doi.md
+5
+$ grep '^\*\*Cả năm lệnh' .claude/rules/bao-cao-thay-doi.md | grep -o '([a-z])' | sort -u | wc -l
+5
+$ grep -nE '^(# |\*\*)[a-z]\.' .claude/rules/bao-cao-thay-doi.md | cut -c1-14
+99:# a. Mọi f
+102:# b. Mỗi d
+108:# c. Mỗi b
+112:**d.** Mọi
+118:# e. Mọi l
+```
 
-**Bẫy khi sửa.** Đừng chọn hướng 2 chỉ vì nó nhanh. Nếu (d) từng là cổng soi một thứ riêng, bỏ nhãn đi là
-**xoá một cổng rồi khai là đã dọn** — đúng hạng lỗi mà [F-16](#f-16) sinh ra để tố, chỉ đổi chiều.
+**Đã thử làm đỏ:** ✅ 2026-08-25, bốn ca trên bản sao, `đỏ khi` = hai số lệch nhau hoặc khác `5`:
+xoá nhãn `**d.**` ⇒ `4` vs `5` · câu khai rụng `(d)` (đúng *hướng 2* mà bản cũ đề nghị) ⇒ `5` vs `4` ·
+câu khai bịa thêm `(f)` — đúng hình dạng "cổng ma" mà bản cũ **tưởng** đang xảy ra ⇒ `5` vs `6` ·
+xoá thân `# c.` ⇒ `4` vs `5`. Bản thật `5` vs `5`.
+
+**Bài học giữ lại:** luật đổi ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md)
+— một bộ cổng phải có **cổng đếm chính nó**, và cổng đó phải bắt **mọi ký pháp nhãn mà file thật đang
+dùng**, không chỉ ký pháp dễ grep nhất. Bài học thứ hai, đắt hơn, áp cho **mọi** mục sổ lỗi và thuộc
+[.claude/rules/chat-luong-finding.md §2](.claude/rules/chat-luong-finding.md) phép thử *Tái hiện được*:
+lệnh tái hiện chứng minh **một phép đếm ra số nào**, nó **không** chứng minh **thứ được đếm không tồn
+tại**. Trước khi viết *"X chưa từng tồn tại"*, phải chạy thêm một lệnh **tìm X bằng đường khác** —
+ở đây `grep -rn '(d)'` toàn repo trả ra ngay ô biên nhận [T-14](task.md) khai *"(d) không dòng `TRỎ HỤT`
+nào"*, tức (d) đã chạy thật từ ngày đầu. Thiếu bước đó, sổ lỗi đẻ ra lệnh **xoá cơ chế đang chạy**.
+
+**Bẫy khi sửa.** Đừng nhét `# d.` vào trong khối ```bash cho "đều nhau": (d) không có thân lệnh riêng —
+nó trỏ sang §5.1 — nên một nhãn chỉ-có-chú-thích trong khối dựng lại đúng hình dạng đã sinh ra
+[F-16](#f-16). Ký pháp lệch là **cố ý**; thứ phải sửa là **lệnh đếm** và **thứ tự**, không phải ký pháp.
 
 ---
 
@@ -1997,8 +2040,9 @@ một commit sau đã chiếu vào chỗ khác. `owner-T-11` ghim sha thật `c3
 
 **Vì sao nó nguy hiểm hơn nó trông.** Cổng (e) chính là cổng owner dùng để **tự kiểm chứng** thay vì tin
 lời agent — ô nào rỗng thì owner mất đúng khả năng đó. Tệ hơn: một cổng đỏ **thường trực** dạy phiên sau
-rằng đỏ là bình thường, nên lần cổng này bắt được lỗi thật sẽ không ai nhìn. Đây đúng chế độ hỏng mà
-[F-32](#f-32) mô tả ở cổng (d) — cùng một rule, cùng một cách trượt.
+rằng đỏ là bình thường, nên lần cổng này bắt được lỗi thật sẽ không ai nhìn. Cùng một rule §3 đã trượt
+một kiểu khác ở cổng (d) — [F-32](#f-32), nhãn không đếm được nên cổng bị **tưởng** là không tồn tại; ở
+đây cổng tồn tại nhưng đỏ thường trực. Hai chiều trượt khác nhau, chung một gốc: §3 không tự soi được.
 
 **Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-27](task.md) đã sửa cột
 `Câu lệnh để thấy thay đổi` nhưng chỉ trong `task.md` phần sổ task, không rà bảng `owner-T-xx`;
