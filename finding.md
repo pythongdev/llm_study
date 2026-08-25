@@ -44,7 +44,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-28](#f-28) | Lệnh soi trục *Một nhà* của `cl-T-04` **tự bắt `task.md`**: chuỗi mốc `happy path` bắt buộc phải nằm trong chính ô soi, nên lệnh đỏ ở **cả hai** nhánh — có checklist thì ra `3` file (*bản chép thứ ba*), chưa có thì kết quả thiếu `quality/05-checklist.md` (*chưa có nhà*) | T-04 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ owner chỉ định vá ngay trong phiên T-04 — không đẻ task |
 | [F-29](#f-29) | Ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy `awk` 7 khoá trên **cả file** trong khi vế nó muốn đo là *bảy dòng `- [ ]`*: §2 của checklist nhắc lại đúng các chuỗi khoá, nên bản **xoá một vế rồi chèn một dòng bịa** qua được cả hai biên nhận — `grep -c` ra `7`, `awk` ra `7` | T-04 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task — owner giao agent riêng vá ngay sau T-04 |
 | [F-30](#f-30) | Biên nhận thứ nhất của [T-26](task.md) — `grep -c '<path>' .claude/rules/bao-cao-thay-doi.md` ra `0` — quét **cả file** trong khi phạm vi T-26 chỉ là §3: `<path>` ở §1 cột `Xem diff` và §2 cột `Câu lệnh để thấy thay đổi` là placeholder văn xuôi **hợp lệ, phải giữ**, nên ô này ra `2` kể cả khi (e) đã vá đúng — đỏ vĩnh viễn, và cách duy nhất làm nó xanh là lấn phạm vi | T-26 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ đóng ngay trong phiên vá — không đẻ task |
-| [F-31](#f-31) | Hai bản **dẫn xuất** từ `project_preparation/00-scope.md` không có cơ chế nào canh: `prompt-fullstack.md` §9.3 giữ 10 số giá tự khai *"hợp đồng với chủ quán"* mà chỉ khai nguồn bằng câu chữ, và `design/BA/04-yeu-cau.md` dòng 22 còn đánh ⚠️ cho `00-scope.md` §4.4 trong khi nhà đã có | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-31](#f-31) | Hai bản **dẫn xuất** từ `project_preparation/00-scope.md` không có cơ chế nào canh: `prompt-fullstack.md` §9.3 giữ 10 số giá tự khai *"hợp đồng với chủ quán"* mà chỉ khai nguồn bằng câu chữ, và `design/BA/04-yeu-cau.md` dòng 22 còn đánh ⚠️ cho `00-scope.md` §4.4 trong khi nhà đã có | T-05 · 2026-08-24 | 🟡 MỞ **vế (b)** — vế (a) đã xử 2026-08-25 | [T-37](task.md) |
 | [F-32](#f-32) | `.claude/rules/bao-cao-thay-doi.md` §3 khai *"cả năm lệnh (a) (b) (c) (d) (e) đều bắt buộc"* nhưng khối lệnh của §3 chỉ có **bốn** nhãn — `# d.` **chưa từng tồn tại** ở bất kỳ phiên bản nào của file; bộ bắt buộc đang đòi một lệnh ma, và phiên đóng T-26 đã khai *"(d) rỗng"* cho nó | T-05 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-33](#f-33) | `quality/05-checklist.md` tự khai là **nhà duy nhất** của câu hỏi *"task này XONG chưa"* cho task có code, nhưng cả bảy vế §1 chỉ đo **vệ sinh của đầu ra** — không vế nào hỏi đầu ra **có phải thứ ô `Task` yêu cầu không**; dòng 57 còn đẩy việc đó sang câu hỏi TỐT | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-34](#f-34) | Biên nhận `grep -c '^- \[ \]'` **= đúng 7, không hơn không kém** bị ghim ở **bốn** chỗ (checklist §5 · ô `Đầu ra kiểm chứng được` của T-04 · bảng `cl-T-04` · ô biên nhận của [T-33](task.md) còn mở), nên checklist **không có cửa** nhận vế XONG mới — kể cả vế học từ một sự cố thật mà §6.7 luật 2 đòi | rà quality/05-checklist.md · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task |
@@ -57,6 +57,8 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-41](#f-41) | `NHA` trong [Makefile](Makefile) là **danh sách gõ tay 10 file**, không cơ chế nào bắt một nhà mới bị bỏ ngoài: `quality/05-checklist.md` ra đời ở T-04 và **chưa từng** vào `NHA`, nên bốn đích của `make check` không hề soi nó — cổng xanh trong khi hai nhà đứng ngoài cổng | T-34 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-42](#f-42) | Nhịp *"chạy sáu probe N1–N6 rồi dán phiếu, trước biên nhận"* mà [quality/01-chat-luong-noi-dung.md §5](quality/01-chat-luong-noi-dung.md) đặt ra **không có nhà**: §7 file đó nhượng nhịp cho [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 4 rồi tự cấm mở nhịp thứ hai, nhưng mục 4 có **9** hàng và **không hàng nào** là sáu probe — thủ tục chấm nội dung tồn tại như văn bản, không tồn tại như nhịp | owner hỏi hiện trạng · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên phát hiện — không đẻ task |
 | [F-43](#f-43) | `paths:` của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) liệt kê **7** mẫu và **không mẫu nào khớp thư mục code**; [rule mục 6](.claude/rules/quan-ly-du-an.md) — 5 vế mở một lane — chỉ đòi `paths:` cho `.claude/rules/lane-<tên>.md`, không vế nào đòi nới `paths:` của rule quản lý dự án ⇒ từ lúc [T-07](task.md)/[T-08](task.md)/[T-09](task.md) mở lane DB/BE/FE, phiên viết code không nạp rule này, và hàng nhịp vừa thêm ở [F-42](#f-42) tắt đúng lúc đầu ra là code | owner hỏi hiện trạng · 2026-08-25 | 🔴 MỞ | [T-36](task.md) |
+| [F-44](#f-44) | **Định nghĩa XONG thiếu một vế.** [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 3 vế 4 khai *"**Ba** thứ của `CLAUDE.md` §4 đủ"* rồi liệt kê 3 — biên nhận · commit · `finding.md` — nhưng [CLAUDE.md §4](CLAUDE.md) khai *"cần đủ **bốn** thứ"*, thứ (4) là **bảng thay đổi**; phiên theo đúng rule mục 3 đánh ✅ hợp lệ mà không dán bảng, đúng thứ CLAUDE.md §4 gọi là *phiên chưa xong* | T-36 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-45](#f-45) | [prompt-fullstack.md §6.6](project_preparation/prompt-fullstack.md) khai bốn nhịp kiểm tra bắt buộc, nhịp thứ hai là *"mỗi ngày sau khi đóng quán → **tầng 2**"* — nhưng chuỗi `tầng 2` xuất hiện **đúng một lần** trong toàn repo, chính dòng khai nó, và **không file nào** nói tầng 2 gồm lệnh gì; [rule mục 4](.claude/rules/quan-ly-du-an.md) — nhà mà [checklist §4](quality/05-checklist.md) và [guideline §6](quality/00-guideline-chat-luong.md) trao quyền giữ nhịp — có **10** hàng và **0** hàng nào là nhịp của §6.6 | giải thích checklist §1 vế 1 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 
 ---
 
@@ -296,6 +298,8 @@ commit đè lên việc đó, và **không lệnh nào trong bộ khung đỏ**:
 
 **Chưa đóng được vì:** cả ba hướng đều đổi kiến trúc (thêm file khoá / thêm hook / đổi cách mở phiên),
 mà theo [CLAUDE.md §7](CLAUDE.md) đó là quyền của owner. Chốt xong mới mở dòng task.
+
+**Ca sống 2026-08-25.** Lần đầu bắt được tại chỗ, và nó tệ hơn mệnh đề trên mô tả. Một phiên NON-CODE mở [F-42](#f-42)/[F-43](#f-43)/[T-36](task.md) thấy cây **sạch** ở bước 4 ([CLAUDE.md §3](CLAUDE.md)); trong lúc nó gõ, phiên thứ hai **commit đè** đúng phần việc chưa commit của nó (`5df6c66`, `eb8a0c9`) rồi mở tiếp `F-44` của riêng mình — **cùng mã** với `F-44` phiên đầu vừa viết. Hai phiên tự phát hiện và một bên đổi sang `F-45`, nên lần này không mất gì; nhưng cơ chế cứu được là **may**, không phải luật: không lệnh nào trong repo bắt được trùng mã **trước khi ghi**, và `git status` sạch ở bước 4 **không** còn nghĩa là an toàn khi có phiên khác chạy. Thêm vế cho `Cách sửa đề xuất`: cấp mã `F-xx`/`T-xx` phải là thao tác **đọc-rồi-ghi trong một commit**, hoặc `CLAUDE.md` §3 bước 4 phải thêm điều kiện *không có phiên khác đang mở* — điều kiện hiện chưa đo được, đó mới là gốc.
 
 ---
 
@@ -1321,6 +1325,30 @@ lệch khỏi nhà thật. Vế (b): gỡ ⚠️ ở `design/BA/04-yeu-cau.md` d
 phải hardcode kết quả mong đợi — bảng ca test lấy số từ chính nhà nó đang kiểm thì không kiểm gì cả.
 Cái cần thêm là **lệnh đối chiếu**, không phải xoá một bên.
 
+**Vế (a) đã xử 2026-08-25 — không bằng lệnh đối chiếu, mà bằng cách bỏ hẳn bản chép.**
+Đối chiếu lại thì cả **10** số ở §9.3 đều là ô có sẵn của [00-scope.md](project_preparation/00-scope.md)
+§4.2 — không con nào là kết quả tính toán mới, nên §9.3 **đúng là nhà thứ hai**, không phải bảng ca test
+buộc hardcode. Ô *Bẫy khi sửa* ở trên đọc sai chính chỗ này: nó cảnh báo đúng luật, nhưng luật đó không
+áp cho mười số này. §9.3 nay giữ **11 tổ hợp đầu vào** (giá trị thật của nó: chọn ca nào để phủ) và trỏ
+[00-scope.md](project_preparation/00-scope.md) §4.2 §4.3 cho giá kỳ vọng. Ngoại lệ duy nhất giữ kết quả
+tại chỗ là ca 11 `→ LỖI` — nó không phải một giá nên §4.2 không tra ra được, nó là luật hành vi ở §4.3.
+
+**Đóng khi.** Vế (b) hết: `grep -n '00-scope' design/BA/04-yeu-cau.md | grep -c '⚠️'` ra **`0`** —
+**đỏ khi** ra `>= 1`. Việc của [T-37](task.md), lane BA; lane NON-CODE không sở hữu `design/BA/**`
+([CLAUDE.md §1](CLAUDE.md)).
+
+**Biên nhận vế (a)**, chạy từ gốc repo, đã chạy 2026-08-25:
+
+```bash
+B() { sed -n '/^\*\*9\.3 /,/^\*\*9\.4 /p' project_preparation/prompt-fullstack.md; }
+B | grep -cE '[0-9]+\.[0-9]{3}'   # ra 0  — đỏ khi >= 1: bản chép giá mọc lại ở §9.3
+B | grep -cE '^ *[0-9]+\. '       # ra 11 — đỏ khi != 11: gỡ số làm rụng mất một ca
+B | grep -c 'LỖI'                 # ra 1  — đỏ khi 0: dọn tay làm mất luôn ca hành vi
+```
+
+**Đã thử làm đỏ:** ✅ 2026-08-25, trên bản sao — chép lại `→ 4.000` vào ca 2 thì vế 1 ra `1`; xoá ca 7 thì
+vế 2 ra `10`; xoá dòng `→ LỖI` thì vế 3 ra `0`. Cả ba đỏ đúng như khai, bản thật vẫn `11` ca.
+
 ---
 
 ### F-32
@@ -1825,3 +1853,87 @@ dùng — là cám dỗ dễ nhất và sai ở đây: rule nạp ở **mọi** 
 ([CLAUDE.md §8](CLAUDE.md)), và một luật phiên nào cũng thấy là luật phiên nào cũng bỏ qua. Liệt kê mẫu,
 rồi bắt việc nới mẫu thành **vế của quy trình mở lane** — chỗ duy nhất chắc chắn được đọc khi lane mới ra
 đời.
+
+---
+
+### F-44
+
+**Mệnh đề sai.** [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 3 — nhà của
+**định nghĩa XONG khi chưa có compiler** ([CLAUDE.md §2](CLAUDE.md)) — có vế thứ 4 viết
+*"**Ba** thứ của `CLAUDE.md` §4 đủ:"* rồi liệt kê ba: biên nhận + output · commit · `finding.md` đổi
+trạng thái. Nhưng [CLAUDE.md §4](CLAUDE.md) dòng 59 khai *"Đánh ✅ cần đủ **bốn** thứ"*, và thứ (4) là
+**bảng thay đổi**, kèm câu *"Thiếu bảng ⇒ phiên chưa xong, dù biên nhận đã xanh"*. Hai nhà nói hai số
+khác nhau cho **cùng một** định nghĩa; nhà con chép số cũ.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết thì dòng này còn: không dòng
+task nào rà lại mục 3 của rule, và bảng thay đổi được thêm vào `CLAUDE.md` §4 sau khi mục 3 đã viết
+xong. Đây là **trôi một chiều** — nhà cha đổi, nhà con không có lệnh nào bắt phải theo, và cả hai đọc
+riêng đều hoàn chỉnh.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Vế thiếu không phải một vế bất kỳ: bảng thay đổi là thứ **duy
+nhất** cho owner thấy *cái gì vừa đổi* ([.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md)
+§1). Phiên nào nạp rule mà không nạp `CLAUDE.md` §4 kỹ sẽ dừng ở ba vế, ✅ hợp lệ, và owner mất đúng
+cái nhìn đó — trong khi mọi biên nhận vẫn xanh.
+
+**Lệnh tái hiện.**
+
+```bash
+grep -c '^4\. \*\*Ba thứ của' .claude/rules/quan-ly-du-an.md   # ra 1  ← nhà con nói BA
+grep -c 'cần đủ \*\*bốn\*\* thứ' CLAUDE.md                      # ra 1  ← nhà cha nói BỐN
+```
+
+**Cách sửa đề xuất.** Sửa vế 4 của mục 3 thành *"**Bốn** thứ của `CLAUDE.md` §4 đủ"* và thêm mẩu thứ tư
+`bảng thay đổi` + link [.claude/rules/bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) §1. Rồi
+**gắn lệnh gác**: mục 3 không được chép **số đếm** của `CLAUDE.md` §4 nữa mà trỏ sang, hoặc mục 4 nhận
+thêm một hàng *mỗi lần sửa `CLAUDE.md` §4 ⇒ chạy lại `grep` số đếm ở rule mục 3*. Chưa gắn vào task nào.
+
+**Bẫy khi sửa.** Đừng sửa bằng cách chép cả bốn vế của `CLAUDE.md` §4 vào rule — đó là đẻ nhà thứ hai
+lần nữa và lần sau sẽ trôi y hệt. Số đếm là thứ **cấm chép**; nó phải là con trỏ.
+
+### F-45
+
+**Mệnh đề sai.** [prompt-fullstack.md §6.6](project_preparation/prompt-fullstack.md) khai **nhịp kiểm tra**
+của cả dự án, và nhịp thứ hai của nó — *"mỗi ngày sau khi đóng quán → **tầng 2** + đối chiếu sổ giấy"* —
+**không ai chạy được**: chuỗi `tầng 2` xuất hiện **đúng một lần** trong toàn repo, chính là dòng khai nó,
+và không file nào nói tầng 2 **gồm lệnh gì**. Đối chứng ngay bên cạnh: `tầng 1` ở cùng câu đó **có nhà** —
+[quality/05-checklist.md](quality/05-checklist.md) §1 §2 nhắc nó **7** lần và gắn lệnh cụ thể cho từng stack.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết thì dòng này còn: `grep -c 'tầng 2'
+task.md` ra `0` — không dòng task nào nhắc tới nó. Con đường lẽ ra đưa nó vào cũng đã đóng: [T-04](task.md)
+(đã ✅) chép §6.**5** vào checklist chứ không chép §6.**6**, và [checklist §4](quality/05-checklist.md) tự
+khai **không sở hữu nhịp chạy**, nhượng cho [rule mục 4](.claude/rules/quan-ly-du-an.md) — nơi có 10 hàng và
+0 hàng nào là nhịp §6.6. Đây **không** phải dạng *"chưa có X"* mà [rule §4](.claude/rules/chat-luong-finding.md)
+đẩy sang sổ task: mệnh đề sai không phải *"tầng 2 chưa có định nghĩa"*, mà là **§6.6 đang khai một nhịp bắt
+buộc như thể nó thực thi được**. Câu đó sai ngay hôm nay, và sai bất kể task.md chạy tới đâu.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Nó không trông giống chỗ trống. §6.6 là một câu liền mạch bốn nhịp,
+đọc qua thấy đủ; rule mục 4 là bảng 10 hàng, hàng nào cũng đủ ba cột. Phiên nào mở một trong hai cũng thấy
+một cơ chế **đầy đủ về hình thức**, nên không phiên nào có lý do nghi. Cùng chế độ hỏng với [F-42](#f-42).
+
+**Lệnh tái hiện.**
+
+```bash
+# (1) tầng 2 chỉ tồn tại ở đúng chỗ khai nó — đỏ khi ra ĐÚNG 1 file (hiện đỏ).
+#     Tự loại finding.md, nếu không probe tự bắt chính mục này — bẫy của F-11 và F-28.
+grep -rl "tầng 2" --include="*.md" --include="Makefile" . | grep -v 'finding\.md$'
+# (2) không nhịp nào của §6.6 có mặt ở nhà giữ nhịp — đỏ khi ra 0 (hiện đỏ)
+sed -n '/^## 4\. Nhịp kiểm tra/,/^## 5\./p' .claude/rules/quan-ly-du-an.md \
+  | grep -c "tầng 2\|đóng quán\|restore\|deploy\|11h"
+# (3) đối chứng: tầng 1 thì có nhà — đỏ khi ra 0
+grep -c "tầng 1" quality/05-checklist.md
+```
+
+**Cách sửa đề xuất.** Hai nước, **hai nhà khác nhau**, đừng gộp:
+· **nội dung** (tầng 2 gồm lệnh gì) → hàng mới ở [quality/05-checklist.md §2](quality/05-checklist.md),
+cùng bảng đã giữ tầng 1 — nhưng file đang **75/75** kịch trần §5, nên thêm hàng phải nới trần §5 trong cùng
+commit, và nới trần là quyết định của owner, không phải của phiên.
+· **nhịp** (chạy lúc nào) → **đúng một hàng** ở [rule mục 4](.claude/rules/quan-ly-du-an.md), y khuôn nước A
+đã đóng [F-42](#f-42).
+Gắn vào task: **chưa có dòng nào**; đề xuất mở một dòng NON-CODE làm cả hai nước, xếp **sau**
+[T-36](task.md) để không va vào phiên đang sửa `task.md`.
+
+**Bẫy khi sửa.** Đừng "định nghĩa" tầng 2 bằng cách chép §6.6 vào checklist — §6.6 chỉ khai *nhịp*, chưa bao
+giờ khai *gồm lệnh gì*; nội dung tầng 2 **chưa từng tồn tại ở đâu**, nên đây là **viết mới** phải hỏi owner,
+không phải việc cơ khí. Và đừng gộp mã này vào [F-42](#f-42): F-42 là nhịp **có** nội dung (sáu probe N1–N6)
+mà thiếu hàng nhịp — sửa xong là hết; F-45 là nhịp **không có** nội dung, đóng nó cần owner chốt một thứ
+chưa ai viết. Một mã một nguyên nhân ([rule §2](.claude/rules/chat-luong-finding.md) phép thử thứ tư).
