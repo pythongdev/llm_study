@@ -116,4 +116,4 @@ Sáu nước lách bị cấm đích danh: chọn cách đếm có lợi khi lu�
 
 Thêm luật mới ⇒ **thay hoặc gộp một luật cũ**, không mở mục mới. File này nạp lại ở **mọi request của mọi phiên**, nên mỗi dòng thừa ở đây là khoản thuế mọi phiên sau đều trả.
 
-Luật chỉ đúng cho một loại file thì nhà của nó là `.claude/rules/` có `paths:`. Luật cần **chắc chắn** xảy ra thì nhà của nó là hook trong `.claude/settings.json` ([T-35](task.md)) hoặc một đích trong [Makefile](Makefile) ([T-38](task.md)) — câu chữ ở đây là lời đề nghị, hook và `make check` mới là cưỡng chế.
+Luật chỉ đúng cho một loại file thì nhà của nó là `.claude/rules/` có `paths:`. Luật cần **chắc chắn** xảy ra thì nhà của nó là hook trong `.claude/settings.json` ([T-35](task.md)) hoặc một đích trong [Makefile](Makefile) (lane DEVOPS, mở ở [T-06](task.md)) — câu chữ ở đây là lời đề nghị, hook và `make check` mới là cưỡng chế.
