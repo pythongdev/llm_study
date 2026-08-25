@@ -110,7 +110,8 @@ nguyên nhân, và cái chưa hiểu thì sẽ quay lại.
 
 ## 3. Định nghĩa XONG — giai đoạn KHÔNG CÓ COMPILER
 
-Repo chưa có `Makefile`, chưa có test runner (`CLAUDE.md` §7). Nên **biên nhận là lệnh đọc lại**.
+Repo đã có `Makefile`: `make check` chạy thật, là biên nhận thật ([CLAUDE.md §7](../../CLAUDE.md)).
+Chưa có test runner (Go, npm). Nên ngoài `make check`, **biên nhận là lệnh đọc lại**.
 Một task giai đoạn này gọi là XONG khi đủ **bốn** vế, thiếu một vế thì vẫn là đang làm:
 
 1. **Đầu ra tồn tại thật.** `test -e <đường dẫn>` không kêu. Trỏ tới file chưa có mà không đánh ⚠️
@@ -123,12 +124,15 @@ Một task giai đoạn này gọi là XONG khi đủ **bốn** vế, thiếu m�
 4. **Ba thứ của `CLAUDE.md` §4 đủ:** biên nhận + output dán vào · commit · `finding.md` đổi trạng thái
    nếu có finding bị đóng.
 
-**Cái gì KHÔNG được tính là biên nhận ở giai đoạn này:** `make ...` ⚠️ · `go test` ⚠️ · `npm run ...` ⚠️
-· "đã đọc lại thấy ổn" · "đã hoàn thành đầy đủ yêu cầu". Ba cái đầu chưa chạy được, hai cái sau không
-phải output của lệnh nào.
+**Cái gì KHÔNG được tính là biên nhận ở giai đoạn này:** `go test` ⚠️ · `npm run ...` ⚠️ · "đã đọc lại
+thấy ổn" · "đã hoàn thành đầy đủ yêu cầu". Hai cái đầu chưa chạy được, hai cái sau không phải output
+của lệnh nào. `make check` **không** nằm trong danh sách này — đánh ⚠️ cho nó là khai sai theo chiều
+bi quan: cổng đã dựng xong thành cổng không ai đi qua. Lệnh 3 của §5.3 dưới đây bắt chiều đó.
 
-**Khi `Makefile` đã có (T-03),** ba lệnh máy trên mới hết ⚠️, và định nghĩa XONG đầy đủ chuyển nhà sang
-`quality/05-checklist.md` (T-04 tạo). Từ lúc đó mục 3 này chỉ còn áp cho lane NON-CODE và BA.
+**`Makefile` đã có (T-03),** nên `make check` hết ⚠️; `go test` và `npm run ...` giữ ⚠️ cho tới khi lane
+BE và FE mở. Định nghĩa XONG đầy đủ chuyển nhà sang
+[quality/05-checklist.md](../../quality/05-checklist.md) (T-04 tạo). Từ lúc đó mục 3 này chỉ còn
+áp cho lane NON-CODE và BA.
 
 ---
 
@@ -205,16 +209,36 @@ for L in ba db be fe devops; do grep -qi "^| \*\*$(echo $L | tr a-z A-Z)\*\*.*�
 không có mục nào tên như vậy. Với mỗi con trỏ cấp mục vừa viết, `grep` nó trong chính file đích trước
 khi commit — ví dụ `grep -c 'Pha 0' project_preparation/prompt-fullstack.md` ra `0` nghĩa là con trỏ bịa.
 
-### 5.3 Ba lệnh dò phiên đang trôi
+### 5.3 Bốn lệnh dò phiên đang trôi
 
 ```bash
 git status --short | grep -v -E '^\?\? '   # sửa file ngoài lane: đối chiếu cột "Lane sở hữu" ở CLAUDE.md §1
-grep -rn 'make \|go test\|npm run' CLAUDE.md task.md | grep -v '⚠️'  # biên nhận là lời hứa, chưa đánh dấu
+grep -rn 'go test\|npm run' CLAUDE.md task.md | grep -v '⚠️'   # biên nhận là lời hứa, chưa đánh dấu
+grep -rnoE '⚠️ ?`make [a-z][a-z-]*`|`make [a-z][a-z-]*` ?⚠️' CLAUDE.md task.md .claude/rules/*.md \
+  | grep -oE 'make [a-z][a-z-]*' | sort -u \
+  | while read -r _ d; do make -n "$d" >/dev/null 2>&1 \
+      && echo "⚠️ THỪA: đích 'make $d' đã dựng xong, gỡ ⚠️"; done   # ⚠️ kề cổng đã chạy được
 git log --oneline -5 | grep -v -E '^[0-9a-f]+ (NON-CODE|BA|DB|BE|FE|DEVOPS)/T-[0-9]+:'  # commit không khai lane + mã task
 ```
 
-Lệnh thứ nhất bắt **sửa file ngoài lane**. Lệnh thứ hai bắt **báo xong mà không có biên nhận chạy được**.
-Lệnh thứ ba bắt **commit không truy vết được về một dòng task** — tức việc của pha sau lọt vào phiên này.
+**Lệnh 3 dùng `make -n`, không dùng mã thoát của `make`.** Hai thứ đó khác nhau: `make -n <đích>` ra `0`
+nghĩa là **cổng đã dựng** (đích có trong [Makefile](../../Makefile)), còn `make <đích>` ra khác `0` có thể
+chỉ nghĩa là **cổng đang bắt được lỗi thật** — hôm nay `make check` đúng là đang đỏ ở `check-so`
+([finding.md F-05 ca sống 2026-08-25](../../finding.md#f-05)). Lấy mã thoát của `make` làm bằng chứng thì
+mỗi ngày repo có lỗi thật, lệnh 3 lại tự tắt: ⚠️ thừa trôi qua đúng lúc cần bắt nhất.
+
+**Phải khớp thế kề nhau, không phải cùng dòng.** Bản cùng-dòng bắt nhầm đúng những câu **giải thích**
+luật ("đánh ⚠️ cho `make check` là khai sai") — đoạn §3 trên và [CLAUDE.md §7](../../CLAUDE.md) đều
+dính. Chỉ tính khi ⚠️ **kề** đích, cách nhau nhiều nhất một dấu cách, ở một trong hai thế.
+
+**Đỏ khi** một sổ hay file luật còn ⚠️ **kề** một đích `make` đã có trong [Makefile](../../Makefile).
+**Xanh khi** hoặc đích đó chưa dựng (⚠️ đúng), hoặc ⚠️ đã gỡ. Chạy 2026-08-25 lệnh này **đỏ**:
+[task.md](../../task.md) dòng 45, ô `Đầu ra` của `T-03`, còn ⚠️ từ thời chưa có `Makefile` —
+ca sống ghi ở [finding.md F-23](../../finding.md#f-23).
+
+Lệnh 1 bắt **sửa file ngoài lane**. Lệnh 2 bắt **báo xong mà không có biên nhận chạy được**. Lệnh 3 bắt
+chiều ngược lại: **⚠️ bi quan trên cổng đã chạy được**. Lệnh 4 bắt **commit không truy vết được về một
+dòng task** — tức việc của pha sau lọt vào phiên này.
 
 ---
 
