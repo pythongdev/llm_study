@@ -1,6 +1,6 @@
 # finding.md — sổ lỗi
 
-> Cập nhật **2026-08-25**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
+> Cập nhật **2026-08-26**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
 > [task.md](task.md). Phép thử một câu và luật không trộn hai sổ ở [CLAUDE.md §5](CLAUDE.md);
 > hai sổ khác nhau chỗ nào ở [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §2.
 
@@ -62,6 +62,8 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-46](#f-46) | Cổng **(e)** ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) đỏ **15 dòng** và đã đỏ từ lâu: 15 ô `Câu lệnh để thấy thay đổi` của 7 task đã gạch ghim `git show HEAD -- <file>` (toàn sổ có **63** ô như vậy), mà `HEAD` **trôi theo mỗi commit** — chúng nay chiếu vào commit chẳng liên quan. Cổng đỏ thường trực là cổng phiên sau học cách bỏ qua | ngoài-sổ · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-47](#f-47) | Sổ lỗi có **đường vào** mà không có **đường ra**: dòng vai trò ở [CLAUDE.md](CLAUDE.md) bắt *ghi một dòng vào finding.md rồi quay lại việc đang làm*, nhưng không luật nào bắt **giao dòng đó đi** — nên tồn đọng chỉ tăng: **37/46** finding còn 🔴 MỞ, **25** trong số đó khai `⚠️ chưa có task` | owner nêu · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên owner nêu — không đẻ task |
 | [F-48](#f-48) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi khớp đúng từng ký tự**, nên mục viết tiêu đề biến thể bị báo `THIẾU VẾ` trong khi vế **có thật**: 3/4 mục nó đang tố (`F-06` `F-07` `F-12`) đều đủ vế — cổng đỏ kinh niên, và ca đỏ **thật** duy nhất (`F-13`) chìm trong đó | đóng F-08 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên đóng F-08 |
+| [F-49](#f-49) | Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) khai mình là bộ dò việc của mọi phiên, nhưng **không file nào trong repo gọi nó nữa**: [CLAUDE.md §3](CLAUDE.md) bước 2 — caller duy nhất — nay khai *prompt là nguồn việc duy nhất*, `grep -c 'Task tiếp theo' CLAUDE.md` ra `0`; trong khi [huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md) vẫn bắt mục đó **phải là lệnh chạy được** | ngoài-sổ · 2026-08-26 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên mở |
+| [F-50](#f-50) | Bảng nhịp [mục 4](.claude/rules/quan-ly-du-an.md) của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) còn khai hàng *Mỗi lần sửa `CLAUDE.md`* là ``wc -l` ≤ 120` … `không nới trần`` — cả con số lẫn mệnh lệnh đều hết đúng từ `78a8901`: [CLAUDE.md §8](CLAUDE.md) nay ghi **140**, owner đã nới. Rule chép **số** thay vì trỏ nhà thật | ngoài-sổ · 2026-08-26 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên mở |
 
 ---
 
@@ -1202,6 +1204,19 @@ làm `b334899` trông như đang chứa đủ phần §7 và §1 nó khai — c�
 cờ chứa hai chuỗi đó. Bỏ neo `^+` còn tệ hơn: `git show` in cả dòng ngữ cảnh **không đổi**, nên
 `grep -c 'Sáu nước lách'` ra `1` cho **cả hai** commit và mệnh đề tự xanh. Mẫu phải neo `^+` **và** chọn
 chuỗi chỉ có trong phần thêm — cùng họ hỏng với [F-20](#f-20).
+
+
+**Ca sống thứ năm — 2026-08-26: không mất hunk, mất *bản khai*.** Phiên NON-CODE này thấy cây bẩn **3 file** ở
+bước 4 ([CLAUDE.md §3](CLAUDE.md)), khai đủ ba file vào message rồi `git add task.md finding.md CLAUDE.md`.
+Trong lúc nó đọc rule, phiên khác commit `7c3f7f0` đúng `task.md` + `finding.md` với **cùng nội dung** — nên
+`git add` stage được đúng **một** file, và commit ra đời chứa `CLAUDE.md` trong khi message khai ba.
+**Không hunk nào bị nuốt**: đây là biến thể rẻ nhất của mục này, và chính vì rẻ nên nó dễ trôi nhất — cây sạch,
+biên nhận xanh, chỉ `git log` sai, mà `git log` là nhà duy nhất của *ai sửa file nào* ([CLAUDE.md §2](CLAUDE.md)).
+Bắt được chỉ vì phiên chạy `git show --stat` **ngay sau** commit; sửa bằng `git commit --amend` (`a89a0be` →
+`0d5dc42`, chưa ai ghim nên amend không giết con trỏ nào — luật ghim sha ở [F-46](#f-46)).
+Thêm vế cho `Cách sửa đề xuất`, rẻ hơn mọi cơ chế khoá: **mỗi commit xong chạy `git show --stat <sha>` và đối
+chiếu với message của chính nó**. Nó bắt đúng lớp hỏng mà `git status` sạch ở bước 4 không thấy được, vì lớp này
+sinh ra **sau** khi bước 4 chạy xong.
 
 ---
 
@@ -2401,4 +2416,79 @@ thứ 14 lại viết biến thể; và sửa nội dung 3 mục 🔴 để làm
 *"viết lại biên nhận cho vừa kết quả đã có"* mà [CLAUDE.md §8](CLAUDE.md) cấm đích danh.
 Sau khi nới cổng, output phải còn **đúng một** dòng: `THIẾU VẾ: F-13 Vì-sao-không-tự-mất` — còn 4 dòng là chưa
 sửa, còn 0 dòng là nới quá tay, cổng đã ngừng bắt được ca thật.
+### F-49
 
+**Mệnh đề sai.** Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) tự khai là bộ dò việc của mọi phiên
+(*"Chạy hai lệnh, đúng thứ tự"*), nhưng **không file nào trong repo gọi nó nữa**. Caller duy nhất là
+[CLAUDE.md §3](CLAUDE.md) bước 2, và bước 2 nay khai *prompt là nguồn việc duy nhất* (owner chốt 2026-08-26,
+bỏ **hẳn** vế dò sổ chứ không hạ xuống fallback). Cùng lúc
+[project_preparation/huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md) — nhà của
+*luật viết sổ task* theo [CLAUDE.md §2](CLAUDE.md) — vẫn bắt mục đó *"phải là **lệnh chạy được** dò theo đúng
+các tầng này"*. Hai nhà đang khai ngược nhau, cả hai đều có hiệu lực.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-30](task.md) siết khuôn message
+commit, [T-32](task.md) thêm vế `Đóng khi.` cho sổ lỗi, [T-33](task.md) tạo nhà cho ràng buộc kiến trúc,
+[T-35](task.md) dựng hook `Stop` — không dòng nào chạm mục *Task tiếp theo* hay §5.12. Ngược lại, mỗi phiên sau
+đọc `task.md` từ trên xuống lại gặp một bộ dò trông còn hiệu lực và chạy nó, tức cái sai **được dùng** chứ không
+nằm im. Còn ⇒ finding.
+
+**Lệnh tái hiện.** Ba vế, chạy từ gốc repo:
+
+```bash
+grep -c 'Task tiếp theo' CLAUDE.md                                   # ra 0  <- caller đã mất
+sed -n '/^## Task tiếp theo/,/^---/p' task.md | grep -c '^grep -n'   # ra 2  <- bộ dò vẫn còn, vẫn 2 lệnh
+grep -c 'lệnh chạy được' project_preparation/huong-dan-viet-task-md.md   # ra >= 1 <- nhà kia vẫn bắt buộc
+```
+
+Vế 1 ra `0` **và** vế 2 ra `2` là đủ dựng mâu thuẫn: một mục còn nguyên, không ai gọi.
+
+**Đóng khi.** Ba vế trên hết mâu thuẫn — hoặc vế 1 ra `>= 1` (có caller mới, hợp lệ), hoặc vế 2 ra `0` (bộ dò
+đã rút khỏi `task.md`) **và** §5.12 sửa theo. **Đỏ khi** vế 1 ra `0` mà vế 2 vẫn ra `2`: đúng trạng thái hôm nay.
+
+**Cách sửa đề xuất.** Chốt **hướng (a) — giữ bộ dò, đổi vai thành *tra cứu theo yêu cầu*, không phải *nguồn việc***:
+sửa lời mở của mục thành *"người dùng hỏi còn việc gì thì chạy hai lệnh này"*, và sửa §5.12 của
+[huong-dan-viet-task-md.md](project_preparation/huong-dan-viet-task-md.md) cho khớp vai mới.
+Hướng (b) — **xoá hẳn** mục khỏi `task.md` — bị loại: `task.md` vẫn là nhà của *làm gì tiếp, theo thứ tự nào*
+([CLAUDE.md §2](CLAUDE.md)), và xoá bộ dò thì câu hỏi đó chỉ còn trả lời được bằng cách đọc cả sổ — đắt hơn hẳn
+việc sửa một dòng lời mở. Cả hai hướng chạm **2 file**, một lane NON-CODE, vừa [CLAUDE.md §6](CLAUDE.md).
+
+`Ngoài: Makefile — mục tiêu không ai gọi (dead target), lint bắt bằng đồ thị phụ thuộc` · `Ta:` bắt bằng
+`grep -c` một chiều, không dựng đồ thị · `Vì:` repo này có đúng một caller cho mỗi mục, đồ thị là công cụ của
+hệ hàng nghìn đích, không phải của một sổ hai chục dòng.
+
+**Bẫy khi sửa.** Đừng nhân tiện đóng luôn [F-18](#f-18): mệnh đề của F-18 khai *"bước 2 của §3 dò đúng vào nó"*
+— kênh hại đó nay biến mất, nhưng **nguyên nhân** của F-18 là *task xong trong git mà dòng sổ còn mở*, và nguyên
+nhân đó còn nguyên. Đóng F-18 vì kênh hại đổi chỗ là đóng nhầm; sửa **mệnh đề** F-18 cho khớp hiện trạng là việc
+của [T-30](task.md), không phải của finding này.
+### F-50
+
+**Mệnh đề sai.** Hàng *Mỗi lần sửa `CLAUDE.md`* trong bảng nhịp mục 4 của
+[.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) khai điều kiện kiểm là ``wc -l` ≤ 120` và
+hậu quả là *"gộp hoặc thay luật cũ, **không nới trần**"*. Cả hai vế đã hết đúng ở commit `78a8901`
+(2026-08-26): [CLAUDE.md §8](CLAUDE.md) nay ghi trần **140 dòng**, và ghi rõ *owner nới ngày 2026-08-26,
+có hạn*. Theo [CLAUDE.md §2](CLAUDE.md), nhà thật thắng ⇒ hàng rule này là **bug phải sửa**, không phải
+một cách đọc khác. Gốc sâu hơn: rule **chép số** của một nhà khác thay vì trỏ tới nó.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: [T-30](task.md) sửa
+[CLAUDE.md §4](CLAUDE.md) và §5.2 của rule, [T-32](task.md) sửa sổ lỗi, [T-33](task.md) sửa
+[CLAUDE.md §2](CLAUDE.md), [T-35](task.md) sửa `.claude/settings.json` — không dòng nào chạm mục 4.
+Bằng chứng mạnh hơn: chính commit `78a8901` nới trần **có** sửa mục 3 của rule này mà **không** sửa mục 4,
+tức lệch này đã sống sót đúng cái phiên sinh ra nó. Còn ⇒ finding.
+
+**Lệnh tái hiện.** Hai vế, chạy từ gốc repo:
+
+```bash
+grep -c '≤ 120' .claude/rules/quan-ly-du-an.md   # ra 1  <- rule còn ghim số cũ
+grep -c '140 dòng' CLAUDE.md                     # ra 1  <- nhà thật đã là 140
+```
+
+**Đóng khi.** Vế 1 ra `0` — rule hết ghim số. **Đỏ khi** vế 1 ra `>= 1` trong lúc vế 2 vẫn ra `1`: đúng
+trạng thái hôm nay, hai nhà khai hai con số.
+
+**Cách sửa đề xuất.** Chốt **bỏ con số khỏi rule, thay bằng con trỏ**: ô điều kiện của hàng đó viết
+*"ba cổng ở [CLAUDE.md §8](CLAUDE.md)"*, ô hậu quả bỏ vế *"không nới trần"* (nới trần là quyền owner theo
+[CLAUDE.md §7](CLAUDE.md), rule lane không cấm được). Hướng *sửa `120` thành `140`* bị **loại**: nó xanh
+đúng tới lần nới trần kế, rồi lệch lại — và đó chính là cách lệch hôm nay ra đời. Một file, lane NON-CODE.
+
+**Bẫy khi sửa.** Đừng nhân tiện quét cả rule tìm số khác để trỏ hoá — mục 4 còn nhiều hàng ghim ngưỡng
+**của chính rule đó**, và những hàng ấy **đúng nhà**, không phải lệch.
