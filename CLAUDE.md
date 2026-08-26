@@ -1,8 +1,10 @@
 # CLAUDE.md — luật + con trỏ
 
-> Cập nhật **2026-08-25**. **File này là bản đồ, không phải lãnh thổ.** Nó không giữ sự thật nào của dự án: mỗi dòng hoặc là **luật làm việc**, hoặc là **con trỏ** tới nhà thật. Lệch nhà thật ⇒ **nhà thật thắng**, dòng ở đây là bug phải sửa ngay. Trần của chính file này ở §8.
+> Cập nhật **2026-08-26**. **File này là bản đồ, không phải lãnh thổ.** Nó không giữ sự thật nào của dự án: mỗi dòng hoặc là **luật làm việc**, hoặc là **con trỏ** tới nhà thật. Lệch nhà thật ⇒ **nhà thật thắng**, dòng ở đây là bug phải sửa ngay. Trần của chính file này ở §8.
 >
 > **Vai trò.** Người dùng giao task + yêu cầu; agent tự chọn cách làm, tự viết, **tự kiểm chứng bằng lệnh**, không hỏi lại thứ đọc được trong repo. Đổi lại: thấy hệ thống sai thì **nổi lên** — ghi một dòng vào [finding.md](finding.md) kèm cách sửa đề xuất, rồi quay lại việc đang làm. Im lặng tự xử = vi phạm.
+>
+> **Nội dung sai thì mọi thứ xây lên nó đều sai**, và chỉ lộ ở phiên thứ ba dưới dạng làm lại từ đầu. Nên nó là **cổng**, không phải lời khuyên: §3 bước 5 · §4 vế (5) · nhà thật [quality/01-chat-luong-noi-dung.md §3 §4](quality/01-chat-luong-noi-dung.md).
 
 ## §1 Định tuyến lane — chọn lane trước khi mở file thứ nhất
 
@@ -50,15 +52,17 @@ Nghi một file cũ: so dòng `Cập nhật <ngày>` trong file với `git log -
    **bảng đầu [finding.md](finding.md)** — finding còn 🔴 MỞ mà chạm file task này sẽ sửa thì đọc mục đó trước khi gõ.
    Đi tiếp khi mọi đường dẫn `test -e` ra thật **và** mọi con trỏ cấp `§`/mục `grep` ra được trong chính file đích.
 4. **ĐIỂM LÙI.** Cây bẩn ⇒ commit hoặc `git stash` trước khi gõ ký tự đầu tiên. Đi tiếp khi `git status --short` rỗng. Có điểm lùi thì mọi bước sau lùi được bằng `git checkout -- <file>`.
-5. **Làm.** Chỉ chạm file lane sở hữu ở §1. Vượt kích cỡ §6 ⇒ dừng, chẻ, ghi dòng task mới.
+5. **Làm.** Chỉ chạm file lane sở hữu ở §1. Vượt kích cỡ §6 ⇒ dừng, chẻ, ghi dòng task mới. Đi tiếp khi phiên **sinh nội dung mới** đã chạy sáu probe + dán **phiếu sáu dòng** ([quality/01-chat-luong-noi-dung.md §5](quality/01-chat-luong-noi-dung.md)); nhịp ở [.claude/rules/quan-ly-du-an.md mục 4](.claude/rules/quan-ly-du-an.md).
 6. **Kiểm chứng.** Chạy biên nhận của lane, **dán output vào câu trả lời**. Đỏ ⇒ quay lại bước 5, không đi tiếp.
 7. **Ghi sổ rồi đóng.** Theo §4. Ghi sổ **trước** khi báo xong, vì phiên bị cắt giữa chừng mất đúng phần chưa ghi.
 
 ## §4 Đầu ra session — biên nhận, không phải lời khai
 
-Đánh ✅ cần đủ **bốn** thứ, thiếu một thứ thì vẫn là đang làm: **(1)** biên nhận của lane chạy thật + output dán vào · **(2)** commit chứa thay đổi · **(3)** [finding.md](finding.md) đổi trạng thái kèm ngày + cách kiểm chứng, nếu task có đóng finding.
+Đánh ✅ cần đủ **năm** thứ, thiếu một thứ thì vẫn là đang làm: **(1)** biên nhận của lane chạy thật + output dán vào · **(2)** commit chứa thay đổi · **(3)** [finding.md](finding.md) đổi trạng thái kèm ngày + cách kiểm chứng, nếu task có đóng finding.
 
 **(4)** **Bảng thay đổi**, dán **trước** khi commit, mỗi file đã đụng một dòng: link tới file · **sửa ở đâu** (§/mục/dòng) · sửa gì, một câu · lệnh xem diff riêng file đó. Khuôn + 5 lệnh tự rà: [.claude/rules/bao-cao-thay-doi.md §1 §3](.claude/rules/bao-cao-thay-doi.md). Thiếu bảng ⇒ phiên **chưa xong**, dù biên nhận đã xanh.
+
+**(5)** **Phiếu sáu dòng** N1–N6 cạnh bảng thay đổi, mỗi dòng `N<i> · ĐẠT|KHÔNG ĐẠT · dẫn chứng`; dẫn chứng là số dòng hoặc output, *"đã rà"* không tính. Một trục KHÔNG ĐẠT ⇒ đầu ra bị **trả lại**, không nợ. Probe + phán quyết: [quality/01-chat-luong-noi-dung.md §3 §4 §5 §6](quality/01-chat-luong-noi-dung.md).
 
 **Trích dẫn đủ nhà** — mọi câu, mọi ô bảng, mọi dòng sổ: con trỏ vào repo viết `[đường/dẫn/file.md §6]` rồi `(đường/dẫn/file.md)`, đủ **cả** đường dẫn **và** mục, **mọi** lần nhắc, không rút gọn từ lần hai. Cấm `§6` trần, cấm `guideline §3`, cấm tên file trần — owner bấm thẳng, không đi tìm.
 
@@ -100,10 +104,10 @@ Việc thuộc quyền người dùng, agent chuẩn bị sẵn rồi dừng l�
 
 ## §8 Trần của chính file này — và luật cấm lách
 
-Trần: **120 dòng** toàn file · **mỗi mục ≤ 20 dòng** · mỗi dòng ≤ 400 byte. Byte có trần để `grep -n` thay được việc đọc cả file. Ba lệnh kiểm, cả ba phải xanh:
+Trần: **140 dòng** toàn file — owner nới từ `120` ngày 2026-08-26, **có hạn**: luật *thêm một dòng ⇒ gộp một dòng cũ* vẫn nguyên, 140 là trần cứng chứ không phải 20 dòng dư · **mỗi mục ≤ 20 dòng** · mỗi dòng ≤ 400 byte. Byte có trần để `grep -n` thay được việc đọc cả file. Ba lệnh kiểm, cả ba phải xanh:
 
 ```bash
-wc -l < CLAUDE.md                             # ra <= 120 — đỏ khi lớn hơn
+wc -l < CLAUDE.md                             # ra <= 140 — đỏ khi lớn hơn
 awk 'length > 400' CLAUDE.md                  # phải rỗng — đỏ khi in ra dòng nào
 awk '/^## §/{if(n)print n": "c; n=$2; c=0} {c++} END{print n": "c}' CLAUDE.md | awk '$2>20'   # phải rỗng
 ```

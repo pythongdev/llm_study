@@ -56,8 +56,8 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-40](#f-40) | Hệ đánh số tên file `quality/` va nhau: [guideline §7](quality/00-guideline-chat-luong.md) đặt tầng pha ở `quality/0n-pha-<n>-<tên>.md` cho **6 pha** ⇒ pha 4 đòi `05-`, pha 5 đòi `06-`; nhưng `05-` đã là `05-checklist.md` (T-04 đã xong) và `06-` đã bị [T-33](task.md) đặt trước cho `06-rang-buoc-kien-truc.md` — hai chỗ va, cả hai đều đã ghim vào sổ | T-34 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-41](#f-41) | `NHA` trong [Makefile](Makefile) là **danh sách gõ tay 10 file**, không cơ chế nào bắt một nhà mới bị bỏ ngoài: `quality/05-checklist.md` ra đời ở T-04 và **chưa từng** vào `NHA`, nên bốn đích của `make check` không hề soi nó — cổng xanh trong khi hai nhà đứng ngoài cổng | T-34 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-42](#f-42) | Nhịp *"chạy sáu probe N1–N6 rồi dán phiếu, trước biên nhận"* mà [quality/01-chat-luong-noi-dung.md §5](quality/01-chat-luong-noi-dung.md) đặt ra **không có nhà**: §7 file đó nhượng nhịp cho [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 4 rồi tự cấm mở nhịp thứ hai, nhưng mục 4 có **9** hàng và **không hàng nào** là sáu probe — thủ tục chấm nội dung tồn tại như văn bản, không tồn tại như nhịp | owner hỏi hiện trạng · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên phát hiện — không đẻ task |
-| [F-43](#f-43) | `paths:` của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) liệt kê **7** mẫu và **không mẫu nào khớp thư mục code**; [rule mục 6](.claude/rules/quan-ly-du-an.md) — 5 vế mở một lane — chỉ đòi `paths:` cho `.claude/rules/lane-<tên>.md`, không vế nào đòi nới `paths:` của rule quản lý dự án ⇒ từ lúc [T-07](task.md)/[T-08](task.md)/[T-09](task.md) mở lane DB/BE/FE, phiên viết code không nạp rule này, và hàng nhịp vừa thêm ở [F-42](#f-42) tắt đúng lúc đầu ra là code | owner hỏi hiện trạng · 2026-08-25 | 🔴 MỞ | [T-36](task.md) |
-| [F-44](#f-44) | **Định nghĩa XONG thiếu một vế.** [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 3 vế 4 khai *"**Ba** thứ của `CLAUDE.md` §4 đủ"* rồi liệt kê 3 — biên nhận · commit · `finding.md` — nhưng [CLAUDE.md §4](CLAUDE.md) khai *"cần đủ **bốn** thứ"*, thứ (4) là **bảng thay đổi**; phiên theo đúng rule mục 3 đánh ✅ hợp lệ mà không dán bảng, đúng thứ CLAUDE.md §4 gọi là *phiên chưa xong* | T-36 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-43](#f-43) | `paths:` của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) liệt kê **7** mẫu và **không mẫu nào khớp thư mục code**; [rule mục 6](.claude/rules/quan-ly-du-an.md) — 5 vế mở một lane — chỉ đòi `paths:` cho `.claude/rules/lane-<tên>.md`, không vế nào đòi nới `paths:` của rule quản lý dự án ⇒ từ lúc [T-07](task.md)/[T-08](task.md)/[T-09](task.md) mở lane DB/BE/FE, phiên viết code không nạp rule này, và hàng nhịp vừa thêm ở [F-42](#f-42) tắt đúng lúc đầu ra là code | owner hỏi hiện trạng · 2026-08-25 | ✅ ĐÓNG 2026-08-26 | [T-36](task.md) ⚠️ nay thừa — xem Bài học |
+| [F-44](#f-44) | **Định nghĩa XONG thiếu một vế.** [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 3 vế 4 khai *"**Ba** thứ của `CLAUDE.md` §4 đủ"* rồi liệt kê 3 — biên nhận · commit · `finding.md` — nhưng [CLAUDE.md §4](CLAUDE.md) khai *"cần đủ **bốn** thứ"*, thứ (4) là **bảng thay đổi**; phiên theo đúng rule mục 3 đánh ✅ hợp lệ mà không dán bảng, đúng thứ CLAUDE.md §4 gọi là *phiên chưa xong* | T-36 · 2026-08-25 | ✅ ĐÓNG 2026-08-26 | ⚠️ đóng ngoài sổ, cùng phiên nâng trần |
 | [F-45](#f-45) | [prompt-fullstack.md §6.6](project_preparation/prompt-fullstack.md) khai bốn nhịp kiểm tra bắt buộc, nhịp thứ hai là *"mỗi ngày sau khi đóng quán → **tầng 2**"* — nhưng chuỗi `tầng 2` xuất hiện **đúng một lần** trong toàn repo, chính dòng khai nó, và **không file nào** nói tầng 2 gồm lệnh gì; [rule mục 4](.claude/rules/quan-ly-du-an.md) — nhà mà [checklist §4](quality/05-checklist.md) và [guideline §6](quality/00-guideline-chat-luong.md) trao quyền giữ nhịp — có **10** hàng và **0** hàng nào là nhịp của §6.6 | giải thích checklist §1 vế 1 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-46](#f-46) | Cổng **(e)** ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) đỏ **15 dòng** và đã đỏ từ lâu: 15 ô `Câu lệnh để thấy thay đổi` của 7 task đã gạch ghim `git show HEAD -- <file>` (toàn sổ có **63** ô như vậy), mà `HEAD` **trôi theo mỗi commit** — chúng nay chiếu vào commit chẳng liên quan. Cổng đỏ thường trực là cổng phiên sau học cách bỏ qua | ngoài-sổ · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-47](#f-47) | Sổ lỗi có **đường vào** mà không có **đường ra**: dòng vai trò ở [CLAUDE.md](CLAUDE.md) bắt *ghi một dòng vào finding.md rồi quay lại việc đang làm*, nhưng không luật nào bắt **giao dòng đó đi** — nên tồn đọng chỉ tăng: **37/46** finding còn 🔴 MỞ, **25** trong số đó khai `⚠️ chưa có task` | owner nêu · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên owner nêu — không đẻ task |
@@ -2076,6 +2076,53 @@ dùng — là cám dỗ dễ nhất và sai ở đây: rule nạp ở **mọi** 
 rồi bắt việc nới mẫu thành **vế của quy trình mở lane** — chỗ duy nhất chắc chắn được đọc khi lane mới ra
 đời.
 
+**Ca sống 2026-08-26.** Mệnh đề đặt mốc nổ ở [T-07](task.md)/[T-08](task.md)/[T-09](task.md), và mốc đó
+**sai về sớm một lane**: commit `3c32e4c` ([T-06](task.md)) đã mở lane DEVOPS, `paths:` của
+[.claude/rules/lane-devops.md](.claude/rules/lane-devops.md) là `Makefile` · `deploy/**` · `.env*` —
+không mẫu nào trong 7 mẫu khớp — và gói nạp của hàng DEVOPS ở [CLAUDE.md §1](CLAUDE.md) không có
+`quan-ly-du-an.md`. Nên câu *"hôm nay vô hại"* hết đúng ngay hôm sau ngày viết nó, và nó hết đúng **im
+lặng**, vì `make check` đo `Makefile` chứ không đo việc phiên có chạy N1–N6.
+
+**Kiểm chứng.** Owner chốt 2026-08-26: **không** đi nước B nữa. Nhịp không còn đi qua `paths:` — nó
+được ghim vào chính vòng lặp phiên, thứ nạp ở **mọi request của mọi phiên** ([CLAUDE.md §8](CLAUDE.md)):
+
+```bash
+# (1) cổng nằm ở bước 5 — bước duy nhất của §3 trước đây KHÔNG có "Đi tiếp khi"
+sed -n '/^## §3/,/^## §4/p' CLAUDE.md | grep -c 'phiếu sáu dòng'          # ra 1  (trước: 0)
+# (2) và là vế của ✅, không phải lời khuyên
+grep -c 'cần đủ \*\*năm\*\* thứ' CLAUDE.md                               # ra 1  (trước: "bốn")
+sed -n '/^## §4/,/^## §5/p' CLAUDE.md | grep -c '^\*\*(5)\*\*'             # ra 1
+# (3) biên nhận âm — CẤM chép sáu trục vào CLAUDE.md, chỉ được trỏ
+grep -cE 'N[1-6] · ĐẠT' CLAUDE.md                                        # ra 0 — đỏ khi >= 1
+```
+
+Lệnh (3) là vế *đỏ khi* của cụm này, và nó đã được **thử làm đỏ một lần** trước khi commit: dán thử một
+dòng `N1 · ĐẠT · x` vào [CLAUDE.md](CLAUDE.md) thì nó in `1`, gỡ dòng đó ra thì về `0`. Khôi phục bằng
+cách **đảo đúng phép chèn**, không bằng `git checkout --`: cây lúc đó đang giữ ba file chưa commit của
+phiên này, và `git checkout --` sẽ nuốt cả ba — đúng chế độ hỏng mà [F-24](#f-24) mô tả.
+
+Vế *"7 mẫu không khớp thư mục code"* vẫn **đúng nguyên văn** — nó chỉ hết **hại**, vì không cơ chế nào
+còn treo trên nó. Đó là lý do mã này đóng chứ không tách mã mới: nguyên nhân của F-43 là *nhịp chất
+lượng không tới được lane code*, và nguyên nhân đó chết.
+
+**Bài học giữ lại:** `Ngoài: GitHub CODEOWNERS` — luật gán theo **path pattern**, thư mục mới không khớp
+mẫu nào thì không có owner và **không cảnh báo nào bật**; đúng một chế độ hỏng với `paths:` ở đây.
+`Ta:` bỏ hẳn `paths:` cho cổng chất lượng, neo vào [CLAUDE.md §3](CLAUDE.md) bước 5 — chỗ **mọi** phiên đi
+qua, bất kể lane. `Vì:` repo mới có 2/6 lane mở ([CLAUDE.md §1](CLAUDE.md)), nên chi phí thật không nằm ở
+vài dòng nạp thừa mà ở **bốn lane sắp mở chạy ngoài nhịp mà không ai biết**.
+
+Cụ thể: cơ chế phải chạy ở **lane chưa tồn tại** thì **cấm neo vào `paths:`** — `paths:` chỉ
+bắt được thư mục đã biết tên hôm nay, nên nó luôn hụt đúng lane mở sau. Neo vào [CLAUDE.md §3](CLAUDE.md)
+(vòng lặp mọi phiên đi qua) hoặc hook `.claude/settings.json` ([T-35](task.md)). Luật đổi ở ba chỗ, cùng
+commit: [CLAUDE.md §3](CLAUDE.md) bước 5 nay có *Đi tiếp khi* — trước đó là bước **duy nhất** của §3
+không có, tức §3 tự phá lời hứa ở chính tiêu đề nó · [CLAUDE.md §4](CLAUDE.md) lên **năm** vế ✅, thêm
+**(5)** phiếu sáu dòng · [CLAUDE.md §8](CLAUDE.md) trần `120`→`140`, owner nới **có hạn**, luật *thêm một
+dòng ⇒ gộp một dòng cũ* giữ nguyên để 140 không thành 20 dòng dư.
+
+Hệ quả: [T-36](task.md) mất lý do tồn tại — cả `.claude/rules/chat-luong-noi-dung.md` lẫn *vế thứ 6* của
+[rule mục 6](.claude/rules/quan-ly-du-an.md) đều chỉ để lôi rule vào phiên code, việc mà §3 nay làm không
+tốn file nào. Huỷ T-36 là việc của phiên sau, chạm [task.md](task.md).
+
 ---
 
 ### F-44
@@ -2111,6 +2158,33 @@ thêm một hàng *mỗi lần sửa `CLAUDE.md` §4 ⇒ chạy lại `grep` s�
 
 **Bẫy khi sửa.** Đừng sửa bằng cách chép cả bốn vế của `CLAUDE.md` §4 vào rule — đó là đẻ nhà thứ hai
 lần nữa và lần sau sẽ trôi y hệt. Số đếm là thứ **cấm chép**; nó phải là con trỏ.
+
+**Kiểm chứng.** Đóng ngày 2026-08-26, đi đúng hướng *cấm chép số đếm* chứ **không** đi hướng sửa `Ba`
+thành `Bốn` — hướng đó chỉ đúng cho tới lần §4 đổi tiếp, và §4 đã đổi ngay trong cùng commit này
+(`bốn`→`năm`, thêm vế **(5)** phiếu sáu dòng). Hai lệnh tái hiện ở trên nay **cả hai** ra `0`:
+
+```bash
+grep -c '^4\. \*\*Ba thứ của' .claude/rules/quan-ly-du-an.md   # ra 0  (trước: 1)
+grep -c 'cần đủ \*\*bốn\*\* thứ' CLAUDE.md                      # ra 0  (trước: 1)
+grep -c 'mục này cấm chép lại nó' .claude/rules/quan-ly-du-an.md  # ra 1  ← con trỏ đã thay số đếm
+```
+
+Biên nhận âm của mã này: **đỏ khi** lệnh thứ ba ra `0`, hoặc khi
+
+```bash
+grep -cE '^4\. \*\*(Ba|Bốn|Năm|Sáu)\*?\*? thứ' .claude/rules/quan-ly-du-an.md   # ra 0 — đỏ khi >= 1
+```
+
+ra `>= 1` — tức một phiên sau lại chép số đếm vào nhà con. **Lần thử làm đỏ đầu tiên đã bắt được chính
+lệnh này đo hụt:** bản đầu viết `\*\*(Ba|Bốn|Năm|Sáu) thứ`, khớp `**Ba thứ của` (bold trùm cả cụm) nhưng
+**trượt** `**Năm** thứ của` (bold chỉ trùm chữ số) — dựng thử vế sai kiểu thứ hai thì lệnh vẫn in `0`.
+Hai dấu `\*?` là bản vá. Sau vá, thử **cả hai** kiểu viết đều in `1`, gỡ ra in `0`.
+
+**Bài học giữ lại:** **số đếm là con trỏ, không phải nội dung.** Nhà con chép *"Ba thứ"* thì nó trôi ở
+lần nhà cha đổi thứ tư, và **cả hai file đọc riêng đều hoàn chỉnh** nên không lệnh nào bắt được. Luật đổi:
+[.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 3 vế 4 nay **trỏ** sang
+[CLAUDE.md §4](CLAUDE.md) và ghi thẳng dòng cấm chép số đếm — cùng họ với luật *trỏ, không chép* ở
+[CLAUDE.md §2](CLAUDE.md), nay áp cho cả **số**, không chỉ cho câu.
 
 ### F-45
 

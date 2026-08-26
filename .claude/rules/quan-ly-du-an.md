@@ -11,7 +11,7 @@ paths:
 
 # Sổ tay quản lý dự án — nạp khi chạm sổ task, sổ lỗi, hoặc tài liệu thiết kế
 
-> Cập nhật **2026-08-25**. File này giữ phần **dài** mà [CLAUDE.md](../../CLAUDE.md) không chứa nổi.
+> Cập nhật **2026-08-26**. File này giữ phần **dài** mà [CLAUDE.md](../../CLAUDE.md) không chứa nổi.
 > Luật áp cho **mọi** session nằm ở `CLAUDE.md` §1–§8 — file này **trỏ** tới chúng, không chép lại.
 > Chép lại là đẻ nhà thứ hai, và bản chép sẽ lệch trong im lặng.
 
@@ -117,12 +117,13 @@ Một task giai đoạn này gọi là XONG khi đủ **bốn** vế, thiếu m�
 1. **Đầu ra tồn tại thật.** `test -e <đường dẫn>` không kêu. Trỏ tới file chưa có mà không đánh ⚠️
    là bịa ra một lãnh thổ, và phiên sau sẽ đi theo tấm bản đồ đó.
 2. **Nội dung đúng hình dạng, đo bằng lệnh.** Ví dụ hợp lệ: `grep -c '^| ' task.md` ra số dòng mong đợi ·
-   `wc -l < CLAUDE.md` ra ≤ 120 · `sed -n '/T-03/p' task.md` in ra đúng một dòng ·
+   `wc -l < CLAUDE.md` ra ≤ 140 · `sed -n '/T-03/p' task.md` in ra đúng một dòng ·
    `awk 'length > 400' CLAUDE.md` rỗng · `head -6 .claude/rules/quan-ly-du-an.md` in ra frontmatter.
 3. **Mọi con trỏ trong đầu ra giải được.** Chạy vòng lặp §5.1 dưới đây, output rỗng, hoặc mỗi dòng in
    ra đều có ⚠️ + mã task **ngay tại chỗ trỏ**.
-4. **Ba thứ của `CLAUDE.md` §4 đủ:** biên nhận + output dán vào · commit · `finding.md` đổi trạng thái
-   nếu có finding bị đóng.
+4. **Đủ mọi vế của [`CLAUDE.md` §4](../../CLAUDE.md)** — biên nhận + output · commit · `finding.md`
+   đổi trạng thái · bảng thay đổi · phiếu sáu dòng N1–N6. **Số đếm nằm ở §4, mục này cấm chép lại nó**:
+   chép là đẻ nhà thứ hai và nhà con sẽ trôi lại đúng như `F-44`. Đếm bằng `CLAUDE.md` §4, không đếm ở đây.
 
 **Cái gì KHÔNG được tính là biên nhận ở giai đoạn này:** `go test` ⚠️ · `npm run ...` ⚠️ · "đã đọc lại
 thấy ổn" · "đã hoàn thành đầy đủ yêu cầu". Hai cái đầu chưa chạy được, hai cái sau không phải output
