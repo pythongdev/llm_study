@@ -47,7 +47,7 @@ Nghi một file cũ: so dòng `Cập nhật <ngày>` trong file với `git log -
 ## §3 Vòng lặp một phiên — mỗi bước có điều kiện đo được mới đi tiếp
 
 1. **Định vị.** Chạy `git log --oneline -5` và `git status --short`. Đi tiếp khi biết commit cuối làm gì và cây làm việc sạch hay bẩn.
-2. **Chọn việc.** Chạy lệnh ở mục *Task tiếp theo* đầu [task.md](task.md). Đi tiếp khi có **đúng một** mã `T-xx`.
+2. **Chọn việc.** Prompt đã chỉ đích việc ⇒ **đó là việc**, không dò sổ; chỉ chạy lệnh ở mục *Task tiếp theo* đầu [task.md](task.md) khi prompt **không** chỉ. Đi tiếp khi khai được **đúng một** mã ở dòng §1: `T-xx` khi prompt hoặc sổ nêu, `ngoài-sổ` khi không — chính mã đó đi vào message commit §4.
 3. **Nạp gói.** Ba phần: gói lane ở §1 · ô `Context › Nạp` của dòng task (**lệch với §1 ⇒ ô `Nạp` thắng**) ·
    **bảng đầu [finding.md](finding.md)** — finding còn 🔴 MỞ mà chạm file task này sẽ sửa thì đọc mục đó trước khi gõ.
    Đi tiếp khi mọi đường dẫn `test -e` ra thật **và** mọi con trỏ cấp `§`/mục `grep` ra được trong chính file đích.
