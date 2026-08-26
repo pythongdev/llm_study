@@ -56,7 +56,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-40](#f-40) | Hệ đánh số tên file `quality/` va nhau: [guideline §7](quality/00-guideline-chat-luong.md) đặt tầng pha ở `quality/0n-pha-<n>-<tên>.md` cho **6 pha** ⇒ pha 4 đòi `05-`, pha 5 đòi `06-`; nhưng `05-` đã là `05-checklist.md` (T-04 đã xong) và `06-` đã bị [T-33](task.md) đặt trước cho `06-rang-buoc-kien-truc.md` — hai chỗ va, cả hai đều đã ghim vào sổ | T-34 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-41](#f-41) | `NHA` trong [Makefile](Makefile) là **danh sách gõ tay 10 file**, không cơ chế nào bắt một nhà mới bị bỏ ngoài: `quality/05-checklist.md` ra đời ở T-04 và **chưa từng** vào `NHA`, nên bốn đích của `make check` không hề soi nó — cổng xanh trong khi hai nhà đứng ngoài cổng | T-34 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-42](#f-42) | Nhịp *"chạy sáu probe N1–N6 rồi dán phiếu, trước biên nhận"* mà [quality/01-chat-luong-noi-dung.md §5](quality/01-chat-luong-noi-dung.md) đặt ra **không có nhà**: §7 file đó nhượng nhịp cho [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 4 rồi tự cấm mở nhịp thứ hai, nhưng mục 4 có **9** hàng và **không hàng nào** là sáu probe — thủ tục chấm nội dung tồn tại như văn bản, không tồn tại như nhịp | owner hỏi hiện trạng · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên phát hiện — không đẻ task |
-| [F-43](#f-43) | `paths:` của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) liệt kê **7** mẫu và **không mẫu nào khớp thư mục code**; [rule mục 6](.claude/rules/quan-ly-du-an.md) — 5 vế mở một lane — chỉ đòi `paths:` cho `.claude/rules/lane-<tên>.md`, không vế nào đòi nới `paths:` của rule quản lý dự án ⇒ từ lúc [T-07](task.md)/[T-08](task.md)/[T-09](task.md) mở lane DB/BE/FE, phiên viết code không nạp rule này, và hàng nhịp vừa thêm ở [F-42](#f-42) tắt đúng lúc đầu ra là code | owner hỏi hiện trạng · 2026-08-25 | ✅ ĐÓNG 2026-08-26 | [T-36](task.md) ⚠️ nay thừa — xem Bài học |
+| [F-43](#f-43) | `paths:` của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) liệt kê **7** mẫu và **không mẫu nào khớp thư mục code**; [rule mục 6](.claude/rules/quan-ly-du-an.md) — 5 vế mở một lane — chỉ đòi `paths:` cho `.claude/rules/lane-<tên>.md`, không vế nào đòi nới `paths:` của rule quản lý dự án ⇒ từ lúc [T-07](task.md)/[T-08](task.md)/[T-09](task.md) mở lane DB/BE/FE, phiên viết code không nạp rule này, và hàng nhịp vừa thêm ở [F-42](#f-42) tắt đúng lúc đầu ra là code | owner hỏi hiện trạng · 2026-08-25 | ✅ ĐÓNG 2026-08-26 | ⚠️ T-36 đã huỷ khỏi sổ 2026-08-26 — không đẻ task thay thế |
 | [F-44](#f-44) | **Định nghĩa XONG thiếu một vế.** [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 3 vế 4 khai *"**Ba** thứ của `CLAUDE.md` §4 đủ"* rồi liệt kê 3 — biên nhận · commit · `finding.md` — nhưng [CLAUDE.md §4](CLAUDE.md) khai *"cần đủ **bốn** thứ"*, thứ (4) là **bảng thay đổi**; phiên theo đúng rule mục 3 đánh ✅ hợp lệ mà không dán bảng, đúng thứ CLAUDE.md §4 gọi là *phiên chưa xong* | T-36 · 2026-08-25 | ✅ ĐÓNG 2026-08-26 | ⚠️ đóng ngoài sổ, cùng phiên nâng trần |
 | [F-45](#f-45) | [prompt-fullstack.md §6.6](project_preparation/prompt-fullstack.md) khai bốn nhịp kiểm tra bắt buộc, nhịp thứ hai là *"mỗi ngày sau khi đóng quán → **tầng 2**"* — nhưng chuỗi `tầng 2` xuất hiện **đúng một lần** trong toàn repo, chính dòng khai nó, và **không file nào** nói tầng 2 gồm lệnh gì; [rule mục 4](.claude/rules/quan-ly-du-an.md) — nhà mà [checklist §4](quality/05-checklist.md) và [guideline §6](quality/00-guideline-chat-luong.md) trao quyền giữ nhịp — có **10** hàng và **0** hàng nào là nhịp của §6.6 | giải thích checklist §1 vế 1 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-46](#f-46) | Cổng **(e)** ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) đỏ **15 dòng** và đã đỏ từ lâu: 15 ô `Câu lệnh để thấy thay đổi` của 7 task đã gạch ghim `git show HEAD -- <file>` (toàn sổ có **63** ô như vậy), mà `HEAD` **trôi theo mỗi commit** — chúng nay chiếu vào commit chẳng liên quan. Cổng đỏ thường trực là cổng phiên sau học cách bỏ qua | ngoài-sổ · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
@@ -302,7 +302,7 @@ commit đè lên việc đó, và **không lệnh nào trong bộ khung đỏ**:
 **Chưa đóng được vì:** cả ba hướng đều đổi kiến trúc (thêm file khoá / thêm hook / đổi cách mở phiên),
 mà theo [CLAUDE.md §7](CLAUDE.md) đó là quyền của owner. Chốt xong mới mở dòng task.
 
-**Ca sống 2026-08-25.** Lần đầu bắt được tại chỗ, và nó tệ hơn mệnh đề trên mô tả. Một phiên NON-CODE mở [F-42](#f-42)/[F-43](#f-43)/[T-36](task.md) thấy cây **sạch** ở bước 4 ([CLAUDE.md §3](CLAUDE.md)); trong lúc nó gõ, phiên thứ hai **commit đè** đúng phần việc chưa commit của nó (`5df6c66`, `eb8a0c9`) rồi mở tiếp `F-44` của riêng mình — **cùng mã** với `F-44` phiên đầu vừa viết. Hai phiên tự phát hiện và một bên đổi sang `F-45`, nên lần này không mất gì; nhưng cơ chế cứu được là **may**, không phải luật: không lệnh nào trong repo bắt được trùng mã **trước khi ghi**, và `git status` sạch ở bước 4 **không** còn nghĩa là an toàn khi có phiên khác chạy. Thêm vế cho `Cách sửa đề xuất`: cấp mã `F-xx`/`T-xx` phải là thao tác **đọc-rồi-ghi trong một commit**, hoặc `CLAUDE.md` §3 bước 4 phải thêm điều kiện *không có phiên khác đang mở* — điều kiện hiện chưa đo được, đó mới là gốc.
+**Ca sống 2026-08-25.** Lần đầu bắt được tại chỗ, và nó tệ hơn mệnh đề trên mô tả. Một phiên NON-CODE mở [F-42](#f-42)/[F-43](#f-43)/`T-36` *(mã này đã huỷ 2026-08-26)* thấy cây **sạch** ở bước 4 ([CLAUDE.md §3](CLAUDE.md)); trong lúc nó gõ, phiên thứ hai **commit đè** đúng phần việc chưa commit của nó (`5df6c66`, `eb8a0c9`) rồi mở tiếp `F-44` của riêng mình — **cùng mã** với `F-44` phiên đầu vừa viết. Hai phiên tự phát hiện và một bên đổi sang `F-45`, nên lần này không mất gì; nhưng cơ chế cứu được là **may**, không phải luật: không lệnh nào trong repo bắt được trùng mã **trước khi ghi**, và `git status` sạch ở bước 4 **không** còn nghĩa là an toàn khi có phiên khác chạy. Thêm vế cho `Cách sửa đề xuất`: cấp mã `F-xx`/`T-xx` phải là thao tác **đọc-rồi-ghi trong một commit**, hoặc `CLAUDE.md` §3 bước 4 phải thêm điều kiện *không có phiên khác đang mở* — điều kiện hiện chưa đo được, đó mới là gốc.
 
 **Ca sống thứ hai 2026-08-25 — lần này mất thật, phát hiện muộn.** Phiên **BA/[T-37](task.md)** thấy cây
 sạch ở bước 4, sửa đúng một dòng của [design/BA/04-yeu-cau.md](design/BA/04-yeu-cau.md), chạy biên nhận
@@ -2063,7 +2063,8 @@ sed -n '/^paths:/,/^---$/p' .claude/rules/quan-ly-du-an.md \
 sed -n '/^## 6\./,/^## 7\./p' .claude/rules/quan-ly-du-an.md | grep -c 'quan-ly-du-an'      # ra 0  ← 5 vế không nhắc nới paths của chính nó
 ```
 
-**Cách sửa đề xuất.** Nước B của owner (chốt 2026-08-25), gắn vào [T-36](task.md): tạo
+**Cách sửa đề xuất.** *(Nước B — owner chốt 2026-08-25, sau đó **bỏ**; `T-36` huỷ khỏi sổ 2026-08-26,
+xem Kiểm chứng dưới.)* Gắn vào `T-36`: tạo
 `.claude/rules/chat-luong-noi-dung.md` — rule **mỏng**, `paths:` phủ mọi nơi đầu ra nội dung ra đời, thân
 **chỉ trỏ** sang [quality/01](quality/01-chat-luong-noi-dung.md) §3 §4 §5, theo đúng mô hình
 [.claude/rules/chat-luong-finding.md](.claude/rules/chat-luong-finding.md) đang dùng cho `finding.md`; và
@@ -2119,9 +2120,18 @@ không có, tức §3 tự phá lời hứa ở chính tiêu đề nó · [CLAUD
 **(5)** phiếu sáu dòng · [CLAUDE.md §8](CLAUDE.md) trần `120`→`140`, owner nới **có hạn**, luật *thêm một
 dòng ⇒ gộp một dòng cũ* giữ nguyên để 140 không thành 20 dòng dư.
 
-Hệ quả: [T-36](task.md) mất lý do tồn tại — cả `.claude/rules/chat-luong-noi-dung.md` lẫn *vế thứ 6* của
-[rule mục 6](.claude/rules/quan-ly-du-an.md) đều chỉ để lôi rule vào phiên code, việc mà §3 nay làm không
-tốn file nào. Huỷ T-36 là việc của phiên sau, chạm [task.md](task.md).
+Hệ quả, **đã xử ngày 2026-08-26**: `T-36` mất lý do tồn tại — cả `.claude/rules/chat-luong-noi-dung.md`
+lẫn *vế thứ 6* của [rule mục 6](.claude/rules/quan-ly-du-an.md) đều chỉ để lôi rule vào phiên code, việc
+mà [CLAUDE.md §3](CLAUDE.md) bước 5 nay làm không tốn file nào. Owner chốt huỷ, và huỷ = **rời sổ**, không
+phải gạch `~~`: [CLAUDE.md §5](CLAUDE.md) định nghĩa sổ task đo **xong / chưa**, task huỷ không có ô thứ
+ba, còn `~~` đã mang nghĩa *đã xong* ở bộ dò *Task tiếp theo* đầu [task.md](task.md). Xác của T-36 nằm ở
+`git log`, đúng nhà mà [CLAUDE.md §2](CLAUDE.md) chỉ định.
+`Ngoài: GitHub Issues / Jira` — cả hai **giữ** trạng thái thứ ba (`closed as not planned` · `Won't Do`),
+tức thế giới ngoài đi hướng ngược lại. `Ta:` vẫn xoá khỏi sổ. `Vì:` hai hệ kia có UI lọc theo trạng thái,
+còn sổ này được đọc bằng `grep` và bộ dò chỉ phân biệt `| **T-` với `| ~~**T-`; thêm trạng thái thứ ba
+buộc sửa **mọi** lệnh rà ở [.claude/rules/quan-ly-du-an.md §5.2](.claude/rules/quan-ly-du-an.md) và bốn
+đích `check-so` của [Makefile](Makefile) — giá đó không xứng cho một mã bị huỷ mỗi vài chục task. Cùng lúc, ô `Cần xong trước` của `T-35` bỏ
+`T-36` để không còn trỏ vào mã đã rời sổ.
 
 ---
 
@@ -2225,8 +2235,9 @@ cùng bảng đã giữ tầng 1 — nhưng file đang **75/75** kịch trần �
 commit, và nới trần là quyết định của owner, không phải của phiên.
 · **nhịp** (chạy lúc nào) → **đúng một hàng** ở [rule mục 4](.claude/rules/quan-ly-du-an.md), y khuôn nước A
 đã đóng [F-42](#f-42).
-Gắn vào task: **chưa có dòng nào**; đề xuất mở một dòng NON-CODE làm cả hai nước, xếp **sau**
-[T-36](task.md) để không va vào phiên đang sửa `task.md`.
+Gắn vào task: **chưa có dòng nào**; đề xuất mở một dòng NON-CODE làm cả hai nước. Ràng buộc *"xếp sau
+`T-36`"* nay **hết hiệu lực** — mã đó huỷ khỏi sổ 2026-08-26 ([F-43](#f-43) Kiểm chứng), nên dòng mới
+không còn phải chờ ai.
 
 **Bẫy khi sửa.** Đừng "định nghĩa" tầng 2 bằng cách chép §6.6 vào checklist — §6.6 chỉ khai *nhịp*, chưa bao
 giờ khai *gồm lệnh gì*; nội dung tầng 2 **chưa từng tồn tại ở đâu**, nên đây là **viết mới** phải hỏi owner,
