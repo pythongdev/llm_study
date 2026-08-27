@@ -1148,8 +1148,42 @@ git diff --no-index /tmp/base /tmp/mine | sed 's|/tmp/base|a/task.md|; s|/tmp/mi
 git apply --cached /tmp/p && git commit -m '...'   # index = HEAD + phần của tôi; cây vẫn giữ cả hai phiên
 ```
 
+**Ba phép đo canh mục này — đánh số, ngang hàng.** Cả ba soi **cùng một** lần nuốt từ ba phía, nên xanh
+một cái không tha hai cái kia; chạy đủ ba sau **mỗi** commit chạm `task.md` hay `finding.md`.
+
+**PĐ-1 — đo *kẻ nuốt*: commit chứa file mà bảng thay đổi của phiên đó không khai.**
 **Đỏ khi:** `git show --stat <commit>` liệt kê một file mà bảng thay đổi của phiên đó không có dòng nào.
 Đây là lệnh (e) mà [F-16](#f-16) đang nói là chưa chạy được — sửa F-16 thì phép đo này có sẵn người canh.
+
+**PĐ-2 — đo *nạn nhân*: bảng thay đổi khai việc mà commit của chính nó không chứa.** Bốn lệnh + vế
+**đỏ khi** (`vế 3` ra `0` mà `vế 4` ra `>= 1`) nằm ở *"Ca sống thứ tư"* dưới, không chép lại. PĐ-1 chạy
+**ngược chiều** nên bắt không được ca này: một lần nuốt làm `git log` sai **hai** lần, mỗi phép đo thấy một.
+
+**PĐ-3 — đo *bản khai lệch stat*: sau mỗi commit chạy `git show --stat <sha>` rồi đối chiếu với message của
+chính nó.** Rẻ nhất trong ba — không khoá, không bản vá, một lệnh sau khi commit — và là cái **duy nhất**
+bắt được lớp hỏng sinh ra **sau** khi [CLAUDE.md §3](CLAUDE.md) bước 4 đã chạy xong: `git add` stage hụt một
+file vì phiên khác vừa commit đúng nội dung đó, nên **không hunk nào mất** mà message vẫn khai thừa file
+(*"Ca sống thứ năm"* dưới). Bước 4 thấy cây sạch, biên nhận xanh, chỉ `git log` sai.
+
+```bash
+sha=${1:-HEAD}
+comm -3 <(git show --name-only --format= "$sha" | grep -v '^$' | sort -u) \
+        <(git log -1 --format=%s  "$sha" | grep -oE '[A-Za-z0-9_./-]+\.[a-z]+' | sort -u)
+```
+
+**Đỏ khi** lệnh in ra **bất kỳ** dòng nào: cột trái = file commit chứa mà message không khai (**kẻ nuốt**) ·
+cột phải, thụt một tab = file message khai mà commit không chứa (**nạn nhân**). Đã thử làm đỏ trên lịch sử
+thật: `d079ca1` ra rỗng (xanh) · `78a8901` ra `finding.md` bên trái · `b334899` ra `.claude/settings.json`
+bên phải — đúng ca sống thứ tư · `c6155eb` ra **3 dòng** trái, đúng commit của kẻ nuốt.
+
+**Bẫy khi đo PĐ-3.** Đừng thay `comm -3` bằng *đếm hai bên rồi so số*: commit chứa `{A,B}` mà message khai
+`{B,C}` ra `2 = 2` và mệnh đề **tự xanh** — phải so **tập tên**, không so lượng. Và dùng `--name-only` chứ
+không `--stat` để lấy tập: `--stat` rút gọn đường dẫn dài thành `...` nên tên không khớp nổi. Message khai
+file **không đuôi** (`Makefile`) thì regex trượt và PĐ-3 báo xanh giả — cùng họ hỏng với [F-20](#f-20).
+**Ngoài:** `comm(1)` — lệnh POSIX so **hai tập đã sort**, đúng bài toán "cùng/khác tên" này · **Ta:** dùng
+`comm -3` thay vì tự đếm hoặc tự viết vòng lặp so tên · **Vì:** quán một VPS, một máy dev
+([prompt-fullstack §6.8](project_preparation/prompt-fullstack.md)) — phép đo phải chạy được bằng thứ `git`
+đã kéo theo, không thêm một phụ thuộc nào để canh một sổ hai chục dòng.
 
 **Bẫy khi sửa.** Đừng sửa bằng cách cấm hai phiên chạy cùng lúc — đó là hướng của [F-07](#f-07) và là quyền
 owner. Mục này chỉ đòi câu ở §4 khai **đúng** mức bảo vệ mà `git add <đường dẫn>` thật sự cho: nó chống
