@@ -59,7 +59,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-43](#f-43) | `paths:` của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) liệt kê **7** mẫu và **không mẫu nào khớp thư mục code**; [rule mục 6](.claude/rules/quan-ly-du-an.md) — 5 vế mở một lane — chỉ đòi `paths:` cho `.claude/rules/lane-<tên>.md`, không vế nào đòi nới `paths:` của rule quản lý dự án ⇒ từ lúc [T-07](task.md)/[T-08](task.md)/[T-09](task.md) mở lane DB/BE/FE, phiên viết code không nạp rule này, và hàng nhịp vừa thêm ở [F-42](#f-42) tắt đúng lúc đầu ra là code | owner hỏi hiện trạng · 2026-08-25 | ✅ ĐÓNG 2026-08-26 | ⚠️ T-36 đã huỷ khỏi sổ 2026-08-26 — không đẻ task thay thế |
 | [F-44](#f-44) | **Định nghĩa XONG thiếu một vế.** [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) mục 3 vế 4 khai *"**Ba** thứ của `CLAUDE.md` §4 đủ"* rồi liệt kê 3 — biên nhận · commit · `finding.md` — nhưng [CLAUDE.md §4](CLAUDE.md) khai *"cần đủ **bốn** thứ"*, thứ (4) là **bảng thay đổi**; phiên theo đúng rule mục 3 đánh ✅ hợp lệ mà không dán bảng, đúng thứ CLAUDE.md §4 gọi là *phiên chưa xong* | T-36 · 2026-08-25 | ✅ ĐÓNG 2026-08-26 | ⚠️ đóng ngoài sổ, cùng phiên nâng trần |
 | [F-45](#f-45) | [prompt-fullstack.md §6.6](project_preparation/prompt-fullstack.md) khai bốn nhịp kiểm tra bắt buộc, nhịp thứ hai là *"mỗi ngày sau khi đóng quán → **tầng 2**"* — nhưng chuỗi `tầng 2` xuất hiện **đúng một lần** trong toàn repo, chính dòng khai nó, và **không file nào** nói tầng 2 gồm lệnh gì; [rule mục 4](.claude/rules/quan-ly-du-an.md) — nhà mà [checklist §4](quality/05-checklist.md) và [guideline §6](quality/00-guideline-chat-luong.md) trao quyền giữ nhịp — có **10** hàng và **0** hàng nào là nhịp của §6.6 | giải thích checklist §1 vế 1 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
-| [F-46](#f-46) | Cổng **(e)** ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) đỏ **15 dòng** và đã đỏ từ lâu: 15 ô `Câu lệnh để thấy thay đổi` của 7 task đã gạch ghim `git show HEAD -- <file>` (toàn sổ có **63** ô như vậy), mà `HEAD` **trôi theo mỗi commit** — chúng nay chiếu vào commit chẳng liên quan. Cổng đỏ thường trực là cổng phiên sau học cách bỏ qua | ngoài-sổ · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
+| [F-46](#f-46) | Cổng **(e)** ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) đỏ **15 dòng** và đã đỏ từ lâu: 15 ô `Câu lệnh để thấy thay đổi` của 7 task đã gạch ghim `git show HEAD -- <file>` (toàn sổ có **63** ô như vậy), mà `HEAD` **trôi theo mỗi commit** — chúng nay chiếu vào commit chẳng liên quan. Cổng đỏ thường trực là cổng phiên sau học cách bỏ qua | ngoài-sổ · 2026-08-25 | ✅ ĐÓNG 2026-08-27 | ⚠️ không có task — vá ngoài sổ ở `c6155eb`+`2107241`, đóng ở phiên NON-CODE 2026-08-27 |
 | [F-47](#f-47) | Sổ lỗi có **đường vào** mà không có **đường ra**: dòng vai trò ở [CLAUDE.md](CLAUDE.md) bắt *ghi một dòng vào finding.md rồi quay lại việc đang làm*, nhưng không luật nào bắt **giao dòng đó đi** — nên tồn đọng chỉ tăng: **37/46** finding còn 🔴 MỞ, **25** trong số đó khai `⚠️ chưa có task` | owner nêu · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên owner nêu — không đẻ task |
 | [F-48](#f-48) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi khớp đúng từng ký tự**, nên mục viết tiêu đề biến thể bị báo `THIẾU VẾ` trong khi vế **có thật**: 3/4 mục nó đang tố (`F-06` `F-07` `F-12`) đều đủ vế — cổng đỏ kinh niên, và ca đỏ **thật** duy nhất (`F-13`) chìm trong đó | đóng F-08 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên đóng F-08 |
 | [F-49](#f-49) | Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) khai mình là bộ dò việc của mọi phiên, nhưng **không file nào trong repo gọi nó nữa**: [CLAUDE.md §3](CLAUDE.md) bước 2 — caller duy nhất — nay khai *prompt là nguồn việc duy nhất*, `grep -c 'Task tiếp theo' CLAUDE.md` ra `0`; trong khi [huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md) vẫn bắt mục đó **phải là lệnh chạy được** | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-27 |
@@ -1252,6 +1252,31 @@ Thêm vế cho `Cách sửa đề xuất`, rẻ hơn mọi cơ chế khoá: **m�
 chiếu với message của chính nó**. Nó bắt đúng lớp hỏng mà `git status` sạch ở bước 4 không thấy được, vì lớp này
 sinh ra **sau** khi bước 4 chạy xong.
 
+**Ca sống thứ sáu — 2026-08-27: hunk *còn*, nhưng nằm trong commit của phiên khác.** Phiên NON-CODE làm
+[F-23](#f-23) sửa hai file lúc `09:10:25` và `09:10:44` (`.claude/rules/quan-ly-du-an.md` §5.3 + mục `F-23`
+của file này). Bước 4 của [CLAUDE.md §3](CLAUDE.md) đã chạy và cây **sạch** lúc `09:09`. Trước khi phiên kịp
+gõ `git commit`, phiên song song commit `7cc5fe3` — message khai **hai** file, `git show --stat` liệt kê **ba**:
+
+```bash
+git show --stat --format=%s 7cc5fe3   # message khai: quan-ly-du-an.md §5.2, Makefile đích check-so
+git show 7cc5fe3 -- finding.md | grep -c '0370781'   # ra 4 — hunk F-23 của phiên khác nằm trong commit này
+```
+
+`git commit -- .claude/rules/quan-ly-du-an.md finding.md` chạy sau đó ra `no changes added to commit`: phiên
+nạn nhân **không có commit nào** mang mã của nó, và `git log -1 -- finding.md` từ nay trả về một message
+không hề nhắc `F-23`.
+
+**Khác ca thứ năm ở đúng một chỗ, và đó là chỗ đắt hơn.** Ca năm mất *bản khai*, hunk còn nguyên trong
+commit của **chính** phiên đó. Ca này hunk cũng còn — nhưng nằm trong commit của **phiên khác**, nên một lần
+nuốt làm đỏ **cả hai** chiều cùng lúc: PĐ-1 đỏ ở `7cc5fe3` (stat có `finding.md`, message không), PĐ-2 đỏ ở
+phiên nạn nhân (bảng thay đổi khai hai file, commit của nó không tồn tại). Đây là ca đầu tiên chứng minh
+PĐ-1 và PĐ-2 **không** thừa nhau: bỏ phép nào cũng mất một nửa bằng chứng của cùng một sự kiện.
+
+**Vì sao `git commit --amend` không cứu được ca này**, khác ca thứ năm: `7cc5fe3` không phải commit của phiên
+nạn nhân, và `563066b` đã chồng lên nó trước khi phiên kịp phản ứng. Sửa lịch sử của phiên khác đang chạy là
+hỏng nặng hơn lỗi nó vá. Ca này chỉ còn **ghi lại**, không còn **sửa** — nên nó là lý lẽ mạnh nhất cho vế
+`Cách sửa đề xuất`: cơ chế phải chặn **trước** commit, `git show --stat` sau commit chỉ kịp làm biên bản.
+
 ---
 
 ### F-25
@@ -2348,6 +2373,24 @@ bằng cách chỉ vá 15 ô đã gạch, và 48 ô còn lại sẽ đỏ lại 
 
 **Bẫy khi sửa.** Đừng gỡ cổng (e) cho hết đỏ: nó đỏ vì nó **đúng** — 15 ô kia thật sự không chiếu được gì.
 Gỡ cổng là đổi một cổng đỏ ồn ào lấy một lỗ hổng im lặng.
+
+**Kiểm chứng.** Cả hai vế `**Đóng khi.**` xanh, chạy từ gốc repo 2026-08-27 trên `563066b`:
+`grep -c 'git show HEAD --' task.md` ra **`0`** (mở sổ: `63`) · khối `# e.` ở
+[.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) in ra **rỗng**, không dòng
+`LỆNH RỖNG` nào (mở sổ: `15`) — cả **33** ô của **13** task đã gạch đều chiếu ra diff thật. Vá ở hai
+nước đúng như **Cách sửa đề xuất**: nước (1) `2107241` thay 63 `HEAD` bằng sha, nước (2) `c6155eb`+`2107241`
+dựng câu cấm `HEAD` + cổng `grep` trong [.claude/rules/bao-cao-thay-doi.md §1](.claude/rules/bao-cao-thay-doi.md).
+**Đã thử làm đỏ:** ✅ 2026-08-27 — trên bản sao ở scratchpad, đổi một ô của `owner-T-01` về
+`git show HEAD -- task.md` (HEAD `017a42a` chỉ đụng `finding.md` nên ô này in rỗng): cổng `grep` ra **`1`**,
+cổng (e) in **`LỆNH RỖNG: owner-T-01`**. Repo không bị chạm — `git status --short` rỗng ngay sau đó.
+
+**Bài học giữ lại:** luật đã đổi ở [.claude/rules/bao-cao-thay-doi.md §1](.claude/rules/bao-cao-thay-doi.md):
+*ô ghim **sha cố định**, cấm `HEAD`* — áp cho **cả** cột `Xem diff` §1 **và** cột `Câu lệnh để thấy thay đổi`
+§2, kèm luật vòng đời *task chưa làm ghi `—`, phiên đóng task thay `—` bằng sha vừa commit **trong chính
+commit đó***. Vá dữ liệu mà không vá luật thì 48 ô còn lại đỏ dần từng phiên. Vế còn hở, **không** thuộc mã
+này: cổng (e) chỉ đo *ô có in ra gì không*, không đo *có in đúng commit của task đó không* — 4/33 sha hiện
+ghim đúng nội dung nhưng message commit không mang mã task (`c1a789e` `b520e7c` `1e3c963` `c6155eb`), đúng
+nhà của [F-17](#f-17) (message lệch `--stat`) và [F-18](#f-18) (khuôn message, [T-30](task.md)).
 ---
 
 ### F-47
