@@ -11,7 +11,7 @@ paths:
 
 # Sổ tay quản lý dự án — nạp khi chạm sổ task, sổ lỗi, hoặc tài liệu thiết kế
 
-> Cập nhật **2026-08-26**. File này giữ phần **dài** mà [CLAUDE.md](../../CLAUDE.md) không chứa nổi.
+> Cập nhật **2026-08-27**. File này giữ phần **dài** mà [CLAUDE.md](../../CLAUDE.md) không chứa nổi.
 > Luật áp cho **mọi** session nằm ở `CLAUDE.md` §1–§8 — file này **trỏ** tới chúng, không chép lại.
 > Chép lại là đẻ nhà thứ hai, và bản chép sẽ lệch trong im lặng.
 
@@ -146,7 +146,7 @@ BE và FE mở. Định nghĩa XONG đầy đủ chuyển nhà sang
 | Mỗi lần sửa `task.md` | **cả khối** lệnh tự rà ở §5.2 — đếm số lệnh trong câu này là hằng số, nó tự trôi | lỗi của `task.md`, sửa ngay trong phiên đó |
 | Owner soi lại một task vừa ✅ | từng lệnh ở **bảng soi** `### owner-T-xx` trong `task.md`, rồi đọc dòng `**Đạt khi:**` | thay đổi khác cái bảng đó khai ⇒ ghi finding, đừng sửa lặng lẽ |
 | Owner soi **chất lượng** một task vừa ✅ | từng lệnh ở bảng `### cl-T-xx`, rồi dòng `**ĐẠT khi:**` và `**Đã thử làm đỏ:**` | chưa đạt tầng sàn ⇒ ô `Chất lượng` để `❌` + mở finding, **không** đổi dấu thành ✅ cho xong |
-| Mỗi lần sửa `CLAUDE.md` | `wc -l` ≤ 120 · `awk 'length > 400'` rỗng · vòng lặp con trỏ §5.1 | gộp hoặc thay luật cũ, không nới trần |
+| Mỗi lần sửa `CLAUDE.md` | **cả ba lệnh trần** ở [CLAUDE.md §8](../../CLAUDE.md) — ngưỡng sống ở đó, rule này **không chép số** sang · rồi vòng lặp con trỏ §5.1 | gộp hoặc thay luật cũ **trong cùng commit**; nới trần là quyền owner ([CLAUDE.md §7](../../CLAUDE.md)) |
 | Cuối mỗi phiên **có sửa file** | dán bảng thay đổi 5 cột — khuôn [bao-cao-thay-doi.md](bao-cao-thay-doi.md) §1 | thiếu bảng ⇒ phiên **chưa xong**, dù biên nhận đã xanh |
 | Cuối mỗi phiên | ba lệnh dò phiên trôi §5.3 | ghi finding hoặc mở task, đừng sửa lặng lẽ |
 | Mỗi lần mở một lane | quy trình §6 **và lệnh §5.2b** | thiếu vế nào thì lane đó chưa được coi là mở |
