@@ -1,6 +1,6 @@
 # task.md — việc tiếp theo là gì, theo thứ tự nào
 
-> Cập nhật **2026-08-25**. Đây là **sổ task**: đo *xong / chưa*. Cái đang **sai** đi sổ khác —
+> Cập nhật **2026-08-27**. Đây là **sổ task**: đo *xong / chưa*. Cái đang **sai** đi sổ khác —
 > [finding.md](finding.md). Luật không trộn hai sổ ở [CLAUDE.md §5](CLAUDE.md).
 > Khuôn 11 cột, đặc tả từng ô, và định nghĩa XONG của giai đoạn chưa-có-compiler nằm ở
 > [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §1 và §3 — file này **không** chép lại.
@@ -9,7 +9,10 @@
 
 ## Task tiếp theo — làm ngay
 
-Đừng chép mã task ra đây; chép là hai chỗ phải sửa, và chỗ thứ hai sẽ quên. Chạy hai lệnh, đúng thứ tự:
+**Mục này không phải nguồn việc.** Nguồn việc của một phiên là **prompt**, và chỉ prompt —
+[CLAUDE.md §3](CLAUDE.md) bước 2 chốt vậy; prompt mơ hồ thì hỏi lại người dùng, đừng bốc một dòng ở đây
+cho có. Hai lệnh dưới là **tra cứu theo yêu cầu**: chạy khi người dùng hỏi *"còn việc gì"*, đúng thứ tự.
+Đừng chép mã task ra đây; chép là hai chỗ phải sửa, và chỗ thứ hai sẽ quên.
 
 ```bash
 grep -n '^| \*\*T-' task.md | grep '🔺' | head -1   # 1. 🔺 chặn task khác ⇒ làm trước

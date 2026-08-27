@@ -1,6 +1,6 @@
 # finding.md — sổ lỗi
 
-> Cập nhật **2026-08-26**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
+> Cập nhật **2026-08-27**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
 > [task.md](task.md). Phép thử một câu và luật không trộn hai sổ ở [CLAUDE.md §5](CLAUDE.md);
 > hai sổ khác nhau chỗ nào ở [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §2.
 
@@ -62,7 +62,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-46](#f-46) | Cổng **(e)** ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) đỏ **15 dòng** và đã đỏ từ lâu: 15 ô `Câu lệnh để thấy thay đổi` của 7 task đã gạch ghim `git show HEAD -- <file>` (toàn sổ có **63** ô như vậy), mà `HEAD` **trôi theo mỗi commit** — chúng nay chiếu vào commit chẳng liên quan. Cổng đỏ thường trực là cổng phiên sau học cách bỏ qua | ngoài-sổ · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task |
 | [F-47](#f-47) | Sổ lỗi có **đường vào** mà không có **đường ra**: dòng vai trò ở [CLAUDE.md](CLAUDE.md) bắt *ghi một dòng vào finding.md rồi quay lại việc đang làm*, nhưng không luật nào bắt **giao dòng đó đi** — nên tồn đọng chỉ tăng: **37/46** finding còn 🔴 MỞ, **25** trong số đó khai `⚠️ chưa có task` | owner nêu · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên owner nêu — không đẻ task |
 | [F-48](#f-48) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi khớp đúng từng ký tự**, nên mục viết tiêu đề biến thể bị báo `THIẾU VẾ` trong khi vế **có thật**: 3/4 mục nó đang tố (`F-06` `F-07` `F-12`) đều đủ vế — cổng đỏ kinh niên, và ca đỏ **thật** duy nhất (`F-13`) chìm trong đó | đóng F-08 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên đóng F-08 |
-| [F-49](#f-49) | Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) khai mình là bộ dò việc của mọi phiên, nhưng **không file nào trong repo gọi nó nữa**: [CLAUDE.md §3](CLAUDE.md) bước 2 — caller duy nhất — nay khai *prompt là nguồn việc duy nhất*, `grep -c 'Task tiếp theo' CLAUDE.md` ra `0`; trong khi [huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md) vẫn bắt mục đó **phải là lệnh chạy được** | ngoài-sổ · 2026-08-26 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên mở |
+| [F-49](#f-49) | Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) khai mình là bộ dò việc của mọi phiên, nhưng **không file nào trong repo gọi nó nữa**: [CLAUDE.md §3](CLAUDE.md) bước 2 — caller duy nhất — nay khai *prompt là nguồn việc duy nhất*, `grep -c 'Task tiếp theo' CLAUDE.md` ra `0`; trong khi [huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md) vẫn bắt mục đó **phải là lệnh chạy được** | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-27 |
 | [F-50](#f-50) | Bảng nhịp [mục 4](.claude/rules/quan-ly-du-an.md) của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) còn khai hàng *Mỗi lần sửa `CLAUDE.md`* là ``wc -l` ≤ 120` … `không nới trần`` — cả con số lẫn mệnh lệnh đều hết đúng từ `78a8901`: [CLAUDE.md §8](CLAUDE.md) nay ghi **140**, owner đã nới. Rule chép **số** thay vì trỏ nhà thật | ngoài-sổ · 2026-08-26 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên mở |
 
 ---
@@ -2460,6 +2460,27 @@ hệ hàng nghìn đích, không phải của một sổ hai chục dòng.
 — kênh hại đó nay biến mất, nhưng **nguyên nhân** của F-18 là *task xong trong git mà dòng sổ còn mở*, và nguyên
 nhân đó còn nguyên. Đóng F-18 vì kênh hại đổi chỗ là đóng nhầm; sửa **mệnh đề** F-18 cho khớp hiện trạng là việc
 của [T-30](task.md), không phải của finding này.
+**Kiểm chứng.** Ba vế, chạy từ gốc repo sau commit vá — hai vế đầu giữ nguyên lệnh của *Lệnh tái hiện*,
+vế ba thay cho vế `lệnh chạy được` cũ vì §5.12 nay khai vai mới chứ không bị xoá:
+
+```bash
+grep -c 'Task tiếp theo' CLAUDE.md                                   # ra 0  <- vẫn không caller, đúng chốt owner
+sed -n '/^## Task tiếp theo/,/^---/p' task.md | grep -c '^grep -n'   # ra 2  <- bộ dò còn nguyên (hướng (b) bị loại)
+grep -c 'nguồn việc' task.md                                         # ra 1  <- lời mở đã đổi vai
+```
+
+Output thật 2026-08-27: `0` · `2` · `1`. **Đỏ khi** vế 3 ra `0` (lời mở chưa đổi vai) hoặc vế 2 ra `0`
+(bộ dò đã bị xoá). Đã thử làm đỏ một lần rồi khôi phục: gỡ cụm `nguồn việc` khỏi lời mở ⇒ vế 3 ra `0`;
+xoá một dòng `grep -n` ⇒ vế 2 ra `1`. Mâu thuẫn hết vì hai nhà nay khai **cùng một vai**: mục *Task tiếp
+theo* là **tra cứu theo yêu cầu**, không phải nguồn việc.
+
+**Bài học giữ lại:** đổi một luật ở [CLAUDE.md](CLAUDE.md) thì phải đi hết **caller** của nó trong cùng
+commit — luật *prompt là nguồn việc duy nhất* ([CLAUDE.md §3](CLAUDE.md) bước 2) bỏ vế dò sổ mà để lại
+hai chỗ vẫn khai vai cũ. Luật đổi: [project_preparation/huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md)
+nay khai vai *tra cứu theo yêu cầu* + trỏ ngược về [CLAUDE.md §3](CLAUDE.md) bước 2, và lời mở mục *Task
+tiếp theo* của [task.md](task.md) tự khai **không phải nguồn việc** — cơ chế còn nguyên, chỉ vai đổi, nên
+phiên sau đọc bất kỳ nhà nào trong ba nhà cũng ra cùng một câu trả lời.
+
 ### F-50
 
 **Mệnh đề sai.** Hàng *Mỗi lần sửa `CLAUDE.md`* trong bảng nhịp mục 4 của

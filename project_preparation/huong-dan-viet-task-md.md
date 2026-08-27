@@ -1,6 +1,6 @@
 # Hướng dẫn viết task — **mỗi dòng task là một prompt hoàn chỉnh**
 
-> Cập nhật **2026-08-23**. File này là **luật viết sổ task**, không phải sổ task.
+> Cập nhật **2026-08-27**. File này là **luật viết sổ task**, không phải sổ task.
 > Nền lý thuyết: [cau-truc-prompt-tot.md](../prompt/huong_dan_prompt/cau-truc-prompt-tot.md) (11 thành phần
 > của một prompt tốt) · Luật dự án: [prompt-fullstack.md §5–§8](prompt-fullstack.md) ·
 > Định nghĩa "TỐT" + thang tầng T0–T3: [quality/00-guideline-chat-luong.md](../quality/00-guideline-chat-luong.md) ·
@@ -588,7 +588,10 @@ dùng cái nào — `grep -c '⚑' task.md` ra `0` — nên đừng viết như 
 
 **Session hiểu và làm gì.** Mục *"Task tiếp theo — làm ngay"* ở đầu sổ phải là **lệnh chạy được** dò
 theo đúng các tầng này, **không phải** câu "tiếp theo làm T-08". Chép tên task ra đó ⇒ mỗi lần xong một
-task phải sửa hai chỗ, và chỗ thứ hai sẽ quên.
+task phải sửa hai chỗ, và chỗ thứ hai sẽ quên. Nhưng nó **không phải nguồn việc của phiên**: nguồn
+việc là **prompt**, và chỉ prompt ([CLAUDE.md §3](../CLAUDE.md) bước 2) — mục đó là **tra cứu theo yêu
+cầu**, chạy khi người dùng hỏi *"còn việc gì"*. Viết nó như thể mọi phiên đều phải chạy là dựng lại
+[F-49](../finding.md#f-49): một bộ dò còn nguyên, không ai gọi.
 
 ### 5.13 `Owner kiểm tra` — TP11 nửa người: *vừa đổi cái gì, có đúng chỗ đã hứa không*
 
