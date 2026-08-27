@@ -63,7 +63,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-47](#f-47) | Sổ lỗi có **đường vào** mà không có **đường ra**: dòng vai trò ở [CLAUDE.md](CLAUDE.md) bắt *ghi một dòng vào finding.md rồi quay lại việc đang làm*, nhưng không luật nào bắt **giao dòng đó đi** — nên tồn đọng chỉ tăng: **37/46** finding còn 🔴 MỞ, **25** trong số đó khai `⚠️ chưa có task` | owner nêu · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên owner nêu — không đẻ task |
 | [F-48](#f-48) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi khớp đúng từng ký tự**, nên mục viết tiêu đề biến thể bị báo `THIẾU VẾ` trong khi vế **có thật**: 3/4 mục nó đang tố (`F-06` `F-07` `F-12`) đều đủ vế — cổng đỏ kinh niên, và ca đỏ **thật** duy nhất (`F-13`) chìm trong đó | đóng F-08 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên đóng F-08 |
 | [F-49](#f-49) | Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) khai mình là bộ dò việc của mọi phiên, nhưng **không file nào trong repo gọi nó nữa**: [CLAUDE.md §3](CLAUDE.md) bước 2 — caller duy nhất — nay khai *prompt là nguồn việc duy nhất*, `grep -c 'Task tiếp theo' CLAUDE.md` ra `0`; trong khi [huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md) vẫn bắt mục đó **phải là lệnh chạy được** | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-27 |
-| [F-50](#f-50) | Bảng nhịp [mục 4](.claude/rules/quan-ly-du-an.md) của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) còn khai hàng *Mỗi lần sửa `CLAUDE.md`* là ``wc -l` ≤ 120` … `không nới trần`` — cả con số lẫn mệnh lệnh đều hết đúng từ `78a8901`: [CLAUDE.md §8](CLAUDE.md) nay ghi **140**, owner đã nới. Rule chép **số** thay vì trỏ nhà thật | ngoài-sổ · 2026-08-26 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên mở |
+| [F-50](#f-50) | Bảng nhịp [mục 4](.claude/rules/quan-ly-du-an.md) của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) còn khai hàng *Mỗi lần sửa `CLAUDE.md`* là ``wc -l` ≤ 120` … `không nới trần`` — cả con số lẫn mệnh lệnh đều hết đúng từ `78a8901`: [CLAUDE.md §8](CLAUDE.md) nay ghi **140**, owner đã nới. Rule chép **số** thay vì trỏ nhà thật | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ đóng ngay trong phiên nhận vé (b) — không đẻ task |
 
 ---
 
@@ -2513,3 +2513,24 @@ trạng thái hôm nay, hai nhà khai hai con số.
 
 **Bẫy khi sửa.** Đừng nhân tiện quét cả rule tìm số khác để trỏ hoá — mục 4 còn nhiều hàng ghim ngưỡng
 **của chính rule đó**, và những hàng ấy **đúng nhà**, không phải lệch.
+
+**Kiểm chứng.** Vá 2026-08-27: hàng *Mỗi lần sửa `CLAUDE.md`* của
+[.claude/rules/quan-ly-du-an.md mục 4](.claude/rules/quan-ly-du-an.md) dòng 149 nay trỏ
+*"**cả ba lệnh trần** ở [CLAUDE.md §8](CLAUDE.md)"* thay cho con số, và ô hậu quả bỏ vế *không nới trần*,
+đổi thành *gộp hoặc thay luật cũ trong cùng commit; nới trần là quyền owner ([CLAUDE.md §7](CLAUDE.md))*.
+
+```bash
+grep -c '≤ 120' .claude/rules/quan-ly-du-an.md   # ra 0  <- rule hết ghim số (trước vá: 1)
+grep -c '140 dòng' CLAUDE.md                     # ra 1  <- nhà thật vẫn 140, không ai chạm
+make check                                       # ĐỎ duy nhất vẫn là F-67, diff với mốc trước vá: 0 dòng khác
+```
+
+**Đã thử làm đỏ:** ✅ 2026-08-27 — chèn lại `` `wc -l` ≤ 120 `` vào đúng ô đó, vế 1 ra `1` trong khi vế 2
+vẫn ra `1` (đúng vế **đỏ khi** mục này khai: hai nhà khai hai con số); khôi phục file, vế 1 về `0`.
+
+**Bài học giữ lại:** luật đổi ở [.claude/rules/quan-ly-du-an.md mục 4](.claude/rules/quan-ly-du-an.md):
+**rule lane không chép ngưỡng của nhà khác, chỉ trỏ tới nhà đó.** Số chép đi là số hết hạn ở lần owner
+đổi kế tiếp, và không lệnh nào bắt được — chính commit `78a8901` nới trần đã sửa mục 3 mà bỏ sót mục 4.
+Hệ quả thứ hai: rule lane **không cấm được quyền của owner** ([CLAUDE.md §7](CLAUDE.md)) — vế
+*"không nới trần"* là rule tự cấp thẩm quyền nó không có.
+
