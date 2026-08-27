@@ -32,7 +32,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-16](#f-16) | Lệnh **(e)** ở [bao-cao-thay-doi.md](.claude/rules/bao-cao-thay-doi.md) §3 — lệnh **duy nhất** bắt được [F-15](#f-15) — không chạy được: thân nó là hai dòng chú thích cộng `git log --oneline -3 -- <path>` với `<path>` là chỗ trống, và T-14 chỉ đưa (b) (c) (d) vào bộ bắt buộc | T-02 rà pipeline · 2026-08-23 | ✅ ĐÓNG 2026-08-24 | T-26 |
 | [F-17](#f-17) | [CLAUDE.md §2](CLAUDE.md) trao cho `git log` vai nhà duy nhất của *"ai sửa file nào"*, nhưng không lệnh nào đối chiếu message với `--stat`: `c386219` khai sửa `.claude/rules/quan-ly-du-an.md` trong khi commit đó chỉ đụng `finding.md` và `task.md` | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-15](task.md) |
 | [F-18](#f-18) | Không cơ chế nào bắt *task đã xong trong git mà dòng sổ còn mở*: T-02 commit đủ đầu ra ở `4851d17` với cả năm vế biên nhận xanh, dòng vẫn `\| **T-02** 🔺` — nên bước 2 của [CLAUDE.md §3](CLAUDE.md) dò đúng vào nó và phiên sau mở ra làm lại việc đã xong | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-30](task.md) |
-| [F-19](#f-19) | Một cơ chế đang hỏng được ghi **ngoài sổ lỗi**: `design/BA/04-yeu-cau.md` §4 mục 2 (*"Đóng T-02 xong thì vế 5 tự đỏ"*) mô tả đủ chuyện đóng T-02 làm lệnh §5.2b in `LANE NỬA VỜI: ba`, nhưng `grep -c 'LANE NỬA VỜI' finding.md` ra `0` và định tuyến §1 không dẫn lane NON-CODE tới `design/BA/**` | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-28](task.md) |
+| [F-19](#f-19) | Một cơ chế đang hỏng được ghi **ngoài sổ lỗi**: `design/BA/04-yeu-cau.md` §4 mục 2 (*"Đóng T-02 xong thì vế 5 tự đỏ"*) mô tả đủ chuyện đóng T-02 làm lệnh §5.2b in `LANE NỬA VỜI: ba`, nhưng `grep -c 'LANE NỬA VỜI' finding.md` ra `0` và định tuyến §1 không dẫn lane NON-CODE tới `design/BA/**` | T-02 rà pipeline · 2026-08-23 | ✅ ĐÓNG 2026-08-27 | T-28 |
 | [F-20](#f-20) | Bảng `cl-T-02` khai `Đỏ khi: ra hai đường dẫn khác nhau`, nhưng lệnh của nó in ra **8 dòng** ngay cả khi lane hoàn toàn đúng — `[^ )]*` nuốt cả dấu markdown — nên nó **đỏ giả vĩnh viễn**, và khi `paths:` bị đổi sang `design/DB/**` thật thì output chỉ khác đúng một dòng | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-29](task.md) |
 | [F-21](#f-21) | Hai cổng ở [rule §3](.claude/rules/chat-luong-finding.md) lấy mã bằng `grep -o 'F-[0-9]*'` chạy trên **cả dòng bảng**, nên mã `F-xx` **nhắc trong ô** cũng bị duyệt như mã của dòng: dòng `F-06` nhắc `[F-03]` kéo một mã **đã đóng** vào khuôn mở, và cổng (a) duyệt 25 mã cho 18 dòng 🔴 | rà khuôn finding · 2026-08-23 | ✅ ĐÓNG 2026-08-23 | ⚠️ đóng ngay trong phiên rà — không đẻ task |
 | [F-22](#f-22) | Khuôn mục `### F-xx` ở [rule §1](.claude/rules/chat-luong-finding.md) không có vế nào giữ **tiêu chí thành công** lúc **mở**: `**Kiểm chứng.**` chỉ bắt buộc khi **đóng**, nên lệnh chứng minh được chọn **sau** khi đã sửa — 14/18 mục 🔴 hiện không khai nổi một vế `đỏ khi` | rà khuôn finding · 2026-08-23 | 🔴 MỞ | [T-31](task.md) |
@@ -64,6 +64,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-48](#f-48) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi khớp đúng từng ký tự**, nên mục viết tiêu đề biến thể bị báo `THIẾU VẾ` trong khi vế **có thật**: 3/4 mục nó đang tố (`F-06` `F-07` `F-12`) đều đủ vế — cổng đỏ kinh niên, và ca đỏ **thật** duy nhất (`F-13`) chìm trong đó | đóng F-08 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên đóng F-08 |
 | [F-49](#f-49) | Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) khai mình là bộ dò việc của mọi phiên, nhưng **không file nào trong repo gọi nó nữa**: [CLAUDE.md §3](CLAUDE.md) bước 2 — caller duy nhất — nay khai *prompt là nguồn việc duy nhất*, `grep -c 'Task tiếp theo' CLAUDE.md` ra `0`; trong khi [huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md) vẫn bắt mục đó **phải là lệnh chạy được** | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-27 |
 | [F-50](#f-50) | Bảng nhịp [mục 4](.claude/rules/quan-ly-du-an.md) của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) còn khai hàng *Mỗi lần sửa `CLAUDE.md`* là ``wc -l` ≤ 120` … `không nới trần`` — cả con số lẫn mệnh lệnh đều hết đúng từ `78a8901`: [CLAUDE.md §8](CLAUDE.md) nay ghi **140**, owner đã nới. Rule chép **số** thay vì trỏ nhà thật | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ đóng ngay trong phiên nhận vé (b) — không đẻ task |
+| [F-51](#f-51) | Lệnh canh việc mở lane sống ở **hai** nhà và hai bản **đang lệch**: khối §5.2b của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) (lane NON-CODE) đã nuốt dòng task đã gạch từ `7cc5fe3`, còn đích `check-lane` của [Makefile](Makefile) — **cổng chạy thật** trong `make check`, lane DEVOPS — vẫn giữ mẫu cũ `^| \*\*T-`; cùng cơ chế, §6 nay **sáu vế** mà 5 chỗ ngoài rule còn dạy *năm vế* | T-28 · 2026-08-27 | 🔴 MỞ | ⚠️ chưa có task — cần một phiên **lane DEVOPS** |
 
 ---
 
@@ -885,6 +886,35 @@ file của lane — vì lane khác sẽ không bao giờ đọc nó.
 **Bẫy khi sửa.** Vá (i) mà bỏ (ii) là dọn đúng một hậu quả: lần sau lane DB hay BE cũng sẽ ghi chỗ hụt
 của mình vào `design/data_base/` hay `design/backend/`, và không lane nào ngoài nó đọc được.
 
+**Kiểm chứng.** Vá 2026-08-27 trong [T-28](task.md), hai vế đúng như `Cách sửa đề xuất` nêu.
+**(i)** Mẫu dò của [.claude/rules/quan-ly-du-an.md §5.2b](.claude/rules/quan-ly-du-an.md) nay là
+`^| ~*\*\*T-[0-9]*\*\*~* *[^|]*| *<LANE> `. **(ii)** §6 của cùng file có **vế 6** — *chỗ hụt phát hiện
+trong lúc mở lane ghi vào `finding.md`, không ghi vào file của lane* — và tiêu đề §6 hết chữ *năm vế*.
+
+```bash
+sed -n '/^## 6\./,/^## 7\./p' .claude/rules/quan-ly-du-an.md | grep -c '^6\. \*\*'   # ra 1  (trước vá: 0)
+sed -n '/^## 6\./p'  .claude/rules/quan-ly-du-an.md | grep -c 'năm vế'                # ra 0  (trước vá: 1)
+grep -c 'LANE NỬA VỜI' finding.md                                                      # ra >= 1 (mệnh đề khai: 0)
+```
+
+Vế (i) chạy trên **bản sao** repo ở scratchpad, dòng `T-06` bọc `~~ ~~` như lúc lane DEVOPS đóng dòng task
+cuối của nó: khối §5.2b **bản vá** in ra **rỗng** — hết đỏ giả. Cùng bản sao đó, `make check-lane` vẫn in
+`ĐỎ lane nửa vời: devops`: bản sao thứ hai của lệnh nằm trong [Makefile](Makefile), lane khác, mã riêng
+[F-51](#f-51) — không phải phần còn lại của mục này.
+
+**Đã thử làm đỏ:** ✅ 2026-08-27 — trên bản sao, xoá **hẳn** mọi dòng task lane DEVOPS rồi mọi dòng lane BA:
+khối vá in `LANE NỬA VỜI: devops không dòng task nào` rồi `LANE NỬA VỜI: ba không dòng task nào`; khôi phục
+`task.md` thì in ra rỗng lại. Xoá **chỉ** dòng `T-06` **không** đủ làm đỏ — `T-03` cũng là dòng DEVOPS đã
+gạch, và bản vá nay đọc được nó; đó là hành vi đúng, không phải nới lỏng.
+
+**Bài học giữ lại:** hai luật đổi, cả hai ở [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md).
+**(1)** §6 vế 6: *chỗ hụt phát hiện trong lúc mở lane ghi vào sổ lỗi, không ghi vào file của lane* — sổ lỗi
+là nhà **duy nhất** mọi lane đều nạp, còn `design/<lane>/` chỉ lane đó đọc, nên chỗ hụt ghi ở đấy là chỗ hụt
+chỉ người **không có quyền sửa** nhìn thấy. **(2)** §5.2b: **một trạng thái có hai hình dạng thì mọi mẫu dò
+phải nuốt cả hai.** Dòng task xong mang khuôn `~~**T-xx**~~`, nên mẫu neo `^| \*\*T-` biến *"làm xong"*
+thành *"biến mất"* — và cái đỏ sinh ra là **đỏ giả**, thứ đắt hơn không đỏ: nó dạy phiên sau bỏ qua đúng
+cái lệnh đang canh việc mở lane.
+
 ---
 
 ### F-20
@@ -1276,6 +1306,24 @@ PĐ-1 và PĐ-2 **không** thừa nhau: bỏ phép nào cũng mất một nửa 
 nạn nhân, và `563066b` đã chồng lên nó trước khi phiên kịp phản ứng. Sửa lịch sử của phiên khác đang chạy là
 hỏng nặng hơn lỗi nó vá. Ca này chỉ còn **ghi lại**, không còn **sửa** — nên nó là lý lẽ mạnh nhất cho vế
 `Cách sửa đề xuất`: cơ chế phải chặn **trước** commit, `git show --stat` sau commit chỉ kịp làm biên bản.
+
+**Ca sống thứ bảy — cùng `7cc5fe3`, nạn nhân thứ hai, và lần này PĐ-1 lẫn PĐ-3 đều *mù*.** Cùng commit ấy còn
+nuốt hai hunk của một phiên NON-CODE thứ ba đang làm [T-28](task.md): bản vá §5.2b và vế 6 của §6 trong
+[.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md), gõ xong và **chưa** commit vì đang chạy biên
+nhận trên bản sao. Cái mới không nằm ở lần nuốt, mà ở chỗ **cả hai phép đo theo tập tên file đều xanh cho
+đúng file bị nuốt**: message của `7cc5fe3` *có* khai `.claude/rules/quan-ly-du-an.md`, vì nó thật sự cũng sửa
+§5.2 của file đó. Nuốt **cùng file, khác mục** nằm dưới ngưỡng phân giải của PĐ-1 và PĐ-3 — hai dòng PĐ-3 in
+ra hôm nay (`Makefile`, `finding.md`) là bằng chứng của ca thứ sáu, không của ca này.
+
+```bash
+git show 7cc5fe3 -- .claude/rules/quan-ly-du-an.md | grep -c '^+.*Chỗ hụt phát hiện trong lúc mở lane'  # ra 1
+git log -1 --format=%s 7cc5fe3 | grep -c 'T-28\|F-19\|5\.2b'                                          # ra 0
+```
+
+**Đỏ khi** vế 1 ra `>= 1` mà vế 2 ra `0` — cùng vế đỏ với ca thứ ba, nhưng phép đo phải hạ xuống **mức hunk**
+(`git show <sha> -- <file>` cộng một chuỗi chỉ có trong phần **thêm**) mới thấy: mức **tên file** đã hết phân
+giải. Phiên T-28 chỉ phát hiện vì `git show HEAD:<file>` in ra đúng bản vá của chính nó — không phép đo nào
+trong mục này chỉ vào nó.
 
 ---
 
@@ -2611,3 +2659,64 @@ vẫn ra `1` (đúng vế **đỏ khi** mục này khai: hai nhà khai hai con s
 Hệ quả thứ hai: rule lane **không cấm được quyền của owner** ([CLAUDE.md §7](CLAUDE.md)) — vế
 *"không nới trần"* là rule tự cấp thẩm quyền nó không có.
 
+---
+
+### F-51
+
+**Mệnh đề sai.** Lệnh canh việc mở lane có **hai** nhà, và từ `7cc5fe3` (2026-08-27) hai nhà **khai hai
+hành vi khác nhau**. Nhà thứ nhất: khối `bash` ở [.claude/rules/quan-ly-du-an.md §5.2b](.claude/rules/quan-ly-du-an.md),
+lane NON-CODE, mẫu dò dòng task nay là `^| ~*\*\*T-[0-9]*\*\*~* *[^|]*| *<LANE> ` — nuốt cả dòng đã gạch.
+Nhà thứ hai: đích `check-lane` của [Makefile](Makefile), lane DEVOPS, còn nguyên mẫu `^| \*\*T-[0-9]*\*\* `.
+Nhà thứ hai mới là **cổng chạy thật** — nó nằm trong `make check` ([CLAUDE.md §8](CLAUDE.md): *hook và
+`make check` mới là cưỡng chế*) — nên bản vá [F-19](#f-19) vừa làm **không đổi hành vi của cổng nào**.
+Cùng một cơ chế đẻ ra vế thứ hai: §6 của rule nay khai **sáu vế**, còn 5 chỗ chép số ấy ra ngoài rule
+(`task.md` bốn bảng soi `owner-T-06` `owner-T-07` `owner-T-08` `owner-T-09` ·
+[project_preparation/step.md](project_preparation/step.md) dòng 63) vẫn dạy *năm vế*.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết thì lệch này **tự chín thành đỏ giả**:
+[T-06](task.md) mở lane DEVOPS và **gạch chính dòng T-06**, [T-25](task.md) gạch dòng BA cuối cùng còn mở —
+đúng lúc đó `make check` in `ĐỎ lane nửa vời` cho hai lane hoàn toàn lành. Không dòng task nào nói tới việc
+đồng bộ hai bản, và [T-28](task.md) — dòng duy nhất chạm mẫu này — bị khoá vào lane NON-CODE nên **không
+được** chạm `Makefile`. Còn ⇒ finding.
+
+**Lệnh tái hiện.** Ba vế, chạy từ gốc repo:
+
+```bash
+sed -n '/^check-lane:/,/^$/p' Makefile | grep -c '~\*'          # ra 0  <- thân đích check-lane chưa có bản vá
+sed -n '/^check-lane:/,/^$/p' Makefile | grep -n 'T-\[0-9\]\*'  # ra mẫu cũ `^| \*\*T-[0-9]*\*\* ` — không nuốt `~~`
+grep -rn 'đủ \*\*năm vế\*\*\|đủ năm vế' task.md project_preparation/step.md | wc -l   # ra 5 bản chép số cũ
+```
+
+Vế 1 phải cắt **thân đích** `check-lane` chứ không `grep` cả `Makefile`: đích `check-so` đã dùng `~*` đúng
+từ trước, nên `grep -c '~\*' Makefile` ra `5` và mệnh đề **tự xanh** trong khi cổng lane vẫn giữ mẫu cũ —
+cùng họ hỏng với [F-20](#f-20). Cũng vì vậy mục này **không ghim số dòng** của `Makefile`: nó vừa trôi từ
+`106` sang `109` trong đúng commit `7cc5fe3`.
+
+Vế thứ tư, đắt hơn nhưng là vế chứng minh **hậu quả**: chép `Makefile` `CLAUDE.md` `task.md` `.claude/rules/`
+sang một thư mục tạm, bọc dòng `T-06` bằng `~~ ~~` như lúc lane DEVOPS đóng nó (dòng DEVOPS còn lại,
+`T-03`, vốn đã gạch từ trước — tức lane hết dòng chưa gạch), rồi
+`make -C <thư mục tạm> check-lane` — in `ĐỎ lane nửa vời: devops không dòng task nào`, mã thoát `2`,
+trong khi khối §5.2b **đã vá** chạy trên đúng thư mục đó in ra **rỗng**.
+
+**Đóng khi** vế 1 ra `>= 1` và bản sao gạch-T-06 chạy `make check-lane` ra **rỗng**, mã thoát `0`.
+**Đỏ khi** bản sao ấy vẫn in `ĐỎ lane nửa vời: devops` — đúng trạng thái hôm nay — **hoặc** bản sao
+**xoá hẳn** mọi dòng task DEVOPS lại **không** in gì: nới mẫu tới mức đó là mất luôn thứ cổng này canh.
+
+**Cách sửa đề xuất.** Ba việc, việc (b) mới là gốc.
+**(a)** Lane DEVOPS, một file một dòng: dòng `grep -qi` trong thân đích `check-lane` của
+[Makefile](Makefile) đổi mẫu thành
+`"^| ~*\*\*T-[0-9]*\*\*~* *[^|]*| *$$U "`. Làm **trước** khi ai gạch [T-06](task.md).
+**(b)** Gộp về **một** nhà theo đúng bài học [F-50](#f-50) — *rule không giữ bản sao của nhà khác*: §5.2b bỏ
+khối `bash`, chỉ còn câu luật + `make check-lane`. Bỏ (b) thì lần lệch sau chỉ là vấn đề thời gian, vì hôm
+nay không lệnh nào đối chiếu hai bản.
+**Ngoài:** *Single Source of Truth* — và cách `make(1)` gói một lệnh vào **một đích**, thứ khác trỏ tới tên
+đích chứ không chép thân nó · **Ta:** mẫu dò sống **một** chỗ, trong thân `check-lane`; §5.2b còn câu luật
+cộng dòng `make check-lane` · **Vì:** quán chạy trên **1 VPS**, không hàng đợi, không cache
+([prompt-fullstack §6.8](project_preparation/prompt-fullstack.md)) — không có CI nào đối chiếu hai bản chép, nên
+mọi bản sao ở đây là bản **sẽ** lệch — [F-50](#f-50) vừa trả giá đúng kiểu này với một con số.
+**(c)** Năm chỗ *năm vế* trỏ về [.claude/rules/quan-ly-du-an.md §6](.claude/rules/quan-ly-du-an.md) thay vì
+chép số — cùng một cách sửa, cùng một lý do.
+
+**Bẫy khi sửa.** Vá (a) rồi tin vào `make check` xanh là **chưa chứng minh gì**: hôm nay cổng xanh vì lane
+BA và DEVOPS mỗi lane còn **một** dòng task chưa gạch, tức nó xanh **bất kể** mẫu đúng hay sai. Chỉ bản sao
+đã gạch hết mới phân biệt được hai bản, và phải chạy thêm một lần **xoá hẳn** để thấy nó còn đỏ được.
