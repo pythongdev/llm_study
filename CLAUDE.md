@@ -49,7 +49,9 @@ Nghi một file cũ: so dòng `Cập nhật <ngày>` trong file với `git log -
 1. **Định vị.** Chạy `git log --oneline -5` và `git status --short`. Đi tiếp khi biết commit cuối làm gì và cây làm việc sạch hay bẩn.
 2. **Chọn việc.** **Prompt là nguồn việc duy nhất** — không dò sổ, không mở [task.md](task.md) tìm việc. Prompt mơ hồ ⇒ **hỏi lại người dùng**, đừng tự bốc một dòng cho có. Đi tiếp khi khai được **đúng một** mã ở dòng §1: `T-xx` khi prompt nêu, `ngoài-sổ` khi không — mã đó đi vào message commit §4.
 3. **Nạp gói.** Ba phần: gói lane ở §1 · ô `Context › Nạp` của dòng task (**lệch với §1 ⇒ ô `Nạp` thắng**) ·
-   **bảng đầu [finding.md](finding.md)** — finding còn 🔴 MỞ mà chạm file task này sẽ sửa thì đọc mục đó trước khi gõ.
+   **finding chạm file sắp gõ**: `awk -F'|' -v f=<file> '/🔴 MỞ/ && index($(NF-1),f)' finding.md` cho **mỗi** file sẽ sửa — ra dòng nào thì đọc mục đó trước khi gõ, rỗng thì đi tiếp.
+   Lệnh đọc **ô cuối** — cột `File chạm` của [finding.md](finding.md). `grep` cả dòng **không** thay được: nó dính `(task.md)` ở cột `Task đóng nó` và `finding.md` trong mệnh đề, thừa 8/18 dòng khi hỏi về `finding.md`.
+   Finding **chặn** task thì lấy mã ở cột `Finding phải đóng` của dòng task — **không dò cả bảng**: nạp cả bảng mỗi phiên là thuế, mà vẫn trượt finding không nhắc tên file trong mệnh đề.
    Đi tiếp khi mọi đường dẫn `test -e` ra thật **và** mọi con trỏ cấp `§`/mục `grep` ra được trong chính file đích.
 4. **ĐIỂM LÙI.** Cây bẩn ⇒ commit hoặc `git stash` trước khi gõ ký tự đầu tiên. Đi tiếp khi `git status --short` rỗng. Có điểm lùi thì mọi bước sau lùi được bằng `git checkout -- <file>`.
 5. **Làm.** Chỉ chạm file lane sở hữu ở §1. Vượt kích cỡ §6 ⇒ dừng, chẻ, ghi dòng task mới. Đi tiếp khi phiên **sinh nội dung mới** đã chạy sáu probe + dán **phiếu sáu dòng** ([quality/01-chat-luong-noi-dung.md §5](quality/01-chat-luong-noi-dung.md)); nhịp ở [.claude/rules/quan-ly-du-an.md mục 4](.claude/rules/quan-ly-du-an.md).
