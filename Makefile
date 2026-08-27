@@ -69,6 +69,8 @@ check-contro:
 ## check-so — 12 phép tự rà task.md/finding.md ở rule §5.2, gom vào một cổng.
 ## Đỏ khi: một dòng task thiếu ô bắt buộc, một bảng soi mồ côi hay thiếu, mã task trùng,
 ## task đánh xong trước phụ thuộc của nó, hoặc một finding không mã task nào nhận.
+## Mã finding lấy ĐẦU DÒNG — bảng đầu `| [F-xx]` và mục `### F-xx`; mã trích trong thân một mục
+## khác (F-67 trong thân F-38) là trích dẫn, không phải finding của sổ, vét vào là báo nhầm (F-05).
 check-so:
 		@out=$$( \
 		   grep '^| \*\*T-' task.md | awk -F'|' 'length($$(NF-5)) < 12 {print "  ĐỎ thiếu ô Đầu ra kiểm chứng được:" $$2}'; \
@@ -89,7 +91,8 @@ check-so:
 		         for(i=1;i<=n;i++) if (d[i]~/^T-[0-9]+$$/) print t, d[i]}' \
 		     | while read t dep; do grep -q "^| ~~\*\*$$dep\*\*" task.md \
 		         || echo "  ĐỎ sai thứ tự: $$t đánh xong nhưng $$dep chưa"; done; \
-		   for f in $$(grep -oE 'F-[0-9]{2}' finding.md | sort -u); do \
+		   for f in $$(grep -oE '^\| \[F-[0-9]{2}\]|^### F-[0-9]{2}' finding.md \
+		                | grep -oE 'F-[0-9]{2}' | sort -u); do \
 		     grep -q "^| \[$$f\].*⚠️" finding.md && continue; \
 		     grep -q "$$f" task.md || echo "  ĐỎ finding bỏ rơi: $$f"; done; \
 		 ); \

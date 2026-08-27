@@ -188,7 +188,9 @@ grep '^| ~~\*\*T-' task.md | awk -F'|' 'NF==13 {t=substr($2,index($2,"T-"),4); \
   n=split($6,d,/[ ,]+/); for(i=1;i<=n;i++) if (d[i]~/^T-[0-9]+$/) print t, d[i]}' \
   | while read t dep; do grep -q "^| ~~\*\*$dep\*\*" task.md \
     || echo "XONG TRƯỚC PHỤ THUỘC: $t đánh xong nhưng $dep chưa"; done   # làm sai thứ tự
-for f in $(grep -oE 'F-[0-9]{2}' finding.md | sort -u); do \
+# mã hợp lệ chỉ lấy ĐẦU DÒNG — bảng đầu `| [F-xx]` và mục `### F-xx`; mã trích trong thân một mục khác
+# (ví dụ `F-67` nằm trong thân F-38) là **trích dẫn**, không phải finding của sổ này, vét nó vào là báo nhầm
+for f in $(grep -oE '^\| \[F-[0-9]{2}\]|^### F-[0-9]{2}' finding.md | grep -oE 'F-[0-9]{2}' | sort -u); do \
   grep -q "^| \[$f\].*⚠️" finding.md && continue                     # khai rõ chưa có task (chờ owner) ⇒ bỏ qua
   grep -q "$f" task.md || echo "FINDING BỎ RƠI: $f"; done            # finding không task nào đóng
 ```
@@ -201,8 +203,22 @@ tiên) không có lệnh nào đòi, nên lane mở nửa vời **không đỏ �
 ```bash
 for L in ba db be fe devops; do grep -qi "^| \*\*$(echo $L | tr a-z A-Z)\*\*.*⚠️ chưa" CLAUDE.md && continue; \
   test -e ".claude/rules/lane-$L.md" || echo "LANE NỬA VỜI: $L thiếu rule"; \
-  grep -qi "^| \*\*T-[0-9]*\*\* *[^|]*| *$(echo $L | tr a-z A-Z) " task.md || echo "LANE NỬA VỜI: $L không dòng task nào"; done
+  grep -qi "^| ~*\*\*T-[0-9]*\*\*~* *[^|]*| *$(echo $L | tr a-z A-Z) " task.md || echo "LANE NỬA VỜI: $L không dòng task nào"; done
 ```
+
+**Mẫu dò phải nuốt cả dòng đã gạch — `~*` ở hai chỗ.** Dòng task xong mang khuôn `| ~~**T-06**~~ ✅ |`;
+mẫu cũ `^| \*\*T-` không khớp nó, nên **đóng** dòng task cuối cùng của một lane làm lệnh này in
+`LANE NỬA VỜI: <lane> không dòng task nào` cho một lane hoàn toàn lành — đỏ giả, và đỏ giả dạy phiên sau
+bỏ qua đúng cái lệnh canh việc mở lane ([finding.md F-19](../../finding.md#f-19)). Khuôn `~*` không phải
+phát minh mới: [bao-cao-thay-doi.md](bao-cao-thay-doi.md) §3 lệnh (b) và (c) đã dùng đúng nó từ trước.
+
+**Đỏ khi** xoá **hẳn** dòng task của một lane đã hết ⚠️ mà lệnh vẫn im — nới mẫu tới mức đó là mất luôn
+thứ nó canh. **Xanh khi** dòng task đó chỉ bị gạch `~~ ~~`.
+
+**Nhà cưỡng chế của lệnh này là [Makefile](../../Makefile) đích `check-lane`**, không phải khối trên:
+khối trên là bản đọc được, `make check-lane` mới là cổng chạy thật trong `make check`
+([CLAUDE.md §8](../../CLAUDE.md)). Sửa khối này mà bản trong `Makefile` không đổi thì cổng vẫn giữ hành vi
+cũ — `Makefile` thuộc lane DEVOPS, hiện trạng và cách gộp một nhà ở [finding.md F-51](../../finding.md#f-51).
 
 ### 5.2c Con trỏ cấp `§`/mục có giải được không
 
@@ -233,9 +249,10 @@ luật ("đánh ⚠️ cho `make check` là khai sai") — đoạn §3 trên và
 dính. Chỉ tính khi ⚠️ **kề** đích, cách nhau nhiều nhất một dấu cách, ở một trong hai thế.
 
 **Đỏ khi** một sổ hay file luật còn ⚠️ **kề** một đích `make` đã có trong [Makefile](../../Makefile).
-**Xanh khi** hoặc đích đó chưa dựng (⚠️ đúng), hoặc ⚠️ đã gỡ. Chạy 2026-08-25 lệnh này **đỏ**:
-[task.md](../../task.md) dòng 45, ô `Đầu ra` của `T-03`, còn ⚠️ từ thời chưa có `Makefile` —
-ca sống ghi ở [finding.md F-23](../../finding.md#f-23).
+**Xanh khi** hoặc đích đó chưa dựng (⚠️ đúng), hoặc ⚠️ đã gỡ. Chạy 2026-08-25 lệnh này **đỏ**, và
+2026-08-27 chạy lại vẫn **đỏ**: ô `Đầu ra` của `T-03` trong [task.md](../../task.md) còn ⚠️ kề `make check`
+từ thời chưa có `Makefile`. Dò bằng `grep -n 'make check' task.md`, **đừng ghim số dòng** — sổ task còn nở
+ra nên con trỏ cấp dòng hết đúng trong im lặng. Ca sống ghi ở [finding.md F-23](../../finding.md#f-23).
 
 Lệnh 1 bắt **sửa file ngoài lane**. Lệnh 2 bắt **báo xong mà không có biên nhận chạy được**. Lệnh 3 bắt
 chiều ngược lại: **⚠️ bi quan trên cổng đã chạy được**. Lệnh 4 bắt **commit không truy vết được về một
@@ -243,7 +260,7 @@ dòng task** — tức việc của pha sau lọt vào phiên này.
 
 ---
 
-## 6. Quy trình mở một lane mới — làm đủ năm vế, thiếu vế nào thì lane đó chưa mở
+## 6. Quy trình mở một lane mới — làm đủ sáu vế, thiếu vế nào thì lane đó chưa mở
 
 1. **Nhà của lane tồn tại.** Tạo thư mục lane sở hữu, `test -e` không kêu.
 2. **Biên nhận chạy được.** Viết ra lệnh, chạy thật, dán output. Chưa chạy được ⇒ lane chưa mở, để ⚠️.
@@ -253,6 +270,11 @@ dòng task** — tức việc của pha sau lọt vào phiên này.
    Sửa một dòng, không thêm mục — trần ở `CLAUDE.md` §8.
 5. **Dòng task đầu tiên của lane đó có mặt trong `task.md`.** Lane mở mà không có việc nào là lane
    không ai đi vào, và cột `Lane sở hữu file nào` sẽ trôi khỏi hiện trạng mà không lệnh nào đỏ.
+6. **Chỗ hụt phát hiện trong lúc mở lane ghi vào [finding.md](../../finding.md), không ghi vào file của
+   lane.** Mở lane là lúc lộ ra nhiều chỗ hụt nhất, nhưng [CLAUDE.md §1](../../CLAUDE.md) chỉ cho **một**
+   lane nạp thư mục của lane đó ⇒ chỗ hụt nằm trong `design/<lane>/` chỉ đọc được bởi lane **không có
+   quyền sửa** nó, còn lane có quyền sửa thì không được nạp file chứa nó ([finding.md F-19](../../finding.md#f-19)).
+   Sổ lỗi là nhà duy nhất mọi lane đều nạp.
 
 Thứ tự mở: lane nào là **nền của biên nhận lane khác** thì mở trước. DEVOPS (`Makefile`) đứng trước
 DB / BE / FE vì ba lane đó lấy `Makefile` làm biên nhận.
