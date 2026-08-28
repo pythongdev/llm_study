@@ -71,19 +71,24 @@ for t in $(sed -n 's/^\.PHONY: *//p' Makefile); do \
 ## 4. Biên nhận của lane
 
 `make check` — **5 đích**, mã thoát `0` (đích gộp `check` gọi 5 đích con). Đây là biên nhận **thật**, không phải lời hứa: nó chạy được từ
-commit `9699f1c`, và `CLAUDE.md` §7 cùng `.claude/rules/quan-ly-du-an.md` mục 3 nay đều khai đúng như vậy.
+commit `9699f1c`. Hai file luật khai cùng chuyện này là `CLAUDE.md` §7 và
+`.claude/rules/quan-ly-du-an.md` mục 3 — đọc thẳng ở đó, file này không chép lại lời khai của chúng.
 Lịch sử của chỗ này là [finding.md F-23](../../finding.md#f-23) — **trạng thái của nó đọc ở hàng `F-23`
 trong [finding.md](../../finding.md)**, file này không chép lại và không ghim số dòng của file nào
 ([.claude/rules/quan-ly-du-an.md §5.3](quan-ly-du-an.md)). Muốn biết ô `Đầu ra` của `T-03` còn ⚠️ kề
 `make check` không thì dò `grep -n 'make check' task.md`; thấy còn cũng **đừng sửa kèm ở đây** —
 `task.md` là lane NON-CODE. Lý do luật này tồn tại: [finding.md F-53](../../finding.md#f-53).
 
-**Hôm nay `make check` đỏ sẵn** ở đích `check-so`, dòng `ĐỎ finding bỏ rơi: F-67` — nguyên nhân ở
-`finding.md` F-05 mục *Ca sống 2026-08-25*, thuộc lane NON-CODE, **không** thuộc lane này. Vì vậy:
+**Đừng giả định cổng đang xanh — và cũng đừng giả định nó đang đỏ.** `make check` có thể đỏ sẵn vì một
+lỗi thuộc lane khác: nội dung hai sổ là lane NON-CODE, **không** thuộc lane này. File này cố ý **không
+khai trạng thái tức thời của cổng** — trạng thái đọc bằng chính lệnh, không đọc ở một file luật.
+Nó chỉ khai ba bước xử trí, ba bước này đúng ở mọi ngày:
 
 1. Chạy `make check` **trước** khi gõ ký tự đầu tiên, giữ output làm vạch nền.
 2. Chạy lại sau khi gõ, và chỉ đọc **phần khác** giữa hai lần.
-3. Dòng đỏ có sẵn thì để nguyên và trỏ mã finding của nó. Vá một đích cho nó im là vi phạm §2 (a):
+3. Dòng đỏ có sẵn thì để nguyên và trỏ mã finding của nó — dò mã bằng
+   `grep -n '<chuỗi trong dòng đỏ>' finding.md`, chưa có mã thì mở một mã; đừng chép dòng đỏ sang đây.
+   Vá một đích cho nó im là vi phạm §2 (a):
    cổng đỏ thường trực là cổng phiên sau học cách bỏ qua, còn cổng bị bịt miệng thì không ai học được nữa.
 
 ## 5. Ba thứ không bao giờ thoả hiệp — trỏ, không chép

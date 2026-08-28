@@ -106,7 +106,7 @@ check-lane:
 		   U=$$(echo $$L | tr a-z A-Z); \
 		   grep -qi "^| \*\*$$U\*\*.*⚠️ chưa" CLAUDE.md && continue; \
 		   test -e ".claude/rules/lane-$$L.md" || echo "  ĐỎ lane nửa vời: $$L thiếu rule riêng"; \
-		   grep -qi "^| \*\*T-[0-9]*\*\* *[^|]*| *$$U " task.md || echo "  ĐỎ lane nửa vời: $$L không dòng task nào"; \
+		   grep -qi "^| ~*\*\*T-[0-9]*\*\*~* *[^|]*| *$$U " task.md || echo "  ĐỎ lane nửa vời: $$L không dòng task nào"; \
 		 done); \
 		 [ -z "$$out" ] || { echo "$$out"; exit 1; }; \
 		 echo "  lane: mọi lane hết ⚠️ ở CLAUDE.md §1 đều có rule riêng + dòng task"

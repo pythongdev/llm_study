@@ -148,7 +148,7 @@ BE và FE mở. Định nghĩa XONG đầy đủ chuyển nhà sang
 | Owner soi **chất lượng** một task vừa ✅ | từng lệnh ở bảng `### cl-T-xx`, rồi dòng `**ĐẠT khi:**` và `**Đã thử làm đỏ:**` | chưa đạt tầng sàn ⇒ ô `Chất lượng` để `❌` + mở finding, **không** đổi dấu thành ✅ cho xong |
 | Mỗi lần sửa `CLAUDE.md` | **cả ba lệnh trần** ở [CLAUDE.md §8](../../CLAUDE.md) — ngưỡng sống ở đó, rule này **không chép số** sang · rồi vòng lặp con trỏ §5.1 | gộp hoặc thay luật cũ **trong cùng commit**; nới trần là quyền owner ([CLAUDE.md §7](../../CLAUDE.md)) |
 | Cuối mỗi phiên **có sửa file** | dán bảng thay đổi 5 cột — khuôn [bao-cao-thay-doi.md](bao-cao-thay-doi.md) §1 | thiếu bảng ⇒ phiên **chưa xong**, dù biên nhận đã xanh |
-| Cuối mỗi phiên | ba lệnh dò phiên trôi §5.3 | ghi finding hoặc mở task, đừng sửa lặng lẽ |
+| Cuối mỗi phiên | **cả khối** lệnh dò phiên trôi §5.3 — số lệnh không ghim trong câu này, nó tự trôi | ghi finding hoặc mở task, đừng sửa lặng lẽ |
 | Mỗi lần mở một lane | quy trình §6 **và lệnh §5.2b** | thiếu vế nào thì lane đó chưa được coi là mở |
 | Mỗi lần viết ô `Nạp` mới | §5.2c — `grep` từng con trỏ cấp `§` trong chính file đích | ra `0` ⇒ con trỏ bịa, sửa ngay, đừng để phiên sau đi tìm |
 
@@ -169,6 +169,13 @@ grep -o '](\([^)#]*\)' <file> | sed 's/](//' | grep -v '^http' | grep -v '^$' | 
 ### 5.2 Tự rà `task.md` trước khi commit
 
 ```bash
+# ĐẾM CỘT — chạy TRƯỚC mọi lệnh dưới: chúng định vị ô bằng số thứ tự cột ($(NF-5), $(NF-4)) nên đều
+# GIẢ ĐỊNH dòng đủ cột, không lệnh nào KIỂM điều đó (gốc finding.md F-05). Phải bỏ `\|` đã thoát rồi
+# mới đếm: `awk -F'|'` cắt theo ký tự | THÔ, đếm luôn dấu đã thoát đúng luật §1.1 ⇒ đỏ giả trên mọi
+# dòng có lệnh trong ô (finding.md F-09). Ngưỡng 11 = số cột thật, nhà ở huong-dan-viet-task-md.md Phần IV.
+grep '^| ~*\*\*T-' task.md \
+  | awk '{ l=$0; gsub(/\\\|/,"",l); n=gsub(/\|/,"",l); if (n-1 != 11) { \
+      match($0,/T-[0-9]+/); print "VỠ CỘT: " substr($0,RSTART,RLENGTH), n-1 "/11" } }'
 grep '^| \*\*T-' task.md | awk -F'|' 'length($(NF-5)) < 12 {print $2}'  # thiếu biên nhận ⇒ là ý kiến
 grep '^| \*\*T-' task.md | grep '⚠️+'                                   # chạm 2 lane ⇒ chẻ trước khi làm
 grep '^| \*\*T-' task.md | awk -F'|' '$(NF-4) !~ /👤|🤖/ {print $2}'    # thiếu ô Owner kiểm tra
@@ -226,7 +233,7 @@ cũ — `Makefile` thuộc lane DEVOPS, hiện trạng và cách gộp một nh�
 không có mục nào tên như vậy. Với mỗi con trỏ cấp mục vừa viết, `grep` nó trong chính file đích trước
 khi commit — ví dụ `grep -c 'Pha 0' project_preparation/prompt-fullstack.md` ra `0` nghĩa là con trỏ bịa.
 
-### 5.3 Bốn lệnh dò phiên đang trôi
+### 5.3 Lệnh dò phiên đang trôi
 
 ```bash
 git status --short | grep -v -E '^\?\? '   # sửa file ngoài lane: đối chiếu cột "Lane sở hữu" ở CLAUDE.md §1
@@ -236,12 +243,15 @@ grep -rnoE '⚠️ ?`make [a-z][a-z-]*`|`make [a-z][a-z-]*` ?⚠️' CLAUDE.md t
   | while read -r _ d; do make -n "$d" >/dev/null 2>&1 \
       && echo "⚠️ THỪA: đích 'make $d' đã dựng xong, gỡ ⚠️"; done   # ⚠️ kề cổng đã chạy được
 git log --oneline -5 | grep -v -E '^[0-9a-f]+ (NON-CODE|BA|DB|BE|FE|DEVOPS)/T-[0-9]+:'  # commit không khai lane + mã task
+grep -rn 'dòng [0-9][0-9]*' .claude/rules/*.md CLAUDE.md | grep -v 'số dòng'   # con trỏ ghim số dòng
+grep -rnE '(h[ô]m nay|20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]).*đ[ỏ]' .claude/rules/*.md CLAUDE.md \
+  | grep -v 'thử làm đ[ỏ]'   # file luật chép trạng thái tức thời của một cổng
 ```
 
 **Lệnh 3 dùng `make -n`, không dùng mã thoát của `make`.** Hai thứ đó khác nhau: `make -n <đích>` ra `0`
 nghĩa là **cổng đã dựng** (đích có trong [Makefile](../../Makefile)), còn `make <đích>` ra khác `0` có thể
-chỉ nghĩa là **cổng đang bắt được lỗi thật** — hôm nay `make check` đúng là đang đỏ ở `check-so`
-([finding.md F-05 ca sống 2026-08-25](../../finding.md#f-05)). Lấy mã thoát của `make` làm bằng chứng thì
+chỉ nghĩa là **cổng đang bắt được lỗi thật**, tức cổng đang làm việc chứ không phải cổng chưa dựng — ca
+sống ghi ở [finding.md F-05](../../finding.md#f-05). Lấy mã thoát của `make` làm bằng chứng thì
 mỗi ngày repo có lỗi thật, lệnh 3 lại tự tắt: ⚠️ thừa trôi qua đúng lúc cần bắt nhất.
 
 **Phải khớp thế kề nhau, không phải cùng dòng.** Bản cùng-dòng bắt nhầm đúng những câu **giải thích**
@@ -249,14 +259,28 @@ luật ("đánh ⚠️ cho `make check` là khai sai") — đoạn §3 trên và
 dính. Chỉ tính khi ⚠️ **kề** đích, cách nhau nhiều nhất một dấu cách, ở một trong hai thế.
 
 **Đỏ khi** một sổ hay file luật còn ⚠️ **kề** một đích `make` đã có trong [Makefile](../../Makefile).
-**Xanh khi** hoặc đích đó chưa dựng (⚠️ đúng), hoặc ⚠️ đã gỡ. Chạy 2026-08-25 lệnh này **đỏ**, và
-2026-08-27 chạy lại vẫn **đỏ**: ô `Đầu ra` của `T-03` trong [task.md](../../task.md) còn ⚠️ kề `make check`
-từ thời chưa có `Makefile`. Dò bằng `grep -n 'make check' task.md`, **đừng ghim số dòng** — sổ task còn nở
+**Xanh khi** hoặc đích đó chưa dựng (⚠️ đúng), hoặc ⚠️ đã gỡ. Lệnh này **đã đỏ thật** hai phiên liền trên
+ô `Đầu ra` của `T-03` trong [task.md](../../task.md) — ⚠️ còn kề `make check` từ thời chưa có `Makefile`;
+**trạng thái của vế đó đọc ở hàng `F-23`** trong [finding.md](../../finding.md), chỗ này không chép lại.
+Dò bằng `grep -n 'make check' task.md`, **đừng ghim số dòng** — sổ task còn nở
 ra nên con trỏ cấp dòng hết đúng trong im lặng. Ca sống ghi ở [finding.md F-23](../../finding.md#f-23).
 
 Lệnh 1 bắt **sửa file ngoài lane**. Lệnh 2 bắt **báo xong mà không có biên nhận chạy được**. Lệnh 3 bắt
 chiều ngược lại: **⚠️ bi quan trên cổng đã chạy được**. Lệnh 4 bắt **commit không truy vết được về một
 dòng task** — tức việc của pha sau lọt vào phiên này.
+
+**Lệnh 5 và 6 bắt cùng một nguyên nhân: file luật *chép* thay vì *trỏ*** — ca sống là
+[finding.md F-53](../../finding.md#f-53). Lệnh 5 bắt **con trỏ ghim số dòng**: file luật chỉ được trỏ bằng
+tên mục `§`, mã `F-xx`, hoặc một lệnh dò, vì số dòng trôi mỗi lần sổ nở ra và con trỏ cấp dòng hết đúng
+**trong im lặng** — nó vẫn trỏ tới một dòng có thật, chỉ là dòng khác. Bộ lọc `grep -v 'số dòng'` chừa lại
+đúng những câu **nói về** luật này. **Đỏ khi** in ra dòng nào.
+
+Lệnh 6 bắt **bản sao trạng thái tức thời**: một câu trong file luật khai một cổng hay một sổ *đang* thế
+nào, gắn với một mốc thời gian. Câu đó đúng đúng một ngày rồi thành lời dạy sai, và không cổng nào cũ đi
+ồn ào cả. Bộ lọc `grep -v 'thử làm đ[ỏ]'` chừa lại biên nhận âm theo
+[quality/00-guideline-chat-luong.md §5](../../quality/00-guideline-chat-luong.md) — *đã thử làm đỏ ngày
+nào* là **lịch sử**, không phải trạng thái, và nó phải được giữ. **Đỏ khi** in ra dòng nào; **xanh khi**
+mọi câu như vậy đã đổi thành con trỏ tới nhà thật.
 
 ---
 

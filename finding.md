@@ -43,7 +43,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-23](#f-23) | ~~[CLAUDE.md §7](CLAUDE.md)~~ ~~[rule §3](.claude/rules/quan-ly-du-an.md)~~ ~~§5.3 thiếu lệnh bắt ⚠️ **thừa**~~ ~~ô `Đầu ra` của `T-03` trong [task.md](task.md) giữ ⚠️ kề `make check`~~ — **cả bốn vế đã vá**: ba vế 2026-08-25 (`b334899` + `0370781`), vế cuối 2026-08-28; lệnh 3 của [rule §5.3](.claude/rules/quan-ly-du-an.md) chạy ra **rỗng** | T-03 · 2026-08-23 · vá 2026-08-25 · đóng 2026-08-28 | ✅ ĐÓNG 2026-08-28 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-28 | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` `Makefile` `task.md` |
 | [F-24](#f-24) | [CLAUDE.md §4](CLAUDE.md) khai `git add <đường dẫn cụ thể>` là cách chống nuốt việc dở của phiên khác — nó chỉ chống **lẫn file**, không chống **lẫn hunk**: hai phiên cùng sửa `task.md`/`finding.md` thì bên nào commit trước cũng nuốt trọn phần bên kia đang viết, cây vẫn sạch và `git log` vẫn hợp khuôn (ca thật: `0d2a785` chứa cả phần đóng `T-03` của phiên DEVOPS) | T-03 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task | `.claude/rules/bao-cao-thay-doi.md` `CLAUDE.md` `finding.md` `task.md` |
 | [F-25](#f-25) | Luật *thử làm đỏ một lần* ([guideline §5](quality/00-guideline-chat-luong.md)) không có cổng nào cưỡng chế cho bảng `cl-T-xx`: **28/31** bảng đang `Đã thử làm đỏ: ⬜ chưa`, nên một lệnh soi hỏng nằm im vô hạn — ca phát hiện: `cl-T-04` khai đỏ khi hai file cùng `>= 1` hit `go test`/`npm run`, trong khi rule đã có 2 hit và **một hit nằm trong thân câu lệnh §5.2** nên không xoá được ⇒ trục đó **đỏ vĩnh viễn** | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task | `.claude/rules/quan-ly-du-an.md` `quality/00-guideline-chat-luong.md` `task.md` |
-| [F-26](#f-26) | ~~Ô `**Đạt khi:**` của bảng soi `owner-T-06` ([task.md](task.md) dòng 164) và ô `Context` của dòng `T-06` ([task.md](task.md) dòng 51) khai nhà của luật *không deploy trong giờ bán* là `CLAUDE.md`, nhưng `CLAUDE.md` **không có chữ nào** về luật đó~~ — **cả hai chỗ đã vá** ở `563066b` (2026-08-27), nay trỏ nhà thật `project_preparation/prompt-fullstack.md` §6.9, `CLAUDE.md` chỉ trỏ; bản mở của mã này khai nhầm sang một bảng soi khác — bảng đó nói về `paths:` và không chứa chữ nào về luật deploy, xem mục ↓ | vá dòng T-04 · 2026-08-23 · vá 2026-08-27 · đóng 2026-08-28 | ✅ ĐÓNG 2026-08-28 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-27 (`563066b`), đóng 2026-08-28 | `CLAUDE.md` `project_preparation/prompt-fullstack.md` `quality/00-guideline-chat-luong.md` `task.md` |
+| [F-26](#f-26) | ~~Ô `**Đạt khi:**` của bảng soi `owner-T-06` ([task.md](task.md) dòng 164) **và** ô `Context › Bẫy` của dòng `T-06` ([task.md](task.md) dòng 51) khai nhà của luật *không deploy trong giờ bán* là `CLAUDE.md`, trong khi `CLAUDE.md` **không có chữ nào** về luật đó~~ — **cả hai bản đã vá** ở `563066b` (2026-08-27), nay cùng trỏ nhà thật [project_preparation/prompt-fullstack.md §6.9](project_preparation/prompt-fullstack.md); bản mở của chính mã này khai **sai địa chỉ** (`owner-T-11`) và chỉ ghi **một** trong hai bản — đã sửa 2026-08-28, xem [thân mục ↓](#f-26) | vá dòng T-04 · 2026-08-23 · vá 2026-08-27 · sửa địa chỉ + đóng 2026-08-28 | ✅ ĐÓNG 2026-08-28 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-27 (`563066b`), đóng ngoài sổ 2026-08-28 | `CLAUDE.md` `finding.md` `project_preparation/prompt-fullstack.md` `quality/00-guideline-chat-luong.md` `task.md` |
 | [F-27](#f-27) | `project_preparation/prompt-fullstack.md` khai **hai** bề rộng cho cùng một màn hình khách: §3.7 *"mobile-first 375px"*, §6.5 *"thử ở 360px (khách)"* — [T-04](task.md) sẽ chép **một** trong hai vào `quality/05-checklist.md` và chốt luôn số sai | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task — owner đã chốt **375px** 2026-08-24, còn phải sửa §6.5 | `CLAUDE.md` `project_preparation/prompt-fullstack.md` `quality/05-checklist.md` `task.md` |
 | [F-28](#f-28) | Lệnh soi trục *Một nhà* của `cl-T-04` **tự bắt `task.md`**: chuỗi mốc `happy path` bắt buộc phải nằm trong chính ô soi, nên lệnh đỏ ở **cả hai** nhánh — có checklist thì ra `3` file (*bản chép thứ ba*), chưa có thì kết quả thiếu `quality/05-checklist.md` (*chưa có nhà*) | T-04 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ owner chỉ định vá ngay trong phiên T-04 — không đẻ task | `finding.md` `quality/00-guideline-chat-luong.md` `quality/05-checklist.md` `task.md` |
 | [F-29](#f-29) | Ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy `awk` 7 khoá trên **cả file** trong khi vế nó muốn đo là *bảy dòng `- [ ]`*: §2 của checklist nhắc lại đúng các chuỗi khoá, nên bản **xoá một vế rồi chèn một dòng bịa** qua được cả hai biên nhận — `grep -c` ra `7`, `awk` ra `7` | T-04 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task — owner giao agent riêng vá ngay sau T-04 | `quality/00-guideline-chat-luong.md` `quality/05-checklist.md` `task.md` |
@@ -1492,6 +1492,58 @@ một phiên**: lần đầu khi cây bẩn hiện ra, lần hai khi `260685e` �
 với [F-53](#f-53), đến từ hướng khác: [F-53](#f-53) nói bản chép hết đúng vì **nhà thật đi tiếp**; ca này nói
 bản chép hết đúng vì **nhà thật đang bị phiên khác sửa ngay lúc chép**.
 
+
+**Ca sống thứ mười một — 2026-08-28: kẻ nuốt không phải một thói quen, nó là bước 4.** Chín ca trên tả
+`git add` nuốt hunk như **tai nạn** — phiên bất cẩn, luật thì đúng. Ca này lật vế đó: [CLAUDE.md §3](CLAUDE.md)
+bước 4 **ra lệnh** làm đúng chuyện ấy. Nguyên văn (`sed -n '56p' CLAUDE.md`): *"Cây bẩn ⇒ commit hoặc
+`git stash` trước khi gõ ký tự đầu tiên. Đi tiếp khi `git status --short` rỗng."* Câu đó không có mệnh đề nào
+phân biệt **cây bẩn vì việc dở của chính phiên này** với **cây bẩn vì phiên song song đang gõ**, nên với ca
+thứ hai nó đưa ra đúng hai nhánh, cả hai đều cướp:
+
+- nhánh `commit` — chính mệnh đề gốc của mục này, chỉ khác là lần này phiên làm vì **tuân luật**;
+- nhánh `git stash` — **tệ hơn `git add`**: nó gỡ hunk khỏi cây làm việc mà **không để lại dòng nào trong
+  `git log`**. Phiên nạn nhân quay lại thấy file mình vừa gõ trở về đúng `HEAD`, không commit lạ nào để lần
+  ra, và không biên nhận của lane nào ở [CLAUDE.md §1](CLAUDE.md) đọc `refs/stash`. `git add` ít ra để lại
+  một commit sai tên trong lịch sử — chín ca trên bắt được là nhờ vậy. Stash chỉ để lại một cây sạch.
+
+Vế **điều kiện đi tiếp** siết thêm một nấc: *"đi tiếp khi `git status --short` rỗng"* biến việc dọn hunk của
+phiên khác thành **cổng bắt buộc**, nên phiên tuân luật không còn nhánh hợp lệ nào để **chờ** — mà chờ đúng
+là cơ chế duy nhất cứu `017a42a` ở ca thật phía trên. Bước 4 vừa mở đường nuốt, vừa cấm cách chống đã có.
+
+**Ca thật.** Phiên NON-CODE 12:55 nhận việc vá [F-23](#f-23) — việc đã xong từ `260685e` lúc `12:33:04`. Nó
+thấy ` M finding.md`, hunk **không** của nó: phiên khác đang đóng [F-26](#f-26). Làm đúng bước 4 thì hunk đó
+phải bị `commit` (vào commit mang message F-23 của phiên này) hoặc `git stash`. Nó không làm cả hai; khôi phục
+bằng **đúng một đường dẫn** `git checkout -- task.md`, nên hunk `F-26` sống sót. `git checkout -- .` — cách
+đọc tự nhiên của *"cây bẩn ⇒ … trước khi gõ ký tự đầu tiên"* — thì mất trắng, và mất **không dấu vết**: chưa
+staged, chưa commit, không stash, không reflog.
+
+```bash
+git log -1 --format='%h %ad %s' --date=format:'%H:%M:%S' 260685e   # 12:33:04 — F-23 đã đóng trước khi phiên 12:55 nhận việc
+git show --name-only --format= 260685e                            # finding.md task.md — phiên kia đang giữ cả hai
+awk -F'|' '/^\| \[F-26\]/{print $5}' finding.md                    # 🔴 MỞ — hunk F-26 còn sống vì checkout theo đường dẫn
+sed -n '56p' CLAUDE.md | grep -c 'git stash'                       # 1 — bước 4 vẫn ra lệnh stash, không loại trừ ca phiên song song
+```
+
+**Ca thứ hai, trong chính phiên đang gõ dòng này.** `git status --short` ở bước 1 ra ` M .claude/rules/lane-devops.md`
+— 9 thêm / 4 bớt, hunk của phiên khác viết tiếp §4 sau `c5bcd5f`, không thuộc việc của phiên này. Phiên này
+**bỏ qua bước 4** và stage đúng `finding.md`. Làm đúng chữ của bước 4 thì 9 dòng ấy hoặc chui vào commit mang
+message `F-24` của phiên này, hoặc biến mất vào `refs/stash` — và đây là ca thứ ba liên tiếp trong hai ngày
+mà thứ cứu được việc của phiên song song là một phiên **không tuân bước 4**.
+
+**Đỏ khi** `sed -n '56p' CLAUDE.md` còn in ra `git stash` mà không kèm mệnh đề loại trừ ca phiên song song:
+
+```bash
+grep -n 'git stash' CLAUDE.md | grep -v 'phiên song song\|phiên khác' \
+  && echo "ĐỎ: §3 bước 4 còn ra lệnh stash mà không loại trừ ca phiên song song"
+```
+
+Lệnh trên **đang đỏ** (in ra dòng 56). Nó không đóng được ở phiên này: vế phải sửa nằm trong `CLAUDE.md`,
+ngoài phạm vi lane, và đổi một luật ở đó là quyền owner ([CLAUDE.md §8](CLAUDE.md) *"thay hoặc gộp một luật
+cũ"*). Vế mới cần thêm vào `**Cách sửa đề xuất.**`: bước 4 phải chẻ *cây bẩn* làm hai ca — bẩn vì việc dở của
+**chính phiên này** (commit hoặc stash, như hiện nay) và bẩn vì **phiên khác** (không chạm; khôi phục chỉ
+bằng `git checkout -- <đường dẫn cụ thể>` của riêng mình, cấm `git checkout -- .` và cấm `git stash`), đồng
+thời gỡ *"đi tiếp khi `git status --short` rỗng"* làm điều kiện cứng cho ca thứ hai.
+
 ---
 
 ### F-25
@@ -1551,61 +1603,70 @@ một bảng `cl-` của task đã `✅` về `⬜` ⇒ lệnh phải in `CHƯA 
 
 ### F-26
 
-**Mệnh đề sai.** Ô `**Đạt khi:**` của bảng soi `owner-T-06` ([task.md](task.md) dòng 164) và ô `Context`
-của dòng `T-06` ([task.md](task.md) dòng 51) viết: *"…luật không deploy trong giờ bán **không** bị đem
-vào rule — luật đó mất giữa phiên là gây hỏng thật, nên **nhà của nó là `CLAUDE.md`**"*. `CLAUDE.md`
-không chứa câu nào về luật đó. Nhà thật là `project_preparation/prompt-fullstack.md` §6.9, và
-[guideline §6](quality/00-guideline-chat-luong.md) đang trỏ đúng về đó với chú thích *"trỏ, không chép"*.
-Bản mở của mã này khai nhầm bảng: nó ghi `owner-T-11`, nhưng bảng đó nói về `paths:` của rule quản lý
-([F-03](#f-03) ✅ ĐÓNG) và `sed -n '212,222p' task.md | grep -c 'deploy trong giờ bán'` ra `0`.
+**Mệnh đề sai.** ~~Ô `**Đạt khi:**` của bảng soi `owner-T-06` trong [task.md](task.md) (dòng 164)
+**và** ô `Context › Bẫy` của dòng `T-06` ở §Sổ task (dòng 51) — **hai bản của cùng một câu** — viết:
+*"…luật không deploy trong giờ bán **không** bị đem vào rule — luật đó mất giữa phiên là gây hỏng thật,
+nên **nhà của nó là `CLAUDE.md`**"*, trong khi `CLAUDE.md` không chứa câu nào về luật đó.~~ Nhà thật là
+[project_preparation/prompt-fullstack.md §6.9](project_preparation/prompt-fullstack.md), và
+[quality/00-guideline-chat-luong.md §6](quality/00-guideline-chat-luong.md) đang trỏ đúng về đó với chú
+thích *"trỏ, không chép"*.
 
-**Lệnh tái hiện.**
+**Bản mở của chính mục này khai sai địa chỉ — sửa 2026-08-28.** Cả hàng bảng lẫn thân mục đều ghi câu ấy
+nằm ở `owner-T-11`, và chỉ khai **một** bản thay vì hai. `owner-T-11` là bảng soi của việc nới `paths:`
+cho rule quản lý ([F-03](#f-03) ✅ ĐÓNG); ô `**Đạt khi:**` của nó nói về *đúng hai dòng `paths:`* và
+không có chữ nào về deploy — `sed -n '220p' task.md | grep -c 'CLAUDE.md'` ra `0`. Mục này vì vậy **tự
+dính đúng lỗi nó tố cáo**: một câu khai *"X nằm ở Y"* mà Y không hề chứa X. Ai đi vá theo địa chỉ cũ sẽ
+mở `owner-T-11`, không thấy gì, và đóng mục này là *"hết đúng"* trong khi câu sai vẫn sống ở hai chỗ khác.
+
+**Lệnh tái hiện.** (hai lệnh đầu chạy trên bản **trước** `563066b`)
 
 ```bash
-grep -c 'deploy trong giờ bán' CLAUDE.md                                   # ra 0 — không có nhà nào ở đây
-grep -rn 'không deploy trong giờ bán' --include='*.md' --exclude-dir=reference .
-# ra: prompt-fullstack.md §6.9 (nguồn) · quality/00-guideline-chat-luong.md §6 (trỏ) · task.md (khai sai)
+git show 563066b~1:task.md | grep -c 'nhà của nó là .CLAUDE.md.'   # ra 2 — hai bản, không phải một
+grep -c 'deploy trong giờ bán' CLAUDE.md                           # ra 0 — không có nhà nào ở đây
+sed -n '220p' task.md | grep -c 'CLAUDE.md'                        # ra 0 — owner-T-11 không phải địa chỉ
 ```
 
 **Vì sao nó không tự mất đi.** T-06 đã xong — `.claude/rules/lane-devops.md` có thật, dòng DEVOPS ở
-[CLAUDE.md §1](CLAUDE.md) hết ⚠️. Chạy hết [task.md](task.md): không dòng nào mở lại ô `Đạt khi` của
-`owner-T-06`, và không lệnh nào trong [§5.2](.claude/rules/quan-ly-du-an.md) đối chiếu một câu khai
-*"nhà của X là Y"* với việc Y có thật chứa X hay không. Dòng này **còn** ⇒ finding. Nó cùng họ với
-[F-17](#f-17) (khai sai file đã sửa) nhưng khác nguyên nhân: F-17 là commit message lệch `--stat`, mục
-này là **một câu khai nhà** lệch nội dung nhà đó.
+[CLAUDE.md §1](CLAUDE.md) hết ⚠️. Chạy hết [task.md](task.md) y như nó viết: không dòng nào mở lại ô
+`Đạt khi` của `owner-T-06` hay ô `Context` của `T-06`, và không lệnh nào trong
+[.claude/rules/quan-ly-du-an.md §5.2](.claude/rules/quan-ly-du-an.md) đối chiếu một câu khai *"nhà của X
+là Y"* với việc Y có thật chứa X hay không — vòng lặp con trỏ ở đó chỉ kiểm **đường dẫn có tồn tại**.
+Dòng này **còn** ⇒ finding. Cùng họ [F-17](#f-17) (khai sai file đã sửa), khác nguyên nhân: F-17 là
+commit message lệch `--stat`, mục này là **một câu văn khai nhà** lệch nội dung nhà đó.
 
-**Cách sửa đề xuất — đã vá ở `563066b` (2026-08-27), cả hai chỗ.** Ô `Đạt khi` của `owner-T-06` và ô
-`Context` của dòng `T-06` nay đều trỏ *"nhà của nó là [project_preparation/prompt-fullstack.md §6.9]"*,
-`CLAUDE.md` xuống vai chỉ-trỏ; `git show 563066b -- task.md` ra đúng **2 insertions / 2 deletions**, không
-file nào khác bị chạm. Owner **không** chọn hướng đem luật vào `CLAUDE.md` — hướng đó là *thay hoặc gộp
-một luật cũ* theo [CLAUDE.md §8](CLAUDE.md), quyền owner, không phải việc sửa kèm.
-**Đỏ khi:** `grep -c 'deploy trong giờ bán' CLAUDE.md` ra `0` **trong khi** `task.md` còn câu
-*"nhà của nó là `CLAUDE.md`"* — hai lệnh này phải cùng xanh hoặc cùng đỏ, không được lệch nhau.
+**Cách sửa đề xuất — đã vá ở `563066b` (2026-08-27), cả hai bản.** Ô `Đạt khi` của `owner-T-06` và ô
+`Context › Bẫy` của dòng `T-06` nay đều viết *"nhà của nó là
+[project_preparation/prompt-fullstack.md §6.9](project_preparation/prompt-fullstack.md)"*, `CLAUDE.md`
+xuống vai chỉ-trỏ. `git show --stat 563066b` ra đúng `task.md | 4 ++--` (2 insertions / 2 deletions),
+không file nào khác bị chạm. Owner **không** chọn hướng đem luật vào `CLAUDE.md`: hướng đó là *thay hoặc
+gộp một luật cũ* theo [CLAUDE.md §8](CLAUDE.md), quyền owner, không phải việc sửa kèm.
+**Đỏ khi:** `grep -c 'nhà của nó là .CLAUDE.md.' task.md` ra `>= 1`, **hoặc**
+`grep -c 'deploy trong giờ bán' CLAUDE.md` ra `>= 1` mà lệnh kia vẫn ra `0` — hai lệnh phải **cùng**
+xanh hoặc **cùng** đỏ; lệch nhau là câu khai nhà lại trỏ vào file không chứa luật.
 
-**Kiểm chứng.** Ba lệnh, chạy 2026-08-28 từ gốc repo, cả ba xanh:
+**Kiểm chứng.** Hai lệnh đóng + một lần thử làm đỏ, chạy 2026-08-28 từ gốc repo:
 
 ```bash
-grep -c 'nhà của nó là `CLAUDE.md`' task.md            # ra 0 — đỏ khi >= 1
-grep -c 'deploy trong giờ bán' CLAUDE.md               # ra 0 — đỏ khi >= 1
-grep -n 'owner-T-11' finding.md \
-  | grep -c 'F-26'                                     # ra 0 — đỏ khi >= 1
+grep -c 'nhà của nó là .CLAUDE.md.' task.md                        # ra 0   ← xanh
+grep -c 'deploy trong giờ bán' CLAUDE.md                           # ra 0   ← xanh, cùng chiều
+git show 563066b~1:task.md | grep -c 'nhà của nó là .CLAUDE.md.'   # ra 2   ← thử làm đỏ: đỏ thật
 ```
 
-Lệnh 3 phải viết **tách hai dòng**, và mọi câu văn xuôi trong mục này cũng vậy: một dòng chứa **đủ cả**
-chuỗi `owner-T-11` lẫn chuỗi mã của mục thì nó tự bắt mình và lệnh **đỏ vĩnh viễn** — cùng bẫy với
-[F-28](#f-28), lệnh soi nằm trong chính file nó soi. Tách dòng không đổi ngữ nghĩa: lệnh vẫn hỏi
-*có dòng nào vừa nhắc bảng soi kia vừa nhắc mã này không*, chỉ là hai vế không còn cùng một dòng.
+Lần thử làm đỏ chứng minh lệnh đóng **đang đo cái nó khai**: trên cây trước khi vá nó ra `2` — đúng hai
+bản, đúng con số mà bản mở của mục này khai thiếu.
 
-Thử làm đỏ một lần: chèn `nhà của nó là \`CLAUDE.md\`` vào cuối `task.md` ⇒ lệnh 1 ra `1` (đỏ đúng chỗ
-nó hứa đo); `git checkout -- task.md` ⇒ ra `0` trở lại, `git status --short` rỗng.
-
-**Bài học giữ lại:** mọi câu dạng *"nhà của X là Y"* phải kèm **lệnh `grep` chứng minh Y thật sự chứa
-X**; không có lệnh đó thì nó là **con trỏ chưa kiểm chứng**, không phải một câu khai nhà — và nó hỏng im
-lặng, vì đọc lên vẫn trôi chảy. Luật này chưa có nhà cưỡng chế: [CLAUDE.md §2](CLAUDE.md) chỉ dạy so
-`Cập nhật <ngày>` với `git log`, không soi *nội dung* nhà. Chỗ gắn đề xuất là một cổng `grep` trong
-[.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §5.2 — **ngoài phạm vi phiên này**
-(lane chỉ chạm `finding.md`), nên phiên này để lại luật ở đây và không tự sửa kèm.
-
+**Bài học giữ lại:** hai luật phải đổi, không luật nào nằm trong lane của phiên đóng nên cả hai đi kèm
+prompt giao ngay ([CLAUDE.md §5](CLAUDE.md)).
+**(i) Để một câu khai *"nhà của X là Y"* không lọt khi Y không chứa X:** thêm **lệnh thứ 4** vào vòng
+lặp con trỏ của [.claude/rules/quan-ly-du-an.md §5.2](.claude/rules/quan-ly-du-an.md) — với mỗi câu khớp
+`nhà của .* là <file>`, `grep -c` từ khoá của X trong chính `<file>`, **đỏ khi ra `0`**. Hôm nay §5.2
+chỉ kiểm *đường dẫn có tồn tại*, nên `CLAUDE.md` — file có thật — qua cổng dù rỗng nội dung.
+**(ii) Để chính sổ lỗi không khai sai địa chỉ:** [.claude/rules/chat-luong-finding.md §1](.claude/rules/chat-luong-finding.md)
+buộc vế `**Mệnh đề sai.**` kèm **địa chỉ tái hiện được** (số dòng, hoặc `sed -n`/`grep -n` in ra đúng câu
+bị tố), và §2 thêm phép thử thứ năm *"đếm đủ số bản"* — `grep -c` chuỗi bị tố ra `n`, mệnh đề phải khai
+đúng `n`. Bản mở của F-26 trượt cả hai: nó khai địa chỉ bằng **tên bảng** chứ không bằng lệnh, và khai
+`1` bản trong khi `grep -c` ra `2`. Vế `**Lệnh tái hiện.**` hôm nay chỉ chứng minh *file kia rỗng*
+(`grep -c … CLAUDE.md` ra `0`) — vế đó xanh dù địa chỉ ghi ở đâu cũng được, nên nó không bắt được lỗi này.
 
 ### F-27
 
