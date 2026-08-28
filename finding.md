@@ -43,7 +43,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-23](#f-23) | ~~[CLAUDE.md §7](CLAUDE.md)~~ ~~[rule §3](.claude/rules/quan-ly-du-an.md)~~ ~~§5.3 thiếu lệnh bắt ⚠️ **thừa**~~ ~~ô `Đầu ra` của `T-03` trong [task.md](task.md) giữ ⚠️ kề `make check`~~ — **cả bốn vế đã vá**: ba vế 2026-08-25 (`b334899` + `0370781`), vế cuối 2026-08-28; lệnh 3 của [rule §5.3](.claude/rules/quan-ly-du-an.md) chạy ra **rỗng** | T-03 · 2026-08-23 · vá 2026-08-25 · đóng 2026-08-28 | ✅ ĐÓNG 2026-08-28 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-28 | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` `Makefile` `task.md` |
 | [F-24](#f-24) | [CLAUDE.md §4](CLAUDE.md) khai `git add <đường dẫn cụ thể>` là cách chống nuốt việc dở của phiên khác — nó chỉ chống **lẫn file**, không chống **lẫn hunk**: hai phiên cùng sửa `task.md`/`finding.md` thì bên nào commit trước cũng nuốt trọn phần bên kia đang viết, cây vẫn sạch và `git log` vẫn hợp khuôn (ca thật: `0d2a785` chứa cả phần đóng `T-03` của phiên DEVOPS) | T-03 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task | `.claude/rules/bao-cao-thay-doi.md` `CLAUDE.md` `finding.md` `task.md` |
 | [F-25](#f-25) | Luật *thử làm đỏ một lần* ([guideline §5](quality/00-guideline-chat-luong.md)) không có cổng nào cưỡng chế cho bảng `cl-T-xx`: **28/31** bảng đang `Đã thử làm đỏ: ⬜ chưa`, nên một lệnh soi hỏng nằm im vô hạn — ca phát hiện: `cl-T-04` khai đỏ khi hai file cùng `>= 1` hit `go test`/`npm run`, trong khi rule đã có 2 hit và **một hit nằm trong thân câu lệnh §5.2** nên không xoá được ⇒ trục đó **đỏ vĩnh viễn** | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task | `.claude/rules/quan-ly-du-an.md` `quality/00-guideline-chat-luong.md` `task.md` |
-| [F-26](#f-26) | Ô `**Đạt khi:**` của `owner-T-11` trong [task.md](task.md) khai nhà của luật *không deploy trong giờ bán* là `CLAUDE.md`, nhưng `CLAUDE.md` **không có chữ nào** về luật đó — nhà thật là `prompt-fullstack.md` §6.9, và [guideline §6](quality/00-guideline-chat-luong.md) đang trỏ đúng về đó | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task | `CLAUDE.md` `project_preparation/prompt-fullstack.md` `quality/00-guideline-chat-luong.md` `task.md` |
+| [F-26](#f-26) | ~~Ô `**Đạt khi:**` của bảng soi `owner-T-06` ([task.md](task.md) dòng 164) và ô `Context` của dòng `T-06` ([task.md](task.md) dòng 51) khai nhà của luật *không deploy trong giờ bán* là `CLAUDE.md`, nhưng `CLAUDE.md` **không có chữ nào** về luật đó~~ — **cả hai chỗ đã vá** ở `563066b` (2026-08-27), nay trỏ nhà thật `project_preparation/prompt-fullstack.md` §6.9, `CLAUDE.md` chỉ trỏ; bản mở của mã này khai nhầm sang một bảng soi khác — bảng đó nói về `paths:` và không chứa chữ nào về luật deploy, xem mục ↓ | vá dòng T-04 · 2026-08-23 · vá 2026-08-27 · đóng 2026-08-28 | ✅ ĐÓNG 2026-08-28 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-27 (`563066b`), đóng 2026-08-28 | `CLAUDE.md` `project_preparation/prompt-fullstack.md` `quality/00-guideline-chat-luong.md` `task.md` |
 | [F-27](#f-27) | `project_preparation/prompt-fullstack.md` khai **hai** bề rộng cho cùng một màn hình khách: §3.7 *"mobile-first 375px"*, §6.5 *"thử ở 360px (khách)"* — [T-04](task.md) sẽ chép **một** trong hai vào `quality/05-checklist.md` và chốt luôn số sai | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task — owner đã chốt **375px** 2026-08-24, còn phải sửa §6.5 | `CLAUDE.md` `project_preparation/prompt-fullstack.md` `quality/05-checklist.md` `task.md` |
 | [F-28](#f-28) | Lệnh soi trục *Một nhà* của `cl-T-04` **tự bắt `task.md`**: chuỗi mốc `happy path` bắt buộc phải nằm trong chính ô soi, nên lệnh đỏ ở **cả hai** nhánh — có checklist thì ra `3` file (*bản chép thứ ba*), chưa có thì kết quả thiếu `quality/05-checklist.md` (*chưa có nhà*) | T-04 · 2026-08-24 | ✅ ĐÓNG 2026-08-24 | ⚠️ owner chỉ định vá ngay trong phiên T-04 — không đẻ task | `finding.md` `quality/00-guideline-chat-luong.md` `quality/05-checklist.md` `task.md` |
 | [F-29](#f-29) | Ô `Đầu ra kiểm chứng được` của [T-04](task.md) chạy `awk` 7 khoá trên **cả file** trong khi vế nó muốn đo là *bảy dòng `- [ ]`*: §2 của checklist nhắc lại đúng các chuỗi khoá, nên bản **xoá một vế rồi chèn một dòng bịa** qua được cả hai biên nhận — `grep -c` ra `7`, `awk` ra `7` | T-04 · 2026-08-24 | 🔴 MỞ | ⚠️ chưa có task — owner giao agent riêng vá ngay sau T-04 | `quality/00-guideline-chat-luong.md` `quality/05-checklist.md` `task.md` |
@@ -1551,11 +1551,13 @@ một bảng `cl-` của task đã `✅` về `⬜` ⇒ lệnh phải in `CHƯA 
 
 ### F-26
 
-**Mệnh đề sai.** Ô `**Đạt khi:**` của bảng `owner-T-11` trong [task.md](task.md) viết: *"…luật không
-deploy trong giờ bán **không** bị đem vào rule — luật đó mất giữa phiên là gây hỏng thật, nên **nhà của
-nó là `CLAUDE.md`**"*. `CLAUDE.md` không chứa câu nào về luật đó. Nhà thật là
-`project_preparation/prompt-fullstack.md` §6.9, và [guideline §6](quality/00-guideline-chat-luong.md)
-đang trỏ đúng về đó với chú thích *"trỏ, không chép"*.
+**Mệnh đề sai.** Ô `**Đạt khi:**` của bảng soi `owner-T-06` ([task.md](task.md) dòng 164) và ô `Context`
+của dòng `T-06` ([task.md](task.md) dòng 51) viết: *"…luật không deploy trong giờ bán **không** bị đem
+vào rule — luật đó mất giữa phiên là gây hỏng thật, nên **nhà của nó là `CLAUDE.md`**"*. `CLAUDE.md`
+không chứa câu nào về luật đó. Nhà thật là `project_preparation/prompt-fullstack.md` §6.9, và
+[guideline §6](quality/00-guideline-chat-luong.md) đang trỏ đúng về đó với chú thích *"trỏ, không chép"*.
+Bản mở của mã này khai nhầm bảng: nó ghi `owner-T-11`, nhưng bảng đó nói về `paths:` của rule quản lý
+([F-03](#f-03) ✅ ĐÓNG) và `sed -n '212,222p' task.md | grep -c 'deploy trong giờ bán'` ra `0`.
 
 **Lệnh tái hiện.**
 
@@ -1565,20 +1567,45 @@ grep -rn 'không deploy trong giờ bán' --include='*.md' --exclude-dir=referen
 # ra: prompt-fullstack.md §6.9 (nguồn) · quality/00-guideline-chat-luong.md §6 (trỏ) · task.md (khai sai)
 ```
 
-**Vì sao nó không tự mất đi.** T-11 đã xong ([F-03](#f-03) ✅ ĐÓNG). Chạy hết [task.md](task.md): không
-dòng nào mở lại ô `Đạt khi` của `owner-T-11`, và không lệnh nào trong §5.2 đối chiếu một câu khai *"nhà
-của X là Y"* với việc Y có thật chứa X hay không. Dòng này **còn** ⇒ finding. Nó cùng họ với
+**Vì sao nó không tự mất đi.** T-06 đã xong — `.claude/rules/lane-devops.md` có thật, dòng DEVOPS ở
+[CLAUDE.md §1](CLAUDE.md) hết ⚠️. Chạy hết [task.md](task.md): không dòng nào mở lại ô `Đạt khi` của
+`owner-T-06`, và không lệnh nào trong [§5.2](.claude/rules/quan-ly-du-an.md) đối chiếu một câu khai
+*"nhà của X là Y"* với việc Y có thật chứa X hay không. Dòng này **còn** ⇒ finding. Nó cùng họ với
 [F-17](#f-17) (khai sai file đã sửa) nhưng khác nguyên nhân: F-17 là commit message lệch `--stat`, mục
 này là **một câu khai nhà** lệch nội dung nhà đó.
 
-**Cách sửa đề xuất.** Sửa ô `Đạt khi` của `owner-T-11` cho trỏ đúng nhà thật:
-*"…nhà của nó là [prompt-fullstack.md](project_preparation/prompt-fullstack.md) §6.9, `CLAUDE.md` chỉ
-được trỏ"*. Nếu owner **muốn** `CLAUDE.md` thật sự thành nhà của ba luật không thoả hiệp thì đó là
-*thay hoặc gộp một luật cũ* theo [CLAUDE.md §8](CLAUDE.md) — quyền owner, không phải việc sửa kèm.
+**Cách sửa đề xuất — đã vá ở `563066b` (2026-08-27), cả hai chỗ.** Ô `Đạt khi` của `owner-T-06` và ô
+`Context` của dòng `T-06` nay đều trỏ *"nhà của nó là [project_preparation/prompt-fullstack.md §6.9]"*,
+`CLAUDE.md` xuống vai chỉ-trỏ; `git show 563066b -- task.md` ra đúng **2 insertions / 2 deletions**, không
+file nào khác bị chạm. Owner **không** chọn hướng đem luật vào `CLAUDE.md` — hướng đó là *thay hoặc gộp
+một luật cũ* theo [CLAUDE.md §8](CLAUDE.md), quyền owner, không phải việc sửa kèm.
 **Đỏ khi:** `grep -c 'deploy trong giờ bán' CLAUDE.md` ra `0` **trong khi** `task.md` còn câu
 *"nhà của nó là `CLAUDE.md`"* — hai lệnh này phải cùng xanh hoặc cùng đỏ, không được lệch nhau.
 
----
+**Kiểm chứng.** Ba lệnh, chạy 2026-08-28 từ gốc repo, cả ba xanh:
+
+```bash
+grep -c 'nhà của nó là `CLAUDE.md`' task.md            # ra 0 — đỏ khi >= 1
+grep -c 'deploy trong giờ bán' CLAUDE.md               # ra 0 — đỏ khi >= 1
+grep -n 'owner-T-11' finding.md \
+  | grep -c 'F-26'                                     # ra 0 — đỏ khi >= 1
+```
+
+Lệnh 3 phải viết **tách hai dòng**, và mọi câu văn xuôi trong mục này cũng vậy: một dòng chứa **đủ cả**
+chuỗi `owner-T-11` lẫn chuỗi mã của mục thì nó tự bắt mình và lệnh **đỏ vĩnh viễn** — cùng bẫy với
+[F-28](#f-28), lệnh soi nằm trong chính file nó soi. Tách dòng không đổi ngữ nghĩa: lệnh vẫn hỏi
+*có dòng nào vừa nhắc bảng soi kia vừa nhắc mã này không*, chỉ là hai vế không còn cùng một dòng.
+
+Thử làm đỏ một lần: chèn `nhà của nó là \`CLAUDE.md\`` vào cuối `task.md` ⇒ lệnh 1 ra `1` (đỏ đúng chỗ
+nó hứa đo); `git checkout -- task.md` ⇒ ra `0` trở lại, `git status --short` rỗng.
+
+**Bài học giữ lại:** mọi câu dạng *"nhà của X là Y"* phải kèm **lệnh `grep` chứng minh Y thật sự chứa
+X**; không có lệnh đó thì nó là **con trỏ chưa kiểm chứng**, không phải một câu khai nhà — và nó hỏng im
+lặng, vì đọc lên vẫn trôi chảy. Luật này chưa có nhà cưỡng chế: [CLAUDE.md §2](CLAUDE.md) chỉ dạy so
+`Cập nhật <ngày>` với `git log`, không soi *nội dung* nhà. Chỗ gắn đề xuất là một cổng `grep` trong
+[.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §5.2 — **ngoài phạm vi phiên này**
+(lane chỉ chạm `finding.md`), nên phiên này để lại luật ở đây và không tự sửa kèm.
+
 
 ### F-27
 
