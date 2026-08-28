@@ -1,6 +1,6 @@
 # finding.md — sổ lỗi
 
-> Cập nhật **2026-08-27**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
+> Cập nhật **2026-08-28**. Đây là **sổ lỗi**: đo *đúng / sai*. Việc **chưa tới lượt xây** đi sổ khác —
 > [task.md](task.md). Phép thử một câu và luật không trộn hai sổ ở [CLAUDE.md §5](CLAUDE.md);
 > hai sổ khác nhau chỗ nào ở [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) §2.
 
@@ -69,7 +69,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-49](#f-49) | Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) khai mình là bộ dò việc của mọi phiên, nhưng **không file nào trong repo gọi nó nữa**: [CLAUDE.md §3](CLAUDE.md) bước 2 — caller duy nhất — nay khai *prompt là nguồn việc duy nhất*, `grep -c 'Task tiếp theo' CLAUDE.md` ra `0`; trong khi [huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md) vẫn bắt mục đó **phải là lệnh chạy được** | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-27 | `CLAUDE.md` `Makefile` `project_preparation/huong-dan-viet-task-md.md` `task.md` |
 | [F-50](#f-50) | Bảng nhịp [mục 4](.claude/rules/quan-ly-du-an.md) của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) còn khai hàng *Mỗi lần sửa `CLAUDE.md`* là ``wc -l` ≤ 120` … `không nới trần`` — cả con số lẫn mệnh lệnh đều hết đúng từ `78a8901`: [CLAUDE.md §8](CLAUDE.md) nay ghi **140**, owner đã nới. Rule chép **số** thay vì trỏ nhà thật | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ đóng ngay trong phiên nhận vé (b) — không đẻ task | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` |
 | [F-51](#f-51) | Lệnh canh việc mở lane sống ở **hai** nhà và hai bản **đang lệch**: khối §5.2b của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) (lane NON-CODE) đã nuốt dòng task đã gạch từ `7cc5fe3`, còn đích `check-lane` của [Makefile](Makefile) — **cổng chạy thật** trong `make check`, lane DEVOPS — vẫn giữ mẫu cũ `^| \*\*T-`; cùng cơ chế, §6 nay **sáu vế** mà 5 chỗ ngoài rule còn dạy *năm vế* | T-28 · 2026-08-27 | 🔴 MỞ | ⚠️ chưa có task — cần một phiên **lane DEVOPS** | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` `Makefile` `project_preparation/step.md` `task.md` |
-| [F-52](#f-52) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi cứng**, nên **3/4** dòng nó in ra là **báo nhầm**: `F-06` viết `**Lệnh tái hiện**` (thiếu dấu chấm), `F-07` và `F-12` viết `**Cách sửa đề xuất — kiến trúc…**` (có hậu tố) và `**Chưa đóng được vì:**` thay cho `**Chưa đề xuất được vì:**` — ca thiếu vế **thật** duy nhất (`F-13` không có `**Vì sao nó không tự mất đi.**`) lẫn giữa ba báo nhầm và chưa ai gỡ | rà bước 3 · 2026-08-27 | 🔴 MỞ | ⚠️ chưa có task | `.claude/rules/chat-luong-finding.md` `finding.md` |
+| [F-52](#f-52) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi cứng**, nên **3/4** dòng nó in ra là **báo nhầm**: `F-06` viết `**Lệnh tái hiện**` (thiếu dấu chấm), `F-07` và `F-12` viết `**Cách sửa đề xuất — kiến trúc…**` (có hậu tố) và `**Chưa đóng được vì:**` thay cho `**Chưa đề xuất được vì:**` — ca thiếu vế **thật** duy nhất (`F-13` không có `**Vì sao nó không tự mất đi.**`) lẫn giữa ba báo nhầm và chưa ai gỡ | rà bước 3 · 2026-08-27 | ✅ ĐÓNG 2026-08-28 | ⚠️ đóng ngay trong phiên nới mẫu — không đẻ task | `.claude/rules/chat-luong-finding.md` `finding.md` |
 
 ---
 
@@ -627,6 +627,15 @@ xếp việc đó vào quyền của owner. Hướng 1 owner chạy được nga
 rỗng nghĩa, và một ngưỡng dưới đặt trên thứ dễ đẻ — `grep -c` một mẫu gạch đầu dòng ra `>= 3` — xanh
 với ba dòng rác. Tệ hơn: nó xanh **vĩnh viễn**, vì không trạng thái hỏng nào của repo làm nó đỏ lại
 được. Mười sáu dòng có trước ngày 2026-08-23 trong [task.md](task.md) dừng đúng ở đó.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết thì dòng này **còn**, vì sổ chỉ
+mua được nửa điều kiện đóng ghi ở vế cuối mục này. Nửa mua được: [T-20](task.md) đưa vế `đỏ khi` vào đặc
+tả ô, [T-21](task.md) áp xuống mọi dòng cũ — cả hai làm vế âm **được viết ra**. Nửa không dòng task nào
+mang: *mỗi vế âm đã được thử làm đỏ đúng một lần*. Đo bằng chính sổ,
+`grep -c 'Đã thử làm đỏ:\*\* ⬜ chưa' task.md` ra `27` so với `8` dòng `✅` — và T-21 tự khai là *"việc
+cơ khí ... chỉ **thêm** vế âm"*, nên chạy xong nó, 27 vế ấy vẫn chưa ai thử. Một vế `đỏ khi` chưa được
+thử làm đỏ là đúng cơ chế trang trí mà mệnh đề trên tố, chỉ dài lời hơn: nó vẫn xanh trong mọi trạng
+thái của repo. Hết đúng chỉ khi có luật bắt **thử**, không phải luật bắt **viết**.
 
 **Lệnh tái hiện.**
 
@@ -2859,3 +2868,23 @@ for f in F-06 F-07 F-12; do sed -n "/^### $f\$/,/^### F-/p" finding.md \
 **Cách sửa đề xuất.** Nới mẫu ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) cho khớp cách sổ **đang** viết, thay vì bắt 51 mục viết lại: `'^\*\*Lệnh tái hiện[.:]?\*\*'` → `'^\*\*Lệnh tái hiện'`, và `'^\*\*(Cách sửa đề xuất|Chưa (đề xuất được|đóng được) vì)'` bỏ neo đuôi `\*\*`. Rồi vá **một** ca thật: thêm `**Vì sao nó không tự mất đi.**` vào [F-13](#f-13). Sau đó đưa cổng (a) và (b) vào một đích của [Makefile](Makefile) — cổng không ai chạy thì nới hay siết đều vô nghĩa.
 
 **Bẫy khi sửa.** Đừng sửa theo chiều ngược lại (bắt ba mục viết đúng chuỗi cứng): [.claude/rules/chat-luong-finding.md §1](.claude/rules/chat-luong-finding.md) đã nói tiêu đề *"phải viết đúng từng ký tự"*, nhưng chính sổ đã trôi khỏi luật đó ở ba mục, và hậu tố của `F-07` `F-12` (*"— kiến trúc, agent không tự làm"*) đang **mang thông tin**, cắt đi là mất.
+
+**Kiểm chứng.** Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md)
+chạy từ gốc repo in ra **rỗng** (trước khi sửa in 4 dòng, 3 báo nhầm); `make check` ra `EXIT=0`, `5 đích, 0
+vi phạm`. Lệnh thứ hai của vế **Lệnh tái hiện** trên vẫn in đủ ba tiêu đề biến thể của `F-06` `F-07` `F-12`
+⇒ hai lệnh không còn mã chung, đúng vế **Đỏ khi**. Đã thử làm đỏ 2026-08-28: xoá vế `**Lệnh tái hiện.**`
+khỏi [F-09](#f-09) ⇒ cổng in đúng `THIẾU VẾ: F-09 Lệnh-tái-hiện`, `git checkout -- finding.md` khôi phục
+thì rỗng lại; và lần khôi phục đó cuốn luôn vế vừa thêm cho [F-13](#f-13) ⇒ cổng in lại đúng `THIẾU VẾ:
+F-13 Vì-sao-không-tự-mất`, tức mẫu nới **vẫn** bắt được ca thiếu thật — nới mẫu không phải tắt cổng.
+
+**Bài học giữ lại:** luật đổi là **cổng dò tiêu đề bằng tiền tố, không bằng chuỗi khớp trọn vế** — ba mẫu
+ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) bỏ neo đuôi `\*\*` và bỏ
+dấu chấm bắt buộc, nên hậu tố mang thông tin (*"— kiến trúc, agent không tự làm"*) và biến thể
+`**Chưa đóng được vì:**` không còn bị tố oan. Luật gốc: **khi văn bản và cổng lệch nhau, sửa cổng cho khớp
+văn bản đang có trước, chỉ bắt văn bản viết lại khi hình dạng cũ thực sự làm mất thông tin** — chiều ngược
+lại tốn 51 mục để mua đúng một dòng output. Hệ quả đo được: cổng báo thừa thì **ca thật chìm trong báo
+nhầm** — `F-13` mở ngày `2026-08-23` và nằm ở dòng thứ tư của output suốt từ đó, qua hai phiên đã đọc
+đúng output ấy rồi bỏ qua ([F-48](#f-48) `2026-08-25`, mục này `2026-08-27`), nên cổng đỏ kinh niên là cổng
+**hỏng**, ngang với cổng bỏ sót. Ranh giới còn lại: [rule §1](.claude/rules/chat-luong-finding.md) vẫn đòi
+tiêu đề viết đúng từng ký tự — sau phiên này §1 là **luật viết**, §3 là **sàn máy đo**, và sàn không được
+siết hơn luật.

@@ -5,7 +5,7 @@ paths:
 
 # Chất lượng một mục finding — nạp khi chạm `finding.md`
 
-> Cập nhật **2026-08-23** · Lane sở hữu: **NON-CODE** · Trần của chính file: §5.
+> Cập nhật **2026-08-28** · Lane sở hữu: **NON-CODE** · Trần của chính file: §5.
 > Nhà của đúng hai thứ chưa có nhà: **khuôn một mục `### F-xx`** và **lệnh cổng của sổ lỗi**.
 > Bốn thứ có nhà rồi, ở đây **trỏ, không chép** — chép là đẻ nhà thứ hai, đúng gốc của
 > `F-04`:
@@ -56,8 +56,8 @@ for f in $(grep '^| \[F-[0-9]*\].*🔴 MỞ' finding.md | sed 's/^| \[\(F-[0-9]*
   s=$(sed -n "/^### $f\$/,/^### F-/p" finding.md); m=""
   echo "$s" | grep -q '^\*\*Mệnh đề sai\.\*\*'               || m="$m Mệnh-đề-sai"
   echo "$s" | grep -q '^\*\*Vì sao nó không tự mất đi\.\*\*' || m="$m Vì-sao-không-tự-mất"
-  echo "$s" | grep -q '^\*\*Lệnh tái hiện\.\*\*'             || m="$m Lệnh-tái-hiện"
-  echo "$s" | grep -qE '^\*\*(Cách sửa đề xuất\.|Chưa đề xuất được vì:)\*\*' || m="$m Cách-sửa"
+  echo "$s" | grep -q '^\*\*Lệnh tái hiện'                   || m="$m Lệnh-tái-hiện"
+  echo "$s" | grep -qE '^\*\*(Cách sửa đề xuất|Chưa (đề xuất được|đóng được) vì)' || m="$m Cách-sửa"
   [ -n "$m" ] && echo "THIẾU VẾ: $f$m"; done
 # (b) mục khai ĐÓNG mà không có bài học — đỏ khi đóng một finding không đổi luật nào
 for f in $(grep '^| \[F-[0-9]*\].*✅ ĐÓNG' finding.md | sed 's/^| \[\(F-[0-9]*\)\].*/\1/'); do \
