@@ -1351,6 +1351,84 @@ git log --oneline -1 -S'File chạm' -- finding.md                            # 
 khai file nó sửa không*, ca này hỏi *commit có sửa thứ nó khai không* — một message đúng đè lên một diff rỗng
 không phép đo nào hiện có bắt được.
 
+**Ca sống thứ chín — 2026-08-27: tranh chấp `.git/index`, không phải tranh chấp file.** Tám ca trên đều tả
+xung đột ở mức **nội dung** — cùng file, cùng mục. Ca này lộ một tầng thấp hơn, và nó làm hỏng đúng **vế (2)**
+của ô `Cách sửa đề xuất` trên: `git apply --cached` dựng được bản vá chỉ chứa hunk của mình, nhưng nó nạp bản
+vá ấy vào `.git/index` — **một** file, **dùng chung** cho mọi phiên trong cùng cây làm việc. Phiên khác
+`git add` file của nó vào cùng index đó thì `git commit` của tôi lấy trọn cả hai. Vế (2) vì thế đang khai
+**mức bảo vệ cao hơn mức nó cho**, đúng cùng kiểu sai như mệnh đề gốc của mục này khai về
+`git add <đường dẫn>`: cái đó chống lẫn **file** mà khai là chống nuốt; vế (2) chống lẫn **hunk trong một
+file** mà khai là an toàn lúc commit. Hai vế của ô `Cách sửa đề xuất` cùng dừng ở ranh giới `.git/index`.
+
+**Lệnh tái hiện — chạy trên repo rỗng, không phải suy luận:**
+
+```bash
+git add a.md                             # phiên A: đúng luật §4, liệt kê đường dẫn cụ thể
+git add b.md                             # phiên B chen vào CÙNG .git/index
+git commit -m 'A: chỉ sửa a.md'
+git show --name-only --format=%s HEAD    # ra `a.md` VÀ `b.md` — A nuốt B dù chưa hề nhắc b.md
+```
+
+**Đỏ khi** `git show --name-only` in ra file mà lệnh `git add` của chính phiên đó không liệt kê. Thay
+`git add a.md` bằng `git apply --cached <bản vá chỉ chứa hunk của A>` **không** đổi kết quả: cả hai đều ghi
+vào cùng `.git/index`.
+
+**Lối thoát không đụng index chung** — đã chạy thật, commit ra đời chứa **đúng** `a.md` trong khi việc của B
+còn nguyên cả trong cây lẫn trong index chung (`git status --short` sau đó ra `MM a.md` / `M  b.md`):
+
+```bash
+export GIT_INDEX_FILE=$PWD/.git/idx-A          # index RIÊNG của phiên này
+git read-tree HEAD && git add a.md
+T=$(git write-tree); old=$(git rev-parse HEAD)
+new=$(git commit-tree "$T" -p "$old" -m 'A: chỉ a.md')
+git update-ref "refs/heads/$(git symbolic-ref --short HEAD)" "$new" "$old"   # CAS: <new> <old>
+```
+
+Vế `<old>` của `git update-ref` là **compare-and-swap**, và nó chặn thêm thứ mà bản vá không chặn: HEAD nhảy
+giữa chừng. **Đã thử làm đỏ** — cho một phiên khác commit xen vào sau khi đã `commit-tree`:
+`fatal: ... is at d3162a7 but expected b0fbfa2`, **mã thoát 128**, ref **không** nhúc nhích. Bỏ vế `<old>`
+thì lệnh ghi đè im lặng đúng commit vừa chen vào — dựng lại chính mục này ở mức ref.
+
+**Bẫy khi dùng lối thoát.** Đừng gõ cứng `refs/heads/main`: lab `git init` ra nhánh `master`, lệnh chết
+`fatal: unable to resolve reference 'refs/heads/main'` — nhưng chết **sau** khi `commit-tree` đã tạo commit,
+nên object treo lại mà ref không đổi, nhìn y hệt *"commit mất"*. Lấy tên nhánh bằng
+`git symbolic-ref --short HEAD`. Và `unset GIT_INDEX_FILE` ngay sau đó: để sót biến thì mọi `git add` và
+`git status` sau đó đọc index sai, bản khai của phiên lệch thêm một lần nữa.
+
+**Ngoài:** `git commit --only <đường dẫn>` — cơ chế **của chính git** cho bài toán này, nó dựng index tạm nên
+index chung có gì cũng không lọt vào commit (đã chạy: index chung giữ `b.md`, commit ra đời chỉ có `a.md`, và
+`b.md` còn nguyên staged). · **Ta:** vẫn đi `GIT_INDEX_FILE` + `commit-tree` + `update-ref`, không dừng ở
+`--only`. · **Vì:** `--only` lấy **cả file** từ cây làm việc, nên nó chống lẫn **file** mà vẫn nuốt lẫn **hunk
+cùng file** — đã thử làm đỏ: cho `a.md` chứa hunk của hai phiên rồi `git commit --only a.md`, commit ra đời
+có **cả hai** dòng thêm. Mà lẫn hunk cùng `task.md`/`finding.md` đúng là ca gốc của mục này. Bốn cách vì thế
+là một **thang**, không phải bốn lựa chọn ngang hàng:
+
+| Cách stage rồi commit | Chống lẫn **file** (index chung) | Chống lẫn **hunk** cùng file |
+|---|---|---|
+| `git add <đường dẫn>` + `git commit` — luật [CLAUDE.md §4](CLAUDE.md) hiện nay | ❌ ca sống này | ❌ mệnh đề gốc |
+| `git commit --only <đường dẫn>` | ✅ | ❌ |
+| `git apply --cached` — vế (2) ô `Cách sửa đề xuất` trên | ❌ ca sống này | ✅ |
+| `GIT_INDEX_FILE` riêng + `write-tree` + `commit-tree` + `update-ref <new> <old>` | ✅ | ✅ |
+
+Chỉ hàng cuối xanh cả hai cột. Ba hàng trên đều **khai an toàn hơn mức chúng cho**, và mục này đã bắt được
+hàng 1 (mệnh đề gốc) rồi hàng 3 (ca sống này) bằng đúng một kiểu sai lặp lại hai lần.
+
+**Ca thật trong repo này — bắt được vì *chờ*, không vì phép đo.** Phiên `017a42a` (sửa ô `Cách sửa đề xuất`
+của mục này, gom PĐ-3) lúc sắp commit thấy `.git/index` chung đang giữ `.claude/rules/quan-ly-du-an.md` —
+file **không** thuộc việc của nó, do phiên khác stage vào — nên nó **chờ** hai commit kia xong mới commit:
+
+```bash
+git log -1 --format='%h %ad %s' --date=format:'%H:%M:%S' 3364209   # 09:04:50 · quan-ly-du-an.md
+git log -1 --format='%h %ad %s' --date=format:'%H:%M:%S' 023e695   # 09:05:12 · finding.md
+git show --name-only --format= 017a42a                            # chỉ finding.md, lúc 09:06:12 — chờ nên không nuốt
+```
+
+Ba mốc giờ và tập tên file là phần `git` còn giữ lại được; *"index chung đang chứa file của phiên khác"* là
+**bản khai của phiên đó**, không tái hiện được từ lịch sử — vì `.git/index` không có lịch sử. Và đó mới là
+điểm của ca này: cả ba commit đều **xanh** ở PĐ-1, PĐ-2 lẫn PĐ-3, vì cả ba phép đo chạy **sau** commit, tức
+sau khi lần nuốt đã thành lịch sử. Không phép đo nào trong mục đo được *lúc sắp commit thì index chung đang
+chứa gì*. Thứ duy nhất cứu `017a42a` là một phiên chịu chờ — cơ chế duy nhất ở đây chưa viết được thành lệnh.
+
 ---
 
 ### F-25
