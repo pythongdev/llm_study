@@ -7,7 +7,7 @@ paths:
 
 # Lane DEVOPS — nạp khi chạm `Makefile`, `deploy/**`, `.env*`
 
-> Cập nhật **2026-08-25**. Ở đây **chỉ** có luật riêng của lane DEVOPS. Luật áp cho mọi lane ở
+> Cập nhật **2026-08-28**. Ở đây **chỉ** có luật riêng của lane DEVOPS. Luật áp cho mọi lane ở
 > `CLAUDE.md` §1–§8; khuôn dòng task và định nghĩa XONG ở `.claude/rules/quan-ly-du-an.md` §1 §3.
 > File này không chép lại vế nào của hai file đó — lệch thì hai file đó thắng.
 >
@@ -71,9 +71,12 @@ for t in $(sed -n 's/^\.PHONY: *//p' Makefile); do \
 ## 4. Biên nhận của lane
 
 `make check` — **5 đích**, mã thoát `0` (đích gộp `check` gọi 5 đích con). Đây là biên nhận **thật**, không phải lời hứa: nó chạy được từ
-commit `9699f1c`, và `CLAUDE.md` §7 đã khai đúng như vậy. Chỗ còn khai ngược là
-`.claude/rules/quan-ly-du-an.md` mục 3 dòng 113 (*"Repo chưa có `Makefile`"*) — mã của nó là
-`finding.md` F-23, đang 🔴 MỞ; đừng sửa kèm ở đây, mục 3 là lane NON-CODE.
+commit `9699f1c`, và `CLAUDE.md` §7 cùng `.claude/rules/quan-ly-du-an.md` mục 3 nay đều khai đúng như vậy.
+Lịch sử của chỗ này là [finding.md F-23](../../finding.md#f-23) — **trạng thái của nó đọc ở hàng `F-23`
+trong [finding.md](../../finding.md)**, file này không chép lại và không ghim số dòng của file nào
+([.claude/rules/quan-ly-du-an.md §5.3](quan-ly-du-an.md)). Muốn biết ô `Đầu ra` của `T-03` còn ⚠️ kề
+`make check` không thì dò `grep -n 'make check' task.md`; thấy còn cũng **đừng sửa kèm ở đây** —
+`task.md` là lane NON-CODE. Lý do luật này tồn tại: [finding.md F-53](../../finding.md#f-53).
 
 **Hôm nay `make check` đỏ sẵn** ở đích `check-so`, dòng `ĐỎ finding bỏ rơi: F-67` — nguyên nhân ở
 `finding.md` F-05 mục *Ca sống 2026-08-25*, thuộc lane NON-CODE, **không** thuộc lane này. Vì vậy:

@@ -70,6 +70,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-50](#f-50) | Bảng nhịp [mục 4](.claude/rules/quan-ly-du-an.md) của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) còn khai hàng *Mỗi lần sửa `CLAUDE.md`* là ``wc -l` ≤ 120` … `không nới trần`` — cả con số lẫn mệnh lệnh đều hết đúng từ `78a8901`: [CLAUDE.md §8](CLAUDE.md) nay ghi **140**, owner đã nới. Rule chép **số** thay vì trỏ nhà thật | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ đóng ngay trong phiên nhận vé (b) — không đẻ task | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` |
 | [F-51](#f-51) | Lệnh canh việc mở lane sống ở **hai** nhà và hai bản **đang lệch**: khối §5.2b của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) (lane NON-CODE) đã nuốt dòng task đã gạch từ `7cc5fe3`, còn đích `check-lane` của [Makefile](Makefile) — **cổng chạy thật** trong `make check`, lane DEVOPS — vẫn giữ mẫu cũ `^| \*\*T-`; cùng cơ chế, §6 nay **sáu vế** mà 5 chỗ ngoài rule còn dạy *năm vế* | T-28 · 2026-08-27 | 🔴 MỞ | ⚠️ chưa có task — cần một phiên **lane DEVOPS** | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` `Makefile` `project_preparation/step.md` `task.md` |
 | [F-52](#f-52) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi cứng**, nên **3/4** dòng nó in ra là **báo nhầm**: `F-06` viết `**Lệnh tái hiện**` (thiếu dấu chấm), `F-07` và `F-12` viết `**Cách sửa đề xuất — kiến trúc…**` (có hậu tố) và `**Chưa đóng được vì:**` thay cho `**Chưa đề xuất được vì:**` — ca thiếu vế **thật** duy nhất (`F-13` không có `**Vì sao nó không tự mất đi.**`) lẫn giữa ba báo nhầm và chưa ai gỡ | rà bước 3 · 2026-08-27 | ✅ ĐÓNG 2026-08-28 | ⚠️ đóng ngay trong phiên nới mẫu — không đẻ task | `.claude/rules/chat-luong-finding.md` `finding.md` |
+| [F-53](#f-53) | [.claude/rules/lane-devops.md §4](.claude/rules/lane-devops.md) **chép trạng thái tức thời của nhà khác** vào thân mình thay vì trỏ, và cả hai bản chép nay đều hết đúng: (a) câu *“chỗ còn khai ngược là `.claude/rules/quan-ly-du-an.md` mục 3 **dòng 113** (Repo chưa có `Makefile`)”* — vế ấy đã ✅ ở `0370781`, dòng 113 nay khai *“Repo **đã** có `Makefile`”*, mà con trỏ còn **ghim số dòng** đúng cái [§5.3](.claude/rules/quan-ly-du-an.md) tự cấm — **đã vá 2026-08-28**; (b) câu *“Hôm nay `make check` **đỏ sẵn** ở `check-so`, dòng `ĐỎ finding bỏ rơi: F-67`”* trong khi `make check` ra mã thoát `0` từ `7cc5fe3` và `grep -c '^### F-67' finding.md` ra `0` — **còn 🔴** | ngoài-sổ · 2026-08-28 | 🔴 MỞ | ⚠️ chưa có task — [vé (b) ở mục F-53](#f-53) | `.claude/rules/lane-devops.md` `finding.md` |
 
 ---
 
@@ -1465,6 +1466,31 @@ Ba mốc giờ và tập tên file là phần `git` còn giữ lại được; *
 điểm của ca này: cả ba commit đều **xanh** ở PĐ-1, PĐ-2 lẫn PĐ-3, vì cả ba phép đo chạy **sau** commit, tức
 sau khi lần nuốt đã thành lịch sử. Không phép đo nào trong mục đo được *lúc sắp commit thì index chung đang
 chứa gì*. Thứ duy nhất cứu `017a42a` là một phiên chịu chờ — cơ chế duy nhất ở đây chưa viết được thành lệnh.
+
+
+**Ca sống thứ mười — 2026-08-28: nạn nhân không phải hunk, mà là *mệnh đề vừa viết ra*.** Phiên NON-CODE mở
+[F-53](#f-53) chạy [CLAUDE.md §3](CLAUDE.md) bước 1: `git status --short` **rỗng**, cây sạch, đủ điều kiện đi
+tiếp. Sau khi đã gõ xong hai file của mình, `git status --short` in thêm ` M task.md` — hunk **không** của
+phiên này: nó gỡ ⚠️ ở ô `Đầu ra` của `T-03` (`git diff task.md`) và đổi ngày header sang `2026-08-28`, tức
+phiên song song đang vá đúng **vế 🔴 duy nhất còn lại** của [F-23](#f-23). Mười phút sau nó commit
+`260685e` — `task.md` + `finding.md`, đóng hẳn [F-23](#f-23).
+
+Chín ca trên tả một hunk bị **nuốt**. Ca này không mất dòng nào: phiên kia sửa `task.md`, phiên này sửa
+`.claude/rules/lane-devops.md` + `finding.md`, `git add` từng đường dẫn là đủ tách. Cái hỏng là thứ khác —
+phiên này vừa viết vào cả hai file câu *"vế còn 🔴 của F-23 nằm ở ô `Đầu ra` của `T-03`, còn ⚠️"*, và câu ấy
+**hết đúng trước khi commit chứa nó kịp ra đời**. Cây sạch ở bước 1 chỉ chứng minh *lúc đó* không ai đang gõ;
+nó không hứa gì cho phút thứ mười lăm, mà [CLAUDE.md §3](CLAUDE.md) bước 4 lại đọc nó như một lời hứa.
+
+Lần này **không ai nuốt ai**: phiên kia đã `git add finding.md` **trước** khi phiên này ghi mục `F-53`, nên
+`260685e` chỉ chứa hai hunk của nó (`git show --name-only 260685e`), và 63 dòng của phiên này còn nguyên trong
+cây làm việc. Đó là may, không phải cơ chế — thứ tự `add` khác đi một phút là ca thứ sáu lặp lại.
+
+Cách chống thì dùng được ngay, và nó không phải một lệnh `git`: **viết con trỏ, đừng chép trạng thái** — câu
+trong `.claude/rules/lane-devops.md` §4 đã đổi thành *"trạng thái của nó đọc ở hàng `F-23` trong finding.md"*
++ `grep -n 'make check' task.md`. Bản chép đầu tiên của phiên này (*"vẫn giữ ⚠️"*) hết đúng **hai lần trong
+một phiên**: lần đầu khi cây bẩn hiện ra, lần hai khi `260685e` đóng `F-23`; bản trỏ thì không phải sửa lần nào. Cùng bài học
+với [F-53](#f-53), đến từ hướng khác: [F-53](#f-53) nói bản chép hết đúng vì **nhà thật đi tiếp**; ca này nói
+bản chép hết đúng vì **nhà thật đang bị phiên khác sửa ngay lúc chép**.
 
 ---
 
@@ -2942,3 +2968,46 @@ nhầm** — `F-13` mở ngày `2026-08-23` và nằm ở dòng thứ tư của 
 **hỏng**, ngang với cổng bỏ sót. Ranh giới còn lại: [rule §1](.claude/rules/chat-luong-finding.md) vẫn đòi
 tiêu đề viết đúng từng ký tự — sau phiên này §1 là **luật viết**, §3 là **sàn máy đo**, và sàn không được
 siết hơn luật.
+
+---
+
+### F-53
+
+**Mệnh đề sai.** [.claude/rules/lane-devops.md §4](.claude/rules/lane-devops.md) — mục *Biên nhận của lane* — **chép trạng thái tức thời của nhà khác** vào thân mình thay vì trỏ tới nhà thật; cả hai bản chép nay đã hết đúng, và không lệnh nào trong repo bắt được.
+
+| Ca | §4 khai | Nhà thật hôm nay | Vá |
+|---|---|---|---|
+| **(a)** | *"Chỗ còn khai ngược là `.claude/rules/quan-ly-du-an.md` mục 3 **dòng 113** (Repo chưa có `Makefile`) — mã của nó là `finding.md` F-23, đang 🔴 MỞ"* | dòng 113 khai *"Repo **đã** có `Makefile`"*; vế ấy ✅ ở `0370781`, ghi ngay trong [F-23](#f-23); vế cuối của F-23 nằm ở [task.md](task.md), không ở file luật nào, và nó đã **✅ ĐÓNG ở `260685e`** — do một phiên song song, **ngay trong lúc mục này đang được viết** ([F-24](#f-24) ca sống thứ mười). Vì vậy §4 nay **trỏ** hàng `F-23`, không chép trạng thái nó | ✅ 2026-08-28, phiên này |
+| **(b)** | *"**Hôm nay `make check` đỏ sẵn** ở đích `check-so`, dòng `ĐỎ finding bỏ rơi: F-67`"* + ba bước dạy cách sống chung với dòng đỏ ấy | `make check` ra `XANH — 5 đích, 0 vi phạm`, mã thoát `0`; dòng đỏ đó chết từ `7cc5fe3`, và `grep -c '^### F-67' finding.md` ra `0` | 🔴 chưa — ngoài phạm vi phiên này |
+
+Ca (a) sai **ba lớp cùng lúc**: sai *nội dung* (nhà thật khai ngược lại), sai *cách trỏ* (**ghim số dòng** — đúng cái [.claude/rules/quan-ly-du-an.md §5.3](.claude/rules/quan-ly-du-an.md) tự cấm bằng câu *"đừng ghim số dòng — sổ còn nở ra nên con trỏ cấp dòng hết đúng trong im lặng"*), và sai *trạng thái* (khai một vế đã ✅ là 🔴 MỞ). Một nguyên nhân, ba lớp: chép thay vì trỏ.
+
+**Vì sao nó nguy hiểm hơn nó trông.** Cả hai ca đều **dạy phiên sau làm sai**, không chỉ khai sai. Ca (a) bảo phiên DEVOPS *"đừng sửa kèm ở đây"* một chỗ **không còn gì để sửa**, và giấu mất chỗ **thật sự** còn 🔴 — ô `Đầu ra` của `T-03`. Ca (b) tệ hơn: nó dựng nguyên một quy trình ba bước sống chung với cổng đỏ (*giữ output làm vạch nền · chỉ đọc phần khác*) cho một cổng **đã xanh** — phiên DEVOPS sau đọc nó sẽ coi lần chạy `make check` đầu tiên là "đỏ sẵn, không phải việc của mình" đúng lúc nó đỏ thật.
+
+**Vì sao nó không tự mất đi.** Chạy hết [task.md](task.md) y như nó viết: dòng chạm `.claude/rules/lane-devops.md` duy nhất là `T-06` (`grep -n 'lane-devops' task.md`), và việc của nó là **tạo** file có `paths:` — không dòng nào nhận việc rà lại thân file khi nhà thật đổi. `make check` không đọc *nội dung* rule lane; hai cổng của [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) chỉ rà `finding.md`. Bản chép đứng yên trong khi nhà thật đi tiếp ⇒ finding, không phải task.
+
+**Lệnh tái hiện.**
+
+```bash
+# ca (a) — trước khi vá, cả hai lệnh ra 1
+grep -c 'Repo chưa có' .claude/rules/lane-devops.md
+grep -c 'dòng 113'     .claude/rules/lane-devops.md
+# ca (b) — file khai cổng đang đỏ, cổng chạy hôm nay lại xanh
+grep -n 'đỏ sẵn' .claude/rules/lane-devops.md
+make check >/dev/null 2>&1 && echo "make check: ma thoat 0 — ban chep trong §4 het dung"
+grep -c '^### F-67' finding.md    # ra 0: mã trong bản chép không tồn tại trong sổ
+```
+
+**Đỏ khi:** §4 của [.claude/rules/lane-devops.md](.claude/rules/lane-devops.md) còn một câu khai *trạng thái* của một file hay một cổng khác mà lệnh chạy hôm nay ra khác — hoặc còn một con trỏ ghim số dòng. **Xanh khi** mọi câu như vậy đã đổi thành con trỏ (`grep -n <chuỗi> <file>`, mã `F-xx`, tên mục `§`), không còn bản sao trạng thái nào.
+
+**Cách sửa đề xuất.** Một phiên NON-CODE, một file, một đầu ra: viết lại ca **(b)** ở §4 của [.claude/rules/lane-devops.md](.claude/rules/lane-devops.md) theo đúng cách ca (a) vừa được viết lại — bỏ câu *"Hôm nay `make check` đỏ sẵn…"* và mã `F-67`, giữ **luật** ba bước (chạy `make check` trước khi gõ · chạy lại sau · dòng đỏ có sẵn thì trỏ mã finding của nó, cấm vá cho nó im) nhưng phát biểu nó **không gắn với dòng đỏ cụ thể nào** — luật đó vẫn đúng, chỉ ví dụ chết. Chặn tái phát ở tầng lệnh thì thêm vào [.claude/rules/quan-ly-du-an.md §5.3](.claude/rules/quan-ly-du-an.md) một phép rà con-trỏ-ghim-dòng cho cả `.claude/rules/*.md`:
+
+```bash
+grep -rn 'dòng [0-9][0-9]*' .claude/rules/*.md CLAUDE.md | grep -v 'số dòng\|ghim số dòng'
+```
+
+**Đối chiếu ngoài.** `Ngoài:` **DRY** (Hunt & Thomas, *The Pragmatic Programmer*) áp cho tài liệu — cùng một sự thật một nhà; bộ dựng tài liệu giải nó bằng **transclusion** (`.. include::` của Sphinx, partial của Antora): vẫn chép, nhưng chép **lúc dựng**, nên bản chép không bao giờ cũ hơn nhà thật. · `Ta:` repo này không có bộ dựng nào, nên cấm chép hẳn — rule lane chỉ được trỏ **tên mục + lệnh dò**, cấm chép trạng thái và cấm ghim số dòng. · `Vì:` [prompt-fullstack §6.8](project_preparation/prompt-fullstack.md) chốt kiến trúc một máy, và tài liệu ở đây đọc bằng `grep`; dựng một pipeline transclusion cho mươi file `.md` đắt hơn nhiều so với một luật viết tay cộng hai lệnh `grep` — đó cũng là lý do vế **Cách sửa đề xuất** trên chọn thêm một phép rà vào §5.3 chứ không chọn công cụ.
+
+**Bẫy khi sửa.** Đừng xoá cả khối ba bước của ca (b) cho gọn: **luật** ở đó (*"cổng đỏ thường trực là cổng phiên sau học cách bỏ qua, còn cổng bị bịt miệng thì không ai học được nữa"*) là luật riêng của lane DEVOPS, không có nhà thứ hai trong repo — chết cùng ví dụ của nó là mất luật thật.
+
+**Đã vá ca (a) 2026-08-28.** Lane NON-CODE, chạm [.claude/rules/lane-devops.md §4](.claude/rules/lane-devops.md) + file này. Ba dòng cũ nay **không khai trạng thái của file nào**: chúng trỏ về **hàng `F-23` của file này** để đọc trạng thái, và về `task.md` bằng lệnh dò `grep -n 'make check' task.md`, không ghim số dòng. Biên nhận: `grep -c 'Repo chưa có' .claude/rules/lane-devops.md` ra `0` · `grep -c 'dòng 113' .claude/rules/lane-devops.md` ra `0`. Mục này vẫn 🔴 vì ca (b) còn sống và **cơ chế** chặn tái phát chưa có — đóng vì "đã dọn một ca" là đúng thứ [CLAUDE.md §4](CLAUDE.md) cấm.
