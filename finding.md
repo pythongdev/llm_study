@@ -65,7 +65,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-45](#f-45) | [prompt-fullstack.md §6.6](project_preparation/prompt-fullstack.md) khai bốn nhịp kiểm tra bắt buộc, nhịp thứ hai là *"mỗi ngày sau khi đóng quán → **tầng 2**"* — nhưng chuỗi `tầng 2` xuất hiện **đúng một lần** trong toàn repo, chính dòng khai nó, và **không file nào** nói tầng 2 gồm lệnh gì; [rule mục 4](.claude/rules/quan-ly-du-an.md) — nhà mà [checklist §4](quality/05-checklist.md) và [guideline §6](quality/00-guideline-chat-luong.md) trao quyền giữ nhịp — có **10** hàng và **0** hàng nào là nhịp của §6.6 | giải thích checklist §1 vế 1 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task | `.claude/rules/quan-ly-du-an.md` `project_preparation/prompt-fullstack.md` `quality/00-guideline-chat-luong.md` `quality/05-checklist.md` |
 | [F-46](#f-46) | Cổng **(e)** ở [.claude/rules/bao-cao-thay-doi.md §3](.claude/rules/bao-cao-thay-doi.md) đỏ **15 dòng** và đã đỏ từ lâu: 15 ô `Câu lệnh để thấy thay đổi` của 7 task đã gạch ghim `git show HEAD -- <file>` (toàn sổ có **63** ô như vậy), mà `HEAD` **trôi theo mỗi commit** — chúng nay chiếu vào commit chẳng liên quan. Cổng đỏ thường trực là cổng phiên sau học cách bỏ qua | ngoài-sổ · 2026-08-25 | ✅ ĐÓNG 2026-08-27 | ⚠️ không có task — vá ngoài sổ ở `c6155eb`+`2107241`, đóng ở phiên NON-CODE 2026-08-27 | `.claude/rules/bao-cao-thay-doi.md` `task.md` |
 | [F-47](#f-47) | Sổ lỗi có **đường vào** mà không có **đường ra**: dòng vai trò ở [CLAUDE.md](CLAUDE.md) bắt *ghi một dòng vào finding.md rồi quay lại việc đang làm*, nhưng không luật nào bắt **giao dòng đó đi** — nên tồn đọng chỉ tăng: **37/46** finding còn 🔴 MỞ, **25** trong số đó khai `⚠️ chưa có task` | owner nêu · 2026-08-25 | ✅ ĐÓNG 2026-08-25 | ⚠️ đóng ngay trong phiên owner nêu — không đẻ task | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` `finding.md` |
-| [F-48](#f-48) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi khớp đúng từng ký tự**, nên mục viết tiêu đề biến thể bị báo `THIẾU VẾ` trong khi vế **có thật**: 3/4 mục nó đang tố (`F-06` `F-07` `F-12`) đều đủ vế — cổng đỏ kinh niên, và ca đỏ **thật** duy nhất (`F-13`) chìm trong đó | đóng F-08 · 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task — vé (b) dán ở phiên đóng F-08 | `.claude/rules/chat-luong-finding.md` `finding.md` |
+| [F-48](#f-48) | Cổng **(a)** ở [.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) dò tiêu đề vế bằng **chuỗi khớp đúng từng ký tự**, nên mục viết tiêu đề biến thể bị báo `THIẾU VẾ` trong khi vế **có thật**: 3/4 mục nó đang tố (`F-06` `F-07` `F-12`) đều đủ vế — cổng đỏ kinh niên, và ca đỏ **thật** duy nhất (`F-13`) chìm trong đó | đóng F-08 · 2026-08-25 | ✅ ĐÓNG 2026-08-28 | ⚠️ không có task — một nguyên nhân với [F-52](#f-52), cùng hết đúng ở `e2aeb66` | `.claude/rules/chat-luong-finding.md` `finding.md` |
 | [F-49](#f-49) | Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) khai mình là bộ dò việc của mọi phiên, nhưng **không file nào trong repo gọi nó nữa**: [CLAUDE.md §3](CLAUDE.md) bước 2 — caller duy nhất — nay khai *prompt là nguồn việc duy nhất*, `grep -c 'Task tiếp theo' CLAUDE.md` ra `0`; trong khi [huong-dan-viet-task-md.md §5.12](project_preparation/huong-dan-viet-task-md.md) vẫn bắt mục đó **phải là lệnh chạy được** | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-27 | `CLAUDE.md` `Makefile` `project_preparation/huong-dan-viet-task-md.md` `task.md` |
 | [F-50](#f-50) | Bảng nhịp [mục 4](.claude/rules/quan-ly-du-an.md) của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) còn khai hàng *Mỗi lần sửa `CLAUDE.md`* là ``wc -l` ≤ 120` … `không nới trần`` — cả con số lẫn mệnh lệnh đều hết đúng từ `78a8901`: [CLAUDE.md §8](CLAUDE.md) nay ghi **140**, owner đã nới. Rule chép **số** thay vì trỏ nhà thật | ngoài-sổ · 2026-08-26 | ✅ ĐÓNG 2026-08-27 | ⚠️ đóng ngay trong phiên nhận vé (b) — không đẻ task | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` |
 | [F-51](#f-51) | Lệnh canh việc mở lane sống ở **hai** nhà và hai bản **đang lệch**: khối §5.2b của [.claude/rules/quan-ly-du-an.md](.claude/rules/quan-ly-du-an.md) (lane NON-CODE) đã nuốt dòng task đã gạch từ `7cc5fe3`, còn đích `check-lane` của [Makefile](Makefile) — **cổng chạy thật** trong `make check`, lane DEVOPS — vẫn giữ mẫu cũ `^| \*\*T-`; cùng cơ chế, §6 nay **sáu vế** mà 5 chỗ ngoài rule còn dạy *năm vế* | T-28 · 2026-08-27 | 🔴 MỞ | ⚠️ chưa có task — cần một phiên **lane DEVOPS** | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` `Makefile` `project_preparation/step.md` `task.md` |
@@ -2654,6 +2654,32 @@ thứ 14 lại viết biến thể; và sửa nội dung 3 mục 🔴 để làm
 *"viết lại biên nhận cho vừa kết quả đã có"* mà [CLAUDE.md §8](CLAUDE.md) cấm đích danh.
 Sau khi nới cổng, output phải còn **đúng một** dòng: `THIẾU VẾ: F-13 Vì-sao-không-tự-mất` — còn 4 dòng là chưa
 sửa, còn 0 dòng là nới quá tay, cổng đã ngừng bắt được ca thật.
+
+**Kiểm chứng.** Mệnh đề hết đúng từ `e2aeb66` — `git show --stat e2aeb66` in
+`.claude/rules/chat-luong-finding.md | 6 +++---` và `finding.md | 33 ++++++++++++++++-----`,
+tức commit đó sửa đúng hai chỗ mệnh đề này tố. Cổng **(a)** ở
+[.claude/rules/chat-luong-finding.md §3](.claude/rules/chat-luong-finding.md) chạy nguyên văn từ gốc repo
+hôm nay in **rỗng** (trước `e2aeb66` in 4 dòng): hai mẫu dò vế mà mệnh đề nhắm — dòng 59 `Lệnh tái hiện`
+và dòng 60 `Cách sửa đề xuất|Chưa (đề xuất được|đóng được) vì` — nay khớp **tiền tố**, nên ba báo nhầm
+`F-06` `F-07` `F-12` hết; ca đỏ thật `F-13` cũng hết vì cùng commit đó vá vế thiếu cho nó. Cổng **(b)**
+in rỗng. Đã thử làm đỏ 2026-08-28: xoá vế `**Bài học giữ lại:**` của chính mục này ⇒ cổng (b) in đúng
+`ĐÓNG KHÔNG BÀI HỌC: F-48`, `git checkout -- finding.md` khôi phục thì rỗng lại.
+Ranh giới **không** thuộc mệnh đề này: hai mẫu `Mệnh đề sai` và `Vì sao nó không tự mất đi` vẫn neo
+`\.\*\*`; ranh *§1 luật viết / §3 sàn máy đo* đã chốt ở [F-52](#f-52), không lặp lại ở đây.
+
+**Bài học giữ lại:** mã này và [F-52](#f-52) là **một nguyên nhân ghi hai mã** — cùng tố cổng (a) khớp
+chuỗi cứng, mở cách nhau hai ngày (`2026-08-25` và `2026-08-27`), và một commit `e2aeb66` làm cả hai hết
+đúng cùng lúc. Luật chặn việc đó **đã có sẵn hai chỗ**, cùng một file:
+[.claude/rules/chat-luong-finding.md §2](.claude/rules/chat-luong-finding.md) phép thử thứ tư
+*"Một nguyên nhân một mã"*, và [.claude/rules/chat-luong-finding.md §4](.claude/rules/chat-luong-finding.md)
+gạch thứ ba *"Hậu quả của một finding đã có → ghi thêm vào mục cũ, đừng đẻ mã mới"*. Cả hai vẫn trượt vì
+chúng đo lúc **viết mệnh đề**, chứ không có bước nào bắt **dò sổ trước khi cấp mã**. Luật giữ lại: lệnh
+`awk -F'|' -v f=<file> '/🔴 MỞ/ && index($(NF-1),f)' finding.md` ở [CLAUDE.md §3](CLAUDE.md) bước 3 phải
+chạy **thêm một chiều nữa** — không chỉ trước khi *gõ* một file, mà trước khi *mở* một mã mới, với `f` là
+file mà mệnh đề mới đang tố; ra mã 🔴 nào thì đọc mục đó trước, trùng nguyên nhân ⇒ ghi thêm vào mục cũ.
+Ở ca này lệnh ấy sẽ in ngay dòng `F-48` (cột `File chạm` có `.claude/rules/chat-luong-finding.md`) trước
+khi `F-52` được cấp. Hệ quả đo được nếu bỏ qua: hai mã cùng nguyên nhân thì mã đóng sau thành **mã treo**
+— `F-48` đã nằm 🔴 MỞ suốt từ `e2aeb66` trong khi mệnh đề của nó không còn đúng một chữ nào.
 ### F-49
 
 **Mệnh đề sai.** Mục *Task tiếp theo — làm ngay* đầu [task.md](task.md) tự khai là bộ dò việc của mọi phiên
