@@ -1330,6 +1330,27 @@ git log -1 --format=%s 7cc5fe3 | grep -c 'T-28\|F-19\|5\.2b'                    
 giải. Phiên T-28 chỉ phát hiện vì `git show HEAD:<file>` in ra đúng bản vá của chính nó — không phép đo nào
 trong mục này chỉ vào nó.
 
+**Ca sống thứ tám — 2026-08-27: người dùng là phiên thứ hai, và bản khai của agent thành lời nói dối.** Phiên
+NON-CODE này gõ xong bản vá `CLAUDE.md` §3 bước 3 + cột `File chạm` của [finding.md](finding.md) nhưng **chưa**
+commit vì đang chạy sáu probe của [quality/01-chat-luong-noi-dung.md §5](quality/01-chat-luong-noi-dung.md).
+Giữa lúc đó người dùng commit cây bằng `a7e75ba` message `sdg`. Phiên không mất hunk nào — nhưng khi nó commit
+tiếp (`5413f36`) với message khai *"CLAUDE.md §3 bước 3 + finding.md cột File chạm"*, commit ấy chỉ còn **2
+dòng**: toàn bộ phần thân nằm trong `sdg`. Cái mới so với ca thứ sáu: ở đó phiên khác là **một agent**, ở đây
+là **người dùng** — nên mọi đề xuất chống-nuốt dựa vào kỷ luật giữa các phiên agent đều không chạm tới ca này.
+Hậu quả cũng khác chiều: `git log` giờ có một commit khai đúng việc nhưng **rỗng ruột**, và một commit tên
+`sdg` giữ toàn bộ sự thật — [CLAUDE.md §2](CLAUDE.md) trao cho `git log` vai nhà duy nhất của *"ai sửa file
+nào"*, nên nhà đó đang sai ở cả hai dòng.
+
+```bash
+git log -1 --format=%s 5413f36 | grep -c 'cột File chạm'                    # ra 1 — commit KHAI có cột
+git show 5413f36 -- finding.md | grep -c '^+.*File chạm'                    # ra 0 — nhưng KHÔNG chứa nó
+git log --oneline -1 -S'File chạm' -- finding.md                            # ra a7e75ba sdg — thân ở đây
+```
+
+**Đỏ khi** vế 1 ra `>= 1` mà vế 2 ra `0`. Phép đo này là **chiều ngược** của ca thứ ba: ca ấy hỏi *commit có
+khai file nó sửa không*, ca này hỏi *commit có sửa thứ nó khai không* — một message đúng đè lên một diff rỗng
+không phép đo nào hiện có bắt được.
+
 ---
 
 ### F-25
