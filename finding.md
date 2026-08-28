@@ -40,7 +40,7 @@ không sửa kèm. Trong [task.md](task.md) chỉ ghi **mã** `F-xx`, cấm mô 
 | [F-20](#f-20) | Bảng `cl-T-02` khai `Đỏ khi: ra hai đường dẫn khác nhau`, nhưng lệnh của nó in ra **8 dòng** ngay cả khi lane hoàn toàn đúng — `[^ )]*` nuốt cả dấu markdown — nên nó **đỏ giả vĩnh viễn**, và khi `paths:` bị đổi sang `design/DB/**` thật thì output chỉ khác đúng một dòng | T-02 rà pipeline · 2026-08-23 | 🔴 MỞ | [T-29](task.md) | `.claude/rules/lane-ba.md` `CLAUDE.md` `design/BA/04-yeu-cau.md` `task.md` |
 | [F-21](#f-21) | Hai cổng ở [rule §3](.claude/rules/chat-luong-finding.md) lấy mã bằng `grep -o 'F-[0-9]*'` chạy trên **cả dòng bảng**, nên mã `F-xx` **nhắc trong ô** cũng bị duyệt như mã của dòng: dòng `F-06` nhắc `[F-03]` kéo một mã **đã đóng** vào khuôn mở, và cổng (a) duyệt 25 mã cho 18 dòng 🔴 | rà khuôn finding · 2026-08-23 | ✅ ĐÓNG 2026-08-23 | ⚠️ đóng ngay trong phiên rà — không đẻ task | `.claude/rules/chat-luong-finding.md` `.claude/rules/quan-ly-du-an.md` `finding.md` |
 | [F-22](#f-22) | Khuôn mục `### F-xx` ở [rule §1](.claude/rules/chat-luong-finding.md) không có vế nào giữ **tiêu chí thành công** lúc **mở**: `**Kiểm chứng.**` chỉ bắt buộc khi **đóng**, nên lệnh chứng minh được chọn **sau** khi đã sửa — 14/18 mục 🔴 hiện không khai nổi một vế `đỏ khi` | rà khuôn finding · 2026-08-23 | 🔴 MỞ | [T-31](task.md) | `.claude/rules/chat-luong-finding.md` `.claude/rules/quan-ly-du-an.md` `prompt/huong_dan_prompt/cau-truc-prompt-tot.md` `task.md` |
-| [F-23](#f-23) | ~~[CLAUDE.md §7](CLAUDE.md)~~ ~~[rule §3](.claude/rules/quan-ly-du-an.md)~~ ~~§5.3 thiếu lệnh bắt ⚠️ **thừa**~~ — **ba vế đã vá 2026-08-25** (`b334899` + `0370781`), lệnh 3 của [rule §5.3](.claude/rules/quan-ly-du-an.md) đã dựng và **đang đỏ thật**. Còn **một** vế: ô `Đầu ra` của `T-03` trong [task.md](task.md) vẫn giữ ⚠️ kề `make check` (`grep -n 'make check' task.md`) | T-03 · 2026-08-23 · vá 2026-08-25 | 🔴 MỞ | ⚠️ chưa có task — [prompt bàn giao ở §4 phiên 2026-08-25](#f-23) | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` `Makefile` `task.md` |
+| [F-23](#f-23) | ~~[CLAUDE.md §7](CLAUDE.md)~~ ~~[rule §3](.claude/rules/quan-ly-du-an.md)~~ ~~§5.3 thiếu lệnh bắt ⚠️ **thừa**~~ ~~ô `Đầu ra` của `T-03` trong [task.md](task.md) giữ ⚠️ kề `make check`~~ — **cả bốn vế đã vá**: ba vế 2026-08-25 (`b334899` + `0370781`), vế cuối 2026-08-28; lệnh 3 của [rule §5.3](.claude/rules/quan-ly-du-an.md) chạy ra **rỗng** | T-03 · 2026-08-23 · vá 2026-08-25 · đóng 2026-08-28 | ✅ ĐÓNG 2026-08-28 | ⚠️ không có task — vá ngoài sổ ở phiên NON-CODE 2026-08-28 | `.claude/rules/quan-ly-du-an.md` `CLAUDE.md` `Makefile` `task.md` |
 | [F-24](#f-24) | [CLAUDE.md §4](CLAUDE.md) khai `git add <đường dẫn cụ thể>` là cách chống nuốt việc dở của phiên khác — nó chỉ chống **lẫn file**, không chống **lẫn hunk**: hai phiên cùng sửa `task.md`/`finding.md` thì bên nào commit trước cũng nuốt trọn phần bên kia đang viết, cây vẫn sạch và `git log` vẫn hợp khuôn (ca thật: `0d2a785` chứa cả phần đóng `T-03` của phiên DEVOPS) | T-03 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task | `.claude/rules/bao-cao-thay-doi.md` `CLAUDE.md` `finding.md` `task.md` |
 | [F-25](#f-25) | Luật *thử làm đỏ một lần* ([guideline §5](quality/00-guideline-chat-luong.md)) không có cổng nào cưỡng chế cho bảng `cl-T-xx`: **28/31** bảng đang `Đã thử làm đỏ: ⬜ chưa`, nên một lệnh soi hỏng nằm im vô hạn — ca phát hiện: `cl-T-04` khai đỏ khi hai file cùng `>= 1` hit `go test`/`npm run`, trong khi rule đã có 2 hit và **một hit nằm trong thân câu lệnh §5.2** nên không xoá được ⇒ trục đó **đỏ vĩnh viễn** | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task | `.claude/rules/quan-ly-du-an.md` `quality/00-guideline-chat-luong.md` `task.md` |
 | [F-26](#f-26) | Ô `**Đạt khi:**` của `owner-T-11` trong [task.md](task.md) khai nhà của luật *không deploy trong giờ bán* là `CLAUDE.md`, nhưng `CLAUDE.md` **không có chữ nào** về luật đó — nhà thật là `prompt-fullstack.md` §6.9, và [guideline §6](quality/00-guideline-chat-luong.md) đang trỏ đúng về đó | vá dòng T-04 · 2026-08-23 | 🔴 MỞ | ⚠️ chưa có task | `CLAUDE.md` `project_preparation/prompt-fullstack.md` `quality/00-guideline-chat-luong.md` `task.md` |
@@ -1123,7 +1123,7 @@ grep -n '⚠️[^|]*make check' CLAUDE.md .claude/rules/*.md \
 | [rule §3](.claude/rules/quan-ly-du-an.md) khai *"Repo chưa có `Makefile`"* | ✅ vá ở `0370781` | `grep -c 'Repo chưa có \`Makefile\`' .claude/rules/quan-ly-du-an.md` ra `0` |
 | rule §3 xếp `make ...` vào loại **không được tính là biên nhận** | ✅ vá ở `0370781` | `make ` không còn trong danh sách đó; §3 nói rõ đánh ⚠️ cho `make check` là khai sai |
 | [rule §5.3](.claude/rules/quan-ly-du-an.md) thiếu lệnh bắt ⚠️ **thừa** | ✅ dựng ở `0370781` (lệnh 3) | `grep -c '⚠️ THỪA' .claude/rules/quan-ly-du-an.md` ra `1` |
-| ⚠️ thừa còn sống trong repo | 🔴 **chưa** | lệnh 3 chạy lại 2026-08-27 vẫn ra `⚠️ THỪA: đích 'make check' đã dựng xong, gỡ ⚠️` |
+| ⚠️ thừa còn sống trong repo | ✅ gỡ 2026-08-28 | lệnh 3 chạy lại sau khi sửa ra **rỗng**; nhét lại ⚠️ vào dòng 48 `task.md` ra **đúng một** dòng `⚠️ THỪA` |
 
 **Hai chỗ lệch với ô `Cách sửa đề xuất` trên — đổi có chủ ý, không phải viết lại biên nhận cho vừa
 kết quả.** Cả hai đều làm lệnh **chặt hơn** đề xuất gốc, không lỏng hơn:
@@ -1150,6 +1150,34 @@ làm đỏ (nhét lại `⚠️ \`make check\`` vào một file rồi chạy) in
 **Bẫy khi sửa.** §7 đang là chỗ duy nhất nói *"biên nhận thật của giai đoạn này là lệnh đọc lại"*. Gỡ ⚠️ khỏi
 `make check` mà xoá luôn câu đó là mở đường cho phiên sau khai `go test` là biên nhận trong khi Go chưa cài —
 đúng cái bẫy mà ô `Bẫy` của [T-03](task.md) đã dựng hàng rào. Gỡ **một** dấu ⚠️, không gỡ cả đoạn.
+
+**Kiểm chứng.** Vế cuối vá 2026-08-28, lane NON-CODE, chạm **đúng dòng 48** của [task.md](task.md):
+gỡ một dấu ⚠️ kề `make check` ở ô `Đầu ra` của `T-03`, giữ nguyên phần còn lại của ô
+(`awk -F'|'` vẫn ra **13 cột**, bằng dòng 47 và 49). Lệnh là lệnh 3 của
+[.claude/rules/quan-ly-du-an.md §5.3](.claude/rules/quan-ly-du-an.md):
+
+```bash
+grep -rnoE '⚠️ ?`make [a-z][a-z-]*`|`make [a-z][a-z-]*` ?⚠️' CLAUDE.md task.md .claude/rules/*.md \
+  | grep -oE 'make [a-z][a-z-]*' | sort -u \
+  | while read -r _ d; do make -n "$d" >/dev/null 2>&1 \
+      && echo "⚠️ THỪA: đích 'make $d' đã dựng xong, gỡ ⚠️"; done
+```
+
+**Trước khi sửa** in ra `⚠️ THỪA: đích 'make check' đã dựng xong, gỡ ⚠️` — **sau khi sửa** ra **rỗng**.
+**Đã thử làm đỏ:** ✅ 2026-08-28 — nhét lại `⚠️ \`make check\`` vào dòng 48, chạy lại in **đúng một** dòng
+`⚠️ THỪA`; khôi phục, chạy lại **rỗng**. `make check` xanh cả 5 đích trước và sau.
+
+**Bài học giữ lại:** ⚠️ là **lời khai về một lệnh**, nên nó phải hết hạn đúng lúc lệnh đó chạy được —
+luật giữ điều đó là **lệnh 3 của [.claude/rules/quan-ly-du-an.md §5.3](.claude/rules/quan-ly-du-an.md)**:
+mỗi ⚠️ **kề** một đích `make` bị đối chiếu với `make -n <đích>`, đích đã dựng xong mà còn ⚠️ thì đỏ.
+Trước đó §5.3 chỉ có lệnh 2 canh chiều **thiếu** ⚠️; chiều **thừa** không ai canh, vì biên nhận trôi
+theo hướng bi quan không làm đỏ ở đâu cả. Vế *"⚠️ là mệnh đề có hạn dùng"* đã được [F-31](#f-31) phát biểu
+2026-08-25 và **để lại cho mã này** đúng vế ⚠️ **thừa** — dòng hôm nay khép vòng đó: lệnh 3 nay là cổng thật,
+chạy trên `CLAUDE.md`, `task.md` và mọi `.claude/rules/*.md`.
+
+Kèm theo, một vế luật thứ hai rút từ ca này: **dòng task đã ✅ gạch vẫn là nội dung sống**. Ô `Đầu ra`
+của [T-03](task.md) khai sai từ `9699f1c` (2026-08-23 — chính commit dựng ra `make check`) tới hôm nay, và không cổng nào soi
+ô của dòng đã gạch cho tới khi lệnh 3 ra đời — lệnh 3 cố tình quét **cả** `task.md`, không chỉ file luật.
 
 ---
 
